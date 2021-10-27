@@ -40,6 +40,7 @@ public class CharacterTest {
         assertEquals(character.position.getX(), 0);
         assertEquals(character.position.getY(), 5);
     }
+    //THIS TEST WILL GET MOVED TO CHECKING THAT INTERFACE TODO
     @Test
     public void testPickUpItem() {
         Character character = new Character(1, "Character", 5, 5);
@@ -71,15 +72,15 @@ public class CharacterTest {
     public void testGetDefense() {
         //test that defense does nothing
         Character character = new Character(1, "Character", 5, 5);
-        assertEquals(character.getDefense(), character.defense);
+        assertEquals(character.getDefense(), character.baseDefense);
         //test that defense does more with items
         Shield shield = new Shield(2);
         character.inventory.addItem(shield);
-        assertEquals(character.getDefense(), character.defense + shield.getMultipler());
+        assertEquals(character.getDefense(), character.baseDefense + shield.getMultipler());
         //make sure armour stacks with shields
         Armour armour = new Armour(3);
         character.inventory.addItem(armour);
-        assertEquals(character.getDefense(), character.defense + shield.getMultipler() + armour.getMultipler());
+        assertEquals(character.getDefense(), character.baseDefense + shield.getMultipler() + armour.getMultipler());
     }
     @Test
     public void testGetHealth() {
