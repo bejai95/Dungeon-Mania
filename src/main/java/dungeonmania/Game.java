@@ -29,7 +29,7 @@ public class Game {
             case "enemies":
                 return Enemies.goalComplete(entities);
             case "treasure":
-                return Treasure.goalComplete(entities);
+                return Gold.goalComplete(entities);
             case "AND":
                 String conj1 = getGoalsLeft(gs.getJSONArray("subgoals").getJSONObject(0));
                 if(conj1.equals("")){
