@@ -18,6 +18,10 @@ public class Entity {
         return this.id;
     }
 
+    public String getType() {
+        return this.type;
+    }
+
     public Position getPosition() {
         return this.position;
     }
