@@ -31,6 +31,7 @@ public class Inventory {
         return new ArrayList<>();
     }
     public void addItem(Item item) {
+        //adds an item and adds them to the nessecary lists
 
     }
     public void removeItem(Item item) {
@@ -49,5 +50,13 @@ public class Inventory {
     }
     public List<Material> getRecipe(String name) {
         return recipes.get(name);
+    }
+    public Item getItem(int id) {
+        for (Item i: this.items) {
+            if (i.getitemId() == id) {
+                return i;
+            }
+        }
+        return null;
     }
 }
