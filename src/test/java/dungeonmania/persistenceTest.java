@@ -13,8 +13,6 @@ import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.FileLoader;
 
-import dungeonmania.DungeonManiaController;
-
 
 @TestInstance(value = Lifecycle.PER_CLASS)
 public class persistenceTest {
