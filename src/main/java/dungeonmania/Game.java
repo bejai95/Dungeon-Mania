@@ -11,7 +11,7 @@ public class Game {
     private List<Item> inventory;
     private List<String> buildables;
     private JSONObject goals;
-    private final List<AnimationQueue> animations;
+    //private final List<AnimationQueue> animations;
     private String gameMode;
     
     public Game(String dungeonId, String dungeonName, String gameMode, String goals) {
@@ -53,10 +53,11 @@ public class Game {
                     return "(" + disj1 + " OR " + disj2 + ")";
                 }
         }
+        return null;
     }
 
     public String getGoalsLeft() {
-        getGoalsLeft(goals);
+        return getGoalsLeft(goals);
     }
 
 }
