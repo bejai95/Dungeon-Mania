@@ -12,7 +12,7 @@ abstract public class Item {
     public int getUses() {
         return this.uses;
     }
-    public int itemId() {
+    public int getitemId() {
         return this.itemId;
     }
 }
