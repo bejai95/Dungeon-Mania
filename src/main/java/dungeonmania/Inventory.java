@@ -8,8 +8,9 @@ public class Inventory {
     List<Item> items = new ArrayList<>();
     List<Consumable> consumables = new ArrayList<>();
     List<Material> materials = new ArrayList<>();
-    List<WeaponItem> weapons = new ArrayList<>();
-    List<DefenseItem> defences = new ArrayList<>();
+    List<Bow> bows = new ArrayList<>();
+    List<Sword> swords = new ArrayList<>();
+    List<DefenseItem> defenceItems = new ArrayList<>();
     //takes in a string which is the name of the recipe and returns a list of all the materials required
     HashMap<String, List<Material>> recipes = new HashMap<String, List<Material>>(); 
     
@@ -58,5 +59,14 @@ public class Inventory {
             }
         }
         return null;
+    }
+    public List<Sword> getSwords() {
+        return this.swords;
+    }
+    public List<Bow> getBows() {
+        return this.bows;
+    }
+    public List<DefenseItem> getDefenseItems() {
+        return this.defenceItems;
     }
 }

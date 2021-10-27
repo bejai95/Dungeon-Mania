@@ -1,10 +1,8 @@
 package dungeonmania;
 
-public class Armour extends DefenseItem implements Consumable {
+public class Armour extends DefenseItem {
     public Armour(int itemId) {
         super(3, itemId);
-    }
-    public void consume() {
-
+        super.setMultipler(0.5);
     }
 }
