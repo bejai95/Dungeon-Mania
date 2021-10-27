@@ -9,8 +9,15 @@ public class Gold{
      * @return "" if the goal has been completed and ":treasure" if not
      */
     public static String goalComplete(List<Entity> entities) {
-        // TODO Auto-generated method stub
-        return null;
+        for(Entity entity : entities){
+            if(entity instanceof UnpickedUpItem){
+                UnpickedUpItem item = (UnpickedUpItem) entity;
+                if(item.getItemClass().equals("Treasure")){
+                    return ":treasure";
+                }
+            }
+        }
+        return "";
     }
 
 }

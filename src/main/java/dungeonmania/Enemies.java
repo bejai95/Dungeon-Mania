@@ -9,8 +9,12 @@ public class Enemies{
      * @return "" if the goal has been completed and ":mercenary" if not
      */
     public static String goalComplete(List<Entity> entities) {
-        // TODO Auto-generated method stub
-        return null;
+        for(Entity entity : entities){
+            if(entity instanceOf Enemy){
+                return ":mercenary";
+            }
+        }
+        return "";
     }
 
 }
