@@ -23,13 +23,13 @@ public class Game {
     private String getGoalsLeft(JSONObject gs){
         switch(gs.getString("goal")){
             case "exit":
-                return Exit.goalComplete();
+                return Exit.goalComplete(entities);
             case "boulder":
-                return Switches.goalComplete();
+                return Switches.goalComplete(entities);
             case "enemies":
-                return Enemies.goalComplete();
+                return Enemies.goalComplete(entities);
             case "treasure":
-                return Treasure.goalComplete();
+                return Treasure.goalComplete(entities);
             case "AND":
                 String conj1 = getGoalsLeft(gs.getJSONArray("subgoals").getJSONObject(0));
                 if(conj1.equals("")){
