@@ -11,13 +11,15 @@ public class Game {
     private List<Item> inventory;
     private List<String> buildables;
     private JSONObject goals;
-    //private final List<AnimationQueue> animations;
+    // private final List<AnimationQueue> animations;
     private String gameMode;
+    private String saveName;
     
     public Game(String dungeonId, String dungeonName, String gameMode, String goals) {
         this.dungeonId = dungeonId;
         this.dungeonName = dungeonName;
         this.gameMode = gameMode;
+        this.saveName = null;
     }
 
     private String getGoalsLeft(JSONObject gs){
