@@ -1,12 +1,18 @@
 package dungeonmania;
 
 
-public class Item {
+abstract public class Item {
     int uses;
-    String itemId;
-    public Item() {
-
+    int itemId;
+    //game checks ids are unique
+    public Item(int uses, int itemId) {
+        this.uses = uses;
+        this.itemId = itemId;
     }
-
-
+    public int getUses() {
+        return this.uses;
+    }
+    public int itemId() {
+        return this.itemId;
+    }
 }
