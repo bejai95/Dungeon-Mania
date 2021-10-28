@@ -26,32 +26,77 @@ public class Inventory {
      */
     public Item craft(String itemName) {
         //craft returns int of the item crafted id
-    /**
-     * Buildable checks all recipes and lists all the ones that are
-     */
         return new Wood(-1);
     }
     public List<String> generateBuildables() {
+        //go through each recipe
+        //then count the amount of 
         return new ArrayList<>();
     }
     public void addItemToInventory(Item item) {
         //adds an item and adds them to the nessecary lists
         //make sure that no duplicates inputted
-
+        if (!(this.getItems().contains(item))) {
+            this.getItems().add(item);
+            if (item instanceof Material) {
+                this.getMaterials().add(item);
+            }
+            if (item instanceof Consumable) {
+                this.getConsumables().add(item);
+            }
+            if (item instanceof Bow) {
+                Bow bow = (Bow) item;
+                this.getBows().add(bow);
+            }
+            if (item instanceof Sword) {
+                Sword sword = (Sword) item;
+                this.getSwords().add(sword);
+            }
+            if (item instanceof DefenseItem) {
+                DefenseItem d = (DefenseItem) item;
+                this.getDefenseItems().add(d);
+            }
+        }
     }
     public void removeItem(Item item) {
         //in change of removing from items as well as the lists consumables
         //weapons defence and materials
+        if (this.getItems().contains(item)) {
+            this.getItems().remove(item);
+            if (item instanceof Material) {
+                this.getMaterials().remove(item);
+            }
+            if (item instanceof Consumable) {
+                this.getConsumables().remove(item);
+            }
+            if (item instanceof Bow) {
+                Bow bow = (Bow) item;
+                this.getBows().remove(bow);
+            }
+            if (item instanceof Sword) {
+                Sword sword = (Sword) item;
+                this.getSwords().remove(sword);
+            }
+            if (item instanceof DefenseItem) {
+                DefenseItem d = (DefenseItem) item;
+                this.getDefenseItems().remove(d);
+            }
+        }
     }
     public void useItem(Consumable consumable) {
 
     }
     //remove all items that have zero uses left, call at end of each turn
     public void removeDeadItems() {
-
-    }
-    public void addItemToRecipe(Material mat) {
-
+        List<Item> itemsToBeRemoved = new ArrayList<>();
+        for (Item item: this.getItems()) {
+            if (item.getUses() == 0) {
+                itemsToBeRemoved.add(item);
+            }
+        }
+        for (Item item: itemsToBeRemoved) {
+            removeItem(item);
+        }
     }
     public void addRecipe(String name, List<Item> materials) {
         recipes.put(name, materials);
