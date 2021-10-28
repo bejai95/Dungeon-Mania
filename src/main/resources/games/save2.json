@@ -1,0 +1,499 @@
+{
+  "dungeonId": "1",
+  "dungeonName": "advanced.json",
+  "entities": [
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "player"
+    },
+    {
+      "id": 0,
+      "type": "sword"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "bomb"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "mercenary"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "treasure"
+    },
+    {
+      "id": 0,
+      "type": "invincibility_potion"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    },
+    {
+      "id": 0,
+      "type": "wall"
+    }
+  ],
+  "inventory": [],
+  "buildables": [],
+  "goal-condition": {
+    "goal": "AND",
+    "subgoals": [
+      {
+        "goal": "enemies"
+      },
+      {
+        "goal": "treasure"
+      }
+    ]
+  }
+}
