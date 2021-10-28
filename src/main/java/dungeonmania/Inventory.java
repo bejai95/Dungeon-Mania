@@ -35,6 +35,7 @@ public class Inventory {
     }
     public void addItem(Item item) {
         //adds an item and adds them to the nessecary lists
+        //make sure that no duplicates inputted
 
     }
     public void removeItem(Item item) {
