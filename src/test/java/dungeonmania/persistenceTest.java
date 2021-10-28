@@ -38,6 +38,8 @@ public class persistenceTest {
 
         // Check that the goals are correct for both games (will do this later once I'm more familiar with how the JSON objects work)
 
+        // Can also use allGames()
+
     }
 
 }
