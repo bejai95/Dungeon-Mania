@@ -5,6 +5,7 @@ import java.util.List;
 public class GoalCondition {
     private String goal;
     private List<GoalCondition> subgoals;
+    
     public GoalCondition() {
     }
 
