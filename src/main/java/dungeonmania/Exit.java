@@ -3,6 +3,12 @@ package dungeonmania;
 import java.util.List;
 
 public class Exit extends StaticEntity {
+    //-----Data-----
+
+    //-----Constructors-----
+
+    //-----Methods-----
+
     /**
      * Returns whether or not this goal has been completed in string form
      * as specified below
@@ -12,4 +18,9 @@ public class Exit extends StaticEntity {
         // TODO Auto-generated method stub
         return null;
     }
+
+    //-----Getters and Setters-----
+    
+    
+
 }
