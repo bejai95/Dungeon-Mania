@@ -1,5 +1,5 @@
 package dungeonmania;
 
-public class ClosedDoor {
+public class ClosedDoor extends Door {
     
 }

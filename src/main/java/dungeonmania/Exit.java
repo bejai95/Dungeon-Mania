@@ -2,7 +2,7 @@ package dungeonmania;
 
 import java.util.List;
 
-public class Exit {
+public class Exit extends StaticEntity {
     /**
      * Returns whether or not this goal has been completed in string form
      * as specified below

@@ -1,5 +1,5 @@
 package dungeonmania;
 
-public class StaticEntity {
+public class StaticEntity extends Entity {
     
 }

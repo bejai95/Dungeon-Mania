@@ -1,5 +1,5 @@
 package dungeonmania;
 
-public class ZombieToastSpawner {
+public class ZombieToastSpawner extends StaticEntity {
     
 }

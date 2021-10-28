@@ -1,5 +1,5 @@
 package dungeonmania;
 
-public class PlacedBomb {
+public class PlacedBomb extends StaticEntity {
     
 }

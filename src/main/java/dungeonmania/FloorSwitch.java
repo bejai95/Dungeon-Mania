@@ -1,5 +1,5 @@
 package dungeonmania;
 
-public class FloorSwitch {
+public class FloorSwitch extends StaticEntity {
     
 }

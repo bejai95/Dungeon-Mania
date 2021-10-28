@@ -1,5 +1,5 @@
 package dungeonmania;
 
-public class UnpickedUpItem {
+public class UnpickedUpItem extends StaticEntity {
     
 }

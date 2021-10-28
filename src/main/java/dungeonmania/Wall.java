@@ -1,5 +1,5 @@
 package dungeonmania;
 
-public class Wall {
+public class Wall  extends StaticEntity {
     
 }
