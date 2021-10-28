@@ -6,8 +6,10 @@ import java.util.HashMap;
 
 public class Inventory {
     List<Item> items = new ArrayList<>();
-    List<Consumable> consumables = new ArrayList<>();
-    List<Material> materials = new ArrayList<>();
+    //invariant only things implementing consumables are added to consumables list
+    List<Item> consumables = new ArrayList<>();
+    //invariant only things implementing materials are added to consumables list.
+    List<Item> materials = new ArrayList<>();
     List<Bow> bows = new ArrayList<>();
     List<Sword> swords = new ArrayList<>();
     List<DefenseItem> defenceItems = new ArrayList<>();
@@ -52,8 +54,8 @@ public class Inventory {
     public List<Material> getRecipe(String name) {
         return recipes.get(name);
     }
-    public Item getItem(int id) {
-        for (Item i: this.items) {
+    public Item getItem(int id, List<? extends Item> list) {
+        for (Item i: list) {
             if (i.getitemId() == id) {
                 return i;
             }
@@ -68,5 +70,11 @@ public class Inventory {
     }
     public List<DefenseItem> getDefenseItems() {
         return this.defenceItems;
+    }
+    public List<Item> getConsumables() {
+        return this.consumables;
+    }
+    public List<Item> getMaterials() {
+        return this.materials;
     }
 }
