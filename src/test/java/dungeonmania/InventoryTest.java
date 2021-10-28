@@ -33,7 +33,7 @@ public class InventoryTest {
         Treasure TreasureI1 = new Treasure(4);
         inventory.addItemToInventory(woodI1);
         inventory.addItemToInventory(TreasureI1);
-        Item craftedBow = inventory.craft("Bow");
+        assertDoesNotThrow(() -> {Item craftedBow = inventory.craft("Bow");});
         //now there should be nothing in items except the bow since materials used
         assertTrue(inventory.getItems() == Arrays.asList(craftedBow));
 

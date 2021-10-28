@@ -3,6 +3,7 @@ package dungeonmania;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.HashMap;
+import java.lang.reflect.*;
 
 public class Inventory {
     List<Item> items = new ArrayList<>();
@@ -24,8 +25,24 @@ public class Inventory {
      * @param itemName
      * @description craft will be in change of adding items to proper lists and taking away what is needed
      */
-    public Item craft(String itemName) {
+    public Item craft(String itemName) throws ClassNotFoundException {
+        List<Item> recipe = this.getRecipe(itemName);
+        List<Item> items = this.getItems();
+        for (Item recipeMaterial: recipe) {
+            for (Item item: items) {
+                String recipeMaterialClass = recipeMaterial.getClass().getCanonicalName();
+                //if same class delete from items and break this loop
+                if (item.getClass().getCanonicalName().equals(recipeMaterialClass)) {
+                    //remove the item and break
+                    this.removeItem(item);
+                    break;
+                }
+            }
+        }
+        Class newItem = Class.forName(itemName);
         //craft returns int of the item crafted id
+        //invariant, assume the item can be crafted
+        
         return new Wood(-1);
     }
     public List<String> generateBuildables() {
