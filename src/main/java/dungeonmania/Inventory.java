@@ -2,6 +2,10 @@ package dungeonmania;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
+
+import dungeonmania.exceptions.InvalidActionException;
+
 import java.util.HashMap;
 import java.lang.reflect.*;
 
@@ -15,7 +19,7 @@ public class Inventory {
     List<Sword> swords = new ArrayList<>();
     List<DefenseItem> defenceItems = new ArrayList<>();
     //takes in a string which is the name of the recipe and returns a list of all the materials required
-    HashMap<String, List<Item>> recipes = new HashMap<String, List<Item>>(); 
+    HashMap<String, List<String>> recipes = new HashMap<String, List<String>>(); 
     
     public Inventory() {
 
@@ -25,22 +29,24 @@ public class Inventory {
      * @param itemName
      * @description craft will be in change of adding items to proper lists and taking away what is needed
      */
-    public Item craft(String itemName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
-          IllegalAccessError, IllegalAccessException, InvocationTargetException {
-        List<Item> recipe = this.getRecipe(itemName);
+    public Item craft(String recipeName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
+          IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException {
+        if (!(isRecipeBuildable(recipeName))) {
+            throw new InvalidActionException("You don't have the resources to craft this item");
+        }
+        List<String> recipe = this.getRecipe(recipeName);
         List<Item> items = this.getItems();
-        for (Item recipeMaterial: recipe) {
+        for (String recipeMaterial: recipe) {
             for (Item item: items) {
-                String recipeMaterialClass = recipeMaterial.getClass().getCanonicalName();
                 //if same class delete from items and break this loop
-                if (item.getClass().getCanonicalName().equals(recipeMaterialClass)) {
+                if (item.getClass().getCanonicalName().equals(recipeMaterial)) {
                     //remove the item and break
                     this.removeItem(item);
                     break;
                 }
             }
         }
-        Class classType = Class.forName(itemName);
+        Class classType = Class.forName(recipeName);
         Constructor construct = classType.getConstructor(int.class);
         Item newItem = (Item)construct.newInstance(2);
         //craft returns int of the item crafted id
@@ -48,9 +54,18 @@ public class Inventory {
         return newItem;
     }
     public List<String> generateBuildables() {
+        List<String> recipesBuildable = new ArrayList<>();
+        HashMap<String, List<String>> recipes = getRecipes();
+        //for each recipe
+        for (String recipeName: recipes.keySet()) {
+            if (this.isRecipeBuildable(recipeName)) {
+                //if can build
+                recipesBuildable.add(recipeName);
+            }
+        }
         //go through each recipe
         //then count the amount of 
-        return new ArrayList<>();
+        return recipesBuildable;
     }
     public void addItemToInventory(Item item) {
         //adds an item and adds them to the nessecary lists
@@ -117,10 +132,10 @@ public class Inventory {
             removeItem(item);
         }
     }
-    public void addRecipe(String name, List<Item> materials) {
+    public void addRecipe(String name, List<String> materials) {
         recipes.put(name, materials);
     }
-    public List<Item> getRecipe(String name) {
+    public List<String> getRecipe(String name) {
         return recipes.get(name);
     }
     public Item getItem(int id, List<? extends Item> list) {
@@ -148,5 +163,43 @@ public class Inventory {
     }
     public List<Item> getItems() {
         return this.items;
+    }
+    public HashMap<String, List<String>> getRecipes() {
+        return this.recipes;
+    }
+    public boolean isRecipeBuildable(String recipeName) {
+        //stores the ids of all materials already counted for in inventory of materials
+        List<Integer> materialsAlreadyUsed = new ArrayList<>();
+        for (String material: recipes.get(recipeName)) {
+            //check through the list of materials and see if item is in the recipe
+            //if so add that specific item to list of materials already used
+            for (Item item: this.getMaterials()) {
+                //if the item is of the right material and is not already used add it to used materials
+                if (item.getClass().getCanonicalName().equals(material) && (!(materialsAlreadyUsed.contains(item.getitemId())))) {
+                    materialsAlreadyUsed.add(item.getitemId());
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+        return true;
+
+    }
+    public static void main(String[] args) {
+        Inventory inventory = new Inventory();
+        List<String> mats = new ArrayList<>();
+        mats.add(Wood.class.getCanonicalName());
+        mats.add(Treasure.class.getCanonicalName());
+        inventory.addRecipe("Bow", mats);
+        //now add wood and treasure that is different id since it shouldnt matter to the inventory
+        Wood woodI1 = new Wood(3);
+        Treasure TreasureI1 = new Treasure(4);
+        inventory.addItemToInventory(woodI1);
+        inventory.addItemToInventory(TreasureI1);
+        for (Item item: inventory.getMaterials()) {
+            System.out.println(item);
+        }
+        //now there should be nothing in items except the bow since materials used
     }
 }
