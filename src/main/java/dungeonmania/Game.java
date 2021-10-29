@@ -22,7 +22,6 @@ public class Game {
 
     // private final List<AnimationQueue> animations;
     private String gameMode;
-    private String saveName;
     private static int numDungeonIds; // Initialized to zero
     private String goalsAsString;
     
@@ -122,4 +121,10 @@ public class Game {
     public DungeonResponse generateDungeonResponse() {
         return new DungeonResponse(dungeonId, dungeonName, null, null, buildables, goalsAsString); //TODO fix this up later
     }
+
+    public void setGameMode(String gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    
 }
