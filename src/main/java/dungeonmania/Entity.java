@@ -9,10 +9,10 @@ public class Entity {
     private Position position;
     private static int numEntityIds; // Initialized to zero
 
-    public Entity(int id, String type, int x, int y) {
+    public Entity(int id, String type, int x, int y, int layer) {
         this.id = id;
         this.type = type;
-        position = new Position(x, y); // decide what default layer of entity is
+        position = new Position(x, y, layer);
         numEntityIds++;
     }
 
