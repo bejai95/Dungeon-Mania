@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class CharacterTest {
-    /*
     @Test
     public void testMove() {
         //test moving in every direction
@@ -41,10 +40,8 @@ public class CharacterTest {
         assertEquals(character.getPosition().getX(), 0);
         assertEquals(character.getPosition().getY(), 5);
     }
-    */
     //THIS TEST WILL GET MOVED TO CHECKING THAT INTERFACE TODO
-    //@Test
-    /*
+    @Test
     public void testPickUpItem() {
         Character character = new Character(1, "Character", new Position(5,5));
         //constructor for a treasure
@@ -60,7 +57,6 @@ public class CharacterTest {
         //test trying to pickup item that does not exist
         assertThrows(InvalidActionException.class,() -> {character.pickUpItem(202020);});
     }
-    */
     @Test
     public void testGetDamage() {
         //test no items
@@ -86,7 +82,6 @@ public class CharacterTest {
         character.inventory.addItemToInventory(armour);
         assertEquals(character.getDefense(), character.baseDefense + shield.getMultipler() + armour.getMultipler());
     }
-    /*
     @Test
     public void testGetHealth() {
         //test before and after a battle
@@ -97,7 +92,6 @@ public class CharacterTest {
         battleManager.battle(character, spider);
         assertTrue(healthBeforeBattle > character.getHealth());
     }
-    */
     @Test
     public void testUse() {
         //test when trying to use an item you cant use throws exceptions
