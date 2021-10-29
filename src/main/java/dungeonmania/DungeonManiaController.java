@@ -77,16 +77,6 @@ public class DungeonManiaController {
             currentlyAccessingGame.initializeInventoryAndBuildables();
             Game.incrementNumDungeonIds();
 
-            // For testing purposes
-            for (Entity curr: currentlyAccessingGame.getEntities()) {
-                System.out.println(curr.getType());
-            }
-            System.out.println("dungeonId: " + currentlyAccessingGame.getDungeonId());
-            System.out.println("dungeonName: " + currentlyAccessingGame.getDungeonName());
-            System.out.println("Inventory: " + currentlyAccessingGame.getInventory());
-            System.out.println("buildables: " + currentlyAccessingGame.getBuildables());
-            System.out.println("goals: " + currentlyAccessingGame.getGoalCondition().getGoal());
-
             return currentlyAccessingGame.generateDungeonResponse();
         }
         catch (IOException e) {
@@ -114,15 +104,36 @@ public class DungeonManiaController {
             return currentlyAccessingGame.generateDungeonResponse();
 
         } catch (IOException e) {
-            System.out.println("An error occurred.");
+            System.out.println("An IO issue occurred");
             e.printStackTrace();
             return null;
         }
     }
     
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
-        return null;
+        try {
+            
+            // Make sure that the file exists
+            if (!FileLoader.listFileNamesInResourceDirectory("/games").contains(name)) {
+                throw new IllegalArgumentException("name is not a valid saved game name");
+            }
+
+            // Load the JSON string from the saved file
+            String JSONString = FileLoader.loadResourceFile("/games/" + name + ".json");
+            
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+
+            // Load the game
+            this.currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
+
+            return currentlyAccessingGame.generateDungeonResponse();
+
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Directory path is invalid or some other IO issue occured");
+        }
     }
+    
     public List<String> allGames() {
         return new ArrayList<>();
     }
