@@ -112,5 +112,9 @@ public class CharacterTest {
         //bow should be used up
         assertThrows(InvalidActionException.class, ()-> {character.use(bow);});
     }
+    @Test
+    public void testMercs() {
+        
+    }
 
 }
