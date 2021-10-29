@@ -11,9 +11,8 @@ public class SquareMovement implements Movement {
     List<Position> path = new ArrayList<>();
 
     
-    public SquareMovement(Position start) {
+    public SquareMovement() {
         direction = Direction.UP;
-        path = getPath(start);
     }
 
 
@@ -22,8 +21,8 @@ public class SquareMovement implements Movement {
      * unless it would move to a non-path tile, in which case
      * turn right
      */
-    public void move() {
-
+    public Position move(Position currentPos) {
+        return null;
     }
 
     /**

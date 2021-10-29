@@ -3,13 +3,24 @@ import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.FileLoader;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.plaf.synth.SynthStyle;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import org.eclipse.jetty.util.IO;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 public class DungeonManiaController {
     private Game currentlyAccessingGame;
     
@@ -56,37 +67,90 @@ public class DungeonManiaController {
         try {
             // Convert the entire dungeon JSON file into a JSON String
             String JSONString = FileLoader.loadResourceFile("/dungeons/" + dungeonName);
-            
-            // From this JSON String, get the dungeon's goals and entities
-            JSONObject entireFile = new JSONObject(JSONString);
-            JSONObject goals = entireFile.getJSONObject("goal-condition");
-            JSONArray entities = entireFile.getJSONArray("entities");
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
 
             // Generate an Id for the new dungeon
             String newDungeonId = String.valueOf(Game.getNumDungeonIds());
 
             // Create a new game
-            this.currentlyAccessingGame = new Game(newDungeonId, dungeonName, entities, gameMode, goals);
+            currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
+            currentlyAccessingGame.setDungeonId(newDungeonId);
+            currentlyAccessingGame.setDungeonName(dungeonName);
+            currentlyAccessingGame.initializeInventoryAndBuildables();
+            Game.incrementNumDungeonIds();
 
-            // Generate the DungeonResponse object TODO complete this
-            DungeonResponse ret = new DungeonResponse(currentlyAccessingGame.getDungeonId(), currentlyAccessingGame.getDungeonName(), null, null, null, currentlyAccessingGame.getGoalsLeft());
-            
-            return ret;
+            return currentlyAccessingGame.generateDungeonResponse();
         }
         catch (IOException e) {
             throw new IllegalArgumentException("Dungeon name does exist (without extension) but incorrect filename");
         }
     }
     
-    public DungeonResponse saveGame(String name) throws IllegalArgumentException {
-        return null;
+    public DungeonResponse saveGame(String name) {
+        try {
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.setPrettyPrinting().create();
+            String JSONString = gson.toJson(this.currentlyAccessingGame);
+            
+            String path = "src\\main\\resources\\games\\" + name + ".json";
+            
+            // Now write to the file that we just created (or just overwrite the existing file)
+            FileWriter writer = new FileWriter(path);
+            writer.write(JSONString);
+            writer.close();
+
+            // Need to give the file some time to save (trust us, this is necessary)
+            Thread.sleep(3000);
+            
+            return currentlyAccessingGame.generateDungeonResponse();
+
+        } catch (IOException e) {
+            System.out.println("An IO issue occurred");
+            e.printStackTrace();
+            return null;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+
+
+    
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
-        return null;
+        try {
+            
+            // Make sure that the file exists
+            if (!FileLoader.listFileNamesInResourceDirectory("/games").contains(name)) {
+                throw new IllegalArgumentException(name +  "is not a valid saved game name");
+            }
+            
+            // Load the JSON string from the saved file
+            String JSONString = FileLoader.loadResourceFile("/games/" + name + ".json");
+            
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
+
+            // Load the game
+            this.currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
+
+            return currentlyAccessingGame.generateDungeonResponse();
+
+        } catch (IOException e) {
+            throw new IllegalArgumentException("Directory path is invalid or some other IO issue occured");
+        }
     }
+    
     public List<String> allGames() {
-        return new ArrayList<>();
+        try {
+            return FileLoader.listFileNamesInResourceDirectory("/games");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         return null;
     }
