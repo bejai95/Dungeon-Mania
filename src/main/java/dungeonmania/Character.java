@@ -51,7 +51,4 @@ public class Character extends Entity {
     public void use(Consumable consumable) throws InvalidActionException {
         consumable.consume();
     }
-
-
-    
 }

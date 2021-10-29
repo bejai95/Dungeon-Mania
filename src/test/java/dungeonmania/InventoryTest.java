@@ -1,6 +1,7 @@
 package dungeonmania;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Executable;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,38 +23,40 @@ public class InventoryTest {
     @Test
     public void testCrafting() {
         Inventory inventory = new Inventory();
-        List<Item> mats = new ArrayList<>();
-        Treasure treasure = new Treasure(1);
-        Wood wood = new Wood(2);
-        mats.add(wood);
-        mats.add(treasure);
-        inventory.addRecipe("Bow", mats);
+        List<String> mats = new ArrayList<>();
+        mats.add(Wood.class.getCanonicalName());
+        mats.add(Treasure.class.getCanonicalName());
+        inventory.addRecipe(Bow.class.getCanonicalName(), mats);
         //now add wood and treasure that is different id since it shouldnt matter to the inventory
         Wood woodI1 = new Wood(3);
         Treasure TreasureI1 = new Treasure(4);
         inventory.addItemToInventory(woodI1);
         inventory.addItemToInventory(TreasureI1);
-        Item craftedBow = inventory.craft("Bow");
+        Item craftedBow = assertDoesNotThrow(() -> inventory.craft(Bow.class.getCanonicalName(),6));
         //now there should be nothing in items except the bow since materials used
-        assertTrue(inventory.getItems() == Arrays.asList(craftedBow));
-
+        assertTrue(inventory.getItems().get(0).equals(craftedBow));
     }
     @Test
     public void testGenerateBuildables() {
         //check that if we have the materials in the inventory that recipe is crafted
         Inventory inventory = new Inventory();
-        List<Item> mats = new ArrayList<>();
-        Treasure treasure = new Treasure(1);
-        Wood wood = new Wood(2);
-        mats.add(wood);
-        mats.add(treasure);
+        List<String> mats = new ArrayList<>();
+        mats.add(Wood.class.getCanonicalName());
+        mats.add(Treasure.class.getCanonicalName());
+        mats.add(Wood.class.getCanonicalName());
         inventory.addRecipe("Bow", mats);
         //now add wood and treasure that is different id since it shouldnt matter to the inventory
         Wood woodI1 = new Wood(3);
+        Wood wood = new Wood(2);
         Treasure TreasureI1 = new Treasure(4);
         inventory.addItemToInventory(woodI1);
         inventory.addItemToInventory(TreasureI1);
-        assertTrue(inventory.generateBuildables() == Arrays.asList("Bow"));
+        inventory.addItemToInventory(wood);
+        assertTrue(inventory.generateBuildables().get(0).equals("Bow"));
+        //check that if you are an item short that it doesnt do anything
+        inventory.removeItem(wood);
+        assertTrue(inventory.generateBuildables().equals(new ArrayList<String>()));
+
     }
     @Test
     public void testaddItemToInventory() {
@@ -153,10 +156,6 @@ public class InventoryTest {
 
     }
     @Test
-    public void testuseItem() {
-        //test using does stuff
-    }
-    @Test
     public void testRemoveDeadItems() {
         Inventory inventory = new Inventory();
         Sword sword = new Sword(1);
@@ -171,13 +170,11 @@ public class InventoryTest {
     @Test
     public void testAddRecipeGetRecipe() {
         Inventory inventory = new Inventory();
-        List<Item> mats = new ArrayList<>();
-        Treasure treasure = new Treasure(1);
-        Wood wood = new Wood(2);
-        mats.add(wood);
-        mats.add(treasure);
-        inventory.addRecipe("Bow", mats);
-        assertTrue(inventory.getRecipe("Bow") == Arrays.asList(treasure, wood));
+        List<String> mats = new ArrayList<>();
+        mats.add(Wood.class.getCanonicalName());
+        mats.add(Treasure.class.getCanonicalName());
+        inventory.addRecipe(Bow.class.getCanonicalName(), mats);
+        assertTrue(inventory.getRecipe(Bow.class.getCanonicalName()).equals(Arrays.asList(Wood.class.getCanonicalName(), Treasure.class.getCanonicalName())));
     }
     @Test
     public void testGetBows() {
