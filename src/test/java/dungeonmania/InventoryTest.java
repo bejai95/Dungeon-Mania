@@ -26,15 +26,15 @@ public class InventoryTest {
         List<String> mats = new ArrayList<>();
         mats.add(Wood.class.getCanonicalName());
         mats.add(Treasure.class.getCanonicalName());
-        inventory.addRecipe("Bow", mats);
+        inventory.addRecipe(Bow.class.getCanonicalName(), mats);
         //now add wood and treasure that is different id since it shouldnt matter to the inventory
         Wood woodI1 = new Wood(3);
         Treasure TreasureI1 = new Treasure(4);
         inventory.addItemToInventory(woodI1);
         inventory.addItemToInventory(TreasureI1);
-        Item craftedBow = assertDoesNotThrow(() -> inventory.craft("Bow",6));
+        Item craftedBow = assertDoesNotThrow(() -> inventory.craft(Bow.class.getCanonicalName(),6));
         //now there should be nothing in items except the bow since materials used
-        assertTrue(inventory.getItems() == Arrays.asList(craftedBow));
+        assertTrue(inventory.getItems().get(0).equals(craftedBow));
     }
     @Test
     public void testGenerateBuildables() {
@@ -52,10 +52,10 @@ public class InventoryTest {
         inventory.addItemToInventory(woodI1);
         inventory.addItemToInventory(TreasureI1);
         inventory.addItemToInventory(wood);
-        assertTrue(inventory.generateBuildables() == Arrays.asList("Bow"));
+        assertTrue(inventory.generateBuildables().get(0).equals("Bow"));
         //check that if you are an item short that it doesnt do anything
         inventory.removeItem(wood);
-        assertTrue(inventory.generateBuildables() == new ArrayList<String>());
+        assertTrue(inventory.generateBuildables().equals(new ArrayList<String>()));
 
     }
     @Test
@@ -171,12 +171,10 @@ public class InventoryTest {
     public void testAddRecipeGetRecipe() {
         Inventory inventory = new Inventory();
         List<String> mats = new ArrayList<>();
-        Treasure treasure = new Treasure(1);
-        Wood wood = new Wood(2);
         mats.add(Wood.class.getCanonicalName());
         mats.add(Treasure.class.getCanonicalName());
-        inventory.addRecipe("Bow", mats);
-        assertTrue(inventory.getRecipe("Bow").equals(Arrays.asList(treasure, wood)));
+        inventory.addRecipe(Bow.class.getCanonicalName(), mats);
+        assertTrue(inventory.getRecipe(Bow.class.getCanonicalName()).equals(Arrays.asList(Wood.class.getCanonicalName(), Treasure.class.getCanonicalName())));
     }
     @Test
     public void testGetBows() {

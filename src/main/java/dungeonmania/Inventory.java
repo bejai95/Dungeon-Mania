@@ -49,6 +49,8 @@ public class Inventory {
         Class classType = Class.forName(recipeName);
         Constructor construct = classType.getConstructor(int.class);
         Item newItem = (Item)construct.newInstance(2);
+        //add the new item to inventory
+        this.addItemToInventory(newItem);
         //craft returns int of the item crafted id
         //invariant, assume the item can be crafted
         return newItem;
@@ -132,6 +134,11 @@ public class Inventory {
             removeItem(item);
         }
     }
+    /**
+     * 
+     * @param name should be the canonical name of an item
+     * @param materials
+     */
     public void addRecipe(String name, List<String> materials) {
         recipes.put(name, materials);
     }
@@ -173,33 +180,20 @@ public class Inventory {
         for (String material: recipes.get(recipeName)) {
             //check through the list of materials and see if item is in the recipe
             //if so add that specific item to list of materials already used
+            int itemsUsedBeforeNewMaterial = materialsAlreadyUsed.size();
             for (Item item: this.getMaterials()) {
                 //if the item is of the right material and is not already used add it to used materials
                 if (item.getClass().getCanonicalName().equals(material) && (!(materialsAlreadyUsed.contains(item.getitemId())))) {
                     materialsAlreadyUsed.add(item.getitemId());
+                    break;
                 }
-                else {
-                    return false;
-                }
+            }
+            //if no items are already being used for this material then material was not found
+            //hence recipe cant be done
+            if (itemsUsedBeforeNewMaterial == materialsAlreadyUsed.size()) {
+                return false;
             }
         }
         return true;
-
-    }
-    public static void main(String[] args) {
-        Inventory inventory = new Inventory();
-        List<String> mats = new ArrayList<>();
-        mats.add(Wood.class.getCanonicalName());
-        mats.add(Treasure.class.getCanonicalName());
-        inventory.addRecipe("Bow", mats);
-        //now add wood and treasure that is different id since it shouldnt matter to the inventory
-        Wood woodI1 = new Wood(3);
-        Treasure TreasureI1 = new Treasure(4);
-        inventory.addItemToInventory(woodI1);
-        inventory.addItemToInventory(TreasureI1);
-        for (Item item: inventory.getMaterials()) {
-            System.out.println(item);
-        }
-        //now there should be nothing in items except the bow since materials used
     }
 }
