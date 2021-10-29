@@ -48,7 +48,7 @@ public class Inventory {
         }
         Class classType = Class.forName(recipeName);
         Constructor construct = classType.getConstructor(int.class);
-        Item newItem = (Item)construct.newInstance(2);
+        Item newItem = (Item)construct.newInstance(itemId);
         //add the new item to inventory
         this.addItemToInventory(newItem);
         //craft returns int of the item crafted id
