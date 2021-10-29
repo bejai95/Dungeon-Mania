@@ -1,25 +1,49 @@
 package dungeonmania;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import dungeonmania.response.models.DungeonResponse;
 
 public class Game {
     private String dungeonId;
     private String dungeonName;
-    private List<Entity> entities; 
+    private List<Entity> entities;
     private List<Item> inventory;
     private List<String> buildables;
-    private JSONObject goals;
-    //private final List<AnimationQueue> animations;
-    private String gameMode;
     
-    public Game(String dungeonId, String dungeonName, String gameMode, String goals) {
-        this.dungeonId = dungeonId;
-        this.dungeonName = dungeonName;
-        this.gameMode = gameMode;
+    @SerializedName(value="goal-condition")
+    private GoalCondition goalCondition;
+
+    // private final List<AnimationQueue> animations;
+    private String gameMode;
+    private String saveName;
+    private static int numDungeonIds; // Initialized to zero
+    private String goalsAsString;
+    
+    public Game() {
     }
 
+
+    public static int getNumDungeonIds() {
+        return numDungeonIds;
+    }
+
+    public static void incrementNumDungeonIds() {
+        numDungeonIds++;
+    }
+
+    public void initializeInventoryAndBuildables() {
+        this.inventory = new ArrayList<Item>();
+        this.buildables = new ArrayList<String>();
+    }
+
+    /*
     private String getGoalsLeft(JSONObject gs){
         switch(gs.getString("goal")){
             case "exit":
@@ -55,9 +79,47 @@ public class Game {
         }
         return null;
     }
-
+    */
+    /*
     public String getGoalsLeft() {
-        return getGoalsLeft(goals);
+        return getGoalsLeft(goalCondition.getGoal());
+    }
+    */
+
+    public String getDungeonId() {
+        return dungeonId;
     }
 
+    public void setDungeonId(String dungeonId) {
+        this.dungeonId = dungeonId;
+    }
+
+    public String getDungeonName() {
+        return dungeonName;
+    }
+
+    public void setDungeonName(String dungeonName) {
+        this.dungeonName = dungeonName;
+    }
+
+    public List<Entity> getEntities() {
+        return entities;
+    }
+
+    public List<Item> getInventory() {
+        return inventory;
+    }
+
+    public List<String> getBuildables() {
+        return buildables;
+    }
+
+    public GoalCondition getGoalCondition() {
+        return goalCondition;
+    }
+
+    // Generate a dungeon response
+    public DungeonResponse generateDungeonResponse() {
+        return new DungeonResponse(dungeonId, dungeonName, null, null, buildables, goalsAsString); //TODO fix this up later
+    }
 }
