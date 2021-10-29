@@ -10,24 +10,24 @@ public class Character extends Entity {
     int damage;
     double baseDefense;
 
-    public Character(int id, String type, int x, int y) {
-        super(id, type, x, y);
+    public Character(int id, String type, int x, int y,int layer) {
+        super(id, type, x, y, layer);
     }
     public int baseDamage() {
         return this.damage;
     }
     public void move(Direction moveDirection) {
-        this.getPosition().translateBy(moveDirection);
+        this.setPosition(this.getPosition().translateBy(moveDirection));
     }
     public int getDamage() {
         //gets damage of all things including inventory and use them
         int damage = this.baseDamage();
-        for (Sword sword: inventory.getSwords()) {
+        for (Sword sword: this.inventory.getSwords()) {
             damage += sword.getDamage();
             use(sword);
         }
         //now we got total damage get the amount of bows and use them
-        for (Bow bow: inventory.getBows()) {
+        for (Bow bow: this.inventory.getBows()) {
             damage *= bow.getAmountOfAttacks();
             use(bow);
         }
@@ -36,7 +36,7 @@ public class Character extends Entity {
     }
     public double getDefense() {
         double defence = this.baseDefense;
-        for (DefenseItem d: inventory.getDefenseItems()) {
+        for (DefenseItem d: this.inventory.getDefenseItems()) {
             defence += d.getMultipler();
             use(d);
         }
