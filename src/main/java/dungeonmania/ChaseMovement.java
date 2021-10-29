@@ -1,5 +1,7 @@
 package dungeonmania;
 
+import dungeonmania.util.Position;
+
 public class ChaseMovement implements Movement {
     
     Entity target;
@@ -12,8 +14,8 @@ public class ChaseMovement implements Movement {
      * Move object by 1 in the direction that would minimise
      * distance to target
      */
-    public void move() {
-
+    public Position move(Position currentPos) {
+        return null;
     }
 
     public double getDistToTarget() {
