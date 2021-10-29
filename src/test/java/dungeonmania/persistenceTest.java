@@ -13,8 +13,6 @@ import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.FileLoader;
 
-import dungeonmania.DungeonManiaController;
-
 
 @TestInstance(value = Lifecycle.PER_CLASS)
 public class persistenceTest {
@@ -39,6 +37,10 @@ public class persistenceTest {
         DungeonResponse response2 = assertDoesNotThrow(() -> controller2.loadGame("save2"));
 
         // Check that the goals are correct for both games (will do this later once I'm more familiar with how the JSON objects work)
+
+        // Can also use allGames()
+
+        // Definitely test the load/save/load/save edge case
 
     }
 

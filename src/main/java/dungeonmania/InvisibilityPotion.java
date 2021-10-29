@@ -2,7 +2,8 @@ package dungeonmania;
 
 public class InvisibilityPotion extends Item implements Consumable {
     public InvisibilityPotion(int itemId) {
-        super(1, itemId);
+        super(itemId);
+        setUses(1);
     }
     public void consume() {
         
