@@ -25,7 +25,8 @@ public class Inventory {
      * @param itemName
      * @description craft will be in change of adding items to proper lists and taking away what is needed
      */
-    public Item craft(String itemName) throws ClassNotFoundException {
+    public Item craft(String itemName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
+          IllegalAccessError, IllegalAccessException, InvocationTargetException {
         List<Item> recipe = this.getRecipe(itemName);
         List<Item> items = this.getItems();
         for (Item recipeMaterial: recipe) {
@@ -39,11 +40,12 @@ public class Inventory {
                 }
             }
         }
-        Class newItem = Class.forName(itemName);
+        Class classType = Class.forName(itemName);
+        Constructor construct = classType.getConstructor(int.class);
+        Item newItem = (Item)construct.newInstance(2);
         //craft returns int of the item crafted id
         //invariant, assume the item can be crafted
-        
-        return new Wood(-1);
+        return newItem;
     }
     public List<String> generateBuildables() {
         //go through each recipe
@@ -101,7 +103,7 @@ public class Inventory {
         }
     }
     public void useItem(Consumable consumable) {
-
+        consumable.consume();
     }
     //remove all items that have zero uses left, call at end of each turn
     public void removeDeadItems() {

@@ -1,6 +1,7 @@
 package dungeonmania;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Executable;
 import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class InventoryTest {
         Treasure TreasureI1 = new Treasure(4);
         inventory.addItemToInventory(woodI1);
         inventory.addItemToInventory(TreasureI1);
-        assertDoesNotThrow(() -> {Item craftedBow = inventory.craft("Bow");});
+        assertDoesNotThrow(() -> {Item craftedBow = inventory.craft("Bow",6);});
         //now there should be nothing in items except the bow since materials used
         assertTrue(inventory.getItems() == Arrays.asList(craftedBow));
 
@@ -153,10 +154,6 @@ public class InventoryTest {
 
     }
     @Test
-    public void testuseItem() {
-        //test using does stuff
-    }
-    @Test
     public void testRemoveDeadItems() {
         Inventory inventory = new Inventory();
         Sword sword = new Sword(1);
@@ -177,7 +174,7 @@ public class InventoryTest {
         mats.add(wood);
         mats.add(treasure);
         inventory.addRecipe("Bow", mats);
-        assertTrue(inventory.getRecipe("Bow") == Arrays.asList(treasure, wood));
+        assertTrue(inventory.getRecipe("Bow").equals(Arrays.asList(treasure, wood)));
     }
     @Test
     public void testGetBows() {
