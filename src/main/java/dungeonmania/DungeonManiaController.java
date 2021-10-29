@@ -3,13 +3,20 @@ import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.FileLoader;
+
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 public class DungeonManiaController {
     private Game currentlyAccessingGame;
     
@@ -56,31 +63,63 @@ public class DungeonManiaController {
         try {
             // Convert the entire dungeon JSON file into a JSON String
             String JSONString = FileLoader.loadResourceFile("/dungeons/" + dungeonName);
-            
-            // From this JSON String, get the dungeon's goals and entities
-            JSONObject entireFile = new JSONObject(JSONString);
-            JSONObject goals = entireFile.getJSONObject("goal-condition");
-            JSONArray entities = entireFile.getJSONArray("entities");
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.create();
 
             // Generate an Id for the new dungeon
             String newDungeonId = String.valueOf(Game.getNumDungeonIds());
 
             // Create a new game
-            this.currentlyAccessingGame = new Game(newDungeonId, dungeonName, entities, gameMode, goals);
+            currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
+            currentlyAccessingGame.setDungeonId(newDungeonId);
+            currentlyAccessingGame.setDungeonName(dungeonName);
+            currentlyAccessingGame.initializeInventoryAndBuildables();
+            Game.incrementNumDungeonIds();
 
-            // Generate the DungeonResponse object TODO complete this
-            DungeonResponse ret = new DungeonResponse(currentlyAccessingGame.getDungeonId(), currentlyAccessingGame.getDungeonName(), null, null, null, currentlyAccessingGame.getGoalsLeft());
-            
-            return ret;
+            // For testing purposes
+            for (Entity curr: currentlyAccessingGame.getEntities()) {
+                System.out.println(curr.getType());
+            }
+            System.out.println("dungeonId: " + currentlyAccessingGame.getDungeonId());
+            System.out.println("dungeonName: " + currentlyAccessingGame.getDungeonName());
+            System.out.println("Inventory: " + currentlyAccessingGame.getInventory());
+            System.out.println("buildables: " + currentlyAccessingGame.getBuildables());
+            System.out.println("goals: " + currentlyAccessingGame.getGoalCondition().getGoal());
+
+            return currentlyAccessingGame.generateDungeonResponse();
         }
         catch (IOException e) {
             throw new IllegalArgumentException("Dungeon name does exist (without extension) but incorrect filename");
         }
     }
     
-    public DungeonResponse saveGame(String name) throws IllegalArgumentException {
-        return null;
+    public DungeonResponse saveGame(String name) {
+        try {
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            Gson gson = gsonBuilder.setPrettyPrinting().create();
+            String JSONString = gson.toJson(this.currentlyAccessingGame);
+            
+            String path = "src\\main\\resources\\games\\" + name + ".json";
+            
+            // Create a new file if the file doesn't exist (if the file does exist then we just want to overwrite it)
+            File newFile = new File(path);
+            newFile.createNewFile();
+
+            // Now write to the file that we just created
+            FileWriter newFileWriter = new FileWriter(path);
+            newFileWriter.write(JSONString);
+            newFileWriter.close();
+
+            return currentlyAccessingGame.generateDungeonResponse();
+
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+            return null;
+        }
     }
+    
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
         return null;
     }
