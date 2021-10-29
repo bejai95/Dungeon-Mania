@@ -1,6 +1,7 @@
 package dungeonmania;
 
 import dungeonmania.util.Direction;
+import dungeonmania.util.Position;
 import dungeonmania.exceptions.InvalidActionException;
 
 public class Character extends Entity {
@@ -10,8 +11,8 @@ public class Character extends Entity {
     int damage;
     double baseDefense;
 
-    public Character(int id, String type, int x, int y) {
-        super(id, type, x, y);
+    public Character(int id, String type, Position position) {
+        super(id, type, position);
     }
     public int baseDamage() {
         return this.damage;
