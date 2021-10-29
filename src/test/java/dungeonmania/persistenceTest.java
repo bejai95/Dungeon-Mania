@@ -31,7 +31,7 @@ public class persistenceTest {
         // Test creating and then saving some games
         assertDoesNotThrow(() -> controller1.newGame("maze.json", "Standard"));
         controller1.saveGame("save1");
-        assertDoesNotThrow(() -> controller1.newGame("advanced.json", "Standard"));
+        assertDoesNotThrow(() -> controller1.newGame("boulders.json", "Standard"));
         controller1.saveGame("save2");
 
         // Test that both games have been saved
@@ -47,7 +47,7 @@ public class persistenceTest {
         assertEquals("maze.json", response1.getDungeonName());
         DungeonResponse response2 = assertDoesNotThrow(() -> controller2.loadGame("save2"));
         assertEquals("1", response2.getDungeonId());
-        assertEquals("advanced.json", response2.getDungeonName());
+        assertEquals("boulders.json", response2.getDungeonName());
 
         // Testing overwriting save files -> Should work
         DungeonManiaController controller3 = new DungeonManiaController();
