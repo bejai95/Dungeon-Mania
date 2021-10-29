@@ -2,8 +2,8 @@ package dungeonmania;
 
 public abstract class DefenseItem extends Item implements Consumable {
     double multipler;
-    public DefenseItem(int uses, int itemId) {
-        super(uses, itemId);
+    public DefenseItem(int itemId) {
+        super(itemId);
     }
     public double getMultipler() {
         return this.multipler;
