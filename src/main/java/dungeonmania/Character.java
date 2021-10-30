@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import dungeonmania.util.Position;
 import dungeonmania.exceptions.InvalidActionException;
 
-public class Character extends Entity {
+public class Character extends Entity implements Battleable{
     Inventory inventory = new Inventory();
     double health;
     int damage;
@@ -51,7 +51,7 @@ public class Character extends Entity {
         }
         return defence;
     }
-    public double getDefenseMultipler() {
+    public double getDefenseMultiplier() {
         return 1 - getDefense();
     }
     public double getHealth() {

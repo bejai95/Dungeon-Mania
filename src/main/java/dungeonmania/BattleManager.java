@@ -19,8 +19,8 @@ public class BattleManager {
         ret.add(goodie);
         ret.add(baddie);
         
-        goodie.setHealth(((goodie.getHealth() - (baddie.getHealth() * baddie.getDamage()))/10)*goodie.getDefenceMultiplier());
-        baddie.setHealth(((baddie.getHealth() - (goodie.getHealth() * goodie.getDamage()))/5)*baddie.getDefenceMultiplier());
+        goodie.setHealth(((goodie.getHealth() - (baddie.getHealth() * baddie.getDamage()))/10)*goodie.getDefenseMultiplier());
+        baddie.setHealth(((baddie.getHealth() - (goodie.getHealth() * goodie.getDamage()))/5)*baddie.getDefenseMultiplier());
         
         return ret.stream().filter(x -> x.getHealth() <= 0).collect(Collectors.toList());
     }
@@ -38,8 +38,8 @@ public class BattleManager {
         return null; //TODO
     }
 
-    private List<Mercenary> getAlliesInRange(List<Mercenary> mercs, Battleable baddie){
-        return mercs.stream().filter(x -> !x.isHostile && x.entityInRadius(baddie)).collect(Collectors.toList()); 
+    private List<Mercenary> getAlliesInRange(List<Mercenary> mercs, Character player){
+        return mercs.stream().filter(x -> !x.isHostile && x.entityInRadius(player)).collect(Collectors.toList()); 
     }
 
     private List<Mercenary> getMercsInRange(List<Mercenary> mercenaries, Character player){
@@ -57,9 +57,10 @@ public class BattleManager {
      */
     public void battle(Character player, MovingEntity baddie, List<Mercenary> mercenaries){        
         List<Battleable> alive = new ArrayList<>();
-        alive.add(player);
-        alive.addAll();
         List<Mercenary> allies = getAlliesInRange(mercenaries, player);
+        alive.add(player);
+        alive.add(baddie);
+        alive.addAll(allies);
         List<Mercenary> mercsInRange = getMercsInRange(mercenaries, player);
         for(Mercenary merc : mercsInRange){
             merc.doubleSpeed();
