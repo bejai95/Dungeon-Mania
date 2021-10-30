@@ -1,4 +1,4 @@
-package dungeonmania;
+/*package dungeonmania;
 
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -68,3 +68,4 @@ public class ColliderTest {
 
 
 }
+*/
