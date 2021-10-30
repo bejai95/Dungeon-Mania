@@ -2,8 +2,6 @@ package dungeonmania;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 import dungeonmania.util.Position;
@@ -13,7 +11,7 @@ public class MovingEntityTest {
     @Test
     public void testSpiderMove() {
 
-        MovingEntity spider1 = new Spider(5, 1, new SquareMovement(), new Position(0,0));
+        MovingEntity spider1 = new Spider(0, new Position(0,0), new SquareMovement());
 
         // Spider's first move should move into the circle (top side)
         spider1.move();
@@ -43,7 +41,7 @@ public class MovingEntityTest {
 
     @Test
     public void testZombieMove() {
-        MovingEntity zombie1 = new ZombieToast(5, 1, new RandomMovement(), new Position(0,0));
+        MovingEntity zombie1 = new ZombieToast(0, new Position(0,0), new RandomMovement());
 
         for (int i = 0; i < 100; i++) {
             Position originalPos = zombie1.getPosition();
@@ -54,11 +52,10 @@ public class MovingEntityTest {
 
     @Test
     public void testMercMove() {
-        int goldThreshold = 1;
         Character character = new Character(1, "Character", new Position(0, 0));
 
         // Chase when above target
-        MovingEntity merc1 = new Mercenary(5, 1, new ChaseMovement(character), new Position(0,3), goldThreshold);
+        MovingEntity merc1 = new Mercenary(0, new Position(0,3), 1, character);
         merc1.move();
         merc1.move();
         assertEquals(merc1.getPosition(), new Position(0, 1));
