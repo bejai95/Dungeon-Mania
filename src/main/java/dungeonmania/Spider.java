@@ -7,7 +7,7 @@ public class Spider extends MovingEntity {
     public static int defaultHealth;
     public static int defaultAttack;
     public static double defaultdefense;
-    public static int defaultSpeed = 2;
+    public static int defaultSpeed = 1;
 
     public static int maxSpiders;
     public static int numSpiders;
