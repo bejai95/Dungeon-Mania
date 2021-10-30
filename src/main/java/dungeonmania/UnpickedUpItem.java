@@ -6,18 +6,16 @@ import java.lang.reflect.*;
 
 public class UnpickedUpItem extends StaticEntity {
     //-----Data-----
-    //This contains the class string of the unpicked up item E.g. "HealthPotion"
     private String itemClass;
-    //This contains the id string of the item E.g. "health_potion"
-    private String itemid;
+    private int itemid;
 
     //-----Constructors-----
     /*Be careful not to get inputs mixed up:
-    id = "unpickedup_item"
-    itemid = "health_potion"
+    id = The id of the unpickedup Static Entity (E.g. 2)
+    itemid = The id of the item (E.g. 5)
     itemClass = "HealthPotion"
     */
-    public UnpickedUpItem(int id, String type, Position position, String itemClass, String itemid) {
+    public UnpickedUpItem(int id, String type, Position position, String itemClass, int itemid) {
         super(id, "unpickedup_item", position);
         this.itemClass = itemClass;
         this.itemid = itemid;
