@@ -12,15 +12,13 @@ public class ZombieToastSpawner extends StaticEntity {
     }
 
     //-----Methods-----
-    public void spawn (Game game, int tickCounter, String gameMode) {
+    public ZombieToast spawn (int tickCounter, String gameMode, Position emptyTile ) {
         
         if ((gameMode == "hard" && tickCounter == 15) || (gameMode != "hard" && tickCounter == 20)) {
-            Position emptyTile = game.getEmpty(this.position)
-
             ZombieToast newZombieToast = new ZombieToast(120, 20, new RandomMovement(), emptyTile);
-            //Add this to entity list check with Raph if there is a method for this
+            return newZombieToast;
         } else {
-            return();
+            return null;
         }
 
     }

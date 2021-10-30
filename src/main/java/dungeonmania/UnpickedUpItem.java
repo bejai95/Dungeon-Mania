@@ -18,7 +18,8 @@ public class UnpickedUpItem extends StaticEntity {
 
     //-----Methods-----
     //Using 0 for ID until ID system implemented
-    public void pickupItem (Inventory inventory) {
+    public void pickupItem (Inventory inventory) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
+    IllegalAccessError, IllegalAccessException, InvocationTargetException {
         Class classType = Class.forName(itemClass);
         Constructor construct = classType.getConstructor(int.class);
         Item newItem = (Item)construct.newInstance(itemid);
