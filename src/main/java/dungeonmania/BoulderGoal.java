@@ -14,11 +14,11 @@ public class BoulderGoal implements Goal{
         return ret;
     }
 
-    private List<Entity> getSwitches(List<Entity> entities){
-        List<Entity> ret = new ArrayList<Entity>();
+    private List<FloorSwitch> getSwitches(List<Entity> entities){
+        List<FloorSwitch> ret = new ArrayList<FloorSwitch>();
         for(Entity entity : entities){
-            if(entity instanceof Switch){
-                ret.add(entity);
+            if(entity instanceof FloorSwitch){
+                ret.add((FloorSwitch)entity);
             }
         }
         return ret;
@@ -37,9 +37,9 @@ public class BoulderGoal implements Goal{
     @Override
     public String getGoalsLeft(List<Entity> entities) {
         List<Entity> boulders = getBoulders(entities);
-        List<Entity> switches = getSwitches(entities);
+        List<FloorSwitch> switches = getSwitches(entities);
 
-        for(Switch s : switches){
+        for(FloorSwitch s : switches){
             if(!existsSamePosition(s, boulders)){
                 return ":switch";
             }
