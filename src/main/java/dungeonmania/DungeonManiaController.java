@@ -68,9 +68,10 @@ public class DungeonManiaController {
             // Convert the entire dungeon JSON file into a JSON String
             String JSONString = FileLoader.loadResourceFile("/dungeons/" + dungeonName);
 
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            Gson gson = gsonBuilder.create();
-
+            Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Entity.class, new EntityDeserializerFromDungeon())
+                .create();
+                
             // Generate an Id for the new dungeon
             String newDungeonId = String.valueOf(Game.getNumDungeonIds());
 
@@ -78,6 +79,7 @@ public class DungeonManiaController {
             currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
             currentlyAccessingGame.setDungeonId(newDungeonId);
             currentlyAccessingGame.setDungeonName(dungeonName);
+            currentlyAccessingGame.setGameMode(gameMode);
             currentlyAccessingGame.initializeInventoryAndBuildables();
             Game.incrementNumDungeonIds();
 
@@ -90,19 +92,22 @@ public class DungeonManiaController {
     
     public DungeonResponse saveGame(String name) {
         try {
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            Gson gson = gsonBuilder.setPrettyPrinting().create();
+            Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
+                .setPrettyPrinting()
+                .create();
+            
             String JSONString = gson.toJson(this.currentlyAccessingGame);
             
             String path = "src\\main\\resources\\games\\" + name + ".json";
             
-            // Now write to the file that we just created (or just overwrite the existing file)
+            // Write to the file
             FileWriter writer = new FileWriter(path);
             writer.write(JSONString);
             writer.close();
 
             // Need to give the file some time to save (trust us, this is necessary)
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             
             return currentlyAccessingGame.generateDungeonResponse();
 
@@ -116,8 +121,6 @@ public class DungeonManiaController {
         }
     }
 
-
-    
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
         try {
             
@@ -129,8 +132,9 @@ public class DungeonManiaController {
             // Load the JSON string from the saved file
             String JSONString = FileLoader.loadResourceFile("/games/" + name + ".json");
             
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            Gson gson = gsonBuilder.create();
+            Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
+            .create();
 
             // Load the game
             this.currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
@@ -160,4 +164,9 @@ public class DungeonManiaController {
     public DungeonResponse build(String buildable) throws IllegalArgumentException, InvalidActionException {
         return null;
     }
+    public Game getCurrentlyAccessingGame() {
+        return currentlyAccessingGame;
+    }
+
+    
 }
