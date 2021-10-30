@@ -7,6 +7,7 @@ public class Entity{
     private int id;
     private String type;
     private Position position;
+    // TODO interactability
     private static int numEntityIds; // Initialized to zero
 
     public Entity() {}
@@ -31,6 +32,7 @@ public class Entity{
     }
 
     public EntityResponse getInfo() {
+        //return new EntityResponse(id, type, position, isInteractable);
         return null;
     }
 

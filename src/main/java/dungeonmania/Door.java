@@ -14,6 +14,11 @@ public class Door extends StaticEntity {
         this.matchingKey = matchingKey;
     }
     //-----Methods-----
+    public void openDoor (Key inputKey){
+        if (inputKey == matchingKey) {
+            this.isOpen = true;
+        }
+    }
 
 
 

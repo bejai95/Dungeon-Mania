@@ -35,6 +35,7 @@ public class InventoryTest {
         Item craftedBow = assertDoesNotThrow(() -> inventory.craft(Bow.class.getCanonicalName(),6));
         //now there should be nothing in items except the bow since materials used
         assertTrue(inventory.getItems().get(0).equals(craftedBow));
+        assertTrue(inventory.getItems().get(0) instanceof Bow);
     }
     @Test
     public void testGenerateBuildables() {
