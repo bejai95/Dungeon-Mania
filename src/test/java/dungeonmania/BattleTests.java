@@ -32,8 +32,7 @@ public class BattleTests {
         List<Battleable> alive = new ArrayList<>();
         alive.add(character);
  
-        assertEquals(bat.battle(), alive);
-        
+        assertEquals(alive, bat.battle());
     }
 
     @Test
@@ -53,9 +52,10 @@ public class BattleTests {
         alive.add(character);
         alive.add(merc);
  
-        assertEquals(bat.battle(), alive);
+        assertEquals(alive, bat.battle());
         
     }
+
 
 
 
