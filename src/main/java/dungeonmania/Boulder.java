@@ -2,15 +2,18 @@ package dungeonmania;
 
 import dungeonmania.util.Position;
 
-public class Wall  extends StaticEntity {
+public class Boulder extends StaticEntity {
 
     //-----Data-----
+
     //-----Constructors-----
-    public Wall(int id, String type, Position position) {
-        super(id, "wall", position);
+    public Boulder(int id, String type, Position position) {
+        super(id, "boulder", position);
     }
 
-    //-----Methods-----
-    //-----Getters and Setters-----
-}
 
+    //-----Methods-----
+
+    //-----Getters and Setters-----
+    
+}
