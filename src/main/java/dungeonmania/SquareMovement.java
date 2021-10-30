@@ -22,24 +22,39 @@ public class SquareMovement implements Movement {
      * turn right
      */
     public Position move(Position currentPos) {
-        return null;
+
+        // If this is the first move() call, define the path around currentPos
+        if (path.isEmpty()) {
+            path = currentPos.getAdjacentPositions();
+        }
+
+        // Get the forward tile
+        Position newPos = currentPos.translateBy(direction);
+
+        // Get the right tile if the forward tile is off path
+        if (!path.contains(newPos)) {
+            turnRight();
+            newPos = currentPos.translateBy(direction);
+        }
+        
+        return newPos;
+
     }
 
     /**
-     * Given the starting position, return a list of Positions
-     * which represent the square path
-     * @param start
-     * @return
-     */
-    public List<Position> getPath(Position start) {
-        return null;
-    }
-
-    /**
-     * Change the direction to be 90 degrees from its current one
+     * Change the direction to be 90 degrees right from its current one
      */
     public void turnRight() {
-
+        // TODO find a cleaner way to do this
+        if (direction.equals(Direction.UP)) {
+            direction = Direction.RIGHT;
+        } else if (direction.equals(Direction.RIGHT)) {
+            direction = Direction.DOWN;
+        } else if (direction.equals(Direction.DOWN)) {
+            direction = Direction.LEFT;
+        } else if (direction.equals(Direction.LEFT)) {
+            direction = Direction.UP;
+        }
     }
 
 }
