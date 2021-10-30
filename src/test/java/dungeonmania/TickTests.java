@@ -15,7 +15,7 @@ import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.response.models.EntityResponse;
 import dungeonmania.util.Direction;
 
-public class CharacterTest {
+public class TickTests {
     
     private EntityResponse getPlayer(List<EntityResponse> entities){
         for(EntityResponse entity : entities){
