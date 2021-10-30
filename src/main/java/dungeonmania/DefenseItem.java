@@ -12,6 +12,8 @@ public abstract class DefenseItem extends Item implements Consumable {
         this.multipler = multipler;
     }
     public void consume() {
-        uses += -1;
+        if (this.getUses() != 0) {
+            this.setUses(this.getUses() -1);   
+        }
     }
 }

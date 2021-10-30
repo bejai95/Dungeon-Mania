@@ -81,12 +81,29 @@ public class CharacterTest {
         Armour armour = new Armour(3);
         character.inventory.addItemToInventory(armour);
         assertEquals(character.getDefense(), character.baseDefense + shield.getMultipler() + armour.getMultipler());
+        Armour armour2 = new Armour(4);
+        Armour armour4 = new Armour(5);
+        Armour armour5 = new Armour(6);
+        Armour armour64 = new Armour(7);
+        Armour armour65 = new Armour(8);
+        Armour armour66 = new Armour(9);
+        character.inventory.addItemToInventory(armour2);
+        character.inventory.addItemToInventory(armour5);
+        character.inventory.addItemToInventory(armour4);
+        character.inventory.addItemToInventory(armour64);
+        character.inventory.addItemToInventory(armour65);
+        character.inventory.addItemToInventory(armour66);
+        //make sure max armour is 1
+        assertEquals(character.getDefense(), 1);
+        //now check that multiplier is zero since should do no damage
+        assertEquals(character.getDefenseMultipler(), 0);
+
     }
     @Test
     public void testGetHealth() {
         //test before and after a battle
         Character character = new Character(1, "Character", new Position(5,5));
-        Spider spider = new Spider(2, new getPosition()(5,5), "Spider");
+        Spider spider = new Spider(100, 3, new SquareMovement(), new Position(5,5));
         double healthBeforeBattle = character.getHealth();
         BattleManager battleManager = new BattleManager();
         battleManager.battle(character, spider);
@@ -112,5 +129,4 @@ public class CharacterTest {
         //bow should be used up
         assertThrows(InvalidActionException.class, ()-> {character.use(bow);});
     }
-
 }

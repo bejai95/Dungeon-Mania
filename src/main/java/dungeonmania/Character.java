@@ -1,12 +1,14 @@
 package dungeonmania;
 
 import dungeonmania.util.Direction;
+
+import java.util.ArrayList;
+
 import dungeonmania.util.Position;
 import dungeonmania.exceptions.InvalidActionException;
 
 public class Character extends Entity {
     Inventory inventory = new Inventory();
-    //List<Mercenary> allies = new ArrayList<>();
     double health;
     int damage;
     double baseDefense;
@@ -41,7 +43,14 @@ public class Character extends Entity {
             defence += d.getMultipler();
             use(d);
         }
+        //if value of defense has gone to high, set it to 1.
+        if (defence > 1) {
+            defence = 1;
+        }
         return defence;
+    }
+    public double getDefenseMultipler() {
+        return 1 - getDefense();
     }
     public double getHealth() {
         return this.health;
@@ -52,4 +61,5 @@ public class Character extends Entity {
     public void use(Consumable consumable) throws InvalidActionException {
         consumable.consume();
     }
+
 }
