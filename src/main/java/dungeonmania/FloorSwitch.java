@@ -12,7 +12,7 @@ public class FloorSwitch extends StaticEntity {
 
     //-----Constructors-----
     public FloorSwitch(int id, String type, Position position) {
-        super(id, "switch", position,);
+        super(id, "switch", position);
         isActive = false;
         noOfSwitches++;
     }
