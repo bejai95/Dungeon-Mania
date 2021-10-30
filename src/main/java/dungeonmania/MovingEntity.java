@@ -14,8 +14,8 @@ public abstract class MovingEntity extends Entity {
     public MovingEntity() {}
 
     //TODO damage and defense in contructor
-    public MovingEntity(String type, int health, int speed, Movement moveBehaviour, Position position) {
-        super(Entity.getNumEntityIds(), type, position);
+    public MovingEntity(String type, int health, int speed, Movement moveBehaviour, Position position, int id) {
+        super(id, type, position);
         this.health = health;
         this.speed = speed;
         this.moveBehaviour = moveBehaviour;

@@ -50,13 +50,11 @@ public class EntityDeserializerFromDungeon  implements JsonDeserializer<Entity> 
                 return new ZombieToastSpawner(newEntityId, "zombie_toast_spawner", positionSpawner);
             case "mercenary":
                 Position positionMercenary = new Position(x, y, 3);
-                // TODO get other logic from 
-                return new Mercenary(newEntityId, "mercenary", positionMercenary);
-            
-            
-                case "wall":
-                Position positionWall = new Position(x, y, 3);
-                return new Wall(newEntityId, "wall", positionWall);
+                // TODO get other logic from game, maybe adjust moving entity constructors to make more consistent
+                return new Mercenary(0, 0, null, positionMercenary, 0, newEntityId, "mercenary");
+            case "treasure":
+                Position positionTreasure = new Position(x, y, 3);
+                return new UnpickedUpItem(newEntityId, "treasure", positionTreasure, itemClass, itemid)
             
             
 
