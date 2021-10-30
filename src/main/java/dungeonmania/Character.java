@@ -43,7 +43,14 @@ public class Character extends Entity {
             defence += d.getMultipler();
             use(d);
         }
+        //if value of defense has gone to high, set it to 1.
+        if (defence > 1) {
+            defence = 1;
+        }
         return defence;
+    }
+    public double getDefenseMultipler() {
+        return 1 - getDefense();
     }
     public double getHealth() {
         return this.health;
