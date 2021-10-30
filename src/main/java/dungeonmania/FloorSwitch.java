@@ -9,15 +9,12 @@ import dungeonmania.util.Position;
 public class FloorSwitch extends StaticEntity {
     //-----Data-----
     private Boolean isActive;
-    private static int noOfSwitches;
-    private static int noOfActiveSwitches;
     private static List<FloorSwitch> floorSwitchList = new ArrayList<FloorSwitch>();
 
     //-----Constructors-----
     public FloorSwitch(int id, String type, Position position) {
         super(id, "switch", position);
         isActive = false;
-        noOfSwitches++;
         floorSwitchList.add(this);
     }
 
@@ -39,21 +36,11 @@ public class FloorSwitch extends StaticEntity {
     }
 
     public void setIsActive(Boolean isActive) {
-        if (isActive == true) {
-            noOfActiveSwitches++;
-        } else {
-            noOfActiveSwitches--;            
-        }
         this.isActive = isActive;
+        //Checks for nearby bombs to explode
+        if (isActive == true) {
+            PlacedBomb.explodeOnSwitchCheck(this.getPosition());
+        }
     }
-
-    public static int getNoOfSwitches() {
-        return noOfSwitches;
-    }
-
-    public static int getNoOfActiveSwitches() {
-        return noOfActiveSwitches;
-    }
-
 
 }

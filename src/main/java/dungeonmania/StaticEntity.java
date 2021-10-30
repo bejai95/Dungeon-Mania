@@ -31,3 +31,4 @@ public class StaticEntity extends Entity {
     //-----Getters and Setters-----
 
 }
+  
