@@ -8,7 +8,10 @@ import dungeonmania.util.Position;
 
 public class FloorSwitch extends StaticEntity {
     //-----Data-----
+    //If switch has a boulder on top of it
     private Boolean isActive;
+
+    //Contains a list of all floor switches on the map
     private static List<FloorSwitch> floorSwitchList = new ArrayList<FloorSwitch>();
 
     //-----Constructors-----

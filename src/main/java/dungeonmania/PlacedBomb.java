@@ -8,6 +8,7 @@ public class PlacedBomb extends StaticEntity {
 
 
     //-----Data-----
+    //This contains a list of all placed bombs on the map
     private static List<PlacedBomb> placedBombList = new ArrayList<PlacedBomb>();
 
     //-----Constructors-----
@@ -19,7 +20,8 @@ public class PlacedBomb extends StaticEntity {
 
     
     //-----Methods-----
-    //Checks to see if bomb will explode when placed
+    /*Checks to see if bomb will explode when it is first placed down.
+    This will hapen if it is placed adjacent to an active switch*/
     public void explodeOnPlacementCheck (){
         List<Position> adjacentPositions = this.getPosition().getAdjacentPositions();
         FloorSwitch possibleSwitch;
@@ -31,7 +33,8 @@ public class PlacedBomb extends StaticEntity {
         }
     }
 
-    //Checks to see if bomb will explode when switch is pressed
+    /*When a switch is pressed it can call this method with it's position to call
+    on any adjacent bombs to explode*/
     public static void explodeOnSwitchCheck (Position switchPos){
         List<Position> adjacentPositions = switchPos.getAdjacentPositions();
         for (Position edgecell : adjacentPositions) {
@@ -43,12 +46,19 @@ public class PlacedBomb extends StaticEntity {
         }
     }
 
-    //explodes killing all enemies 1 cell adjacent to the bomb
+    /*explodes killing all enemies 1 cell adjacent to the bomb
+    and removing the placed bomb*/
     public void explode() {
         List<Position> adjacentPositions = this.getPosition().getAdjacentPositions();
         for (Position edgeCell : adjacentPositions) {
-            return; //Add method which kills enemies at the given position
+            //Removes the bomb from the placed bombs list
+            placedBombList.remove(this);
+            //Removes the bomb from the static entities list
+            super.removeStaticEntity();
+            //Add method here which kills enemies at the given position
+            //....
         }
+        return;
     }
 
 

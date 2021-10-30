@@ -16,6 +16,12 @@ public class StaticEntity extends Entity {
         staticEntitiesList.add(this);
     }
     //-----Methods-----
+    //Removes the current instance of a static entities from the static entities list 
+    public void removeStaticEntity (){
+        staticEntitiesList.remove(this);
+    }
+
+
     //Checks to see if a collision with a static entity would occur at a given position
     public static boolean isCollision(Position cell){
         for (StaticEntity staticEntityItem : staticEntitiesList) {
