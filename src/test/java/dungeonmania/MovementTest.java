@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
-public class MovingEntityTest {
+public class MovementTest {
     
     @Test
     public void testSpiderMove() {
@@ -58,51 +58,48 @@ public class MovingEntityTest {
         // Chase when above target
         MovingEntity merc1 = new Mercenary(0, new Position(0,3), 1, c);
         merc1.move();
-        merc1.move();
-        assertEquals(merc1.getPosition(), c.getPosition().translateBy(Direction.UP));
+        assertEquals(merc1.getPosition(), new Position(0, 2));
 
         // Chase when to the right of target
-        c.setPosition(new Position(3, 0));
+        merc1.setPosition(new Position(3, 0));
         merc1.move();
-        merc1.move();
-        assertEquals(merc1.getPosition(), c.getPosition().translateBy(Direction.RIGHT));
+        assertEquals(merc1.getPosition(), new Position(2, 0));
 
         // Chase when below target
-        c.setPosition(new Position(0, -3));
+        merc1.setPosition(new Position(0, -3));
         merc1.move();
-        merc1.move();
-        assertEquals(merc1.getPosition(), c.getPosition().translateBy(Direction.DOWN));
+        assertEquals(merc1.getPosition(), new Position(0, -2));
 
         // Chase when left of target
-        c.setPosition(new Position(-3, 0));
+        merc1.setPosition(new Position(-3, 0));
         merc1.move();
-        merc1.move();
-        assertEquals(merc1.getPosition(), c.getPosition().translateBy(Direction.LEFT));
+        assertEquals(merc1.getPosition(), new Position(-2, 0));
 
         // Chase when up-right of target
-        c.setPosition(new Position(2, 2));
+        merc1.setPosition(new Position(2, 2));
         merc1.move();
-        assertEquals(merc1.getPosition(), c.getPosition().translateBy(Direction.UP).translateBy(Direction.RIGHT));
+        merc1.move();
+        assertEquals(merc1.getPosition(), new Position(1, 1));
 
         // Chase when down-right of target
-        c.setPosition(new Position(2, -2));
+        merc1.setPosition(new Position(2, -2));
         merc1.move();
-        assertEquals(merc1.getPosition(), c.getPosition().translateBy(Direction.DOWN).translateBy(Direction.RIGHT));
+        merc1.move();
+        assertEquals(merc1.getPosition(), new Position(1, -1));
 
         // Chase when down-left of target
-        c.setPosition(new Position(-2, -2));
+        merc1.setPosition(new Position(-2, -2));
         merc1.move();
-        assertEquals(merc1.getPosition(), c.getPosition().translateBy(Direction.DOWN).translateBy(Direction.LEFT));
+        merc1.move();
+        assertEquals(merc1.getPosition(), new Position(-1, -1));
 
         // Chase when up-left of target
-        c.setPosition(new Position(-2, 2));
+        merc1.setPosition(new Position(-2, 2));
         merc1.move();
-        assertEquals(merc1.getPosition(), c.getPosition().translateBy(Direction.UP).translateBy(Direction.LEFT));
+        merc1.move();
+        assertEquals(merc1.getPosition(), new Position(-1, 1));
     }
 
-    @Test
-    public void testBribe() {
-
-    }
+    
 
 }
