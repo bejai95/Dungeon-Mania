@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import dungeonmania.util.Position;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -16,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class ItemTest {
     //Test that when items are used their uses are decreased
     @Test
-    public void armourTests() {
+    public void usesTests() {
         Armour a = new Armour(1);
         int startingUses = a.getUses();
         a.consume();
@@ -68,19 +71,17 @@ public class ItemTest {
     }
     @Test
     public void theOneRingTests() {
-
-    }
-    @Test
-    public void bowTests() {
-        
-    }
-    @Test
-    public void shieldTests() {
-        
-    }
-    @Test
-    public void swordTests() {
-        
+        //test that revive does work
+        Character character = new Character(3, "Character", new Position(3, 4));
+        //now set health to 0 to pretend died
+        character.setHealth(0);
+        character.revive();
+        assertFalse(character.getHealth() == 100);
+        //give the one ring
+        TheOneRing ring = new TheOneRing(4);
+        character.inventory.addItemToInventory(ring);
+        character.revive();
+        assertTrue(character.getHealth() == 100);
     }
     @Test
     public void treasureTests() {
@@ -100,14 +101,6 @@ public class ItemTest {
     }
     @Test
     public void bombTests() {
-        
-    }
-    @Test
-    public void woodTests() {
-        
-    }
-    @Test
-    public void arrowTests() {
         
     }
     /**

@@ -1,4 +1,4 @@
-package dungeonmania;
+/*package dungeonmania;
 
 import java.util.List;
 
@@ -16,4 +16,4 @@ public class TreasureGoal implements Goal{
         return "";
     }
 
-}
+}*/

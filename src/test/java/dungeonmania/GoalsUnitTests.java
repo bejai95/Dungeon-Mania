@@ -1,4 +1,4 @@
-package dungeonmania;
+/*package dungeonmania;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -99,3 +99,4 @@ public class GoalsUnitTests {
         assertEquals(game.getGoalsLeft(), "(:mercenary AND (:treasure OR :exit))");
     }
 }
+*/
