@@ -69,7 +69,7 @@ public class DungeonManiaController {
             String JSONString = FileLoader.loadResourceFile("/dungeons/" + dungeonName);
 
             Gson gson = new GsonBuilder()
-                .registerTypeAdapter(List.class, new EntityDeserializer())
+                .registerTypeAdapter(Entity.class, new EntityDeserializerFromDungeon())
                 .create();
                 
             // Generate an Id for the new dungeon
@@ -93,6 +93,7 @@ public class DungeonManiaController {
     public DungeonResponse saveGame(String name) {
         try {
             Gson gson = new GsonBuilder()
+                .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
                 .setPrettyPrinting()
                 .create();
             
@@ -106,7 +107,7 @@ public class DungeonManiaController {
             writer.close();
 
             // Need to give the file some time to save (trust us, this is necessary)
-            Thread.sleep(3000);
+            Thread.sleep(5000);
             
             return currentlyAccessingGame.generateDungeonResponse();
 
@@ -131,7 +132,9 @@ public class DungeonManiaController {
             // Load the JSON string from the saved file
             String JSONString = FileLoader.loadResourceFile("/games/" + name + ".json");
             
-            Gson gson = new GsonBuilder().create();
+            Gson gson = new GsonBuilder()
+            .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
+            .create();
 
             // Load the game
             this.currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
