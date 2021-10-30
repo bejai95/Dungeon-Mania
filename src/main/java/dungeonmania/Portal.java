@@ -13,8 +13,13 @@ public class Portal extends StaticEntity {
     }
 
 
-
     //-----Methods-----
+    //Gets the location for where the caracter should teleport to 
+    public Position getTeleportLocation(){
+        Position exitPos = correspondingPortal.getPosition();
+        return exitPos;
+    }
+
 
     //-----Getters and Setters-----
     public Portal getCorrespondingPortal() {

@@ -1,23 +1,37 @@
 package dungeonmania;
 
-import org.eclipse.jetty.server.session.FileSessionDataStore;
+import java.util.ArrayList;
+import java.util.List;
+
 
 import dungeonmania.util.Position;
 
 public class FloorSwitch extends StaticEntity {
     //-----Data-----
+    //If switch has a boulder on top of it
     private Boolean isActive;
-    private static int noOfSwitches;
-    private static int noOfActiveSwitches;
+
+    //Contains a list of all floor switches on the map
+    private static List<FloorSwitch> floorSwitchList = new ArrayList<FloorSwitch>();
 
     //-----Constructors-----
     public FloorSwitch(int id, String type, Position position) {
         super(id, "switch", position);
         isActive = false;
-        noOfSwitches++;
+        floorSwitchList.add(this);
     }
 
     //-----Methods-----
+    //Checks to see if a floor switch is present at a given position 
+    //Returns the floor switch or null
+    public static FloorSwitch isFloorSwitch(Position cell) {
+        for (FloorSwitch floorSwitchItem : floorSwitchList) {
+            if (floorSwitchItem.getPosition().equals(cell)) {
+                return floorSwitchItem;
+            }
+        }
+        return null;
+    }
 
     //-----Getters and Setters-----
     public Boolean getIsActive() {
@@ -25,21 +39,11 @@ public class FloorSwitch extends StaticEntity {
     }
 
     public void setIsActive(Boolean isActive) {
-        if (isActive == true) {
-            noOfActiveSwitches++;
-        } else {
-            noOfActiveSwitches--;            
-        }
         this.isActive = isActive;
+        //Checks for nearby bombs to explode
+        if (isActive == true) {
+            PlacedBomb.explodeOnSwitchCheck(this.getPosition());
+        }
     }
 
-    public static int getNoOfSwitches() {
-        return noOfSwitches;
-    }
-
-    public static int getNoOfActiveSwitches() {
-        return noOfActiveSwitches;
-    }
-
-    
 }
