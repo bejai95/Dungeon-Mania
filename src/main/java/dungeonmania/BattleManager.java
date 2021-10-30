@@ -7,6 +7,15 @@ import java.util.stream.Collectors;
 
 public class BattleManager {
     
+    private Character player;
+    private MovingEntity baddie;
+    private List<Mercenary> mercenaries;
+
+    public BattleManager(Character player, MovingEntity baddie, List<Mercenary> mercenaries){
+        this.player = player;
+        this.baddie = baddie;
+        this.mercenaries = mercenaries;
+    }
     /**
      * Does a single battle instance between a player's ally and
      * the enemy
@@ -38,11 +47,11 @@ public class BattleManager {
         return null; //TODO
     }
 
-    private List<Mercenary> getAlliesInRange(List<Mercenary> mercs, Character player){
-        return mercs.stream().filter(x -> !x.isHostile && x.entityInRadius(player)).collect(Collectors.toList()); 
+    private List<Mercenary> getAlliesInRange(){
+        return mercenaries.stream().filter(x -> !x.isHostile && x.entityInRadius(player)).collect(Collectors.toList()); 
     }
 
-    private List<Mercenary> getMercsInRange(List<Mercenary> mercenaries, Character player){
+    private List<Mercenary> getMercsInRange(){
         return mercenaries.stream().filter(x -> x.entityInRadius(player)).collect(Collectors.toList());
     }
     /**
@@ -55,13 +64,13 @@ public class BattleManager {
      * @param baddie
      * @return
      */
-    public void battle(Character player, MovingEntity baddie, List<Mercenary> mercenaries){        
+    public List<Battleable> battle(){        
         List<Battleable> alive = new ArrayList<>();
-        List<Mercenary> allies = getAlliesInRange(mercenaries, player);
+        List<Mercenary> allies = getAlliesInRange();
         alive.add(player);
         alive.add(baddie);
         alive.addAll(allies);
-        List<Mercenary> mercsInRange = getMercsInRange(mercenaries, player);
+        List<Mercenary> mercsInRange = getMercsInRange();
         for(Mercenary merc : mercsInRange){
             merc.doubleSpeed();
             //Remember to undo this in the tick function after everyone moves
@@ -76,6 +85,8 @@ public class BattleManager {
                 alive.removeAll(battleInstance(merc, baddie));
             }
         }
+
+        return alive;
     }
 
     
