@@ -15,7 +15,7 @@ public class UnpickedUpItem extends StaticEntity {
     Note the ID gets transferred to the item on pickup
     */
     public UnpickedUpItem(int id, String type, Position position, String itemClass) {
-        super(id, "unpickedup_item", position);
+        super(id, type, position);
         this.itemClass = itemClass;
     }
 
@@ -28,7 +28,7 @@ public class UnpickedUpItem extends StaticEntity {
         //Create the new item
         Class classType = Class.forName(itemClass);
         Constructor construct = classType.getConstructor(int.class);
-        Item newItem = (Item)construct.newInstance(id);
+        Item newItem = (Item)construct.newInstance(getId());
 
         //Remove this object from the static entities list
         super.removeStaticEntity();
