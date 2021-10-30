@@ -8,7 +8,10 @@ import com.google.gson.annotations.SerializedName;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.response.models.DungeonResponse;
+import dungeonmania.util.Direction;
+import dungeonmania.util.Position;
 
 public class Game {
     private String dungeonId;
@@ -17,7 +20,7 @@ public class Game {
     private List<Item> inventory;
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
-
+    
     @SerializedName(value="goal-condition")
     private GoalCondition goalCondition;
 
@@ -88,8 +91,8 @@ public class Game {
 
     //Checks if a cell is empty
     public boolean isEmpty(Position cell) {
-        for (int i = 0; i < entities.length; i++) {
-            if (cell.equals(entities[i].getPosition)) {
+        for (int i = 0; i < entities.size(); i++) {
+            if (cell.equals(entities.get(i).getPosition())) {
                 return false;
             }
         }
@@ -99,10 +102,10 @@ public class Game {
     //Finds an adjacent empty cell when given a cell
     public Position getEmpty(Position centre) {
         List<Position> adjacentPositions = centre.getAdjacentPositions();
-        Position emptyTile;
-        for (int i = 0; i < adjacentPositions.length; i++) {
-            if isEmpty(adjacentPositions[i]) {
-                emptyTile = adjacentPositions[i];
+        Position emptyTile = null;
+        for (int i = 0; i < adjacentPositions.size(); i++) {
+            if (isEmpty(adjacentPositions.get(i))) {
+                emptyTile = adjacentPositions.get(i);
             }
         }
         return emptyTile;
@@ -147,6 +150,38 @@ public class Game {
 
     public void setGameMode(String gameMode) {
         this.gameMode = gameMode;
+    }
+
+    private Character getPlayer(){
+        for(Entity entity : entities){
+            if(entity instanceof Character){
+                return (Character) entity;
+            }
+        }
+        return null;
+    }
+
+    private List<Mercenary> getMercenaries(){
+        return null; //TODO
+    }
+
+    private List<MovingEntity> getMovingEntities(){
+        return null; //TODO
+    }
+
+
+    public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
+        //use item
+        //remove dead items
+        //move in direction
+        //move all the mobs -- needs list of moving entities
+        
+        //spawn in enemies -- needs tick counter
+
+        //battle -- needs list of mercenaries, needs movingEntity on same tile as player
+        //display remaining goals and end game if there are none
+        //increment tick counter
+        return null;
     }
 
     
