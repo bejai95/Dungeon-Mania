@@ -1,4 +1,4 @@
-package dungeonmania;
+/*package dungeonmania;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -67,6 +67,10 @@ public class CharacterTest {
         //sword is now in inventory
         character.inventory.addItemToInventory(sword);
         assertEquals(character.getDamage(), character.damage + sword.getDamage());
+        //test that bow doubles it
+        Bow bow = new Bow(6);
+        character.inventory.addItemToInventory(bow);
+        assertEquals(character.getDamage(), bow.getAmountOfAttacks*(character.damage + sword.getDamage()))
     }
     @Test
     public void testGetDefense() {
@@ -130,3 +134,4 @@ public class CharacterTest {
         assertThrows(InvalidActionException.class, ()-> {character.use(bow);});
     }
 }
+*/
