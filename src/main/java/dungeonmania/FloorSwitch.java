@@ -1,6 +1,8 @@
 package dungeonmania;
 
-import org.eclipse.jetty.server.session.FileSessionDataStore;
+import java.util.ArrayList;
+import java.util.List;
+
 
 import dungeonmania.util.Position;
 
@@ -9,15 +11,27 @@ public class FloorSwitch extends StaticEntity {
     private Boolean isActive;
     private static int noOfSwitches;
     private static int noOfActiveSwitches;
+    private static List<FloorSwitch> floorSwitchList = new ArrayList<FloorSwitch>();
 
     //-----Constructors-----
     public FloorSwitch(int id, String type, Position position) {
         super(id, "switch", position);
         isActive = false;
         noOfSwitches++;
+        floorSwitchList.add(this);
     }
 
     //-----Methods-----
+    //Checks to see if a floor switch is present at a given position 
+    //Returns the floor switch or null
+    public static FloorSwitch isFloorSwitch(Position cell) {
+        for (FloorSwitch floorSwitchItem : floorSwitchList) {
+            if (floorSwitchItem.getPosition().equals(cell)) {
+                return floorSwitchItem;
+            }
+        }
+        return null;
+    }
 
     //-----Getters and Setters-----
     public Boolean getIsActive() {
@@ -41,5 +55,5 @@ public class FloorSwitch extends StaticEntity {
         return noOfActiveSwitches;
     }
 
-    
+
 }

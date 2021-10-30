@@ -5,7 +5,6 @@ import dungeonmania.util.Position;
 public class PlacedBomb extends StaticEntity {
 
 
-
     //-----Data-----
 
 
