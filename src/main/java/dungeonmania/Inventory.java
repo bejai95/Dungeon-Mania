@@ -119,9 +119,6 @@ public class Inventory {
             }
         }
     }
-    public void useItem(Consumable consumable) {
-        consumable.consume();
-    }
     //remove all items that have zero uses left, call at end of each turn
     public void removeDeadItems() {
         List<Item> itemsToBeRemoved = new ArrayList<>();
