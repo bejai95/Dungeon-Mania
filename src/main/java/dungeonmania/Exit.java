@@ -2,14 +2,23 @@ package dungeonmania;
 
 import java.util.List;
 
-public class Exit {
-    /**
-     * Returns whether or not this goal has been completed in string form
-     * as specified below
-     * @return "" if the goal has been completed and ":exit" if not
-     */
-    public static String goalComplete(List<Entity> entities) {
-        // TODO Auto-generated method stub
-        return null;
+import dungeonmania.util.Position;
+
+public class Exit extends StaticEntity {
+    //-----Data-----
+
+    //-----Constructors-----
+    public Exit(int id, String type, Position position) {
+        super(id, "exit", position);
     }
+
+
+    //----Methods-----
+
+
+
+    //-----Getters and Setters-----
+    
+    
+
 }

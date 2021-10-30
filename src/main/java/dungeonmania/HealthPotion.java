@@ -6,6 +6,8 @@ public class HealthPotion extends Item implements Consumable {
         setUses(1);
     }
     public void consume() {
-        
+        if (this.getUses() != 0) {
+            this.setUses(this.getUses() -1);
+        }  
     }
 }

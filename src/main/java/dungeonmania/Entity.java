@@ -3,7 +3,7 @@ package dungeonmania;
 import dungeonmania.response.models.EntityResponse;
 import dungeonmania.util.Position;
 
-public class Entity {
+public class Entity{
     private int id;
     private String type;
     private Position position;
@@ -43,6 +43,7 @@ public class Entity {
     public void setPosition(Position position) {
         this.position = position;
     }
+
 
     
 }

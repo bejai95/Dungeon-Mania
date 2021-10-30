@@ -9,6 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import dungeonmania.response.models.DungeonResponse;
+import dungeonmania.util.Position;
 
 public class Game {
     private String dungeonId;
@@ -16,7 +17,8 @@ public class Game {
     private List<Entity> entities;
     private List<Item> inventory;
     private List<String> buildables;
-    
+    private int tickCounter; // Initialized to zero
+
     @SerializedName(value="goal-condition")
     private GoalCondition goalCondition;
 
@@ -84,6 +86,28 @@ public class Game {
         return getGoalsLeft(goalCondition.getGoal());
     }
     */
+
+    //Checks if a cell is empty
+    public boolean isEmpty(Position cell) {
+        for (int i = 0; i < entities.size(); i++) {
+            if (cell.equals(entities.get(i).getPosition())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Finds an adjacent empty cell when given a cell
+    public Position getEmpty(Position centre) {
+        List<Position> adjacentPositions = centre.getAdjacentPositions();
+        Position emptyTile = null;
+        for (int i = 0; i < adjacentPositions.size(); i++) {
+            if (isEmpty(adjacentPositions.get(i))) {
+                emptyTile = adjacentPositions.get(i);
+            }
+        }
+        return emptyTile;
+    }
 
     public String getDungeonId() {
         return dungeonId;
