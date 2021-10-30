@@ -1,6 +1,8 @@
 package dungeonmania;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -13,6 +15,9 @@ import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+
 public class Game {
     private String dungeonId;
     private String dungeonName;
@@ -20,7 +25,7 @@ public class Game {
     private List<Item> inventory;
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
-    
+
     @SerializedName(value="goal-condition")
     private GoalCondition goalCondition;
 
@@ -28,6 +33,9 @@ public class Game {
     private String gameMode;
     private static int numDungeonIds; // Initialized to zero
     private String goalsAsString;
+
+    private double mercenarySpawnChance = 0.05;
+    private int spiderTicks = 10;
     
     public Game() {
     }
@@ -169,18 +177,152 @@ public class Game {
         return null; //TODO
     }
 
+    private Consumable getConsumableFromId(String itemUsed) throws IllegalArgumentException{
+        return null; //TODO
+
+    }
+
+    private List<ZombieToastSpawner> getSpawners(){
+        return null; //TODO
+    }
+
+    private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
+        return null; //TODO
+    }
+
+    private List<Wall> getWalls(){
+        return null; //TODO
+    }
+
+    private boolean isBoundary(Wall wall, List<Wall> walls){
+        boolean noLeft = true;
+        boolean noRight = true;
+        boolean noUp = true; 
+        boolean noDown = true;
+        
+        Position pos = wall.getPosition();
+        for(Wall w : walls){
+            if(w.getPosition().getX() == pos.getX()){
+                noUp = w.getPosition().getY() > pos.getY();
+                noDown = w.getPosition().getY() < pos.getY();
+            }
+
+            if(w.getPosition().getY() == pos.getY()){
+                noLeft = w.getPosition().getX() > pos.getX();
+                noRight = w.getPosition().getX() < pos.getX();
+            }
+        }
+
+        return (noLeft || noRight || noUp || noDown);
+    }
+
+    private List<Wall> getBoundaries(){
+        return null; //TODO
+    }
+
+    private int getXMin(){
+        return 0; //TODO
+    }
+
+    private int getXMax(){
+        return 0; //TODO
+    }
+
+    private int getYMin(){
+        return 0; //TODO
+    }
+
+    private int getYMax(){
+        return 0; //TODO
+    }
+
+    private Position getRandomPosition(){
+        Position pos = new Position(ThreadLocalRandom.current().nextInt(getXMin(), getXMax()), ThreadLocalRandom.current().nextInt(getYMin(), getYMax()));
+        return pos;
+    }
+
+    private List<Wall> getBoundariesToRight(List<Wall> boundaries, Position pos){
+        List<Wall> toRight = boundaries.stream().filter(x -> x.getPosition().getX() > pos.getX()).collect(Collectors.toList());
+        return toRight;
+    }
+    
+    private Position getSpawnPositionRandom(){
+        Position pos = getRandomPosition();
+        List<Wall> boundaries = getBoundaries();
+        List<Wall> toRight = getBoundariesToRight(boundaries, pos);
+
+        while(toRight.size() % 2 == 0 && !isEmpty(pos)){
+            pos = new Position(ThreadLocalRandom.current().nextInt(getXMin(), getXMax()), ThreadLocalRandom.current().nextInt(getYMin(), getYMax()));
+            toRight = getBoundariesToRight(boundaries, pos);
+        }
+
+        return pos;
+    }
+
+    private void spawnRandomEnemies(){
+        Double roll = ThreadLocalRandom.current().nextDouble(0, 1);
+        Position pos = null;
+
+
+        if(roll < mercenarySpawnChance){
+            pos = getSpawnPositionRandom();
+            Mercenary merc = new Mercenary(5, 1, new ChaseMovement(getPlayer()), pos, 1);
+            entities.add(merc);
+        }
+
+        if(tickCounter % spiderTicks == 0){
+            pos = getSpawnPositionRandom();
+            MovingEntity spider = new Spider(5, 1, new SquareMovement(), pos);
+        }
+
+        return;
+    }
 
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
+        Character player = getPlayer();
+        Inventory inventory = player.inventory;
+
         //use item
+        player.use(getConsumableFromId(itemUsed));
+
         //remove dead items
+        inventory.removeDeadItems();
+
         //move in direction
+        player.move(movementDirection);
+
         //move all the mobs -- needs list of moving entities
+        List<MovingEntity> movingEntities = getMovingEntities();
+        for(MovingEntity mob : movingEntities){
+            mob.move();
+        }
         
         //spawn in enemies -- needs tick counter
+        List<ZombieToastSpawner> spawners = getSpawners();
+        for(ZombieToastSpawner spawner : spawners){
+            ZombieToast zomb = spawner.spawn(tickCounter, gameMode, getSpawnPositionSpawner(spawner));
+            if(zomb != null){
+                entities.add(zomb);
+            }
+        }
+
+        spawnRandomEnemies();
+
+
 
         //battle -- needs list of mercenaries, needs movingEntity on same tile as player
+
+        //TODO - When battles work, will just call Battle(player, enemy, mercenaries)
+
+
         //display remaining goals and end game if there are none
+
+        // TODO - Just merge in goals and call the method to display as string in goals, it should work fine
+
         //increment tick counter
+        tickCounter++;
+
+        //DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities, inventory, buildables, goals);
         return null;
     }
 
