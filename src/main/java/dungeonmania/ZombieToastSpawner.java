@@ -1,6 +1,8 @@
 package dungeonmania;
 
 import dungeonmania.util.Position;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ZombieToastSpawner extends StaticEntity {
     //-----Data-----
@@ -12,15 +14,32 @@ public class ZombieToastSpawner extends StaticEntity {
     }
 
     //-----Methods-----
-    public void spawn (Game game, int tickCounter, String gameMode) {
-        
+    /*Will spawn a zombie toast on an adjacent open tile
+     and return the newly created zombie toast or null */
+    public ZombieToast spawn (int tickCounter, String gameMode, Position emptyTile ) {
+        //Checks to see if spawn conditions are met
         if ((gameMode == "hard" && tickCounter == 15) || (gameMode != "hard" && tickCounter == 20)) {
-            Position emptyTile = game.getEmpty(spawnerPosition);
+            //List of adjacent positions around spawner
+            List<Position> adjacentPositions = spawnerPosition.getAdjacentPositions();
 
-            ZombieToast newZombieToast = new ZombieToast(120, 20, new RandomMovement(), emptyTile);
-            //Add this to entity list check with Raph if there is a method for this
+            //Sets the deffault spawn positions as on top of the spawner
+            Position spawnPoint = spawnerPosition;
+
+            //Find an adjacent open tile for the zombie toast to spawn
+            for (Position edgeCell : adjacentPositions) {
+                if (StaticEntity.isCollision(edgeCell)) {
+                    ;
+                } else {
+                    spawnPoint = edgeCell;
+                    break;
+                }
+            }
+
+            //Create new zombie toast
+            ZombieToast newZombieToast = new ZombieToast(120, spawnPoint, new RandomMovement());
+            return newZombieToast;
         } else {
-            return;
+            return null;
         }
 
     }
