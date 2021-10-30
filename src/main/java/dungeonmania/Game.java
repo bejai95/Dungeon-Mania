@@ -16,13 +16,13 @@ public class Game {
     private List<Entity> entities;
     private List<Item> inventory;
     private List<String> buildables;
-    
+    private int tickCounter; // Initialized to zero
+
     @SerializedName(value="goal-condition")
     private GoalCondition goalCondition;
 
     // private final List<AnimationQueue> animations;
     private String gameMode;
-    private String saveName;
     private static int numDungeonIds; // Initialized to zero
     private String goalsAsString;
     
@@ -86,6 +86,28 @@ public class Game {
     }
     */
 
+    //Checks if a cell is empty
+    public boolean isEmpty(Position cell) {
+        for (int i = 0; i < entities.length; i++) {
+            if (cell.equals(entities[i].getPosition)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Finds an adjacent empty cell when given a cell
+    public Position getEmpty(Position centre) {
+        List<Position> adjacentPositions = centre.getAdjacentPositions();
+        Position emptyTile;
+        for (int i = 0; i < adjacentPositions.length; i++) {
+            if isEmpty(adjacentPositions[i]) {
+                emptyTile = adjacentPositions[i];
+            }
+        }
+        return emptyTile;
+    }
+
     public String getDungeonId() {
         return dungeonId;
     }
@@ -122,4 +144,10 @@ public class Game {
     public DungeonResponse generateDungeonResponse() {
         return new DungeonResponse(dungeonId, dungeonName, null, null, buildables, goalsAsString); //TODO fix this up later
     }
+
+    public void setGameMode(String gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    
 }

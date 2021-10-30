@@ -3,16 +3,18 @@ package dungeonmania;
 import dungeonmania.response.models.EntityResponse;
 import dungeonmania.util.Position;
 
-public class Entity {
+public class Entity{
     private int id;
     private String type;
     private Position position;
     private static int numEntityIds; // Initialized to zero
 
-    public Entity(int id, String type, int x, int y) {
+    public Entity() {}
+
+    public Entity(int id, String type, Position position) {
         this.id = id;
         this.type = type;
-        position = new Position(x, y); // decide what default layer of entity is
+        this.position = position;
         numEntityIds++;
     }
 
@@ -35,6 +37,11 @@ public class Entity {
     public static int getNumEntityIds() {
         return numEntityIds;
     }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
 
     
 }

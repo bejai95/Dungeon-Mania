@@ -2,8 +2,8 @@ package dungeonmania;
 
 public abstract class DefenseItem extends Item implements Consumable {
     double multipler;
-    public DefenseItem(int uses, int itemId) {
-        super(uses, itemId);
+    public DefenseItem(int itemId) {
+        super(itemId);
     }
     public double getMultipler() {
         return this.multipler;
@@ -12,6 +12,8 @@ public abstract class DefenseItem extends Item implements Consumable {
         this.multipler = multipler;
     }
     public void consume() {
-        uses += -1;
+        if (this.getUses() != 0) {
+            this.setUses(this.getUses() -1);   
+        }
     }
 }
