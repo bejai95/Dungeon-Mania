@@ -54,19 +54,37 @@ public class EntityDeserializerFromDungeon  implements JsonDeserializer<Entity> 
                 return new Mercenary(newEntityId, positionMercenary, 0, null); 
             case "treasure":
                 Position positionTreasure = new Position(x, y, 3);
-                // Insert here
+                return new UnpickedUpItem(newEntityId, "treasure", positionTreasure, "Treasure");
             case "key":
                 Position positionKey = new Position(x, y, 3);
-                // Insert here =
+                return new UnpickedUpItem(newEntityId, "key", positionKey, "Key");
             case "health_potion":
-                Position 
-            
-            
-
-            
-            
-            
-            
+                Position positionHealthPotion = new Position(x, y, 3);
+                return new UnpickedUpItem(newEntityId, "health_potion", positionHealthPotion, "HealthPotion");
+            case "invincibility_potion":
+                Position positionInvincibilityPotion = new Position(x, y, 3);
+                return new UnpickedUpItem(newEntityId, "invincibility_potion", positionInvincibilityPotion, "InvincibilityPotion");
+            case "invisibility_potion":
+                Position positionInvisibilityPotion = new Position(x, y, 3);
+                return new UnpickedUpItem(newEntityId, "invisibility_potion", positionInvisibilityPotion, "InvisibilityPotion");
+            case "wood":
+                Position positionWood = new Position(x, y, 3);
+                return new UnpickedUpItem(newEntityId, "wood", positionWood, "Wood");
+            case "arrow":
+                Position positionArrow = new Position(x, y, 3);
+                return new UnpickedUpItem(newEntityId, "arrow", positionArrow, "Arrow");
+            case "bomb":
+                Position positionBomb = new Position(x, y, 3);
+                return new UnpickedUpItem(newEntityId, "bomb", positionBomb, "Bomb");
+            case "sword":
+                Position positionSword = new Position(x, y, 3);
+                return new UnpickedUpItem(newEntityId, "sword", positionSword, "Sword");
+            case "armour":
+                Position positionArmour = new Position(x, y, 3);
+                return new UnpickedUpItem(newEntityId, "armour", positionArmour, "Armour");
+            case "one_ring":
+                Position positionOneRing = new Position(x, y, 3);
+                return new UnpickedUpItem(newEntityId, "one_ring", positionOneRing, "OneRing");
             }
         
         return null;
