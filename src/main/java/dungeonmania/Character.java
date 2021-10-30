@@ -9,7 +9,6 @@ import dungeonmania.exceptions.InvalidActionException;
 
 public class Character extends Entity {
     Inventory inventory = new Inventory();
-    List<Mercenary> allies = new ArrayList<>();
     double health;
     int damage;
     double baseDefense;
@@ -54,26 +53,6 @@ public class Character extends Entity {
     }
     public void use(Consumable consumable) throws InvalidActionException {
         consumable.consume();
-    }
-    public List<Mercenary> getAllies() {
-        return this.allies;
-    }
-    public void addAlly(Mercenary ally) {
-        this.getAllies().add(ally);
-    }
-    public void removeAlly(Mercenary ally) {
-        this.getAllies().remove(ally);
-    }
-    public void removeDeadAllies() {
-        List<Mercenary> deadAllies = new ArrayList<>();
-        for (Mercenary ally: this.getAllies()) {
-            if (ally.getHealth <= 0) {
-                deadAllies.add(ally);
-            }
-        }
-        for (Mercenary ally: deadAllies) {
-            removeAlly(ally);
-        }
     }
 
 }
