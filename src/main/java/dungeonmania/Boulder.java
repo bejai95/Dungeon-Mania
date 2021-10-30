@@ -1,11 +1,16 @@
 package dungeonmania;
 
+import dungeonmania.util.Position;
+
 public class Boulder extends StaticEntity {
-    
+
     //-----Data-----
-    private static Collider collidable;
 
     //-----Constructors-----
+    public Boulder(int id, String type, Position position) {
+        super(id, "boulder", position);
+    }
+
 
     //-----Methods-----
 
