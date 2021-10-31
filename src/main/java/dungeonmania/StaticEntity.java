@@ -5,7 +5,7 @@ import dungeonmania.util.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class StaticEntity extends Entity {
+public class StaticEntity extends Entity {
 
     //-----Data-----
     private static List<StaticEntity> staticEntitiesList = new ArrayList<StaticEntity>();

@@ -41,7 +41,7 @@ public class BoulderGoal implements Goal{
 
         for(FloorSwitch s : switches){
             if(!existsSamePosition(s, boulders)){
-                return ":switch";
+                return ":boulders";
             }
         }
 

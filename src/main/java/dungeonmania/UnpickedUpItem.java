@@ -54,4 +54,8 @@ public class UnpickedUpItem extends StaticEntity {
     }
 
     //-----Getters and Setters-----
+    public String getItemClass() {
+        return itemClass;
+    }
+    
 }

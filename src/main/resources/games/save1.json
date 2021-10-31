@@ -1500,18 +1500,22 @@
   "inventory": [],
   "buildables": [],
   "tickCounter": 0,
-  "goal-condition": {
-    "goal": "AND",
-    "subgoals": [
-      {
-        "goal": "enemies"
-      },
-      {
-        "goal": "treasure"
-      }
-    ]
-  },
   "gameMode": "Standard",
+  "goal": {
+    "className": "dungeonmania.AndGoal",
+    "data": {
+      "subgoals": [
+        {
+          "className": "dungeonmania.EnemiesGoal",
+          "data": {}
+        },
+        {
+          "className": "dungeonmania.TreasureGoal",
+          "data": {}
+        }
+      ]
+    }
+  },
   "mercenarySpawnChance": 0.05,
   "spiderTicks": 10
 }
