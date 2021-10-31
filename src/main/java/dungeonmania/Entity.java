@@ -3,11 +3,13 @@ package dungeonmania;
 import dungeonmania.response.models.EntityResponse;
 import dungeonmania.util.Position;
 
+
+
 public abstract class Entity{
     private int id;
     private String type;
     private Position position;
-    // TODO interactability
+    private boolean isInteractable;
     private static int numEntityIds; // Initialized to zero
 
     public Entity() {}
@@ -32,8 +34,7 @@ public abstract class Entity{
     }
 
     public EntityResponse getInfo() {
-        //return new EntityResponse(id, type, position, isInteractable);
-        return null;
+        return new EntityResponse(String.valueOf(id), type, position, isInteractable);
     }
 
     public static int getNumEntityIds() {
@@ -44,6 +45,8 @@ public abstract class Entity{
         this.position = position;
     }
 
-
+    public void setIsInteractable(boolean canInteract) {
+        this.isInteractable = canInteract;
+    }
     
 }
