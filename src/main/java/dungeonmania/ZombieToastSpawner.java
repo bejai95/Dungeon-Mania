@@ -56,6 +56,7 @@ public class ZombieToastSpawner extends StaticEntity implements interaction {
         }
 
         // TODO destroy self somehow
+        super.removeStaticEntity();
 
     }
 
