@@ -20,38 +20,28 @@ public class GoalsSystemTests {
     @Test
     public void testMazeGoalsCorrect() {
         DungeonManiaController c = new DungeonManiaController();
-        DungeonResponse r = c.newGame("maze", "peaceful");
+        DungeonResponse r = c.newGame("maze", "Peaceful");
         assertEquals(r.getGoals(), ":exit");
     }
 
     @Test
     public void testPortalsGoalsCorrect() {
         DungeonManiaController c = new DungeonManiaController();
-        DungeonResponse r = c.newGame("portals", "peaceful");
+        DungeonResponse r = c.newGame("portals", "Peaceful");
         assertEquals(r.getGoals(), null); 
     }
 
     @Test
     public void testBouldersGoalsCorrect() {
         DungeonManiaController c = new DungeonManiaController();
-        DungeonResponse r = c.newGame("boulders", "peaceful");
-        assertEquals(r.getGoals(), ":boulder"); 
+        DungeonResponse r = c.newGame("boulders", "Peaceful");
+        assertEquals(r.getGoals(), ":boulders"); 
     }
 
     @Test
     public void testAdvancedGoalsCorrect() {
         DungeonManiaController c = new DungeonManiaController();
-        DungeonResponse r = c.newGame("advanced", "peaceful");
-        assertEquals(r.getGoals(), ":enemies AND :treasure"); 
+        DungeonResponse r = c.newGame("advanced", "Peaceful");
+        assertEquals(r.getGoals(), "(:enemies AND :treasure)"); 
     }
-
-
-
-
-
-
-
-
-
-
 }

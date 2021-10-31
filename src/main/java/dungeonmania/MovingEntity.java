@@ -2,7 +2,7 @@ package dungeonmania;
 
 import dungeonmania.util.Position;
 
-public abstract class MovingEntity extends Entity implements Battleable{
+public class MovingEntity extends Entity implements Battleable{
     
     //TODO dont forget to set values to the default battle stats in subclasses
 

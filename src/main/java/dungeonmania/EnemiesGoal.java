@@ -7,7 +7,7 @@ public class EnemiesGoal implements Goal{
     public String getGoalsLeft(List<Entity> entities) {
         for(Entity entity : entities){
             if(entity instanceof MovingEntity){
-                return ":mercenary";
+                return ":enemies";
             }
         }
         return "";

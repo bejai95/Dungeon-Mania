@@ -63,6 +63,7 @@ public class DungeonManiaController {
 
             Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Entity.class, new EntityDeserializerFromDungeon())
+                .registerTypeAdapter(Goal.class, new GoalDeserializerFromDungeon())
                 .create();
                 
             // Generate an Id for the new dungeon
@@ -88,6 +89,7 @@ public class DungeonManiaController {
             Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
                 .registerTypeAdapter(Movement.class, new InheritanceAdapter<Movement>())
+                .registerTypeAdapter(Goal.class, new InheritanceAdapter<Goal>())
                 .setPrettyPrinting()
                 .create();
             
@@ -129,6 +131,7 @@ public class DungeonManiaController {
             Gson gson = new GsonBuilder()
             .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
             .registerTypeAdapter(Movement.class, new InheritanceAdapter<Movement>())
+            .registerTypeAdapter(Goal.class, new InheritanceAdapter<Goal>())
             .create();
 
             // Load the game
