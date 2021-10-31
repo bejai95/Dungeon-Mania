@@ -12,6 +12,10 @@ public class Portal extends StaticEntity {
         this.correspondingPortal = correspondingPortal;
     }
 
+    public Portal(int id, String type, Position position) {
+        super(id, "potal", position);
+        this.correspondingPortal = null;
+    }
 
     //-----Methods-----
     //Gets the location for where the caracter should teleport to 

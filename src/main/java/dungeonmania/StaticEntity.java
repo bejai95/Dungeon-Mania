@@ -32,9 +32,9 @@ public class StaticEntity extends Entity {
         return false;
     }
 
-
-
     //-----Getters and Setters-----
-
+    public static List<StaticEntity> getStaticEntitiesList() {
+        return staticEntitiesList;
+    }
 }
   
