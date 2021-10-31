@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -33,6 +34,7 @@ public class Game {
     private String gameMode;
     private static int numDungeonIds; // Initialized to zero
     private String goalsAsString;
+    private Goal goal;
 
     private double mercenarySpawnChance = 0.05;
     private int spiderTicks = 10;
@@ -278,6 +280,20 @@ public class Game {
         return;
     }
 
+    private MovingEntity getEntityOnPlayer(Character player){
+        List<MovingEntity> ms = getMovingEntities();
+        for(MovingEntity entity : ms){
+            if(player.getPosition().equals(entity.getPosition())){
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    private void removeDeadEntities(){
+        return; //TODO
+    }
+
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.inventory;
@@ -309,21 +325,29 @@ public class Game {
         spawnRandomEnemies();
 
 
-
+        resetMercSpeeds();
         //battle -- needs list of mercenaries, needs movingEntity on same tile as player
 
         //TODO - When battles work, will just call Battle(player, enemy, mercenaries)
-
+        MovingEntity baddie = getEntityOnPlayer(player);
+        if(baddie != null){
+            BattleManager bat = new BattleManager(player, baddie, getMercenaries());
+            List<Battleable> survivors = bat.battle();
+            removeDeadEntities();
+        }
 
         //display remaining goals and end game if there are none
-
+        
         // TODO - Just merge in goals and call the method to display as string in goals, it should work fine
 
         //increment tick counter
         tickCounter++;
+        DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().getBuildables(), goal.getGoalsLeft(entities));
+        return ret;
+    }
 
-        //DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities, inventory, buildables, goals);
-        return null;
+
+    private void resetMercSpeeds() {
     }
 
     
