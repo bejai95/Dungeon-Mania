@@ -1,6 +1,8 @@
-/*package dungeonmania;
+package dungeonmania;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Collections;
 
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +23,7 @@ public class CharacterTest {
         character.move(Direction.UP);
         //have not moved horizontally
         assertEquals(character.getPosition().getX(), 5);
-        assertEquals(character.getPosition().getY(), 6);
+        assertEquals(character.getPosition().getY(), 4);
         //move 6 left
         character.move(Direction.LEFT);
         character.move(Direction.LEFT);
@@ -30,17 +32,18 @@ public class CharacterTest {
         character.move(Direction.LEFT);
         character.move(Direction.LEFT);
         assertEquals(character.getPosition().getX(), -1);
-        assertEquals(character.getPosition().getY(), 6);
+        assertEquals(character.getPosition().getY(), 4);
         //move one to the right
         character.move(Direction.RIGHT);
         assertEquals(character.getPosition().getX(), 0);
-        assertEquals(character.getPosition().getY(), 6);
+        assertEquals(character.getPosition().getY(), 4);
         //move down
         character.move(Direction.DOWN);
         assertEquals(character.getPosition().getX(), 0);
         assertEquals(character.getPosition().getY(), 5);
     }
     //THIS TEST WILL GET MOVED TO CHECKING THAT INTERFACE TODO
+    /*
     @Test
     public void testPickUpItem() {
         Character character = new Character(1, "Character", new Position(5,5));
@@ -56,7 +59,7 @@ public class CharacterTest {
 
         //test trying to pickup item that does not exist
         assertThrows(InvalidActionException.class,() -> {character.pickUpItem(202020);});
-    }
+    }*/
     @Test
     public void testGetDamage() {
         //test no items
@@ -70,7 +73,7 @@ public class CharacterTest {
         //test that bow doubles it
         Bow bow = new Bow(6);
         character.inventory.addItemToInventory(bow);
-        assertEquals(character.getDamage(), bow.getAmountOfAttacks*(character.damage + sword.getDamage()))
+        assertEquals(character.getDamage(), bow.getAmountOfAttacks()*(character.damage + sword.getDamage()));
     }
     @Test
     public void testGetDefense() {
@@ -100,17 +103,17 @@ public class CharacterTest {
         //make sure max armour is 1
         assertEquals(character.getDefense(), 1);
         //now check that multiplier is zero since should do no damage
-        assertEquals(character.getDefenseMultipler(), 0);
+        assertEquals(character.getDefenseMultiplier(), 0);
 
     }
     @Test
     public void testGetHealth() {
         //test before and after a battle
         Character character = new Character(1, "Character", new Position(5,5));
-        Spider spider = new Spider(100, 3, new SquareMovement(), new Position(5,5));
+        Spider spider = new Spider(3, new Position(5,5), new SquareMovement());
         double healthBeforeBattle = character.getHealth();
-        BattleManager battleManager = new BattleManager();
-        battleManager.battle(character, spider);
+        BattleManager battleManager = new BattleManager(character, spider, Collections.emptyList());
+        battleManager.battle();
         assertTrue(healthBeforeBattle > character.getHealth());
     }
     @Test
@@ -134,4 +137,3 @@ public class CharacterTest {
         assertThrows(InvalidActionException.class, ()-> {character.use(bow);});
     }
 }
-*/

@@ -2,14 +2,16 @@ package dungeonmania;
 
 import dungeonmania.util.Position;
 
-public abstract class MovingEntity extends Entity {
+public abstract class MovingEntity extends Entity implements Battleable{
     
     //TODO dont forget to set values to the default battle stats in subclasses
 
-    int health;
+    double health;
     int damage;
     double baseDefense;
+    double defense;
     int speed;
+    boolean isHostile;
     Movement moveBehaviour;
     Item currentItem;
 
@@ -37,7 +39,7 @@ public abstract class MovingEntity extends Entity {
         this.speed = speed;
     }
     
-    public int getHealth() {
+    public double getHealth() {
         return this.health;
     }
 
@@ -46,13 +48,16 @@ public abstract class MovingEntity extends Entity {
     }
 
     public double getDefense() {
-        return this.getDefense();
+        return this.defense;
     }
 
     public int getSpeed() {
         return this.speed;
     }
 
+    public boolean getIsHostile() {
+        return this.isHostile;
+    }
 
 
     public void move() {
@@ -70,6 +75,14 @@ public abstract class MovingEntity extends Entity {
 
     public Item dropItem() {
         return null;
+    }
+
+    public void setHealth(double health){
+        this.health = health;
+    }
+
+    public double getDefenseMultiplier(){
+        return 1-defense;
     }
 
 }

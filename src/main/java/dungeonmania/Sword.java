@@ -7,7 +7,7 @@ public class Sword extends Item implements Consumable {
         setDamage(3);
         this.damage = 25;
     }
-    public void consume() {
+    public void consume(Character character) {
         if (this.getUses() != 0) {
             this.setUses(this.getUses() -1);
         }

@@ -10,6 +10,8 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+// Source: https://stackoverflow.com/questions/4795349/how-to-serialize-a-class-with-an-interface/9550086#9550086
+
 final class InheritanceAdapter<T> implements JsonSerializer<T>, JsonDeserializer<T> {
     
     public JsonElement serialize(T object, Type interfaceType, JsonSerializationContext context) {
