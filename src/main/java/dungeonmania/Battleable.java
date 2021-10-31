@@ -5,5 +5,5 @@ public interface Battleable {
     //public void setDamage(double damage);
     public double getHealth();
     public void setHealth(double health);
-    public double getDefenceMultiplier();
+    public double getDefenseMultiplier();
 }
