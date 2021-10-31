@@ -240,4 +240,12 @@ public class Inventory {
         }
         return true;
     }
+    public Item getConsumableFromId(int id) {
+        for (Item item: this.getConsumables()) {
+            if (item.getitemId() == id) {
+                return item;
+            }
+        }
+        return null;
+    }
 }

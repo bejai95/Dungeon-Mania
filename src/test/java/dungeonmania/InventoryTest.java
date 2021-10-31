@@ -260,4 +260,13 @@ public class InventoryTest {
         assertTrue(inventory.getMaterials().contains(a1));
         assertTrue(!(inventory.getMaterials().contains(wood0)));
     }
+    @Test
+    public void testGetConsumableFromId() {
+        Inventory inventory = new Inventory();
+        int itemId = 3;
+        HealthPotion hp = new HealthPotion(itemId);
+        inventory.addItemToInventory(hp);
+        assertTrue(inventory.getConsumableFromId(3) == hp);
+        assertTrue(inventory.getConsumableFromId(5) == null);
+    }
 }
