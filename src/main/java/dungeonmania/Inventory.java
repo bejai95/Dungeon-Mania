@@ -22,19 +22,37 @@ public class Inventory {
     HashMap<String, List<String>> recipes = new HashMap<String, List<String>>(); 
     
     public Inventory() {
-
+        List<String> bowMats = new ArrayList<>();
+        bowMats.add(Wood.class.getCanonicalName());
+        bowMats.add(Arrow.class.getCanonicalName());
+        bowMats.add(Arrow.class.getCanonicalName());
+        bowMats.add(Arrow.class.getCanonicalName());
+        addRecipe(Bow.class.getCanonicalName(), bowMats);
+        List<String> shieldMats1 = new ArrayList<>();
+        shieldMats1.add(Wood.class.getCanonicalName());
+        shieldMats1.add(Wood.class.getCanonicalName());
+        shieldMats1.add(Treasure.class.getCanonicalName());
+        addRecipe(Shield.class.getCanonicalName() + "1", shieldMats1);
+        List<String> shieldMats2 = new ArrayList<>();
+        shieldMats2.add(Wood.class.getCanonicalName());
+        shieldMats2.add(Wood.class.getCanonicalName());
+        shieldMats2.add(Key.class.getCanonicalName());
+        addRecipe(Shield.class.getCanonicalName() + "2", shieldMats2);
     }
     /**
      * @invariant the item wanting to be craft is buidable
      * @param itemName
      * @description craft will be in change of adding items to proper lists and taking away what is needed
      */
-    public Item craft(String recipeName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
+    public Item craft(String itemName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
           IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException {
-        if (!(isRecipeBuildable(recipeName))) {
+        //first finds the first recipe that can craft ur item
+        List<String> recipe = this.getRecipe(itemName);
+        //the recipe cant be crafted
+        if (recipe == null) {
             throw new InvalidActionException("You don't have the resources to craft this item");
         }
-        List<String> recipe = this.getRecipe(recipeName);
+        //now remove items that you are using
         List<Item> items = this.getItems();
         for (String recipeMaterial: recipe) {
             for (Item item: items) {
@@ -46,7 +64,8 @@ public class Inventory {
                 }
             }
         }
-        Class classType = Class.forName(recipeName);
+        //create the new item
+        Class classType = Class.forName(itemName);
         Constructor construct = classType.getConstructor(int.class);
         Item newItem = (Item)construct.newInstance(itemId);
         //add the new item to inventory
@@ -67,6 +86,18 @@ public class Inventory {
         }
         //go through each recipe
         //then count the amount of 
+        //now check 
+        List<String> itemsBuildable = new ArrayList<>();
+        for (String r: recipesBuildable) {
+            //if recipe is a bow recipe and is not already in itemsBuildable
+            if (r.contains(Bow.class.getCanonicalName()) && !(itemsBuildable.contains(Bow.class.getCanonicalName()))) {
+                itemsBuildable.add(Bow.class.getCanonicalName());
+            }
+            //if recipe is a shield recipe and not in itemsBuildable
+            else if (r.contains(Shield.class.getCanonicalName()) && !(itemsBuildable.contains(Shield.class.getCanonicalName()))) {
+                itemsBuildable.add(Shield.class.getCanonicalName());
+            }
+        }
         return recipesBuildable;
     }
     public void addItemToInventory(Item item) {
@@ -139,8 +170,19 @@ public class Inventory {
     public void addRecipe(String name, List<String> materials) {
         recipes.put(name, materials);
     }
-    public List<String> getRecipe(String name) {
-        return recipes.get(name);
+    /**
+     * getRecipe will return the first recipe which you have materials for and is for that specific item
+     * @param itemName
+     * @return
+     */
+    public List<String> getRecipe(String itemName) {
+        //for a given item name go through all recipes that contain itemName and check which one to return
+        for (String recipeName: getRecipes().keySet()) {
+            if (this.isRecipeBuildable(recipeName) && recipeName.contains(itemName)) {
+                return getRecipes().get(recipeName);
+            }
+        }
+        return null;
     }
     public Item getItem(int id, List<? extends Item> list) {
         for (Item i: list) {

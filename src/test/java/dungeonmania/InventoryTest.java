@@ -10,6 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import dungeonmania.util.Position;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -41,21 +43,20 @@ public class InventoryTest {
     public void testGenerateBuildables() {
         //check that if we have the materials in the inventory that recipe is crafted
         Inventory inventory = new Inventory();
-        List<String> mats = new ArrayList<>();
-        mats.add(Wood.class.getCanonicalName());
-        mats.add(Treasure.class.getCanonicalName());
-        mats.add(Wood.class.getCanonicalName());
-        inventory.addRecipe("Bow", mats);
         //now add wood and treasure that is different id since it shouldnt matter to the inventory
         Wood woodI1 = new Wood(3);
         Wood wood = new Wood(2);
-        Treasure TreasureI1 = new Treasure(4);
+        Arrow arrow = new Arrow(4);
+        Arrow arrow2 = new Arrow(6);
+        Arrow arrow3 = new Arrow(7);
         inventory.addItemToInventory(woodI1);
-        inventory.addItemToInventory(TreasureI1);
         inventory.addItemToInventory(wood);
-        assertTrue(inventory.generateBuildables().get(0).equals("Bow"));
+        inventory.addItemToInventory(arrow);
+        inventory.addItemToInventory(arrow2);
+        inventory.addItemToInventory(arrow3);
+        assertTrue(inventory.generateBuildables().get(0).equals(Bow.class.getCanonicalName()));
         //check that if you are an item short that it doesnt do anything
-        inventory.removeItem(wood);
+        inventory.removeItem(arrow);
         assertTrue(inventory.generateBuildables().equals(new ArrayList<String>()));
 
     }
@@ -158,15 +159,15 @@ public class InventoryTest {
     }
     @Test
     public void testRemoveDeadItems() {
-        Inventory inventory = new Inventory();
+        Character character = new Character(3,Character.class.getSimpleName() , new Position(3, 4));
         Sword sword = new Sword(1);
-        inventory.addItemToInventory(sword);
+        character.inventory.addItemToInventory(sword);
         //now consume sword
         while (sword.getUses() > 0) {
-            sword.consume();
+            sword.consume(character);
         }
-        inventory.removeDeadItems();
-        assertTrue(inventory.getItem(sword.getitemId(), inventory.getItems()) == null);
+        character.inventory.removeDeadItems();
+        assertTrue(character.inventory.getItem(sword.getitemId(), character.inventory.getItems()) == null);
     }
     @Test
     public void testAddRecipeGetRecipe() {
@@ -174,8 +175,12 @@ public class InventoryTest {
         List<String> mats = new ArrayList<>();
         mats.add(Wood.class.getCanonicalName());
         mats.add(Treasure.class.getCanonicalName());
-        inventory.addRecipe(Bow.class.getCanonicalName(), mats);
-        assertTrue(inventory.getRecipe(Bow.class.getCanonicalName()).equals(Arrays.asList(Wood.class.getCanonicalName(), Treasure.class.getCanonicalName())));
+        inventory.addRecipe(Treasure.class.getCanonicalName(), mats);
+        Wood wood1 = new Wood(2);
+        Treasure t1 = new Treasure(5);
+        inventory.addItemToInventory(wood1);
+        inventory.addItemToInventory(t1);
+        assertTrue(inventory.getRecipe(Treasure.class.getCanonicalName()).equals(Arrays.asList(Wood.class.getCanonicalName(), Treasure.class.getCanonicalName())));
     }
     @Test
     public void testGetBows() {
@@ -208,5 +213,9 @@ public class InventoryTest {
         inventory.addItemToInventory(shield);
         //order doesnt matter however the order should be preserved
         assertEquals(inventory.getDefenseItems(), Arrays.asList(armour,shield));
-    } 
+    }
+    @Test
+    public void craftingShields() {
+        
+    }
 }
