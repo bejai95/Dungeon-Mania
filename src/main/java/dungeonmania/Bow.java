@@ -7,10 +7,9 @@ public class Bow extends Item implements Consumable {
         this.attackTimes = 2;
         setUses(3);
     }
-    public void consume() {
+    public void consume(Character character) {
         if (this.getUses() != 0) {
             setUses(this.getUses() - 1);
-            getAmountOfAttacks();
         }
     }
     public int getAmountOfAttacks() {
