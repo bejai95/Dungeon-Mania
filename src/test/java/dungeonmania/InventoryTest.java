@@ -216,6 +216,48 @@ public class InventoryTest {
     }
     @Test
     public void craftingShields() {
-        
+        //test if have material of one shield it works
+        Inventory inventory = new Inventory();
+        Wood wood = new Wood(1);
+        Wood wood2 = new Wood(2);
+        Wood wood4 = new Wood(7);
+        Wood wood5 = new Wood(8);
+        Treasure t1 = new Treasure(3);
+        Treasure t2 = new Treasure(4);
+        inventory.addItemToInventory(wood);
+        inventory.addItemToInventory(wood2);
+        inventory.addItemToInventory(wood4);
+        inventory.addItemToInventory(wood5);
+        inventory.addItemToInventory(t1);
+        inventory.addItemToInventory(t2);
+        //test if have material for the other shield recipe that works
+        assertDoesNotThrow(() -> inventory.craft(Shield.class.getCanonicalName(), 21));
+        assertDoesNotThrow(() -> inventory.craft(Shield.class.getCanonicalName(), 22));
+        Wood wood6 = new Wood(10);
+        Wood wood7 = new Wood(11);
+        Key key1 = new Key(71);
+        inventory.addItemToInventory(wood6);
+        inventory.addItemToInventory(wood7);
+        inventory.addItemToInventory(key1);
+        assertDoesNotThrow(() -> inventory.craft(Shield.class.getCanonicalName(), 23));
+        //test that if u have material for both that it just crafts a shield
+        //add arrows to try to confuse it
+        Wood wood8 = new Wood(15);
+        Wood wood0 = new Wood(16);
+        Key key00 = new Key(72);
+        Treasure t3 = new Treasure(1510);
+        Arrow a1 = new Arrow(100);
+        Arrow a2 = new Arrow(102);
+        Arrow a3 = new Arrow(101);
+        inventory.addItemToInventory(key00);
+        inventory.addItemToInventory(wood8);
+        inventory.addItemToInventory(wood0);
+        inventory.addItemToInventory(t3);
+        inventory.addItemToInventory(a1);
+        inventory.addItemToInventory(a2);
+        inventory.addItemToInventory(a3);
+        assertDoesNotThrow(() -> inventory.craft(Shield.class.getCanonicalName(), 230));
+        assertTrue(inventory.getMaterials().contains(a1));
+        assertTrue(!(inventory.getMaterials().contains(wood0)));
     }
 }

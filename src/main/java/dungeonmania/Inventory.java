@@ -53,7 +53,7 @@ public class Inventory {
             throw new InvalidActionException("You don't have the resources to craft this item");
         }
         //now remove items that you are using
-        List<Item> items = this.getItems();
+        List<Item> items = this.getMaterials();
         for (String recipeMaterial: recipe) {
             for (Item item: items) {
                 //if same class delete from items and break this loop
@@ -213,6 +213,11 @@ public class Inventory {
     public HashMap<String, List<String>> getRecipes() {
         return this.recipes;
     }
+    /**
+     * @pre that recipeName is valid
+     * @param recipeName
+     * @return
+     */
     public boolean isRecipeBuildable(String recipeName) {
         //stores the ids of all materials already counted for in inventory of materials
         List<Integer> materialsAlreadyUsed = new ArrayList<>();
