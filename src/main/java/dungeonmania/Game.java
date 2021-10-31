@@ -28,15 +28,13 @@ public class Game {
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
 
-    @SerializedName(value="goal-condition")
-    private GoalCondition goalCondition;
-
     // private final List<AnimationQueue> animations;
     private String gameMode;
     private static int numDungeonIds; // Initialized to zero
-    private String goalsAsString;
+    
+    @SerializedName(value="goal", alternate="goal-condition")
     private Goal goal;
-
+    
     private double mercenarySpawnChance = 0.05;
     private int spiderTicks = 10;
     
@@ -155,13 +153,17 @@ public class Game {
         return buildables;
     }
 
-    public GoalCondition getGoalCondition() {
-        return goalCondition;
+   public String getGoalsLeft() {
+        if (goal == null)  {
+            return null;
+        } else {
+            return goal.getGoalsLeft(entities);
+        }
     }
 
     // Generate a dungeon response
     public DungeonResponse generateDungeonResponse() {
-        return new DungeonResponse(dungeonId, dungeonName, null, null, buildables, goalsAsString); //TODO fix this up later
+        return new DungeonResponse(dungeonId, dungeonName, null, null, buildables, getGoalsLeft()); //TODO fix this up later
     }
 
     public void setGameMode(String gameMode) {
@@ -275,11 +277,12 @@ public class Game {
         return pos;
     }
 
+    /*
     private void spawnRandomEnemies(){
         Double roll = ThreadLocalRandom.current().nextDouble(0, 1);
         Position pos = null;
 
-
+        
         if(roll < mercenarySpawnChance){
             pos = getSpawnPositionRandom();
             Mercenary merc = new Mercenary(getUniqueId(), pos, 1, getPlayer());
@@ -365,6 +368,6 @@ public class Game {
 
     private void resetMercSpeeds() {
     }
-
+    */
     
 }

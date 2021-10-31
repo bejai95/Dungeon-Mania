@@ -1,10 +1,11 @@
 package dungeonmania;
 
+import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.util.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZombieToastSpawner extends StaticEntity {
+public class ZombieToastSpawner extends StaticEntity implements interaction {
     //-----Data-----
     private Position spawnerPosition = getPosition();
 
@@ -16,9 +17,9 @@ public class ZombieToastSpawner extends StaticEntity {
     //-----Methods-----
     /*Will spawn a zombie toast on an adjacent open tile
      and return the newly created zombie toast or null */
-    public ZombieToast spawn (int tickCounter, String gameMode, Position emptyTile ) {
+    public ZombieToast spawn (int tickCounter, String gameMode) {
         //Checks to see if spawn conditions are met
-        if ((gameMode == "hard" && tickCounter == 15) || (gameMode != "hard" && tickCounter == 20)) {
+        if ((gameMode == "hard" && tickCounter % 15 == 0) || (gameMode != "hard" && tickCounter % 20 == 0)) {
             //List of adjacent positions around spawner
             List<Position> adjacentPositions = spawnerPosition.getAdjacentPositions();
 
@@ -41,6 +42,21 @@ public class ZombieToastSpawner extends StaticEntity {
         } else {
             return null;
         }
+
+    }
+
+    /**
+     * Player interacting with spawner destroys spawner if they have weapon
+     */
+    public void interact(Character ch) throws InvalidActionException {
+        if (!Position.isAdjacent(this.getPosition(), ch.getPosition())) {
+            throw new InvalidActionException("Player is not adjacent to spawner");
+        } else if (ch.inventory.getSwords().isEmpty()) {
+            throw new InvalidActionException("Player does not have a sword");
+        }
+
+        // TODO destroy self somehow
+        super.removeStaticEntity();
 
     }
 
