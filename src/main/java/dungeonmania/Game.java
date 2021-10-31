@@ -23,6 +23,7 @@ public class Game {
     private String dungeonId;
     private String dungeonName;
     private List<Entity> entities;
+    private int lastId = 0;
     private List<Item> inventory;
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
@@ -42,7 +43,11 @@ public class Game {
     public Game() {
     }
 
-
+    public int getUniqueId(){
+        int ret = lastId;
+        lastId++;
+        return ret;
+    }
     public static int getNumDungeonIds() {
         return numDungeonIds;
     }
@@ -141,9 +146,10 @@ public class Game {
         return entities;
     }
 
-    public List<Item> getInventory() {
-        return inventory;
+    public Inventory getInventory() {
+        return getPlayer().inventory;
     }
+
 
     public List<String> getBuildables() {
         return buildables;
@@ -193,7 +199,13 @@ public class Game {
     }
 
     private List<Wall> getWalls(){
-        return null; //TODO
+        List<Wall> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof Wall){
+                ret.add((Wall)ret);
+            }
+        }
+        return ret;
     }
 
     private boolean isBoundary(Wall wall, List<Wall> walls){
@@ -219,7 +231,9 @@ public class Game {
     }
 
     private List<Wall> getBoundaries(){
-        return null; //TODO
+        List<Wall> walls = getWalls();
+        List<Wall> walls2 = getWalls();
+        return walls.stream().filter(x -> isBoundary(x, walls2)).collect(Collectors.toList());
     }
 
     private int getXMin(){
@@ -268,13 +282,14 @@ public class Game {
 
         if(roll < mercenarySpawnChance){
             pos = getSpawnPositionRandom();
-            Mercenary merc = new Mercenary(5, 1, new ChaseMovement(getPlayer()), pos, 1);
+            Mercenary merc = new Mercenary(getUniqueId(), pos, 1, getPlayer());
             entities.add(merc);
         }
 
         if(tickCounter % spiderTicks == 0){
             pos = getSpawnPositionRandom();
-            MovingEntity spider = new Spider(5, 1, new SquareMovement(), pos);
+            MovingEntity spider = new Spider(getUniqueId(), pos, new SquareMovement());
+            entities.add(spider);
         }
 
         return;
@@ -291,7 +306,8 @@ public class Game {
     }
 
     private void removeDeadEntities(){
-        return; //TODO
+        List<MovingEntity> deadEnts = getMovingEntities().stream().filter(x -> x.health <= 0).collect(Collectors.toList());
+        entities.removeAll(deadEnts);
     }
 
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {

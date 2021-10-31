@@ -42,7 +42,7 @@ public class GoalsSystemTests {
     public void testAdvancedGoalsCorrect() {
         DungeonManiaController c = new DungeonManiaController();
         DungeonResponse r = c.newGame("advanced", "peaceful");
-        assertEquals(r.getGoals(), ":enemies AND :treasure"); 
+        assertEquals(r.getGoals(), "(:enemies AND :treasure)"); 
     }
 
 
