@@ -7,6 +7,7 @@ import java.lang.reflect.*;
 public class UnpickedUpItem extends StaticEntity {
     //-----Data-----
     private String itemClass;
+    private int keyNum;
 
     //-----Constructors-----
     /*
@@ -14,9 +15,19 @@ public class UnpickedUpItem extends StaticEntity {
     itemClass = "HealthPotion"
     Note the ID gets transferred to the item on pickup
     */
+
+    //Constructor for a key
+    public UnpickedUpItem(int id, String type, Position position, String itemClass, int keyNum) {
+        super(id, type, position);
+        this.itemClass = itemClass;
+        this.keyNum = keyNum;
+    }
+
+    //Constructor for any item that's not a key
     public UnpickedUpItem(int id, String type, Position position, String itemClass) {
         super(id, type, position);
         this.itemClass = itemClass;
+        this.keyNum = -1;
     }
 
     //-----Methods-----
@@ -25,7 +36,13 @@ public class UnpickedUpItem extends StaticEntity {
     //Note the ID gets transferred to the item on pickup
     public Item pickupItem () throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
     IllegalAccessError, IllegalAccessException, InvocationTargetException {
-        //Create the new item
+        if (itemClass == "key") {
+            Key newKey = new Key(getId(),keyNum);
+            return (Item)newKey;
+        }
+
+
+        //Create the new item if the item isn't a key
         Class classType = Class.forName(itemClass);
         Constructor construct = classType.getConstructor(int.class);
         Item newItem = (Item)construct.newInstance(getId());
