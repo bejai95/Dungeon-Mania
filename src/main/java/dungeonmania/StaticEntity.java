@@ -5,7 +5,7 @@ import dungeonmania.util.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StaticEntity extends Entity {
+public abstract class StaticEntity extends Entity {
 
     //-----Data-----
     private static List<StaticEntity> staticEntitiesList = new ArrayList<StaticEntity>();
@@ -32,9 +32,9 @@ public class StaticEntity extends Entity {
         return false;
     }
 
-
-
     //-----Getters and Setters-----
-
+    public static List<StaticEntity> getStaticEntitiesList() {
+        return staticEntitiesList;
+    }
 }
   

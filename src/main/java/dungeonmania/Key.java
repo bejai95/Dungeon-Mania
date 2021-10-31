@@ -1,8 +1,11 @@
 package dungeonmania;
 
 public class Key extends Item implements Material, Consumable {
-    public Key(int itemId) {
+    private int keyNum;
+
+    public Key(int itemId, int keyNum) {
         super(itemId);
+        this.keyNum = keyNum;
         setUses(1);
     }
     public void consume(Character character) {
@@ -10,4 +13,9 @@ public class Key extends Item implements Material, Consumable {
             this.setUses(this.getUses() -1);
         }  
     }
+
+    public int getKeyNum() {
+        return keyNum;
+    }
+  
 }

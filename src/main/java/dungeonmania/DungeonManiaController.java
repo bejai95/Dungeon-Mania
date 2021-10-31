@@ -50,23 +50,16 @@ public class DungeonManiaController {
     }
     public DungeonResponse newGame(String dungeonName, String gameMode) throws IllegalArgumentException {
         
-        // Get the name of the the dungeon with no extension
-        String dungeonNameNoExtension = dungeonName;
-        int pos = dungeonName.lastIndexOf(".");
-        if (pos > 0 && pos < (dungeonName.length() -1)) { // If '.' is not the first or last character
-            dungeonNameNoExtension = dungeonName.substring(0, pos);
-        }
-        
         // Deal with throwing exceptions
         if (!this.getGameModes().contains(gameMode)) {
             throw new IllegalArgumentException("Invalid gameMode argument");
-        } else if (!DungeonManiaController.dungeons().contains(dungeonNameNoExtension)) {
+        } else if (!DungeonManiaController.dungeons().contains(dungeonName)) {
             throw new IllegalArgumentException("Invalid dungeonName argument");
         }
 
         try {
             // Convert the entire dungeon JSON file into a JSON String
-            String JSONString = FileLoader.loadResourceFile("/dungeons/" + dungeonName);
+            String JSONString = FileLoader.loadResourceFile("/dungeons/" + dungeonName + ".json");
 
             Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Entity.class, new EntityDeserializerFromDungeon())
@@ -86,7 +79,7 @@ public class DungeonManiaController {
             return currentlyAccessingGame.generateDungeonResponse();
         }
         catch (IOException e) {
-            throw new IllegalArgumentException("Dungeon name does exist (without extension) but incorrect filename");
+            throw new IllegalArgumentException("A different error occurred");
         }
     }
     
@@ -94,6 +87,7 @@ public class DungeonManiaController {
         try {
             Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
+                .registerTypeAdapter(Movement.class, new InheritanceAdapter<Movement>())
                 .setPrettyPrinting()
                 .create();
             
@@ -134,6 +128,7 @@ public class DungeonManiaController {
             
             Gson gson = new GsonBuilder()
             .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
+            .registerTypeAdapter(Movement.class, new InheritanceAdapter<Movement>())
             .create();
 
             // Load the game

@@ -5,7 +5,7 @@ import dungeonmania.util.Position;
 
 
 
-public class Entity{
+public abstract class Entity{
     private int id;
     private String type;
     private Position position;

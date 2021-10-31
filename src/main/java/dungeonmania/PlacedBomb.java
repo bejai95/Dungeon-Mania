@@ -37,12 +37,21 @@ public class PlacedBomb extends StaticEntity {
     on any adjacent bombs to explode*/
     public static void explodeOnSwitchCheck (Position switchPos){
         List<Position> adjacentPositions = switchPos.getAdjacentPositions();
+        List<PlacedBomb> explodeList = new ArrayList<PlacedBomb>();
+
+        /*Go through each adjacent location to the switch, then check the bombs list
+        if it finds any bombs add it to the explode list*/
         for (Position edgecell : adjacentPositions) {
             for (PlacedBomb possibleBomb : placedBombList ) {
                 if (edgecell.equals(possibleBomb.getPosition())) {
-                    possibleBomb.explode();
+                    explodeList.add(possibleBomb);
                 }   
             }
+        }
+
+        //Explodes all bombs on the explode list
+        for (PlacedBomb explodeItem : explodeList) {
+            explodeItem.explode();
         }
     }
 
@@ -61,7 +70,9 @@ public class PlacedBomb extends StaticEntity {
         return;
     }
 
-
     //-----Getters and Setters-----
-    
+    public static List<PlacedBomb> getPlacedBombList() {
+        return placedBombList;
+    }
+
 }
