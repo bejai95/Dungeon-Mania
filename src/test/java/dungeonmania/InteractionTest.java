@@ -91,7 +91,7 @@ public class InteractionTest {
         ch.inventory.addItemToInventory(new Treasure(2));
         ch.inventory.addItemToInventory(new Treasure(2));
         ch.inventory.addItemToInventory(new Treasure(2));
-        
+
         ch.setPosition(new Position(0,2));
         assertDoesNotThrow(() -> merc.interact(ch));
         ch.setPosition(new Position(2,0));
