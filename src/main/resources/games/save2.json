@@ -278,6 +278,7 @@
       "className": "dungeonmania.UnpickedUpItem",
       "data": {
         "itemClass": "Sword",
+        "keyNum": -1,
         "id": 20,
         "type": "sword",
         "position": {
@@ -519,6 +520,7 @@
       "className": "dungeonmania.UnpickedUpItem",
       "data": {
         "itemClass": "Bomb",
+        "keyNum": -1,
         "id": 40,
         "type": "bomb",
         "position": {
@@ -966,6 +968,7 @@
       "className": "dungeonmania.UnpickedUpItem",
       "data": {
         "itemClass": "Treasure",
+        "keyNum": -1,
         "id": 76,
         "type": "treasure",
         "position": {
@@ -979,6 +982,7 @@
       "className": "dungeonmania.UnpickedUpItem",
       "data": {
         "itemClass": "InvincibilityPotion",
+        "keyNum": -1,
         "id": 77,
         "type": "invincibility_potion",
         "position": {

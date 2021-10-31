@@ -23,12 +23,12 @@ public class EntityDeserializerFromDungeon  implements JsonDeserializer<Entity> 
         int x = jsonObject.get("x").getAsInt();
         int y = jsonObject.get("y").getAsInt();
         String type = jsonObject.get("type").getAsString();
-        String key = null;
+        int key = 0;
         String colour = null;
 
         
         if (jsonObject.has("key")) {
-            key = jsonObject.get("key").getAsString();
+            key = jsonObject.get("key").getAsInt();
         } else if (jsonObject.has("colour")) {
             colour = jsonObject.get("colour").getAsString();
         }

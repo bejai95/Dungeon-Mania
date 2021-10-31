@@ -4,7 +4,7 @@ import dungeonmania.util.Position;
 
 public class EntityFactory {
 
-    public Entity createEntity (int id, String type, int x, int y, String key, String colour) {
+    public Entity createEntity (int id, String type, int x, int y, int matchingKeyNum, String portalColour) {
         switch(type) {
             case "player":
                 Position positionPlayer = new Position(x, y, 2);
@@ -23,12 +23,10 @@ public class EntityFactory {
                 return new FloorSwitch(id, "switch", positionSwitch);
             case "door":
                 Position positionDoor = new Position(x, y, 3);
-                // TODO logic in game that gets the matching key for the door
-                return new Door(id, "door", positionDoor, null);
+                return new Door(id, "door", positionDoor, matchingKeyNum);
             case "portal":
                 Position positionPortal = new Position(x, y, 3);
-                // TODO logic in game that gets the matching portal
-                return new Portal(id, "portal", positionPortal, null);
+                return new Portal(id, "portal", positionPortal, portalColour);
             case "zombie_toast_spawner":
                 Position positionSpawner = new Position(x, y, 3);
                 return new ZombieToastSpawner(id, "zombie_toast_spawner", positionSpawner);
@@ -41,7 +39,7 @@ public class EntityFactory {
                 return new UnpickedUpItem(id, "treasure", positionTreasure, "Treasure");
             case "key":
                 Position positionKey = new Position(x, y, 3);
-                return new UnpickedUpItem(id, "key", positionKey, "Key");
+                return new UnpickedUpItem(id, "key", positionKey, "Key", matchingKeyNum);
             case "health_potion":
                 Position positionHealthPotion = new Position(x, y, 3);
                 return new UnpickedUpItem(id, "health_potion", positionHealthPotion, "HealthPotion");
