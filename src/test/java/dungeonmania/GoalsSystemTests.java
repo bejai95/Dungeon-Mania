@@ -35,13 +35,13 @@ public class GoalsSystemTests {
     public void testBouldersGoalsCorrect() {
         DungeonManiaController c = new DungeonManiaController();
         DungeonResponse r = c.newGame("boulders", "Peaceful");
-        assertEquals(r.getGoals(), ":boulders"); 
+        assertEquals(r.getGoals(), ":switch"); 
     }
 
     @Test
     public void testAdvancedGoalsCorrect() {
         DungeonManiaController c = new DungeonManiaController();
         DungeonResponse r = c.newGame("advanced", "Peaceful");
-        assertEquals(r.getGoals(), "(:enemies AND :treasure)"); 
+        assertEquals(r.getGoals(), "(:mercenary AND :treasure)"); 
     }
 }
