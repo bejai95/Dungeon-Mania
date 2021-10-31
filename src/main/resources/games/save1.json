@@ -240,13 +240,31 @@
           "bows": [],
           "swords": [],
           "defenceItems": [],
-          "recipes": {}
+          "recipes": {
+            "dungeonmania.Shield1": [
+              "dungeonmania.Wood",
+              "dungeonmania.Wood",
+              "dungeonmania.Treasure"
+            ],
+            "dungeonmania.Shield2": [
+              "dungeonmania.Wood",
+              "dungeonmania.Wood",
+              "dungeonmania.Key"
+            ],
+            "dungeonmania.Bow": [
+              "dungeonmania.Wood",
+              "dungeonmania.Arrow",
+              "dungeonmania.Arrow",
+              "dungeonmania.Arrow"
+            ]
+          }
         },
-        "health": 10.0,
+        "health": 200.0,
         "damage": 5,
         "baseDefense": 0.0,
         "InvincibleDuration": 0,
         "InvisibleDuration": 0,
+        "maxHealth": 200.0,
         "id": 19,
         "type": "player",
         "position": {
@@ -537,7 +555,6 @@
     {
       "className": "dungeonmania.Mercenary",
       "data": {
-        "isHostile": true,
         "isHelping": false,
         "goldThreshold": 0,
         "currentGold": 0,
@@ -547,6 +564,7 @@
         "baseDefense": 0.0,
         "defense": 0.0,
         "speed": 1,
+        "isHostile": false,
         "moveBehaviour": {
           "className": "dungeonmania.ChaseMovement",
           "data": {}
