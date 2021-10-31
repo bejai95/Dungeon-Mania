@@ -42,7 +42,7 @@ public class FloorSwitch extends StaticEntity {
         this.isActive = isActive;
         //Checks for nearby bombs to explode
         if (isActive == true) {
-            PlacedBomb.explodeOnSwitchCheck(this.getPosition());
+            PlacedBomb.explodeOnSwitchCheck(getPosition());
         }
     }
 

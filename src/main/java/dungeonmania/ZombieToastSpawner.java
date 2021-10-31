@@ -16,9 +16,9 @@ public class ZombieToastSpawner extends StaticEntity {
     //-----Methods-----
     /*Will spawn a zombie toast on an adjacent open tile
      and return the newly created zombie toast or null */
-    public ZombieToast spawn (int tickCounter, String gameMode, Position emptyTile ) {
+    public ZombieToast spawn (int tickCounter, String gameMode) {
         //Checks to see if spawn conditions are met
-        if ((gameMode == "hard" && tickCounter == 15) || (gameMode != "hard" && tickCounter == 20)) {
+        if ((gameMode == "hard" && tickCounter % 15 == 0) || (gameMode != "hard" && tickCounter % 20 == 0)) {
             //List of adjacent positions around spawner
             List<Position> adjacentPositions = spawnerPosition.getAdjacentPositions();
 
