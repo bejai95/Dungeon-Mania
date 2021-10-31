@@ -64,7 +64,7 @@ public class InventoryTest {
         Inventory inventory = new Inventory();
         //check add item works
         Sword sword = new Sword(3);
-        Key key = new Key(4);
+        Key key = new Key(4,0);
         Wood wood = new Wood(5);
         Treasure treasure = new Treasure(6);
         Shield shield = new Shield(7);
@@ -108,7 +108,7 @@ public class InventoryTest {
         //test that when u remove the item it does from all lists needed
         Inventory inventory = new Inventory();
         Sword sword = new Sword(3);
-        Key key = new Key(4);
+        Key key = new Key(4,1);
         Wood wood = new Wood(5);
         Treasure treasure = new Treasure(6);
         Shield shield = new Shield(7);
@@ -181,7 +181,7 @@ public class InventoryTest {
     public void testGetBows() {
         Inventory inventory = new Inventory();
         Bow bow = new Bow(3);
-        Key key = new Key(4);
+        Key key = new Key(4,1);
         inventory.addItemToInventory(bow);
         inventory.addItemToInventory(key);
         assertEquals(inventory.getBows(), Arrays.asList(bow));
@@ -190,7 +190,7 @@ public class InventoryTest {
     public void testGetSwords() {
         Inventory inventory = new Inventory();
         Sword sword = new Sword(3);
-        Key key = new Key(4);
+        Key key = new Key(4,1);
         inventory.addItemToInventory(sword);
         inventory.addItemToInventory(key);
         assertEquals(inventory.getSwords(), Arrays.asList(sword));
@@ -199,7 +199,7 @@ public class InventoryTest {
     public void testGetDefenseItems() {
         Inventory inventory = new Inventory();
         Sword sword = new Sword(3);
-        Key key = new Key(4);
+        Key key = new Key(4,1);
         Armour armour = new Armour(5);
         Shield shield = new Shield(6);
         inventory.addItemToInventory(sword);

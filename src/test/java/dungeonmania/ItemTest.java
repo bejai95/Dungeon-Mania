@@ -44,7 +44,7 @@ public class ItemTest {
         //the consume function should decrease the amount of uses
         assertNotEquals(startingUses, s.getUses());
 
-        Key k = new Key(5);
+        Key k = new Key(5,1);
         startingUses = k.getUses();
         k.consume();
         //the consume function should decrease the amount of uses

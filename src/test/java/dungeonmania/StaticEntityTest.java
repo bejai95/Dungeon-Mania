@@ -45,38 +45,38 @@ public class StaticEntityTest {
         assertFalse(s1.isCollision(p2));
     }  
     
-    //-----Door Tests-----
-    //Tests to see if a matching key will unlock the door
-    @Test
-    public void testOpenDoorMatch(){
-        Position p1 = new Position(1, 1);
-        Key k1 = new Key(0);
-        Door d1 = new Door(1, "Door", p1, k1);
-        d1.openDoor(k1);
-        assertTrue(d1.getIsOpen());
-    } 
+    // //-----Door Tests-----
+    // //Tests to see if a matching key will unlock the door
+    // @Test
+    // public void testOpenDoorMatch(){
+    //     Position p1 = new Position(1, 1);
+    //     Key k1 = new Key(0);
+    //     Door d1 = new Door(1, "Door", p1, k1);
+    //     d1.openDoor(k1);
+    //     assertTrue(d1.getIsOpen());
+    // } 
     
-    //Tests to see if a unmatching key will fail to unlock the door
-    @Test
-    public void testOpenDoorUnmatch(){
-        Position p1 = new Position(1, 1);
-        Key k1 = new Key(0);
-        Key k2 = new Key(1);
-        Door d1 = new Door(2, "Door", p1, k1);
-        d1.openDoor(k2);
-        assertFalse(d1.getIsOpen());
-    }      
+    // //Tests to see if a unmatching key will fail to unlock the door
+    // @Test
+    // public void testOpenDoorUnmatch(){
+    //     Position p1 = new Position(1, 1);
+    //     Key k1 = new Key(0);
+    //     Key k2 = new Key(1);
+    //     Door d1 = new Door(2, "Door", p1, k1);
+    //     d1.openDoor(k2);
+    //     assertFalse(d1.getIsOpen());
+    // }      
 
-    //-----Portal Tests-----
-    //Tests to see if portal will give the correct teleport location
-    @Test
-    public void testPortalTeleport(){
-        Position portal1Location = new Position(1, 1);
-        Position portal2Location = new Position(4, 6);   
-        Portal portal2 = new Portal(1, "portal", portal2Location);
-        Portal portal1 = new Portal(0, "portal", portal1Location, portal2);
-        assertEquals(portal2.getPosition(), portal1.getTeleportLocation());
-    }   
+    // //-----Portal Tests-----
+    // //Tests to see if portal will give the correct teleport location
+    // @Test
+    // public void testPortalTeleport(){
+    //     Position portal1Location = new Position(1, 1);
+    //     Position portal2Location = new Position(4, 6);   
+    //     Portal portal2 = new Portal(1, "portal", portal2Location);
+    //     Portal portal1 = new Portal(0, "portal", portal1Location, portal2);
+    //     assertEquals(portal2.getPosition(), portal1.getTeleportLocation());
+    // }   
 
     //-----Boulder-----
     //Tests moving a boulder onto an empty cell
@@ -111,6 +111,6 @@ public class StaticEntityTest {
 
 
 
-        // assertEquals(portal2.getPosition(), portal1.getTeleportLocation());
+        // assertEquals(, portal1.getTeleportLocation());
     }   
 }

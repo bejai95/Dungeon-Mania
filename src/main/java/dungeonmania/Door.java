@@ -5,17 +5,18 @@ import dungeonmania.util.Position;
 public class Door extends StaticEntity {
     //-----Data-----
     private Boolean isOpen;
-    private int matchingKeyid;
+    private int matchingKeyNum;
 
     //-----Constructors-----
-    public Door(int id, String type, Position position, int matchingKeyid) {
+    public Door(int id, String type, Position position, int matchingKeyNum) {
         super(id, "door", position);
         this.isOpen = false;
-        this.matchingKeyid = matchingKeyid;
+        this.matchingKeyNum = matchingKeyNum;
     }
+
     //-----Methods-----
     public void openDoor (Key inputKey){
-        if (matchingKeyid == inputKey.getitemId()) {
+        if (inputKey.getKeyNum() == matchingKeyNum) {
             this.isOpen = true;
         }
     }
@@ -28,14 +29,4 @@ public class Door extends StaticEntity {
     public void setIsOpen(Boolean isOpen) {
         this.isOpen = isOpen;
     }
-
-    public Key getMatchingKey() {
-        return matchingKey;
-    }
-
-    public void setMatchingKey(Key matchingKey) {
-        this.matchingKey = matchingKey;
-    }
-
-    
 }
