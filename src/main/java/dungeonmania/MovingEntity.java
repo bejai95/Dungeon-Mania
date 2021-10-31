@@ -11,6 +11,7 @@ public abstract class MovingEntity extends Entity implements Battleable{
     double baseDefense;
     double defense;
     int speed;
+    boolean isHostile;
     Movement moveBehaviour;
     Item currentItem;
 
@@ -54,6 +55,9 @@ public abstract class MovingEntity extends Entity implements Battleable{
         return this.speed;
     }
 
+    public boolean getIsHostile() {
+        return this.isHostile;
+    }
 
 
     public void move() {

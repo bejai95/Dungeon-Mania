@@ -14,9 +14,15 @@ public class Character extends Entity implements Battleable{
     double baseDefense;
     int InvincibleDuration;
     int InvisibleDuration;
+    double maxHealth;
 
     public Character(int id, String type, Position position) {
         super(id, type, position);
+        this.health = 200;
+        this.maxHealth = this.health;
+        this.baseDefense = 0;
+        this.InvincibleDuration = 0;
+        this.InvisibleDuration = 0;
     }
     public int baseDamage() {
         return this.damage;
@@ -61,15 +67,7 @@ public class Character extends Entity implements Battleable{
         this.health = newHealth;
     }
     public void use(Consumable consumable) throws InvalidActionException {
-        if (consumable instanceof InvincibilityPotion) {
-            //set it to value that would make snese
-            this.setInvincibleLength(3);
-        }
-        else if (consumable instanceof InvisibilityPotion) {
-            //set it to value that would make sense
-            this.setInvisibleLength(3);
-        }
-        consumable.consume();
+        consumable.consume(this);
     } 
     /**
      * Attempts to revive the player if has the one ring
@@ -78,14 +76,13 @@ public class Character extends Entity implements Battleable{
         for (Item item: this.inventory.getItems()) {
             if (item instanceof TheOneRing && this.getHealth() <= 0) {
                 TheOneRing ring = (TheOneRing) item;
-                ring.consume();
-                //revive to full health
-                this.setHealth(100);
+                ring.consume(this);
             }
         }
     }
     public boolean isInvisible () {
         if (this.InvisibleDuration > 0) {
+            setInvisibleLength(getInvisibleLength() - 1);
             return true;
         }
         else {
@@ -97,6 +94,7 @@ public class Character extends Entity implements Battleable{
     }
     public boolean isInvincible () {
         if (this.InvincibleDuration > 0) {
+            setInvincibleLength(getInvincibleLength() - 1);
             return true;
         }
         else {
@@ -106,6 +104,13 @@ public class Character extends Entity implements Battleable{
     public void setInvincibleLength (int length) {
         this.InvincibleDuration = length;
     }
-
-
+    public int getInvincibleLength () {
+        return this.InvincibleDuration;
+    }
+    public int getInvisibleLength () {
+        return this.InvisibleDuration;
+    }
+    public double getMaxHealth() {
+        return this.maxHealth;
+    }
 }
