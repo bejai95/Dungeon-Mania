@@ -9,7 +9,6 @@ public class Mercenary extends MovingEntity {
     public static double defaultdefense;
     public static int defaultSpeed = 1;
 
-    boolean isHostile;
     boolean isHelping;
     int goldThreshold;
     int currentGold;
@@ -17,7 +16,6 @@ public class Mercenary extends MovingEntity {
 
     public Mercenary(int id, Position position, int goldThreshold, Character player) {
         super(id, "mercenary", position, new ChaseMovement(player));
-        isHostile = true;
         isHelping = false;
         this.goldThreshold = goldThreshold;
         this.currentGold = 0;
