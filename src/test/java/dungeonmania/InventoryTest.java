@@ -27,15 +27,15 @@ public class InventoryTest {
     public void testCrafting() {
         Inventory inventory = new Inventory();
         List<String> mats = new ArrayList<>();
-        mats.add(Wood.class.getCanonicalName());
-        mats.add(Treasure.class.getCanonicalName());
-        inventory.addRecipe(Bow.class.getCanonicalName(), mats);
+        mats.add(Wood.class.getSimpleName().toLowerCase());
+        mats.add(Treasure.class.getSimpleName().toLowerCase());
+        inventory.addRecipe(Bow.class.getSimpleName().toLowerCase(), mats);
         //now add wood and treasure that is different id since it shouldnt matter to the inventory
         Wood woodI1 = new Wood(3);
         Treasure TreasureI1 = new Treasure(4);
         inventory.addItemToInventory(woodI1);
         inventory.addItemToInventory(TreasureI1);
-        Item craftedBow = assertDoesNotThrow(() -> inventory.craft(Bow.class.getCanonicalName(),6));
+        Item craftedBow = assertDoesNotThrow(() -> inventory.craft("bow",6));
         //now there should be nothing in items except the bow since materials used
         assertTrue(inventory.getItems().get(0).equals(craftedBow));
         assertTrue(inventory.getItems().get(0) instanceof Bow);
@@ -55,7 +55,7 @@ public class InventoryTest {
         inventory.addItemToInventory(arrow);
         inventory.addItemToInventory(arrow2);
         inventory.addItemToInventory(arrow3);
-        assertTrue(inventory.generateBuildables().get(0).equals(Bow.class.getCanonicalName()));
+        assertTrue(inventory.generateBuildables().get(0).equals(Bow.class.getSimpleName().toLowerCase()));
         //check that if you are an item short that it doesnt do anything
         inventory.removeItem(arrow);
         assertTrue(inventory.generateBuildables().equals(new ArrayList<String>()));
@@ -174,14 +174,14 @@ public class InventoryTest {
     public void testAddRecipeGetRecipe() {
         Inventory inventory = new Inventory();
         List<String> mats = new ArrayList<>();
-        mats.add(Wood.class.getCanonicalName());
-        mats.add(Treasure.class.getCanonicalName());
-        inventory.addRecipe(Treasure.class.getCanonicalName(), mats);
+        mats.add(Wood.class.getSimpleName().toLowerCase());
+        mats.add(Treasure.class.getSimpleName().toLowerCase());
+        inventory.addRecipe(Treasure.class.getSimpleName().toLowerCase(), mats);
         Wood wood1 = new Wood(2);
         Treasure t1 = new Treasure(5);
         inventory.addItemToInventory(wood1);
         inventory.addItemToInventory(t1);
-        assertTrue(inventory.getRecipe(Treasure.class.getCanonicalName()).equals(Arrays.asList(Wood.class.getCanonicalName(), Treasure.class.getCanonicalName())));
+        assertTrue(inventory.getRecipe(Treasure.class.getSimpleName().toLowerCase()).equals(Arrays.asList(Wood.class.getSimpleName().toLowerCase(), Treasure.class.getSimpleName().toLowerCase())));
     }
     @Test
     public void testGetBows() {
@@ -235,15 +235,15 @@ public class InventoryTest {
         inventory.addItemToInventory(t1);
         inventory.addItemToInventory(t2);
         //test if have material for the other shield recipe that works
-        assertDoesNotThrow(() -> inventory.craft(Shield.class.getCanonicalName(), 21));
-        assertDoesNotThrow(() -> inventory.craft(Shield.class.getCanonicalName(), 22));
+        assertDoesNotThrow(() -> inventory.craft("shield", 21));
+        assertDoesNotThrow(() -> inventory.craft("shield", 22));
         Wood wood6 = new Wood(10);
         Wood wood7 = new Wood(11);
         Key key1 = new Key(71, 0);
         inventory.addItemToInventory(wood6);
         inventory.addItemToInventory(wood7);
         inventory.addItemToInventory(key1);
-        assertDoesNotThrow(() -> inventory.craft(Shield.class.getCanonicalName(), 23));
+        assertDoesNotThrow(() -> inventory.craft("shield", 23));
         //test that if u have material for both that it just crafts a shield
         //add arrows to try to confuse it
         Wood wood8 = new Wood(15);
@@ -260,7 +260,7 @@ public class InventoryTest {
         inventory.addItemToInventory(a1);
         inventory.addItemToInventory(a2);
         inventory.addItemToInventory(a3);
-        assertDoesNotThrow(() -> inventory.craft(Shield.class.getCanonicalName(), 230));
+        assertDoesNotThrow(() -> inventory.craft("shield", 230));
         assertTrue(inventory.getMaterials().contains(a1));
         assertTrue(!(inventory.getMaterials().contains(wood0)));
     }
@@ -270,7 +270,7 @@ public class InventoryTest {
         int itemId = 3;
         HealthPotion hp = new HealthPotion(itemId);
         inventory.addItemToInventory(hp);
-        assertTrue(inventory.getItemFromType("bow") == hp);
+        assertTrue(inventory.getItemFromType("healthpotion") == hp);
         assertTrue(inventory.getItemFromType("cahskgah") == null);
     }
 }

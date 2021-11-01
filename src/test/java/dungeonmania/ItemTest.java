@@ -127,4 +127,9 @@ public class ItemTest {
         //used it 3 times already so shouldnt work
         assertTrue(!(character.isInvisible()));
     }
+    @Test
+    public void getTypeNameTest() {
+        Bow bow = new Bow(3);
+        assertTrue(bow.getType().equals("bow"));
+    }
 }
