@@ -348,6 +348,15 @@ public class Game {
         entities.removeAll(deadEnts);
     }
 
+    private UnpickedUpItem getItemOnPlayer(){
+        Character player = getPlayer();
+        for(Entity entity : entities){
+            if(entity instanceof UnpickedUpItem && Objects.equals(entity.getPosition(), player.getPosition())){
+                return (UnpickedUpItem) entity;
+            }
+        }
+        return null;
+    }
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.inventory;
@@ -390,6 +399,12 @@ public class Game {
             List<Battleable> survivors = bat.battle();
             removeDeadEntities();
         }        
+
+        UnpickedUpItem pickup = getItemOnPlayer();
+        if(pickup != null){
+            inventory.addItemToInventory(pickup.pickupItem());
+        }
+
 
         //increment tick counter
         tickCounter++;
