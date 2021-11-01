@@ -17,4 +17,7 @@ abstract public class Item {
     public void setUses(int uses) {
         this.uses = uses;
     }
+    public String getType() {
+        return this.getClass().getSimpleName().toLowerCase();
+    }
 }

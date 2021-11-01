@@ -2,7 +2,6 @@ package dungeonmania;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 
 import dungeonmania.exceptions.InvalidActionException;
 
@@ -42,7 +41,7 @@ public class Inventory {
     /**
      * @invariant the item wanting to be craft is buidable
      * @param itemName
-     * @description craft will be in change of adding items to proper lists and taking away what is needed
+     * @description craft will be in charge of adding items to proper lists and taking away what is needed
      */
     public Item craft(String itemName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
           IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException {
@@ -240,9 +239,9 @@ public class Inventory {
         }
         return true;
     }
-    public Item getConsumableFromId(int id) {
-        for (Item item: this.getConsumables()) {
-            if (item.getitemId() == id) {
+    public Item getItemFromType(String type) {
+        for (Item item: this.getItems()) {
+            if (item.getType().equals(type)) {
                 return item;
             }
         }

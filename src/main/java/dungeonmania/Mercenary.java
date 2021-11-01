@@ -49,9 +49,10 @@ public class Mercenary extends MovingEntity implements interaction {
         if (!inBribingRange(ch)) {
             throw new InvalidActionException("Player not within 2 cardinal tiles of mercenary");
         }
-
-        if(/* ch.inventory has treasure */) {
+        Item t = ch.inventory.getItemFromType("treasure");
+        if(t != null) {
             // Remove the treasure
+            ch.inventory.removeItem(t);
             currentGold++;
         } else {
             throw new InvalidActionException("Player does not have any treasure to bribe with");
