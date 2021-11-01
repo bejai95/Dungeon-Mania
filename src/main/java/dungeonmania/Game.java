@@ -395,7 +395,7 @@ public class Game {
         tickCounter++;
 
         //display remaining goals and end game if there are none
-        DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().getBuildables(), goal.getGoalsLeft(entities));
+        DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().generateBuildables(), goal.getGoalsLeft(entities));
         return ret;
     }
 
