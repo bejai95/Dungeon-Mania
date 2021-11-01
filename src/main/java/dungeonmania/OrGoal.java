@@ -1,6 +1,7 @@
 package dungeonmania;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrGoal implements Goal{
     private List<Goal> subgoals;
@@ -8,19 +9,32 @@ public class OrGoal implements Goal{
     public OrGoal(List<Goal> subgoals){
         this.subgoals = subgoals;
     }
+
+    private String orifiy(List<String> gs){
+        if(gs.size() == 0){
+            return "";
+        }
+
+        if(gs.size() == 1){
+            return gs.get(0);
+        }
+        
+        String ret = "(";
+        for(String g : gs){
+            if(gs.get(gs.size() - 1).equals(g)){
+                ret = ret + g + ")";
+            }else{
+                ret = ret + g + " OR ";
+            }
+        }
+        return ret;
+    }
     @Override
     public String getGoalsLeft(List<Entity> entities) {
-        Goal subgoal1 = subgoals.get(0);
-        Goal subgoal2 = subgoals.get(1);
-        String disj1 = subgoal1.getGoalsLeft(entities);
-        if(disj1.equals("")){
+        List<String> subgoalStrings = subgoals.stream().map(x -> x.getGoalsLeft(entities)).collect(Collectors.toList());
+        if(subgoalStrings.stream().anyMatch(x -> x.equals(""))){
             return "";
         }
-        String disj2 = subgoal2.getGoalsLeft(entities);
-        if(disj2.equals("")){
-            return "";
-        }else{
-            return "(" + disj1 + " OR " + disj2 + ")"; 
-        }
+        return orifiy(subgoalStrings);
     }
 }
