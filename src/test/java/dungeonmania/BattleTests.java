@@ -43,7 +43,7 @@ public class BattleTests {
         MovingEntity spider1 = new Spider(0, new Position(5,5), new SquareMovement());
         List<Mercenary> mercs = new ArrayList<>();
         Mercenary merc = new Mercenary(2, new Position(5,4), 1, character);
-        merc.bribe();
+        merc.interact(character);
         mercs.add(merc);
 
         BattleManager bat = new BattleManager(character, spider1, mercs);
