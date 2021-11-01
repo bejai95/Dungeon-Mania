@@ -198,6 +198,16 @@ public class Game {
         return ret;
     }
 
+    private List<StaticEntity> getStaticEntities(){
+        List<StaticEntity> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof StaticEntity){
+                ret.add((StaticEntity) entity);
+            }
+        }
+        return ret;
+    }
+
     private Consumable getConsumableFromId(String itemUsed) throws IllegalArgumentException{
         return null; //TODO
 
@@ -337,12 +347,23 @@ public class Game {
         entities.removeAll(deadEnts);
     }
 
+    private UnpickedUpItem getItemOnPlayer(){
+        Character player = getPlayer();
+        for(Entity entity : entities){
+            if(entity instanceof UnpickedUpItem && Objects.equals(entity.getPosition(), player.getPosition())){
+                return (UnpickedUpItem) entity;
+            }
+        }
+        return null;
+    }
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.inventory;
-
         //use item
         player.use(getConsumableFromId(itemUsed));
+
+        entities.removeAll(getStaticEntities());
+        entities.addAll(StaticEntity.getStaticEntitiesList());
 
         //remove dead items
         inventory.removeDeadItems();
@@ -378,12 +399,18 @@ public class Game {
             removeDeadEntities();
         }        
 
+        UnpickedUpItem pickup = getItemOnPlayer();
+        if(pickup != null){
+            inventory.addItemToInventory(pickup.pickupItem());
+        }
+
+
         //increment tick counter
         tickCounter++;
 
         /*
         //display remaining goals and end game if there are none
-        DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().getBuildables(), goal.getGoalsLeft(entities));
+        DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().generateBuildables(), goal.getGoalsLeft(entities));
         return ret;
         */
 
