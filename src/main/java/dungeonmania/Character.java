@@ -9,8 +9,8 @@ import dungeonmania.exceptions.InvalidActionException;
 
 public class Character extends Entity implements Battleable{
     Inventory inventory = new Inventory();
-    double health = 10;
-    int damage = 5;
+    double health;
+    int damage;
     double baseDefense;
     int InvincibleDuration;
     int InvisibleDuration;
@@ -20,6 +20,7 @@ public class Character extends Entity implements Battleable{
         super(id, type, position);
         this.health = 200;
         this.maxHealth = this.health;
+        this.damage = 20;
         this.baseDefense = 0;
         this.InvincibleDuration = 0;
         this.InvisibleDuration = 0;
