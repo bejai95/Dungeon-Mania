@@ -53,10 +53,7 @@ public class Game {
         numDungeonIds++;
     }
 
-    public void initializeInventoryAndBuildables() {
-        this.inventory = new ArrayList<Item>();
-        this.buildables = new ArrayList<String>();
-    }
+    
 
     /*
     private String getGoalsLeft(JSONObject gs){
@@ -100,6 +97,10 @@ public class Game {
         return getGoalsLeft(goalCondition.getGoal());
     }
     */
+
+    public void initialiseBuildables() {
+        this.buildables = new ArrayList<String>();
+    }
 
     //Checks if a cell is empty
     public boolean isEmpty(Position cell) {

@@ -96,18 +96,23 @@ public class persistenceTest {
             controller1.tick(null, Direction.LEFT);
         }
 
-        Game g = controller1.getCurrentlyAccessingGame();
-        List<Item> previousInventory = g.getInventory().getItems();
-        assertTrue();
+        Game previousGame = controller1.getCurrentlyAccessingGame();
+        List<Item> previousInventory = previousGame.getInventory().getItems();
+        String previousGoalsLeft = previousGame.getGoalsLeft();
+        assertTrue(previousInventory.size() == 9);
+        assertTrue(previousGoalsLeft.equals(":mercenary"));
 
 
-
-
-
-
-
-
-
+        // Save the file, and load it from another file, check that the inventories and goals are the same
+        controller1.saveGame("random_save");
+        DungeonManiaController controller2 = new DungeonManiaController();
+        controller2.loadGame("random_save");
+        Game newGame = controller2.getCurrentlyAccessingGame(); 
+        List<Item> newInventory = previousGame.getInventory().getItems();
+        String newGoalsLeft = previousGame.getGoalsLeft();
+        
+        assertTrue(previousInventory.equals(newInventory));
+        assertTrue(previousGoalsLeft.equals(newGoalsLeft));
     }
 
 }
