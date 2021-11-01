@@ -23,6 +23,12 @@ public class ChaseMovement implements Movement {
         // Get position vector from this object to the target
         Position dir = Position.calculatePositionBetween(currentPos, target.getPosition());
         Position offset;
+
+        // This object is on the same tile as target, dont move
+        if (dir.equals(new Position(0,0))) {
+            return currentPos;
+        }
+
         // Get component of vector with greatest magnitude and move 1 tile in that direction
         if (Math.abs(dir.getX()) >= Math.abs(dir.getY())) {
             int normalisedX = dir.getX()/Math.abs(dir.getX());
