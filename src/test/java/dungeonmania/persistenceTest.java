@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +23,7 @@ import dungeonmania.util.FileLoader;
 @TestInstance(value = Lifecycle.PER_CLASS)
 public class persistenceTest {
     @Test
-    public void basicPersistence() {
+    public void testBasicPersistence() {
         DungeonManiaController controller1 = new DungeonManiaController();
         
         // Test loading a game that does not exist
@@ -59,4 +60,59 @@ public class persistenceTest {
         assertEquals("0", response3.getDungeonId()); // Should be the contents of save1
         assertEquals("advanced", response3.getDungeonName());
     }
+
+    //  basically tests persistence when inventory is not empty, also kind of a system test
+    @Test
+    public void testPersistenseConsistency() {
+        
+        DungeonManiaController controller1 = new DungeonManiaController();
+        controller1.newGame("advanced", "Standard");
+        
+        for(int i = 0; i < 10; i++) {
+            controller1.tick(null, Direction.RIGHT);
+        }
+
+        for(int i = 0; i < 3; i++) {
+            controller1.tick(null, Direction.DOWN);
+        }
+
+        for(int i = 0; i < 5; i++) {
+            controller1.tick(null, Direction.RIGHT);
+        }
+
+        for(int i = 0; i < 10; i++) {
+            controller1.tick(null, Direction.DOWN);
+        }
+
+        for(int i = 0; i < 5; i++) {
+            controller1.tick(null, Direction.LEFT);
+        }
+
+        for(int i = 0; i < 4; i++) {
+            controller1.tick(null, Direction.UP);
+        }
+
+        for(int i = 0; i < 4; i++) {
+            controller1.tick(null, Direction.LEFT);
+        }
+
+        Game previousGame = controller1.getCurrentlyAccessingGame();
+        List<Item> previousInventory = previousGame.getInventory().getItems();
+        String previousGoalsLeft = previousGame.getGoalsLeft();
+        assertTrue(previousInventory.size() == 9);
+        assertTrue(previousGoalsLeft.equals(":mercenary"));
+
+
+        // Save the file, and load it from another file, check that the inventories and goals are the same
+        controller1.saveGame("random_save");
+        DungeonManiaController controller2 = new DungeonManiaController();
+        controller2.loadGame("random_save");
+        Game newGame = controller2.getCurrentlyAccessingGame(); 
+        List<Item> newInventory = previousGame.getInventory().getItems();
+        String newGoalsLeft = previousGame.getGoalsLeft();
+        
+        assertTrue(previousInventory.equals(newInventory));
+        assertTrue(previousGoalsLeft.equals(newGoalsLeft));
+    }
+
 }

@@ -23,8 +23,6 @@ public class Game {
     private String dungeonId;
     private String dungeonName;
     private List<Entity> entities;
-    private int lastId = 0;
-    private List<Item> inventory;
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
 
@@ -41,11 +39,6 @@ public class Game {
     public Game() {
     }
 
-    public int getUniqueId(){
-        int ret = lastId;
-        lastId++;
-        return ret;
-    }
     public static int getNumDungeonIds() {
         return numDungeonIds;
     }
@@ -54,53 +47,9 @@ public class Game {
         numDungeonIds++;
     }
 
-    public void initializeInventoryAndBuildables() {
-        this.inventory = new ArrayList<Item>();
+    public void initialiseBuildables() {
         this.buildables = new ArrayList<String>();
     }
-
-    /*
-    private String getGoalsLeft(JSONObject gs){
-        switch(gs.getString("goal")){
-            case "exit":
-                return Exit.goalComplete(entities);
-            case "boulder":
-                return Switches.goalComplete(entities);
-            case "enemies":
-                return Enemies.goalComplete(entities);
-            case "treasure":
-                return Gold.goalComplete(entities);
-            case "AND":
-                String conj1 = getGoalsLeft(gs.getJSONArray("subgoals").getJSONObject(0));
-                if(conj1.equals("")){
-                    return getGoalsLeft(gs.getJSONArray("subgoals").getJSONObject(1));
-                }
-                String conj2 = getGoalsLeft(gs.getJSONArray("subgoals").getJSONObject(1));
-                if(conj2.equals("")){
-                    return conj1;
-                }else{
-                    return "(" + conj1 + " AND " + conj2 + ")"; 
-                }
-            case "OR":
-                String disj1 = getGoalsLeft(gs.getJSONArray("subgoals").getJSONObject(0));
-                if(disj1.equals("")){
-                    return "";
-                }
-                String disj2 = getGoalsLeft(gs.getJSONArray("subgoals").getJSONObject(1));
-                if(disj2.equals("")){
-                    return "";
-                }else{
-                    return "(" + disj1 + " OR " + disj2 + ")";
-                }
-        }
-        return null;
-    }
-    */
-    /*
-    public String getGoalsLeft() {
-        return getGoalsLeft(goalCondition.getGoal());
-    }
-    */
 
     //Checks if a cell is empty
     public boolean isEmpty(Position cell) {
@@ -431,10 +380,15 @@ public class Game {
         //increment tick counter
         tickCounter++;
 
+        /*
         //display remaining goals and end game if there are none
         DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().generateBuildables(), goal.getGoalsLeft(entities));
         return ret;
+        */
+
+        return null;
     }
+
 
 
     private void resetMercSpeeds() {

@@ -78,7 +78,7 @@ public class DungeonManiaController {
             currentlyAccessingGame.setDungeonId(newDungeonId);
             currentlyAccessingGame.setDungeonName(dungeonName);
             currentlyAccessingGame.setGameMode(gameMode);
-            currentlyAccessingGame.initializeInventoryAndBuildables();
+            currentlyAccessingGame.initialiseBuildables();
             Game.incrementNumDungeonIds();
 
             return currentlyAccessingGame.generateDungeonResponse();
