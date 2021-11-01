@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.util.Position;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -218,6 +219,9 @@ public class InventoryTest {
     public void craftingShields() {
         //test if have material of one shield it works
         Inventory inventory = new Inventory();
+        //make sure errors are thrown correctly
+        assertThrows(IllegalArgumentException.class,() -> inventory.craft("gogogaga", 1));
+        assertThrows(InvalidActionException.class, () -> inventory.craft("bow", 6));
         Wood wood = new Wood(1);
         Wood wood2 = new Wood(2);
         Wood wood4 = new Wood(7);
@@ -261,12 +265,12 @@ public class InventoryTest {
         assertTrue(!(inventory.getMaterials().contains(wood0)));
     }
     @Test
-    public void testGetConsumableFromId() {
+    public void testGetItemFromType() {
         Inventory inventory = new Inventory();
         int itemId = 3;
         HealthPotion hp = new HealthPotion(itemId);
         inventory.addItemToInventory(hp);
-        assertTrue(inventory.getConsumableFromType("bow") == hp);
-        assertTrue(inventory.getConsumableFromType("cahskgah") == null);
+        assertTrue(inventory.getItemFromType("bow") == hp);
+        assertTrue(inventory.getItemFromType("cahskgah") == null);
     }
 }

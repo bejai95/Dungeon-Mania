@@ -1,5 +1,6 @@
 package dungeonmania;
 
+import dungeonmania.response.models.ItemResponse;
 
 abstract public class Item {
     int uses;
@@ -19,5 +20,10 @@ abstract public class Item {
     }
     public String getType() {
         return this.getClass().getSimpleName().toLowerCase();
+    }
+    public ItemResponse makeItemReponse() {
+        Integer newItem = (Integer) getitemId();
+        ItemResponse newItemResponse = new ItemResponse(newItem.toString(), getType());
+        return newItemResponse;
     }
 }

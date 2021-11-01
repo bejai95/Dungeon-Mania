@@ -21,6 +21,16 @@ public abstract class Entity{
         numEntityIds++;
     }
 
+    /**
+     * Return whether ent1 is able to walk over ent2
+     * @param ent1
+     * @param ent2
+     * @return
+     */
+    public static boolean canOverlap(Entity ent1, Entity ent2) {
+        return ent1.getPosition().getLayer() <= ent2.getPosition().getLayer();
+    }
+
     public int getId() {
         return this.id;
     }
