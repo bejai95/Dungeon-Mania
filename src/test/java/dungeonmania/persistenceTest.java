@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +23,7 @@ import dungeonmania.util.FileLoader;
 @TestInstance(value = Lifecycle.PER_CLASS)
 public class persistenceTest {
     @Test
-    public void basicPersistence() {
+    public void testBasicPersistence() {
         DungeonManiaController controller1 = new DungeonManiaController();
         
         // Test loading a game that does not exist
@@ -59,4 +60,54 @@ public class persistenceTest {
         assertEquals("0", response3.getDungeonId()); // Should be the contents of save1
         assertEquals("advanced", response3.getDungeonName());
     }
+
+    //  basically tests persistence when inventory is not empty, also kind of a system test
+    @Test
+    public void testPersistenseConsistency() {
+        
+        DungeonManiaController controller1 = new DungeonManiaController();
+        controller1.newGame("advanced", "Standard");
+        
+        for(int i = 0; i < 10; i++) {
+            controller1.tick(null, Direction.RIGHT);
+        }
+
+        for(int i = 0; i < 3; i++) {
+            controller1.tick(null, Direction.DOWN);
+        }
+
+        for(int i = 0; i < 5; i++) {
+            controller1.tick(null, Direction.RIGHT);
+        }
+
+        for(int i = 0; i < 10; i++) {
+            controller1.tick(null, Direction.DOWN);
+        }
+
+        for(int i = 0; i < 5; i++) {
+            controller1.tick(null, Direction.LEFT);
+        }
+
+        for(int i = 0; i < 4; i++) {
+            controller1.tick(null, Direction.UP);
+        }
+
+        for(int i = 0; i < 4; i++) {
+            controller1.tick(null, Direction.LEFT);
+        }
+
+        Game g = controller1.getCurrentlyAccessingGame();
+        List<Item> previousInventory = g.getInventory().getItems();
+        assertTrue();
+
+
+
+
+
+
+
+
+
+    }
+
 }

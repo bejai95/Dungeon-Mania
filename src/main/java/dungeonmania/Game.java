@@ -23,8 +23,7 @@ public class Game {
     private String dungeonId;
     private String dungeonName;
     private List<Entity> entities;
-    private int lastId = 0;
-    private List<Item> inventory;
+    private int lastId = 0; // Last id of entity being spawned TODO delete this later
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
 
@@ -382,10 +381,15 @@ public class Game {
         //increment tick counter
         tickCounter++;
 
+        /*
         //display remaining goals and end game if there are none
         DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().getBuildables(), goal.getGoalsLeft(entities));
         return ret;
+        */
+
+        return null;
     }
+
 
 
     private void resetMercSpeeds() {
