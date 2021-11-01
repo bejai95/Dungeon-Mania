@@ -8,7 +8,7 @@ public class TreasureGoal implements Goal{
         for(Entity entity : entities){
             if(entity instanceof UnpickedUpItem){
                 UnpickedUpItem item = (UnpickedUpItem) entity;
-                if(item.getItemClass().equals("Treasure")){
+                if(item.getItemClass().equals(Treasure.class.getSimpleName())){
                     return ":treasure";
                 }
             }
