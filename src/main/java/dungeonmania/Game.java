@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -22,6 +23,7 @@ public class Game {
     private String dungeonId;
     private String dungeonName;
     private List<Entity> entities;
+    private int lastId = 0;
     private List<Item> inventory;
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
@@ -39,7 +41,11 @@ public class Game {
     public Game() {
     }
 
-
+    public int getUniqueId(){
+        int ret = lastId;
+        lastId++;
+        return ret;
+    }
     public static int getNumDungeonIds() {
         return numDungeonIds;
     }
@@ -138,9 +144,10 @@ public class Game {
         return entities;
     }
 
-    public List<Item> getInventory() {
-        return inventory;
+    public Inventory getInventory() {
+        return getPlayer().inventory;
     }
+
 
     public List<String> getBuildables() {
         return buildables;
@@ -173,11 +180,23 @@ public class Game {
     }
 
     private List<Mercenary> getMercenaries(){
-        return null; //TODO
+        List<Mercenary> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof Mercenary){
+                ret.add((Mercenary) entity);
+            }
+        }
+        return ret;
     }
 
     private List<MovingEntity> getMovingEntities(){
-        return null; //TODO
+        List<MovingEntity> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof MovingEntity){
+                ret.add((MovingEntity) entity);
+            }
+        }
+        return ret;
     }
 
     private Consumable getConsumableFromId(String itemUsed) throws IllegalArgumentException{
@@ -186,7 +205,13 @@ public class Game {
     }
 
     private List<ZombieToastSpawner> getSpawners(){
-        return null; //TODO
+        List<ZombieToastSpawner> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof ZombieToastSpawner){
+                ret.add((ZombieToastSpawner) entity);
+            }
+        }
+        return ret;
     }
 
     private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
@@ -194,7 +219,13 @@ public class Game {
     }
 
     private List<Wall> getWalls(){
-        return null; //TODO
+        List<Wall> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof Wall){
+                ret.add((Wall)ret);
+            }
+        }
+        return ret;
     }
 
     private boolean isBoundary(Wall wall, List<Wall> walls){
@@ -220,23 +251,29 @@ public class Game {
     }
 
     private List<Wall> getBoundaries(){
-        return null; //TODO
+        List<Wall> walls = getWalls();
+        List<Wall> walls2 = getWalls();
+        return walls.stream().filter(x -> isBoundary(x, walls2)).collect(Collectors.toList());
     }
 
     private int getXMin(){
-        return 0; //TODO
+        List<Wall> walls = getWalls();
+        return (walls.stream().mapToInt(x -> x.getPosition().getX()).min().orElse(0));
     }
 
     private int getXMax(){
-        return 0; //TODO
+        List<Wall> walls = getWalls();
+        return (walls.stream().mapToInt(x -> x.getPosition().getX()).max().orElse(0));
     }
 
     private int getYMin(){
-        return 0; //TODO
+        List<Wall> walls = getWalls();
+        return (walls.stream().mapToInt(x -> x.getPosition().getY()).min().orElse(0));
     }
 
     private int getYMax(){
-        return 0; //TODO
+        List<Wall> walls = getWalls();
+        return (walls.stream().mapToInt(x -> x.getPosition().getY()).max().orElse(0));
     }
 
     private Position getRandomPosition(){
@@ -248,11 +285,15 @@ public class Game {
         List<Wall> toRight = boundaries.stream().filter(x -> x.getPosition().getX() > pos.getX()).collect(Collectors.toList());
         return toRight;
     }
+
+    private List<Wall> getPiecesToRight(List<Wall> boundaries, Position pos){
+        return getBoundariesToRight(boundaries, pos).stream().filter(x -> isEmpty(x.getPosition().translateBy(Direction.LEFT))).collect(Collectors.toList());
+    }
     
     private Position getSpawnPositionRandom(){
         Position pos = getRandomPosition();
         List<Wall> boundaries = getBoundaries();
-        List<Wall> toRight = getBoundariesToRight(boundaries, pos);
+        List<Wall> toRight = getPiecesToRight(boundaries, pos);
 
         while(toRight.size() % 2 == 0 && !isEmpty(pos)){
             pos = new Position(ThreadLocalRandom.current().nextInt(getXMin(), getXMax()), ThreadLocalRandom.current().nextInt(getYMin(), getYMax()));
@@ -262,7 +303,6 @@ public class Game {
         return pos;
     }
 
-    /*
     private void spawnRandomEnemies(){
         Double roll = ThreadLocalRandom.current().nextDouble(0, 1);
         Position pos = null;
@@ -270,16 +310,32 @@ public class Game {
         
         if(roll < mercenarySpawnChance){
             pos = getSpawnPositionRandom();
-            Mercenary merc = new Mercenary(5, 1, new ChaseMovement(getPlayer()), pos, 1);
+            Mercenary merc = new Mercenary(getUniqueId(), pos, 1, getPlayer());
             entities.add(merc);
         }
 
         if(tickCounter % spiderTicks == 0){
             pos = getSpawnPositionRandom();
-            MovingEntity spider = new Spider(5, 1, new SquareMovement(), pos);
+            MovingEntity spider = new Spider(getUniqueId(), pos, new SquareMovement());
+            entities.add(spider);
         }
 
         return;
+    }
+
+    private MovingEntity getEntityOnPlayer(Character player){
+        List<MovingEntity> ms = getMovingEntities();
+        for(MovingEntity entity : ms){
+            if(player.getPosition().equals(entity.getPosition())){
+                return entity;
+            }
+        }
+        return null;
+    }
+
+    private void removeDeadEntities(){
+        List<MovingEntity> deadEnts = getMovingEntities().stream().filter(x -> x.health <= 0).collect(Collectors.toList());
+        entities.removeAll(deadEnts);
     }
 
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
@@ -304,7 +360,7 @@ public class Game {
         //spawn in enemies -- needs tick counter
         List<ZombieToastSpawner> spawners = getSpawners();
         for(ZombieToastSpawner spawner : spawners){
-            ZombieToast zomb = spawner.spawn(tickCounter, gameMode, getSpawnPositionSpawner(spawner));
+            ZombieToast zomb = spawner.spawn(tickCounter, gameMode);
             if(zomb != null){
                 entities.add(zomb);
             }
@@ -313,22 +369,31 @@ public class Game {
         spawnRandomEnemies();
 
 
-
+        resetMercSpeeds();
         //battle -- needs list of mercenaries, needs movingEntity on same tile as player
 
-        //TODO - When battles work, will just call Battle(player, enemy, mercenaries)
-
-
-        //display remaining goals and end game if there are none
-
-        // TODO - Just merge in goals and call the method to display as string in goals, it should work fine
+        MovingEntity baddie = getEntityOnPlayer(player);
+        if(baddie != null){
+            BattleManager bat = new BattleManager(player, baddie, getMercenaries());
+            List<Battleable> survivors = bat.battle();
+            removeDeadEntities();
+        }        
 
         //increment tick counter
         tickCounter++;
 
-        //DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities, inventory, buildables, goals);
-        return null;
+        //display remaining goals and end game if there are none
+        DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().getBuildables(), goal.getGoalsLeft(entities));
+        return ret;
     }
-    */
+
+
+    private void resetMercSpeeds() {
+        List<Mercenary> mercs = getMercenaries();
+        for(Mercenary merc : mercs){
+            merc.setSpeed(Mercenary.defaultSpeed);
+        }
+    }
+    
     
 }
