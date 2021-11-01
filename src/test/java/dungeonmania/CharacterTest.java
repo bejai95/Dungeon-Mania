@@ -125,8 +125,12 @@ public class CharacterTest {
         character.inventory.addItemToInventory(hp);
         //trying to use should not throw error
         assertDoesNotThrow(()-> {character.use(hp);});
-        //try to use again should throw error
-        assertThrows(InvalidActionException.class, ()-> {character.use(hp);});
+        assertTrue(character.getHealth() == character.getMaxHealth());
+        //reduce health
+        character.setHealth(50);
+        //try to use again should do nothing
+        character.use(hp);
+        assertTrue(character.getHealth() == 50);
         Bow bow = new Bow(3);
         character.inventory.addItemToInventory(bow);
         //using a bow should not cause error until after 3 times
@@ -134,6 +138,8 @@ public class CharacterTest {
         assertDoesNotThrow(()-> {character.use(bow);});
         assertDoesNotThrow(()-> {character.use(bow);});
         //bow should be used up
-        assertThrows(InvalidActionException.class, ()-> {character.use(bow);});
+        int bowUses = bow.getUses();
+        character.use(bow);
+        assertTrue(bow.getUses() == bowUses);
     }
 }

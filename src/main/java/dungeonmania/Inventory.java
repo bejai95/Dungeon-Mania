@@ -23,21 +23,21 @@ public class Inventory {
     
     public Inventory() {
         List<String> bowMats = new ArrayList<>();
-        bowMats.add(Wood.class.getCanonicalName());
-        bowMats.add(Arrow.class.getCanonicalName());
-        bowMats.add(Arrow.class.getCanonicalName());
-        bowMats.add(Arrow.class.getCanonicalName());
-        addRecipe(Bow.class.getCanonicalName(), bowMats);
+        bowMats.add(Wood.class.getSimpleName().toLowerCase());
+        bowMats.add(Arrow.class.getSimpleName().toLowerCase());
+        bowMats.add(Arrow.class.getSimpleName().toLowerCase());
+        bowMats.add(Arrow.class.getSimpleName().toLowerCase());
+        addRecipe(Bow.class.getSimpleName().toLowerCase(), bowMats);
         List<String> shieldMats1 = new ArrayList<>();
-        shieldMats1.add(Wood.class.getCanonicalName());
-        shieldMats1.add(Wood.class.getCanonicalName());
-        shieldMats1.add(Treasure.class.getCanonicalName());
-        addRecipe(Shield.class.getCanonicalName() + "1", shieldMats1);
+        shieldMats1.add(Wood.class.getSimpleName().toLowerCase());
+        shieldMats1.add(Wood.class.getSimpleName().toLowerCase());
+        shieldMats1.add(Treasure.class.getSimpleName().toLowerCase());
+        addRecipe(Shield.class.getSimpleName().toLowerCase() + "1", shieldMats1);
         List<String> shieldMats2 = new ArrayList<>();
-        shieldMats2.add(Wood.class.getCanonicalName());
-        shieldMats2.add(Wood.class.getCanonicalName());
-        shieldMats2.add(Key.class.getCanonicalName());
-        addRecipe(Shield.class.getCanonicalName() + "2", shieldMats2);
+        shieldMats2.add(Wood.class.getSimpleName().toLowerCase());
+        shieldMats2.add(Wood.class.getSimpleName().toLowerCase());
+        shieldMats2.add(Key.class.getSimpleName().toLowerCase());
+        addRecipe(Shield.class.getSimpleName().toLowerCase() + "2", shieldMats2);
     }
     /**
      * @invariant the item wanting to be craft is buidable
@@ -47,8 +47,8 @@ public class Inventory {
     public Item craft(String itemName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
           IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException, IllegalArgumentException {
         //if it is not a Shield and is not equal 
-        if (!(Shield.class.getTypeName().equals(itemName) || Bow.class.getTypeName().equals(itemName))) {
-            new IllegalArgumentException("Cannot craft something that is not a bow or a shield");
+        if (!(Shield.class.getSimpleName().toLowerCase().equals(itemName) || Bow.class.getSimpleName().toLowerCase().equals(itemName))) {
+            throw new IllegalArgumentException("Cannot craft something that is not a bow or a shield");
         }
         //first finds the first recipe that can craft ur item
         List<String> recipe = this.getRecipe(itemName);
@@ -61,12 +61,18 @@ public class Inventory {
         for (String recipeMaterial: recipe) {
             for (Item item: items) {
                 //if same class delete from items and break this loop
-                if (item.getClass().getCanonicalName().equals(recipeMaterial)) {
+                if (item.getClass().getSimpleName().toLowerCase().equals(recipeMaterial)) {
                     //remove the item and break
                     this.removeItem(item);
                     break;
                 }
             }
+        }
+        if (itemName.equals("bow")) {
+            itemName = Bow.class.getCanonicalName();
+        }
+        else if (itemName.equals("shield")) {
+            itemName = Shield.class.getCanonicalName();
         }
         //create the new item
         Class classType = Class.forName(itemName);
@@ -94,12 +100,12 @@ public class Inventory {
         List<String> itemsBuildable = new ArrayList<>();
         for (String r: recipesBuildable) {
             //if recipe is a bow recipe and is not already in itemsBuildable
-            if (r.contains(Bow.class.getCanonicalName()) && !(itemsBuildable.contains(Bow.class.getCanonicalName()))) {
-                itemsBuildable.add(Bow.class.getCanonicalName());
+            if (r.contains(Bow.class.getSimpleName().toLowerCase()) && !(itemsBuildable.contains(Bow.class.getSimpleName().toLowerCase()))) {
+                itemsBuildable.add(Bow.class.getSimpleName().toLowerCase());
             }
             //if recipe is a shield recipe and not in itemsBuildable
-            else if (r.contains(Shield.class.getCanonicalName()) && !(itemsBuildable.contains(Shield.class.getCanonicalName()))) {
-                itemsBuildable.add(Shield.class.getCanonicalName());
+            else if (r.contains(Shield.class.getSimpleName().toLowerCase()) && !(itemsBuildable.contains(Shield.class.getSimpleName().toLowerCase()))) {
+                itemsBuildable.add(Shield.class.getSimpleName().toLowerCase());
             }
         }
         return recipesBuildable;
@@ -231,7 +237,7 @@ public class Inventory {
             int itemsUsedBeforeNewMaterial = materialsAlreadyUsed.size();
             for (Item item: this.getMaterials()) {
                 //if the item is of the right material and is not already used add it to used materials
-                if (item.getClass().getCanonicalName().equals(material) && (!(materialsAlreadyUsed.contains(item.getitemId())))) {
+                if (item.getClass().getSimpleName().toLowerCase().equals(material) && (!(materialsAlreadyUsed.contains(item.getitemId())))) {
                     materialsAlreadyUsed.add(item.getitemId());
                     break;
                 }
