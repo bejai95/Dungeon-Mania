@@ -180,11 +180,23 @@ public class Game {
     }
 
     private List<Mercenary> getMercenaries(){
-        return null; //TODO
+        List<Mercenary> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof Mercenary){
+                ret.add((Mercenary) entity);
+            }
+        }
+        return ret;
     }
 
     private List<MovingEntity> getMovingEntities(){
-        return null; //TODO
+        List<MovingEntity> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof MovingEntity){
+                ret.add((MovingEntity) entity);
+            }
+        }
+        return ret;
     }
 
     private Consumable getConsumableFromId(String itemUsed) throws IllegalArgumentException{
@@ -193,7 +205,13 @@ public class Game {
     }
 
     private List<ZombieToastSpawner> getSpawners(){
-        return null; //TODO
+        List<ZombieToastSpawner> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof ZombieToastSpawner){
+                ret.add((ZombieToastSpawner) entity);
+            }
+        }
+        return ret;
     }
 
     private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
@@ -239,19 +257,23 @@ public class Game {
     }
 
     private int getXMin(){
-        return 0; //TODO
+        List<Wall> walls = getWalls();
+        return (walls.stream().mapToInt(x -> x.getPosition().getX()).min().orElse(0));
     }
 
     private int getXMax(){
-        return 0; //TODO
+        List<Wall> walls = getWalls();
+        return (walls.stream().mapToInt(x -> x.getPosition().getX()).max().orElse(0));
     }
 
     private int getYMin(){
-        return 0; //TODO
+        List<Wall> walls = getWalls();
+        return (walls.stream().mapToInt(x -> x.getPosition().getY()).min().orElse(0));
     }
 
     private int getYMax(){
-        return 0; //TODO
+        List<Wall> walls = getWalls();
+        return (walls.stream().mapToInt(x -> x.getPosition().getY()).max().orElse(0));
     }
 
     private Position getRandomPosition(){
@@ -263,11 +285,15 @@ public class Game {
         List<Wall> toRight = boundaries.stream().filter(x -> x.getPosition().getX() > pos.getX()).collect(Collectors.toList());
         return toRight;
     }
+
+    private List<Wall> getPiecesToRight(List<Wall> boundaries, Position pos){
+        return getBoundariesToRight(boundaries, pos).stream().filter(x -> isEmpty(x.getPosition().translateBy(Direction.LEFT))).collect(Collectors.toList());
+    }
     
     private Position getSpawnPositionRandom(){
         Position pos = getRandomPosition();
         List<Wall> boundaries = getBoundaries();
-        List<Wall> toRight = getBoundariesToRight(boundaries, pos);
+        List<Wall> toRight = getPiecesToRight(boundaries, pos);
 
         while(toRight.size() % 2 == 0 && !isEmpty(pos)){
             pos = new Position(ThreadLocalRandom.current().nextInt(getXMin(), getXMax()), ThreadLocalRandom.current().nextInt(getYMin(), getYMax()));
@@ -277,7 +303,6 @@ public class Game {
         return pos;
     }
 
-    /*
     private void spawnRandomEnemies(){
         Double roll = ThreadLocalRandom.current().nextDouble(0, 1);
         Position pos = null;
@@ -335,7 +360,7 @@ public class Game {
         //spawn in enemies -- needs tick counter
         List<ZombieToastSpawner> spawners = getSpawners();
         for(ZombieToastSpawner spawner : spawners){
-            ZombieToast zomb = spawner.spawn(tickCounter, gameMode, getSpawnPositionSpawner(spawner));
+            ZombieToast zomb = spawner.spawn(tickCounter, gameMode);
             if(zomb != null){
                 entities.add(zomb);
             }
@@ -367,7 +392,11 @@ public class Game {
 
 
     private void resetMercSpeeds() {
+        List<Mercenary> mercs = getMercenaries();
+        for(Mercenary merc : mercs){
+            merc.setSpeed(Mercenary.defaultSpeed);
+        }
     }
-    */
+    
     
 }
