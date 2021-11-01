@@ -170,7 +170,7 @@ public class Game {
         this.gameMode = gameMode;
     }
 
-    private Character getPlayer(){
+    public Character getPlayer(){
         for(Entity entity : entities){
             if(entity instanceof Character){
                 return (Character) entity;
@@ -335,7 +335,7 @@ public class Game {
         return;
     }
 
-    private MovingEntity getEntityOnPlayer(Character player){
+    public MovingEntity getEntityOnPlayer(Character player){
         List<MovingEntity> ms = getMovingEntities();
         for(MovingEntity entity : ms){
             if(player.getPosition().equals(entity.getPosition())){

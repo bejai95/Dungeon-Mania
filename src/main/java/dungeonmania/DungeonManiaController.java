@@ -158,7 +158,17 @@ public class DungeonManiaController {
         return currentlyAccessingGame.tick(itemUsed, movementDirection);
     }
     public DungeonResponse interact(String entityId) throws IllegalArgumentException, InvalidActionException {
-        return null;
+        Game game = getCurrentlyAccessingGame();
+        Entity ent = game.getEntityById(entityId);
+        if (ent == null) {
+            throw new IllegalArgumentException("Id does not exist");
+        } else if (!ent.canInteract()) {
+            throw new IllegalArgumentException("Cannot interact with this entity");
+        }
+
+        ent.interact(game.getPlayer());
+
+
     }
     public DungeonResponse build(String buildable) throws IllegalArgumentException, InvalidActionException {
         return null;

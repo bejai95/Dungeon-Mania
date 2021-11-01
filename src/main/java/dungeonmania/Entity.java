@@ -5,7 +5,7 @@ import dungeonmania.util.Position;
 
 
 
-public abstract class Entity{
+public abstract class Entity implements interaction {
     private int id;
     private String type;
     private Position position;
@@ -43,6 +43,10 @@ public abstract class Entity{
         return this.position;
     }
 
+    public boolean canInteract() {
+        return this.isInteractable;
+    }
+
     public EntityResponse getInfo() {
         return new EntityResponse(String.valueOf(id), type, position, isInteractable);
     }
@@ -59,4 +63,8 @@ public abstract class Entity{
         this.isInteractable = canInteract;
     }
     
+    public void interact(Character ch) {
+        // no interaction by default, subclasses implement unique interactions
+    }
+
 }
