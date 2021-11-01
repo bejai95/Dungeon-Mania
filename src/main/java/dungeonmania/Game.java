@@ -38,6 +38,7 @@ public class Game {
     
     public Game() {
     }
+    public Goal getGoal(){ return goal;}
 
     public static int getNumDungeonIds() {
         return numDungeonIds;
@@ -380,13 +381,9 @@ public class Game {
         //increment tick counter
         tickCounter++;
 
-        /*
         //display remaining goals and end game if there are none
         DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().generateBuildables(), goal.getGoalsLeft(entities));
         return ret;
-        */
-
-        return null;
     }
 
 
