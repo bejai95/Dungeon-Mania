@@ -2,9 +2,9 @@ package dungeonmania;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
 
 import dungeonmania.exceptions.InvalidActionException;
+import dungeonmania.response.models.ItemResponse;
 
 import java.util.HashMap;
 import java.lang.reflect.*;
@@ -42,10 +42,14 @@ public class Inventory {
     /**
      * @invariant the item wanting to be craft is buidable
      * @param itemName
-     * @description craft will be in change of adding items to proper lists and taking away what is needed
+     * @description craft will be in charge of adding items to proper lists and taking away what is needed
      */
     public Item craft(String itemName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
-          IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException {
+          IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException, IllegalArgumentException {
+        //if it is not a Shield and is not equal 
+        if (!(Shield.class.getTypeName().equals(itemName) || Bow.class.getTypeName().equals(itemName))) {
+            new IllegalArgumentException("Cannot craft something that is not a bow or a shield");
+        }
         //first finds the first recipe that can craft ur item
         List<String> recipe = this.getRecipe(itemName);
         //the recipe cant be crafted
@@ -240,12 +244,19 @@ public class Inventory {
         }
         return true;
     }
-    public Item getConsumableFromId(int id) {
-        for (Item item: this.getConsumables()) {
-            if (item.getitemId() == id) {
+    public Item getItemFromType(String type) {
+        for (Item item: this.getItems()) {
+            if (item.getType().equals(type)) {
                 return item;
             }
         }
         return null;
+    }
+    public List<ItemResponse> getItemsAsResponse() {
+        List<ItemResponse> newItemResponses = new ArrayList<ItemResponse>();
+        for (Item item: this.getItems()) {
+            newItemResponses.add(item.makeItemReponse());
+        }
+        return newItemResponses;
     }
 }

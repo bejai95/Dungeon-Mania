@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.util.Position;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -218,6 +219,9 @@ public class InventoryTest {
     public void craftingShields() {
         //test if have material of one shield it works
         Inventory inventory = new Inventory();
+        //make sure errors are thrown correctly
+        assertThrows(IllegalArgumentException.class,() -> inventory.craft("gogogaga", 1));
+        assertThrows(InvalidActionException.class, () -> inventory.craft("bow", 6));
         Wood wood = new Wood(1);
         Wood wood2 = new Wood(2);
         Wood wood4 = new Wood(7);
@@ -235,7 +239,7 @@ public class InventoryTest {
         assertDoesNotThrow(() -> inventory.craft(Shield.class.getCanonicalName(), 22));
         Wood wood6 = new Wood(10);
         Wood wood7 = new Wood(11);
-        Key key1 = new Key(71);
+        Key key1 = new Key(71, 0);
         inventory.addItemToInventory(wood6);
         inventory.addItemToInventory(wood7);
         inventory.addItemToInventory(key1);
@@ -244,7 +248,7 @@ public class InventoryTest {
         //add arrows to try to confuse it
         Wood wood8 = new Wood(15);
         Wood wood0 = new Wood(16);
-        Key key00 = new Key(72);
+        Key key00 = new Key(72, 0);
         Treasure t3 = new Treasure(1510);
         Arrow a1 = new Arrow(100);
         Arrow a2 = new Arrow(102);
@@ -261,12 +265,12 @@ public class InventoryTest {
         assertTrue(!(inventory.getMaterials().contains(wood0)));
     }
     @Test
-    public void testGetConsumableFromId() {
+    public void testGetItemFromType() {
         Inventory inventory = new Inventory();
         int itemId = 3;
         HealthPotion hp = new HealthPotion(itemId);
         inventory.addItemToInventory(hp);
-        assertTrue(inventory.getConsumableFromId(3) == hp);
-        assertTrue(inventory.getConsumableFromId(5) == null);
+        assertTrue(inventory.getItemFromType("bow") == hp);
+        assertTrue(inventory.getItemFromType("cahskgah") == null);
     }
 }

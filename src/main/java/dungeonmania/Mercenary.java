@@ -14,8 +14,8 @@ public class Mercenary extends MovingEntity implements interaction {
     int currentGold;
     int battleRadius;
 
-    public Mercenary(int id, Position position, int goldThreshold, Character player) {
-        super(id, "mercenary", position, new ChaseMovement(player));
+    public Mercenary(int id, Position position, int goldThreshold) {
+        super(id, "mercenary", position, new ChaseMovement());
         this.goldThreshold = goldThreshold;
         this.currentGold = 0;
 
@@ -49,9 +49,10 @@ public class Mercenary extends MovingEntity implements interaction {
         if (!inBribingRange(ch)) {
             throw new InvalidActionException("Player not within 2 cardinal tiles of mercenary");
         }
-
-        if(/* ch.inventory has treasure */) {
+        Item t = ch.inventory.getItemFromType("treasure");
+        if(t != null) {
             // Remove the treasure
+            ch.inventory.removeItem(t);
             currentGold++;
         } else {
             throw new InvalidActionException("Player does not have any treasure to bribe with");
@@ -59,7 +60,8 @@ public class Mercenary extends MovingEntity implements interaction {
 
         if (currentGold >= goldThreshold) {
             isHostile = false;
-            // TODO change layer to something lower than players one
+            // TODO might cause problems walking through door
+            getPosition().asLayer(0);
         }
     }
 
@@ -82,6 +84,10 @@ public class Mercenary extends MovingEntity implements interaction {
         return true;
     }
 
-    // TODO maybe a chase(Entity ent) function to set target dynamically
+    public void chase(Character ch) {
+        ChaseMovement newMovement = new ChaseMovement();
+        newMovement.setTarget(ch);
+        super.setMovement(newMovement);
+    }
 
 }
