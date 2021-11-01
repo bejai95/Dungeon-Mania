@@ -38,6 +38,7 @@ public class Game {
     
     public Game() {
     }
+    public Goal getGoal(){ return goal;}
 
     public static int getNumDungeonIds() {
         return numDungeonIds;
@@ -112,7 +113,7 @@ public class Game {
 
     // Generate a dungeon response
     public DungeonResponse generateDungeonResponse() {
-        return new DungeonResponse(dungeonId, dungeonName, null, null, buildables, getGoalsLeft()); //TODO fix this up later
+        return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(), getGoalsLeft());
     }
 
     public void setGameMode(String gameMode) {
@@ -380,13 +381,9 @@ public class Game {
         //increment tick counter
         tickCounter++;
 
-        /*
         //display remaining goals and end game if there are none
         DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().generateBuildables(), goal.getGoalsLeft(entities));
         return ret;
-        */
-
-        return null;
     }
 
 

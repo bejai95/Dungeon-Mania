@@ -54,6 +54,9 @@ public abstract class Entity implements interaction {
     public static int getNumEntityIds() {
         return numEntityIds;
     }
+    public static void incrementNumEntityId() {
+        numEntityIds++;
+    }
 
     public void setPosition(Position position) {
         this.position = position;
