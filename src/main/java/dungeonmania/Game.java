@@ -199,6 +199,16 @@ public class Game {
         return ret;
     }
 
+    private List<StaticEntity> getStaticEntities(){
+        List<StaticEntity> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof StaticEntity){
+                ret.add((StaticEntity) entity);
+            }
+        }
+        return ret;
+    }
+
     private Consumable getConsumableFromId(String itemUsed) throws IllegalArgumentException{
         return null; //TODO
 
@@ -341,9 +351,11 @@ public class Game {
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.inventory;
-
         //use item
         player.use(getConsumableFromId(itemUsed));
+
+        entities.removeAll(getStaticEntities());
+        entities.addAll(StaticEntity.getStaticEntitiesList());
 
         //remove dead items
         inventory.removeDeadItems();
