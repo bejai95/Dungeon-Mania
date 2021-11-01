@@ -227,12 +227,20 @@ public class Game {
     private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
         return null; //TODO
     }
-
+    private Entity getEntityById(String id){
+        Integer intId = Integer.parseInt(id);
+        for(Entity entity : entities){
+            if(entity.getId() == (int) intId){
+                return entity;
+            }
+        }
+        return null;
+    }
     private List<Wall> getWalls(){
         List<Wall> ret = new ArrayList<>();
         for(Entity entity : entities){
             if(entity instanceof Wall){
-                ret.add((Wall)ret);
+                ret.add((Wall)entity);
             }
         }
         return ret;

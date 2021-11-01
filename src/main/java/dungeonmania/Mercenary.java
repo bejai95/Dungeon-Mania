@@ -12,7 +12,7 @@ public class Mercenary extends MovingEntity implements interaction {
 
     int goldThreshold;
     int currentGold;
-    int battleRadius;
+    int battleRadius = 2;
 
     public Mercenary(int id, Position position, int goldThreshold) {
         super(id, "mercenary", position, new ChaseMovement());
