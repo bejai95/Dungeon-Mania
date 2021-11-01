@@ -372,20 +372,17 @@ public class Game {
         resetMercSpeeds();
         //battle -- needs list of mercenaries, needs movingEntity on same tile as player
 
-        //TODO - When battles work, will just call Battle(player, enemy, mercenaries)
         MovingEntity baddie = getEntityOnPlayer(player);
         if(baddie != null){
             BattleManager bat = new BattleManager(player, baddie, getMercenaries());
             List<Battleable> survivors = bat.battle();
             removeDeadEntities();
-        }
-
-        //display remaining goals and end game if there are none
-        
-        // TODO - Just merge in goals and call the method to display as string in goals, it should work fine
+        }        
 
         //increment tick counter
         tickCounter++;
+
+        //display remaining goals and end game if there are none
         DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().getBuildables(), goal.getGoalsLeft(entities));
         return ret;
     }
