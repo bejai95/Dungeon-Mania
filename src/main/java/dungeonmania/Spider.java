@@ -4,9 +4,9 @@ import dungeonmania.util.Position;
 
 public class Spider extends MovingEntity {
 
-    public static int defaultHealth = 1;
-    public static int defaultAttack = 1;
-    public static double defaultdefense;
+    public static int defaultHealth = 50;
+    public static int defaultAttack = 5;
+    public static double defaultdefense = 0;
     public static int defaultSpeed = 1;
 
     public static int maxSpiders;
