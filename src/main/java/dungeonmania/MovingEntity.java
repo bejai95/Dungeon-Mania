@@ -59,6 +59,9 @@ public class MovingEntity extends Entity implements Battleable{
         return this.isHostile;
     }
 
+    public void setMovement(Movement move) {
+        this.moveBehaviour = move;
+    }
 
     public void move() {
         Position newPos = this.getPosition();
