@@ -16,6 +16,8 @@ import java.util.List;
 
 import javax.swing.plaf.synth.SynthStyle;
 
+import java.util.stream.Collectors;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -167,6 +169,12 @@ public class DungeonManiaController {
         }
 
         ent.interact(game.getPlayer());
+
+        Inventory inv = game.getPlayer().inventory;
+
+        return new DungeonResponse(game.getDungeonId(), game.getDungeonName(), 
+        game.getEntities().stream().map(x -> x.getInfo()).collect(Collectors.toList()), 
+        inv.getItemsAsResponse(), inv.generateBuildables(), game.getGoalsLeft());
 
 
     }

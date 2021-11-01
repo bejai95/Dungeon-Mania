@@ -227,7 +227,7 @@ public class Game {
     private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
         return null; //TODO
     }
-    private Entity getEntityById(String id){
+    public Entity getEntityById(String id){
         Integer intId = Integer.parseInt(id);
         for(Entity entity : entities){
             if(entity.getId() == (int) intId){
