@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dungeonmania.exceptions.InvalidActionException;
+import dungeonmania.response.models.ItemResponse;
 
 import java.util.HashMap;
 import java.lang.reflect.*;
@@ -44,7 +45,11 @@ public class Inventory {
      * @description craft will be in charge of adding items to proper lists and taking away what is needed
      */
     public Item craft(String itemName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
-          IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException {
+          IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException, IllegalArgumentException {
+        //if it is not a Shield and is not equal 
+        if (!(Shield.class.getTypeName().equals(itemName) || Bow.class.getTypeName().equals(itemName))) {
+            new IllegalArgumentException("Cannot craft something that is not a bow or a shield");
+        }
         //first finds the first recipe that can craft ur item
         List<String> recipe = this.getRecipe(itemName);
         //the recipe cant be crafted
@@ -246,5 +251,12 @@ public class Inventory {
             }
         }
         return null;
+    }
+    public List<ItemResponse> getItemsAsResponse() {
+        List<ItemResponse> newItemResponses = new ArrayList<ItemResponse>();
+        for (Item item: this.getItems()) {
+            newItemResponses.add(item.makeItemReponse());
+        }
+        return newItemResponses;
     }
 }

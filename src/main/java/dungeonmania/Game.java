@@ -402,7 +402,12 @@ public class Game {
 
         UnpickedUpItem pickup = getItemOnPlayer();
         if(pickup != null){
-            inventory.addItemToInventory(pickup.pickupItem());
+            try {
+                inventory.addItemToInventory(pickup.pickupItem());
+            }
+            catch (Exception e) {
+                throw new IllegalArgumentException("The item you are trying to pickup does not exist");
+            }
         }
 
 
