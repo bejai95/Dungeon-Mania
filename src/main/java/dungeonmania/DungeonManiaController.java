@@ -94,6 +94,7 @@ public class DungeonManiaController {
                 .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
                 .registerTypeAdapter(Movement.class, new InheritanceAdapter<Movement>())
                 .registerTypeAdapter(Goal.class, new InheritanceAdapter<Goal>())
+                .registerTypeAdapter(Item.class, new InheritanceAdapter<Item>())
                 .setPrettyPrinting()
                 .create();
             
@@ -134,6 +135,7 @@ public class DungeonManiaController {
             .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
             .registerTypeAdapter(Movement.class, new InheritanceAdapter<Movement>())
             .registerTypeAdapter(Goal.class, new InheritanceAdapter<Goal>())
+            .registerTypeAdapter(Item.class, new InheritanceAdapter<Item>())
             .create();
 
             // Load the game
