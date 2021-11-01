@@ -8,6 +8,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -80,7 +82,7 @@ public class DungeonManiaController {
             return currentlyAccessingGame.generateDungeonResponse();
         }
         catch (IOException e) {
-            throw new IllegalArgumentException("A different error occurred");
+            throw new IllegalArgumentException("An IO issue occured");
         }
     }
     
@@ -94,24 +96,20 @@ public class DungeonManiaController {
                 .create();
             
             String JSONString = gson.toJson(this.currentlyAccessingGame);
-            
-            String path = "src\\main\\resources\\games\\" + name + ".json";
+            String path = "src\\main\\resources\\savedGames\\";
+
+            // Create the savedGames directory if it does not already exist
+            Files.createDirectories(Paths.get(path));
             
             // Write to the file
-            FileWriter writer = new FileWriter(path);
+            FileWriter writer = new FileWriter(path + name + ".json");
             writer.write(JSONString);
             writer.close();
-
-            // Need to give the file some time to save (trust us, this is necessary)
-            Thread.sleep(5000);
             
             return currentlyAccessingGame.generateDungeonResponse();
 
         } catch (IOException e) {
             System.out.println("An IO issue occurred");
-            e.printStackTrace();
-            return null;
-        } catch (InterruptedException e) {
             e.printStackTrace();
             return null;
         }
@@ -120,13 +118,15 @@ public class DungeonManiaController {
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
         try {
             
+            String path = "src\\main\\resources\\savedGames\\" + name + ".json";
+
             // Make sure that the file exists
-            if (!FileLoader.listFileNamesInResourceDirectory("/games").contains(name)) {
+            if (!FileLoader.listFileNamesInDirectoryOutsideOfResources(path).contains(name)) {
                 throw new IllegalArgumentException(name +  "is not a valid saved game name");
             }
             
             // Load the JSON string from the saved file
-            String JSONString = FileLoader.loadResourceFile("/games/" + name + ".json");
+            String JSONString = Files.readString(Paths.get(path));
             
             Gson gson = new GsonBuilder()
             .registerTypeAdapter(Entity.class, new InheritanceAdapter<Entity>())
@@ -146,7 +146,8 @@ public class DungeonManiaController {
     
     public List<String> allGames() {
         try {
-            return FileLoader.listFileNamesInResourceDirectory("/games");
+            String path = "src\\main\\resources\\savedGames\\";
+            return FileLoader.listFileNamesInDirectoryOutsideOfResources(path);
         } catch (IOException e) {
             e.printStackTrace();
             return null;
