@@ -317,16 +317,18 @@ public class Game {
         Double roll = ThreadLocalRandom.current().nextDouble(0, 1);
         Position pos = null;
 
-        
+        EntityFactory eFactory = new EntityFactory();
+
         if(roll < mercenarySpawnChance){
             pos = getSpawnPositionRandom();
-            Mercenary merc = new Mercenary(getUniqueId(), pos, 1, getPlayer());
+            Mercenary merc = (Mercenary)eFactory.createEntity(Entity.getNumEntityIds(), "mercenary", pos.getX(), pos.getY(), 0, null);
+            merc.chase(getPlayer());
             entities.add(merc);
         }
 
         if(tickCounter % spiderTicks == 0){
             pos = getSpawnPositionRandom();
-            MovingEntity spider = new Spider(getUniqueId(), pos, new SquareMovement());
+            MovingEntity spider = (Spider)eFactory.createEntity(Entity.getNumEntityIds(), "spider", pos.getX(), pos.getY(), 0, null);
             entities.add(spider);
         }
 
