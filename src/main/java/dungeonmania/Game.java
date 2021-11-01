@@ -170,7 +170,7 @@ public class Game {
         this.gameMode = gameMode;
     }
 
-    private Character getPlayer(){
+    public Character getPlayer(){
         for(Entity entity : entities){
             if(entity instanceof Character){
                 return (Character) entity;
@@ -227,7 +227,7 @@ public class Game {
     private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
         return null; //TODO
     }
-    private Entity getEntityById(String id){
+    public Entity getEntityById(String id){
         Integer intId = Integer.parseInt(id);
         for(Entity entity : entities){
             if(entity.getId() == (int) intId){
@@ -343,7 +343,7 @@ public class Game {
         return;
     }
 
-    private MovingEntity getEntityOnPlayer(Character player){
+    public MovingEntity getEntityOnPlayer(Character player){
         List<MovingEntity> ms = getMovingEntities();
         for(MovingEntity entity : ms){
             if(player.getPosition().equals(entity.getPosition())){

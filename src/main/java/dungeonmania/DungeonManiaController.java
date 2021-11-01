@@ -16,6 +16,8 @@ import java.util.List;
 
 import javax.swing.plaf.synth.SynthStyle;
 
+import java.util.stream.Collectors;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -158,7 +160,23 @@ public class DungeonManiaController {
         return currentlyAccessingGame.tick(itemUsed, movementDirection);
     }
     public DungeonResponse interact(String entityId) throws IllegalArgumentException, InvalidActionException {
-        return null;
+        Game game = getCurrentlyAccessingGame();
+        Entity ent = game.getEntityById(entityId);
+        if (ent == null) {
+            throw new IllegalArgumentException("Id does not exist");
+        } else if (!ent.canInteract()) {
+            throw new IllegalArgumentException("Cannot interact with this entity");
+        }
+
+        ent.interact(game.getPlayer());
+
+        Inventory inv = game.getPlayer().inventory;
+
+        return new DungeonResponse(game.getDungeonId(), game.getDungeonName(), 
+        game.getEntities().stream().map(x -> x.getInfo()).collect(Collectors.toList()), 
+        inv.getItemsAsResponse(), inv.generateBuildables(), game.getGoalsLeft());
+
+
     }
     public DungeonResponse build(String buildable) throws IllegalArgumentException, InvalidActionException {
         return null;
