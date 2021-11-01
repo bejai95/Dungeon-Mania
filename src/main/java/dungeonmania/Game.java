@@ -363,7 +363,14 @@ public class Game {
         Character player = getPlayer();
         Inventory inventory = player.inventory;
         //use item
-        player.use(getConsumableFromId(itemUsed));
+        Item used = inventory.getItemFromType(itemUsed);
+        if(used != null){
+            if(!(used instanceof Consumable)){
+                throw(new IllegalArgumentException());
+            }
+            Consumable cons = (Consumable) used;
+            player.use(cons);
+        }
 
         entities.removeAll(getStaticEntities());
         entities.addAll(StaticEntity.getStaticEntitiesList());
