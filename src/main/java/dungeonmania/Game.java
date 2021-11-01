@@ -227,12 +227,20 @@ public class Game {
     private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
         return null; //TODO
     }
-
+    private Entity getEntityById(String id){
+        Integer intId = Integer.parseInt(id);
+        for(Entity entity : entities){
+            if(entity.getId() == (int) intId){
+                return entity;
+            }
+        }
+        return null;
+    }
     private List<Wall> getWalls(){
         List<Wall> ret = new ArrayList<>();
         for(Entity entity : entities){
             if(entity instanceof Wall){
-                ret.add((Wall)ret);
+                ret.add((Wall)entity);
             }
         }
         return ret;
@@ -317,16 +325,18 @@ public class Game {
         Double roll = ThreadLocalRandom.current().nextDouble(0, 1);
         Position pos = null;
 
-        
+        EntityFactory eFactory = new EntityFactory();
+
         if(roll < mercenarySpawnChance){
             pos = getSpawnPositionRandom();
-            Mercenary merc = new Mercenary(getUniqueId(), pos, 1, getPlayer());
+            Mercenary merc = (Mercenary)eFactory.createEntity(Entity.getNumEntityIds(), "mercenary", pos.getX(), pos.getY(), 0, null);
+            merc.chase(getPlayer());
             entities.add(merc);
         }
 
         if(tickCounter % spiderTicks == 0){
             pos = getSpawnPositionRandom();
-            MovingEntity spider = new Spider(getUniqueId(), pos, new SquareMovement());
+            MovingEntity spider = (Spider)eFactory.createEntity(Entity.getNumEntityIds(), "spider", pos.getX(), pos.getY(), 0, null);
             entities.add(spider);
         }
 
@@ -361,7 +371,14 @@ public class Game {
         Character player = getPlayer();
         Inventory inventory = player.inventory;
         //use item
-        player.use(getConsumableFromId(itemUsed));
+        Item used = inventory.getItemFromType(itemUsed);
+        if(used != null){
+            if(!(used instanceof Consumable)){
+                throw(new IllegalArgumentException());
+            }
+            Consumable cons = (Consumable) used;
+            player.use(cons);
+        }
 
         entities.removeAll(getStaticEntities());
         entities.addAll(StaticEntity.getStaticEntitiesList());
@@ -402,7 +419,12 @@ public class Game {
 
         UnpickedUpItem pickup = getItemOnPlayer();
         if(pickup != null){
-            inventory.addItemToInventory(pickup.pickupItem());
+            try {
+                inventory.addItemToInventory(pickup.pickupItem());
+            }
+            catch (Exception e) {
+                throw new IllegalArgumentException("The item you are trying to pickup does not exist");
+            }
         }
 
 

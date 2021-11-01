@@ -59,7 +59,8 @@ public class InteractionTest {
     public void testBribe() {
 
         Character ch = new Character(0, "character", new Position(0, -1));
-        Mercenary merc = new Mercenary(1, new Position(0, 0), 4, ch);
+        Mercenary merc = new Mercenary(1, new Position(0, 0), 4);
+        merc.chase(ch);
         
         // Merc out of range
         ch.setPosition(new Position(0,3));

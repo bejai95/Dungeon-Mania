@@ -5,17 +5,17 @@ import dungeonmania.util.Position;
 
 public class Mercenary extends MovingEntity implements interaction {
     
-    public static int defaultHealth;
-    public static int defaultAttack;
-    public static double defaultdefense;
+    public static int defaultHealth = 200;
+    public static int defaultAttack = 15;
+    public static double defaultdefense = 0;
     public static int defaultSpeed = 1;
 
     int goldThreshold;
     int currentGold;
-    int battleRadius;
+    int battleRadius = 2;
 
-    public Mercenary(int id, Position position, int goldThreshold, Character player) {
-        super(id, "mercenary", position, new ChaseMovement(player));
+    public Mercenary(int id, Position position, int goldThreshold) {
+        super(id, "mercenary", position, new ChaseMovement());
         this.goldThreshold = goldThreshold;
         this.currentGold = 0;
 
@@ -60,7 +60,8 @@ public class Mercenary extends MovingEntity implements interaction {
 
         if (currentGold >= goldThreshold) {
             isHostile = false;
-            // TODO change layer to something lower than players one
+            // TODO might cause problems walking through door
+            getPosition().asLayer(0);
         }
     }
 
@@ -83,6 +84,10 @@ public class Mercenary extends MovingEntity implements interaction {
         return true;
     }
 
-    // TODO maybe a chase(Entity ent) function to set target dynamically
+    public void chase(Character ch) {
+        ChaseMovement newMovement = new ChaseMovement();
+        newMovement.setTarget(ch);
+        super.setMovement(newMovement);
+    }
 
 }

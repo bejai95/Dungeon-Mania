@@ -6,8 +6,8 @@ public class ChaseMovement implements Movement {
     
     Entity target;
 
-    public ChaseMovement(Entity target) {
-        this.target = target;
+    public ChaseMovement() {
+
     }
 
     /**
@@ -15,6 +15,10 @@ public class ChaseMovement implements Movement {
      * distance to target
      */
     public Position move(Position currentPos) {
+
+        if (target == null) {
+            return currentPos;
+        }
 
         // Get position vector from this object to the target
         Position dir = Position.calculatePositionBetween(currentPos, target.getPosition());
@@ -28,6 +32,10 @@ public class ChaseMovement implements Movement {
             offset = new Position(0, normalisedY);   
         }
         return currentPos.translateBy(offset);
+    }
+
+    public void setTarget(Entity target) {
+        this.target = target;
     }
 
 }
