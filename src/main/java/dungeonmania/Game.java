@@ -50,7 +50,7 @@ public class Game {
     /**
      * Initialises the inventory and buildables lists
      */
-    public void initializeBuildables() {
+    public void initialiseBuildables() {
         this.buildables = new ArrayList<String>();
     }
 
@@ -138,7 +138,7 @@ public class Game {
      * Gets the player from the entities list
      * @return
      */
-    private Character getPlayer(){
+    public Character getPlayer(){
         for(Entity entity : entities){
             if(entity instanceof Character){
                 return (Character) entity;
@@ -206,7 +206,7 @@ public class Game {
     private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
         return null; //TODO
     }
-    private Entity getEntityById(String id){
+    public Entity getEntityById(String id){
         Integer intId = Integer.parseInt(id);
         for(Entity entity : entities){
             if(entity.getId() == (int) intId){
@@ -370,7 +370,7 @@ public class Game {
      * @param player
      * @return null if there is no such moving entity
      */
-    private MovingEntity getEntityOnPlayer(Character player){
+    public MovingEntity getEntityOnPlayer(Character player){
         List<MovingEntity> ms = getMovingEntities();
         for(MovingEntity entity : ms){
             if(player.getPosition().equals(entity.getPosition())){
