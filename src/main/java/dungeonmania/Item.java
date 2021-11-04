@@ -5,7 +5,6 @@ import dungeonmania.response.models.ItemResponse;
 abstract public class Item {
     int uses;
     int itemId;
-    //game checks ids are unique
     public Item(int itemId) {
         this.itemId = itemId;
     }
@@ -18,9 +17,17 @@ abstract public class Item {
     public void setUses(int uses) {
         this.uses = uses;
     }
+    /**
+     * 
+     * @return the class' simple name in all lowercase
+     */
     public String getType() {
         return this.getClass().getSimpleName().toLowerCase();
     }
+    /**
+     * 
+     * @return ItemResponse of the item
+     */
     public ItemResponse makeItemReponse() {
         Integer newItem = (Integer) getitemId();
         ItemResponse newItemResponse = new ItemResponse(newItem.toString(), getType());
