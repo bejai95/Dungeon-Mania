@@ -47,12 +47,18 @@ public class Game {
     public static void incrementNumDungeonIds() {
         numDungeonIds++;
     }
-
-    public void initialiseBuildables() {
+    /**
+     * Initialises the inventory and buildables lists
+     */
+    public void initializeBuildables() {
         this.buildables = new ArrayList<String>();
     }
 
-    //Checks if a cell is empty
+    /**
+     * Checks if a cell is empty
+     * @param cell
+     * @return
+     */
     public boolean isEmpty(Position cell) {
         for (int i = 0; i < entities.size(); i++) {
             if (cell.equals(entities.get(i).getPosition())) {
@@ -62,7 +68,11 @@ public class Game {
         return true;
     }
 
-    //Finds an adjacent empty cell when given a cell
+    /**
+     * Finds an adjacent empty cell when given a cell
+     * @param centre
+     * @return
+     */
     public Position getEmpty(Position centre) {
         List<Position> adjacentPositions = centre.getAdjacentPositions();
         Position emptyTile = null;
@@ -98,11 +108,12 @@ public class Game {
         return getPlayer().inventory;
     }
 
-
     public List<String> getBuildables() {
         return buildables;
     }
-
+    /**
+     * Gets all the goals left to complete
+     */
    public String getGoalsLeft() {
         if (goal == null)  {
             return null;
@@ -112,15 +123,22 @@ public class Game {
     }
 
     // Generate a dungeon response
+    /**
+     * Returns the dungeon information as a dungeon response
+     * @return
+     */
     public DungeonResponse generateDungeonResponse() {
         return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(), getGoalsLeft());
-    }
+    } 
 
     public void setGameMode(String gameMode) {
         this.gameMode = gameMode;
     }
-
-    public Character getPlayer(){
+    /**
+     * Gets the player from the entities list
+     * @return
+     */
+    private Character getPlayer(){
         for(Entity entity : entities){
             if(entity instanceof Character){
                 return (Character) entity;
@@ -128,7 +146,9 @@ public class Game {
         }
         return null;
     }
-
+    /**
+     * Gets a list of all the mercenaries on the map
+     */
     private List<Mercenary> getMercenaries(){
         List<Mercenary> ret = new ArrayList<>();
         for(Entity entity : entities){
@@ -138,7 +158,10 @@ public class Game {
         }
         return ret;
     }
-
+    /**
+     * Gets a list of all the moving entities on the map
+     * @return
+     */
     private List<MovingEntity> getMovingEntities(){
         List<MovingEntity> ret = new ArrayList<>();
         for(Entity entity : entities){
@@ -148,7 +171,10 @@ public class Game {
         }
         return ret;
     }
-
+    /**
+     * Gets a list of all the static entities on the map
+     * @return
+     */
     private List<StaticEntity> getStaticEntities(){
         List<StaticEntity> ret = new ArrayList<>();
         for(Entity entity : entities){
@@ -163,7 +189,10 @@ public class Game {
         return null; //TODO
 
     }
-
+    /**
+     * Gets a list of all the spawners on the map
+     * @return
+     */
     private List<ZombieToastSpawner> getSpawners(){
         List<ZombieToastSpawner> ret = new ArrayList<>();
         for(Entity entity : entities){
@@ -177,7 +206,7 @@ public class Game {
     private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
         return null; //TODO
     }
-    public Entity getEntityById(String id){
+    private Entity getEntityById(String id){
         Integer intId = Integer.parseInt(id);
         for(Entity entity : entities){
             if(entity.getId() == (int) intId){
@@ -186,6 +215,10 @@ public class Game {
         }
         return null;
     }
+    /**
+     * Gets a list of all the walls in the game
+     * @return
+     */
     private List<Wall> getWalls(){
         List<Wall> ret = new ArrayList<>();
         for(Entity entity : entities){
@@ -195,7 +228,12 @@ public class Game {
         }
         return ret;
     }
-
+    /**
+     * Returns whether not a given wall is a boundary wall
+     * @param wall
+     * @param walls
+     * @return
+     */
     private boolean isBoundary(Wall wall, List<Wall> walls){
         boolean noLeft = true;
         boolean noRight = true;
@@ -217,47 +255,79 @@ public class Game {
 
         return (noLeft || noRight || noUp || noDown);
     }
-
+    /**
+     * Gets a list of all the boundary walls
+     * @return
+     */
     private List<Wall> getBoundaries(){
         List<Wall> walls = getWalls();
         List<Wall> walls2 = getWalls();
         return walls.stream().filter(x -> isBoundary(x, walls2)).collect(Collectors.toList());
     }
-
+    /**
+     * Gets the minimum y coordinate of a wall
+     * @return
+     */
     private int getXMin(){
         List<Wall> walls = getWalls();
         return (walls.stream().mapToInt(x -> x.getPosition().getX()).min().orElse(0));
     }
-
+    /**
+     * Gets the maximum x coordinate of a wall
+     * @return
+     */
     private int getXMax(){
         List<Wall> walls = getWalls();
         return (walls.stream().mapToInt(x -> x.getPosition().getX()).max().orElse(0));
     }
-
+    /**
+     * Gets the minimum y coordinate of a wall
+     * @return
+     */
     private int getYMin(){
         List<Wall> walls = getWalls();
         return (walls.stream().mapToInt(x -> x.getPosition().getY()).min().orElse(0));
     }
-
+    /**
+     * Gets the maximum y coordinate of a wall
+     * @return
+     */
     private int getYMax(){
         List<Wall> walls = getWalls();
         return (walls.stream().mapToInt(x -> x.getPosition().getY()).max().orElse(0));
     }
-
+    /**
+     * Gets a random position in the approximate bounds of the map
+     * @return
+     */
     private Position getRandomPosition(){
         Position pos = new Position(ThreadLocalRandom.current().nextInt(getXMin(), getXMax()), ThreadLocalRandom.current().nextInt(getYMin(), getYMax()));
         return pos;
     }
-
+    /**
+     * Gets the boundary walls to the right of the player
+     * @param boundaries
+     * @param pos
+     * @return
+     */
     private List<Wall> getBoundariesToRight(List<Wall> boundaries, Position pos){
         List<Wall> toRight = boundaries.stream().filter(x -> x.getPosition().getX() > pos.getX()).collect(Collectors.toList());
         return toRight;
     }
-
+    /**
+     * Gets a list of all blocks of walls (collections of tiles all occupied by walls,
+     * represented by the leftmost wall) to the right of the player
+     * @param boundaries
+     * @param pos
+     * @return
+     */
     private List<Wall> getPiecesToRight(List<Wall> boundaries, Position pos){
         return getBoundariesToRight(boundaries, pos).stream().filter(x -> isEmpty(x.getPosition().translateBy(Direction.LEFT))).collect(Collectors.toList());
     }
-    
+    /**
+     * Gets a random position inside the boundaries of the map
+     * @return
+     */
     private Position getSpawnPositionRandom(){
         Position pos = getRandomPosition();
         List<Wall> boundaries = getBoundaries();
@@ -270,7 +340,10 @@ public class Game {
 
         return pos;
     }
-
+    /**
+     * Spawns spiders every 10 ticks, has a random chance to spawn a mercenary every tick
+     * and spawns whatever it does end up spawning at a random place on the map inside the walls
+     */
     private void spawnRandomEnemies(){
         Double roll = ThreadLocalRandom.current().nextDouble(0, 1);
         Position pos = null;
@@ -292,8 +365,12 @@ public class Game {
 
         return;
     }
-
-    public MovingEntity getEntityOnPlayer(Character player){
+    /**
+     * Gets the MovingEntity on the same position as the o=player
+     * @param player
+     * @return null if there is no such moving entity
+     */
+    private MovingEntity getEntityOnPlayer(Character player){
         List<MovingEntity> ms = getMovingEntities();
         for(MovingEntity entity : ms){
             if(player.getPosition().equals(entity.getPosition())){
@@ -302,12 +379,17 @@ public class Game {
         }
         return null;
     }
-
+    /**
+     * Removes all entities whose health is 0 or less from the entities list
+     */
     private void removeDeadEntities(){
         List<MovingEntity> deadEnts = getMovingEntities().stream().filter(x -> x.health <= 0).collect(Collectors.toList());
         entities.removeAll(deadEnts);
     }
-
+    /**
+     * Gets the item on the ground at the same position as the player  
+     * @return null if there is no such item
+     */
     private UnpickedUpItem getItemOnPlayer(){
         Character player = getPlayer();
         for(Entity entity : entities){
@@ -386,8 +468,9 @@ public class Game {
         return ret;
     }
 
-
-
+    /**
+     * Resets the speeds of all mercenaries in the game
+     */
     private void resetMercSpeeds() {
         List<Mercenary> mercs = getMercenaries();
         for(Mercenary merc : mercs){

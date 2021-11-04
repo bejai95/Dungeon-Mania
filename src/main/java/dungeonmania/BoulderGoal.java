@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoulderGoal implements Goal{
+    /**
+     * Gets a list of all the boulders in a list of entities
+     * @param entities
+     * @return
+     */
     private List<Entity> getBoulders(List<Entity> entities){
         List<Entity> ret = new ArrayList<Entity>();
         for(Entity entity : entities){
@@ -13,7 +18,11 @@ public class BoulderGoal implements Goal{
         }
         return ret;
     }
-
+    /**
+     * Gets a list of all the switches in a list of entities
+     * @param entities
+     * @return
+     */
     private List<FloorSwitch> getSwitches(List<Entity> entities){
         List<FloorSwitch> ret = new ArrayList<FloorSwitch>();
         for(Entity entity : entities){
@@ -24,7 +33,13 @@ public class BoulderGoal implements Goal{
         return ret;
     }
     
-
+    /**
+     * Tells you whether thereb exists an element in entities with the
+     * same position as e
+     * @param e
+     * @param entities
+     * @return
+     */
     private boolean existsSamePosition(Entity e, List<Entity> entities){
         for(Entity entity : entities){
             if(e.getPosition().equals(entity.getPosition())){

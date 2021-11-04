@@ -10,6 +10,12 @@ public class AndGoal implements Goal{
         this.subgoals = subgoals;
     }
     
+    /**
+     * Helper function which combines a listm of strings by
+     * concattenating and placing AND between all elements
+     * @param gs
+     * @return
+     */
     private String andifiy(List<String> gs){
         if(gs.size() == 0){
             return "";
