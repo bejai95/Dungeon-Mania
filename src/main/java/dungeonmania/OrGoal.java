@@ -9,7 +9,12 @@ public class OrGoal implements Goal{
     public OrGoal(List<Goal> subgoals){
         this.subgoals = subgoals;
     }
-
+    /**
+     * Helper function which combines a listm of strings by
+     * concattenating and placing OR between all elements
+     * @param gs
+     * @return
+     */
     private String orifiy(List<String> gs){
         if(gs.size() == 0){
             return "";

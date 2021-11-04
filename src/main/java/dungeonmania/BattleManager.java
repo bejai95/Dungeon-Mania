@@ -46,11 +46,17 @@ public class BattleManager {
     private List<Mercenary> getEnemiesInRange(List<Mercenary> mercs, Character player){
         return null; //TODO
     }
-
+    /**
+     * Gets all the allies in range of the player
+     * @return
+     */
     private List<Mercenary> getAlliesInRange(){
         return mercenaries.stream().filter(x -> !x.isHostile && x.entityInRadius(player)).collect(Collectors.toList()); 
     }
-
+    /**
+     * Gets all the mercenraries in range of the player
+     * @return
+     */
     private List<Mercenary> getMercsInRange(){
         return mercenaries.stream().filter(x -> x.entityInRadius(player)).collect(Collectors.toList());
     }
