@@ -1,30 +1,40 @@
 package dungeonmania;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-public class Bow extends Item implements Consumable {
-    int attackTimes;
+public class Bow extends Item implements Weapon {
     /**
      * Constructor sets uses and the amount of times the bow will attack/turn
      * @param itemId
      */
     public Bow(int itemId) {
-        super(itemId);
-        this.attackTimes = 2;
-        setUses(3);
-    }
-    /**
-     * reduces uses of the bow
-     */
-    public void consume(Character character) {
-        if (this.getUses() != 0) {
-            setUses(this.getUses() - 1);
-        }
+        super(itemId, 3);
     }
     /**
      * 
      * @return amount of attacks/turn
      */
     public int getAmountOfAttacks() {
-        return this.attackTimes;
+        return 2;
+    }
+    public int getDamage() {
+        return 0;
+    }
+    /**
+     * 
+     * @return List: Index 0 = attack damage, Index 1 = amount of attacks
+     */
+    public List<Integer> getWeaponInfo() {
+        //create an array list which will just return 0,0 if not being used
+        List<Integer> weaponInfo = new ArrayList<>(Arrays.asList(0,0));
+        if (canUse()) {
+            weaponInfo.set(0, this.getDamage());
+            weaponInfo.set(1, this.getAmountOfAttacks());
+            use();
+        }
+        //can't use and just return 0,0
+        return weaponInfo;
     }
     
 }

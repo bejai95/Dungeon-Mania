@@ -3,6 +3,7 @@ package dungeonmania;
 import dungeonmania.util.Direction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dungeonmania.util.Position;
 import dungeonmania.exceptions.InvalidActionException;
@@ -34,23 +35,20 @@ public class Character extends Entity implements Battleable{
     public int getDamage() {
         //gets damage of all things including inventory and use them
         int damage = this.baseDamage();
-        for (Sword sword: this.inventory.getSwords()) {
-            damage += sword.getDamage();
-            use(sword);
+        int attackTurns = 1;
+        for (Weapon weapon: this.inventory.getWeapons()) {
+            List<Integer> weaponInfo = weapon.getWeaponInfo();
+            damage += weaponInfo.get(0);
+            attackTurns *= weaponInfo.get(1);
         }
-        //now we got total damage get the amount of bows and use them
-        for (Bow bow: this.inventory.getBows()) {
-            damage *= bow.getAmountOfAttacks();
-            use(bow);
-        }
-        return damage;
+        //damage is a multiple of both
+        return damage*attackTurns;
         
     }
     public double getDefense() {
         double defence = this.baseDefense;
         for (DefenseItem d: this.inventory.getDefenseItems()) {
             defence += d.getMultipler();
-            use(d);
         }
         //if value of defense has gone to high, set it to 1.
         if (defence > 1) {
@@ -67,9 +65,6 @@ public class Character extends Entity implements Battleable{
     public void setHealth(double newHealth) {
         this.health = newHealth;
     }
-    public void use(Consumable consumable) throws InvalidActionException {
-        consumable.consume(this);
-    } 
     /**
      * Attempts to revive the player if has the one ring
      */

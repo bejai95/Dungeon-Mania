@@ -1,13 +1,15 @@
 package dungeonmania;
 
-public class Shield extends DefenseItem {
+public class Shield extends Item implements DefenseItem {
     /**
      * 
      * @param itemId
      */
     public Shield(int itemId) {
-        super(itemId);
-        this.setUses(3);
-        super.setMultipler(0.25);
+        super(itemId, 3);
+    }
+    public double getMultipler() {
+        use();
+        return 0.25;
     }
 }

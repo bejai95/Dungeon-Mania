@@ -409,7 +409,7 @@ public class Game {
                 throw(new IllegalArgumentException());
             }
             Consumable cons = (Consumable) used;
-            player.use(cons);
+            cons.consume(player);
         }
 
         entities.removeAll(getStaticEntities());

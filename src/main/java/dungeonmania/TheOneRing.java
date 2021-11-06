@@ -6,8 +6,7 @@ public class TheOneRing extends Item implements Consumable {
      * @param itemId
      */
     public TheOneRing(int itemId) {
-        super(itemId);
-        setUses(1);
+        super(itemId, 1);
     }
     /**
      * Consumes the one ring and restores player to full health

@@ -124,22 +124,20 @@ public class CharacterTest {
         HealthPotion hp = new HealthPotion(2);
         character.inventory.addItemToInventory(hp);
         //trying to use should not throw error
-        assertDoesNotThrow(()-> {character.use(hp);});
+        assertDoesNotThrow(()-> {hp.consume(character);;});
         assertTrue(character.getHealth() == character.getMaxHealth());
         //reduce health
         character.setHealth(50);
         //try to use again should do nothing
-        character.use(hp);
+        hp.consume(character);
         assertTrue(character.getHealth() == 50);
         Bow bow = new Bow(3);
         character.inventory.addItemToInventory(bow);
         //using a bow should not cause error until after 3 times
-        assertDoesNotThrow(()-> {character.use(bow);});
-        assertDoesNotThrow(()-> {character.use(bow);});
-        assertDoesNotThrow(()-> {character.use(bow);});
+        assertDoesNotThrow(()-> {bow.getWeaponInfo();});
+        assertDoesNotThrow(()-> {bow.getWeaponInfo();});
+        assertDoesNotThrow(()-> {bow.getWeaponInfo();});
         //bow should be used up
-        int bowUses = bow.getUses();
-        character.use(bow);
-        assertTrue(bow.getUses() == bowUses);
+        assertTrue(!(bow.canUse()));
     }
 }

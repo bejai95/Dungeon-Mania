@@ -23,7 +23,7 @@ public class ItemTest {
         Character character = new Character(3, Character.class.getSimpleName(),new Position(3, 4));
         Armour a = new Armour(1);
         int startingUses = a.getUses();
-        a.consume(character);
+        a.getMultipler();
         //the consume function should decrease the amount of uses
         assertNotEquals(startingUses, a.getUses());
 
@@ -35,19 +35,19 @@ public class ItemTest {
 
         Bow b = new Bow(3);
         startingUses = b.getUses();
-        b.consume(character);
+        b.getWeaponInfo();
         //the consume function should decrease the amount of uses
         assertNotEquals(startingUses, b.getUses());
 
         Shield s = new Shield(4);
         startingUses = s.getUses();
-        s.consume(character);
+        s.getMultipler();
         //the consume function should decrease the amount of uses
         assertNotEquals(startingUses, s.getUses());
 
         Key k = new Key(5,1);
         startingUses = k.getUses();
-        k.consume(character);
+        k.use();
         //the consume function should decrease the amount of uses
         assertNotEquals(startingUses, k.getUses());
 
@@ -91,7 +91,7 @@ public class ItemTest {
         character.inventory.addItemToInventory(hp);
         character.setHealth(50);
         //simulate a battle
-        character.use(hp);
+        hp.consume(character);
         assertTrue(character.getHealth() == character.getMaxHealth());
 
     }
@@ -100,7 +100,7 @@ public class ItemTest {
         Character character = new Character(3, Character.class.getCanonicalName(), new Position(3, 4));
         InvincibilityPotion ip = new InvincibilityPotion(4);
         character.inventory.addItemToInventory(ip);
-        character.use(ip);
+        ip.consume(character);
         assertTrue(character.getInvincibleLength() == 3);
         assertTrue(character.isInvincible());
         assertTrue(character.getInvincibleLength() == 2);
@@ -116,7 +116,7 @@ public class ItemTest {
         Character character = new Character(3, Character.class.getCanonicalName(), new Position(3, 4));
         InvisibilityPotion ip = new InvisibilityPotion(4);
         character.inventory.addItemToInventory(ip);
-        character.use(ip);
+        ip.consume(character);
         assertTrue(character.getInvisibleLength() == 3);
         assertTrue(character.isInvisible());
         assertTrue(character.getInvisibleLength() == 2);
