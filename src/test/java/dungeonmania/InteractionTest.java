@@ -21,7 +21,7 @@ public class InteractionTest {
         ZombieToastSpawner distantSpawner1 = new ZombieToastSpawner(2, "zombie_toast_spawner", new Position(0, 2));
         assertThrows(InvalidActionException.class, () -> adjacentSpawner1.interact(ch));
 
-        ch.inventory.addItemToInventory(new Sword(20));
+        ch.getInventory().addItemToInventory(new Sword(20));
 
         // Both spawners to right of player
         assertDoesNotThrow(() -> adjacentSpawner1.interact(ch));
@@ -93,10 +93,10 @@ public class InteractionTest {
         assertThrows(InvalidActionException.class, () -> merc.interact(ch));
       
         // Ch has gold, merc in range
-        ch.inventory.addItemToInventory(new Treasure(2));
-        ch.inventory.addItemToInventory(new Treasure(2));
-        ch.inventory.addItemToInventory(new Treasure(2));
-        ch.inventory.addItemToInventory(new Treasure(2));
+        ch.getInventory().addItemToInventory(new Treasure(2));
+        ch.getInventory().addItemToInventory(new Treasure(2));
+        ch.getInventory().addItemToInventory(new Treasure(2));
+        ch.getInventory().addItemToInventory(new Treasure(2));
 
         ch.setPosition(new Position(0,2));
         assertDoesNotThrow(() -> merc.interact(ch));

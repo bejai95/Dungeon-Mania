@@ -51,7 +51,7 @@ public class ZombieToastSpawner extends StaticEntity implements interaction {
     public void interact(Character ch) throws InvalidActionException {
         if (!Position.isAdjacent(this.getPosition(), ch.getPosition())) {
             throw new InvalidActionException("Player is not adjacent to spawner");
-        } else if (ch.inventory.getSwords().isEmpty()) {
+        } else if (ch.getInventory().getSwords().isEmpty()) {
             throw new InvalidActionException("Player does not have a sword");
         }
 

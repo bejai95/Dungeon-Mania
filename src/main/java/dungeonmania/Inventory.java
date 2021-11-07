@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.lang.reflect.*;
 
 public class Inventory {
-    List<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
     //takes in a string which is the name of the recipe and returns a list of all the materials required
-    HashMap<String, List<String>> recipes = new HashMap<String, List<String>>(); 
+    private HashMap<String, List<String>> recipes = new HashMap<String, List<String>>(); 
     
     public Inventory() {
         List<String> bowMats = new ArrayList<>();
