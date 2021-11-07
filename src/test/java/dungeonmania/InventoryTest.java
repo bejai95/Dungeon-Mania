@@ -124,13 +124,13 @@ public class InventoryTest {
     public void testRemoveDeadItems() {
         Character character = new Character(3,Character.class.getSimpleName() , new Position(3, 4));
         Sword sword = new Sword(1);
-        character.inventory.addItemToInventory(sword);
+        character.getInventory().addItemToInventory(sword);
         //now consume sword
         while (sword.getUses() > 0) {
             sword.getWeaponInfo();
         }
-        character.inventory.removeDeadItems();
-        assertTrue(character.inventory.getItem(sword.getitemId()) == null);
+        character.getInventory().removeDeadItems();
+        assertTrue(character.getInventory().getItem(sword.getitemId()) == null);
     }
     @Test
     public void testAddRecipeGetRecipe() {

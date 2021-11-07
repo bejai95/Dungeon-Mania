@@ -9,32 +9,32 @@ import dungeonmania.util.Position;
 import dungeonmania.exceptions.InvalidActionException;
 
 public class Character extends Entity implements Battleable{
-    Inventory inventory = new Inventory();
-    double health;
-    int damage;
-    double baseDefense;
-    int InvincibleDuration;
-    int InvisibleDuration;
-    double maxHealth;
+    private Inventory inventory = new Inventory();
+    private double health;
+    private int baseDamage;
+    private double baseDefense;
+    private int InvincibleDuration;
+    private int InvisibleDuration;
+    private double maxHealth;
 
     public Character(int id, String type, Position position) {
         super(id, type, position);
         this.health = 200;
         this.maxHealth = this.health;
-        this.damage = 20;
+        this.baseDamage = 20;
         this.baseDefense = 0;
         this.InvincibleDuration = 0;
         this.InvisibleDuration = 0;
     }
-    public int baseDamage() {
-        return this.damage;
+    public int getBaseDamage() {
+        return this.baseDamage;
     }
     public void move(Direction moveDirection) {
         this.setPosition(this.getPosition().translateBy(moveDirection));
     }
     public int getDamage() {
         //gets damage of all things including inventory and use them
-        int damage = this.baseDamage();
+        int damage = this.getBaseDamage();
         int attackTurns = 1;
         for (Weapon weapon: this.inventory.getWeapons()) {
             List<Integer> weaponInfo = weapon.getWeaponInfo();
@@ -108,5 +108,11 @@ public class Character extends Entity implements Battleable{
     }
     public double getMaxHealth() {
         return this.maxHealth;
+    }
+    public Inventory getInventory() {
+        return this.inventory;
+    }
+    public double getBaseDefense() {
+        return this.baseDefense;
     }
 }

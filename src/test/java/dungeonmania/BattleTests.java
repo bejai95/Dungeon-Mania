@@ -41,7 +41,7 @@ public class BattleTests {
 
         Character character = new Character(1, "Character", new Position(5,5));
         Item treasure = new Treasure(3);
-        character.inventory.addItemToInventory(treasure);
+        character.getInventory().addItemToInventory(treasure);
         MovingEntity spider1 = new Spider(0, new Position(5,5), new SquareMovement());
         List<Mercenary> mercs = new ArrayList<>();
         Mercenary merc = new Mercenary(2, new Position(5,4), 1);

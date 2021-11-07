@@ -9,7 +9,14 @@ public class Shield extends Item implements DefenseItem {
         super(itemId, 3);
     }
     public double getMultipler() {
-        use();
-        return 0.25;
+        //has uses
+        if (canUse()) {
+            use();
+            return 0.25;
+        }
+        //act as if item does not exist
+        else {
+            return 0;
+        }
     }
 }

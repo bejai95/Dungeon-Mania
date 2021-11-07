@@ -80,7 +80,7 @@ public class ItemTest {
         assertFalse(character.getHealth() == 100);
         //give the one ring
         TheOneRing ring = new TheOneRing(4);
-        character.inventory.addItemToInventory(ring);
+        character.getInventory().addItemToInventory(ring);
         character.revive();
         assertTrue(character.getHealth() == character.getMaxHealth());
     }
@@ -88,7 +88,7 @@ public class ItemTest {
     public void healthPotionTests() {
         Character character = new Character(3, Character.class.getCanonicalName(), new Position(3, 4));
         HealthPotion hp = new HealthPotion(4);
-        character.inventory.addItemToInventory(hp);
+        character.getInventory().addItemToInventory(hp);
         character.setHealth(50);
         //simulate a battle
         hp.consume(character);
@@ -99,7 +99,7 @@ public class ItemTest {
     public void invicibilityTests() {
         Character character = new Character(3, Character.class.getCanonicalName(), new Position(3, 4));
         InvincibilityPotion ip = new InvincibilityPotion(4);
-        character.inventory.addItemToInventory(ip);
+        character.getInventory().addItemToInventory(ip);
         ip.consume(character);
         assertTrue(character.getInvincibleLength() == 3);
         assertTrue(character.isInvincible());
@@ -115,7 +115,7 @@ public class ItemTest {
     public void InvisibilityTests() {
         Character character = new Character(3, Character.class.getCanonicalName(), new Position(3, 4));
         InvisibilityPotion ip = new InvisibilityPotion(4);
-        character.inventory.addItemToInventory(ip);
+        character.getInventory().addItemToInventory(ip);
         ip.consume(character);
         assertTrue(character.getInvisibleLength() == 3);
         assertTrue(character.isInvisible());

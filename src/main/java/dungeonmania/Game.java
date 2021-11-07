@@ -105,7 +105,7 @@ public class Game {
     }
 
     public Inventory getInventory() {
-        return getPlayer().inventory;
+        return getPlayer().getInventory();
     }
 
     public List<String> getBuildables() {
@@ -401,7 +401,7 @@ public class Game {
     }
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
-        Inventory inventory = player.inventory;
+        Inventory inventory = player.getInventory();
         //use item
         Item used = inventory.getItemFromType(itemUsed);
         if(used != null){

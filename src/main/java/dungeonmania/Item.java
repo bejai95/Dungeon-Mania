@@ -3,8 +3,8 @@ package dungeonmania;
 import dungeonmania.response.models.ItemResponse;
 
 abstract public class Item {
-    int uses;
-    int itemId;
+    private int uses;
+    private int itemId;
     public Item(int itemId, int uses) {
         this.itemId = itemId;
         this.uses = uses;
