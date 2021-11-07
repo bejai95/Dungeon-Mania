@@ -1,28 +1,39 @@
 package dungeonmania;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
 
-public class Sword extends Item implements Consumable {
-    int damage;
+public class Sword extends Item implements Weapon {
     /**
      * Sword constructor sets the amount of damage the sword should do
      * @param itemId
      */
     public Sword(int itemId) {
-        super(itemId);
-        setDamage(3);
-        this.damage = 25;
+        super(itemId, 3);
     }
     /**
      * reduces durability of sword
      */
-    public void consume(Character character) {
-        if (this.getUses() != 0) {
-            this.setUses(this.getUses() -1);
-        }
-    }
     public int getDamage() {
-        return this.damage;
+        return 25;
     }
-    public void setDamage(int damage) {
-        this.damage = damage;
+    public int getAmountOfAttacks() {
+        //does not add to the amount of extra attacks you can do
+        return 1;
+    }
+    /**
+     * 
+     * @return List: Index 0 = attack damage, Index 1 = amount of attacks
+     */
+    public List<Integer> getWeaponInfo() {
+        //create an array list which will just return 0,0 if not being used
+        List<Integer> weaponInfo = new ArrayList<>(Arrays.asList(0,0));
+        if (canUse()) {
+            weaponInfo.set(0, this.getDamage());
+            weaponInfo.set(1, this.getAmountOfAttacks());
+            use();
+        }
+        //can't use and just return 0,0
+        return weaponInfo;
     }
 }

@@ -1,9 +1,18 @@
 package dungeonmania;
 
-public class Armour extends DefenseItem {
+public class Armour extends Item implements DefenseItem {
     public Armour(int itemId) {
-        super(itemId);
-        setUses(3);
-        super.setMultipler(0.5);
+        super(itemId, 3);
+    }
+    public double getMultipler() {
+        //has uses
+        if (canUse()) {
+            use();
+            return 0.5;
+        }
+        //act as if item does not exist
+        else {
+            return 0;
+        }
     }
 }
