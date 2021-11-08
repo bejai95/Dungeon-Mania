@@ -51,11 +51,12 @@ public class BattleTests {
 
         BattleManager bat = new BattleManager(character, spider1, mercs);
 
-        List<Battleable> alive = new ArrayList<>();
-        alive.add(character);
-        alive.add(merc);
+        List<Entity> dead = new ArrayList<>();
+        /*alive.add(character);
+        alive.add(merc);*/
+        dead.add(spider1);
  
-        assertEquals(alive, bat.battle());
+        assertEquals(dead, bat.battle());
         
     }
 

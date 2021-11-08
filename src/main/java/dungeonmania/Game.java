@@ -29,11 +29,12 @@ public class Game {
     // private final List<AnimationQueue> animations;
     private String gameMode;
     private static int numDungeonIds; // Initialized to zero
+    private final int spiderLimit = 4;
     
     @SerializedName(value="goal", alternate="goal-condition")
     private Goal goal;
     
-    private double mercenarySpawnChance = 0.05;
+    private double mercenarySpawnChance = 0.005;
     private int spiderTicks = 10;
     
     public Game() {
@@ -128,6 +129,9 @@ public class Game {
      * @return
      */
     public DungeonResponse generateDungeonResponse() {
+        if(getPlayer() == null){
+            return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), null, null, getGoalsLeft());
+        }
         return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(), getGoalsLeft());
     } 
 
@@ -167,6 +171,30 @@ public class Game {
         for(Entity entity : entities){
             if(entity instanceof MovingEntity){
                 ret.add((MovingEntity) entity);
+            }
+        }
+        return ret;
+    }
+
+    /**
+     * Gets a list of all the moving entities on the map
+     * @return
+     */
+    private List<Battleable> getBattlebles(){
+        List<Battleable> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof Battleable){
+                ret.add((Battleable) entity);
+            }
+        }
+        return ret;
+    }
+
+    private List<Entity> batToEnts(List<Battleable> bats){
+        List<Entity> ret = new ArrayList<>();
+        for(Battleable bat : bats){
+            if(bat instanceof Entity){
+                ret.add((Entity) bat);
             }
         }
         return ret;
@@ -340,6 +368,16 @@ public class Game {
 
         return pos;
     }
+
+    private int getNumberOfSpiders(){
+        int ret = 0;
+        for(Entity entity : entities){
+            if(entity instanceof Spider){
+                ret++;
+            }
+        }
+        return ret;
+    }
     /**
      * Spawns spiders every 10 ticks, has a random chance to spawn a mercenary every tick
      * and spawns whatever it does end up spawning at a random place on the map inside the walls
@@ -357,7 +395,7 @@ public class Game {
             entities.add(merc);
         }
 
-        if(tickCounter % spiderTicks == 0){
+        if(tickCounter % spiderTicks == 0 && getNumberOfSpiders() < spiderLimit){
             pos = getSpawnPositionRandom();
             MovingEntity spider = (Spider)eFactory.createEntity(Entity.getNumEntityIds(), "spider", pos.getX(), pos.getY(), 0, null);
             entities.add(spider);
@@ -383,8 +421,15 @@ public class Game {
      * Removes all entities whose health is 0 or less from the entities list
      */
     private void removeDeadEntities(){
-        List<MovingEntity> deadEnts = getMovingEntities().stream().filter(x -> x.health <= 0).collect(Collectors.toList());
-        entities.removeAll(deadEnts);
+        System.out.println("Entities before: " + entities.size());
+        List<Battleable> deadEnts = getBattlebles().stream().filter(x -> x.getHealth() <= 0.0).collect(Collectors.toList());
+        System.out.println("Number of dead entities: " + deadEnts.size());
+        entities.removeAll(batToEnts(deadEnts));
+        System.out.println("Entities after: " + entities.size());
+    }
+
+    private void removeSpecifiedEntities(){
+        return;
     }
     /**
      * Gets the item on the ground at the same position as the player  
@@ -412,8 +457,16 @@ public class Game {
             cons.consume(player);
         }
 
+        /*
+        THIS SOLUTION DOESN'T WORK
+
+        NEED A BETTER SYSTEM FOR STATIC ENTITIES
+
         entities.removeAll(getStaticEntities());
         entities.addAll(StaticEntity.getStaticEntitiesList());
+        
+        
+        */
 
         //remove dead items
         inventory.removeDeadItems();
@@ -435,7 +488,16 @@ public class Game {
                 entities.add(zomb);
             }
         }
-
+        UnpickedUpItem pickup = getItemOnPlayer();
+        if(pickup != null){
+            try {
+                inventory.addItemToInventory(pickup.pickupItem());
+                entities.remove(pickup);
+            }
+            catch (Exception e) {
+                throw new IllegalArgumentException("The item you are trying to pickup does not exist");
+            }
+        }
         spawnRandomEnemies();
 
 
@@ -444,28 +506,23 @@ public class Game {
 
         MovingEntity baddie = getEntityOnPlayer(player);
         if(baddie != null){
+            System.out.println("Health Before: " + player.getHealth());
             BattleManager bat = new BattleManager(player, baddie, getMercenaries());
-            List<Battleable> survivors = bat.battle();
+            List<Battleable> dead = bat.battle();
+            System.out.println("Health After: " + player.getHealth());
+            System.out.println("Number dead in Battle" + dead.size());
+            //entities.removeAll(dead);
+
             removeDeadEntities();
         }        
-
-        UnpickedUpItem pickup = getItemOnPlayer();
-        if(pickup != null){
-            try {
-                inventory.addItemToInventory(pickup.pickupItem());
-            }
-            catch (Exception e) {
-                throw new IllegalArgumentException("The item you are trying to pickup does not exist");
-            }
-        }
 
 
         //increment tick counter
         tickCounter++;
 
         //display remaining goals and end game if there are none
-        DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().generateBuildables(), goal.getGoalsLeft(entities));
-        return ret;
+        //DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().generateBuildables(), goal.getGoalsLeft(entities));
+        return generateDungeonResponse();
     }
 
     /**
