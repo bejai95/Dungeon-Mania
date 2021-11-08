@@ -172,7 +172,7 @@ public class DungeonManiaController {
 
         ent.interact(game.getPlayer());
 
-        Inventory inv = game.getPlayer().inventory;
+        Inventory inv = game.getPlayer().getInventory();
 
         return new DungeonResponse(game.getDungeonId(), game.getDungeonName(), 
         game.getEntities().stream().map(x -> x.getInfo()).collect(Collectors.toList()), 

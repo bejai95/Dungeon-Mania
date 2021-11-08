@@ -3,54 +3,52 @@ package dungeonmania;
 import dungeonmania.util.Direction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dungeonmania.util.Position;
 import dungeonmania.exceptions.InvalidActionException;
 
 public class Character extends Entity implements Battleable{
-    Inventory inventory = new Inventory();
-    double health;
-    int damage;
-    double baseDefense;
-    int InvincibleDuration;
-    int InvisibleDuration;
-    double maxHealth;
+    private Inventory inventory = new Inventory();
+    private double health;
+    private int baseDamage;
+    private double baseDefense;
+    private int InvincibleDuration;
+    private int InvisibleDuration;
+    private double maxHealth;
 
     public Character(int id, String type, Position position) {
         super(id, type, position);
         this.health = 200;
         this.maxHealth = this.health;
-        this.damage = 20;
+        this.baseDamage = 20;
         this.baseDefense = 0;
         this.InvincibleDuration = 0;
         this.InvisibleDuration = 0;
     }
-    public int baseDamage() {
-        return this.damage;
+    public int getBaseDamage() {
+        return this.baseDamage;
     }
     public void move(Direction moveDirection) {
         this.setPosition(this.getPosition().translateBy(moveDirection));
     }
     public int getDamage() {
         //gets damage of all things including inventory and use them
-        int damage = this.baseDamage();
-        for (Sword sword: this.inventory.getSwords()) {
-            damage += sword.getDamage();
-            use(sword);
+        int damage = this.getBaseDamage();
+        int attackTurns = 1;
+        for (Weapon weapon: this.inventory.getWeapons()) {
+            List<Integer> weaponInfo = weapon.getWeaponInfo();
+            damage += weaponInfo.get(0);
+            attackTurns *= weaponInfo.get(1);
         }
-        //now we got total damage get the amount of bows and use them
-        for (Bow bow: this.inventory.getBows()) {
-            damage *= bow.getAmountOfAttacks();
-            use(bow);
-        }
-        return damage;
+        //damage is a multiple of both
+        return damage*attackTurns;
         
     }
     public double getDefense() {
         double defence = this.baseDefense;
         for (DefenseItem d: this.inventory.getDefenseItems()) {
             defence += d.getMultipler();
-            use(d);
         }
         //if value of defense has gone to high, set it to 1.
         if (defence > 1) {
@@ -67,9 +65,6 @@ public class Character extends Entity implements Battleable{
     public void setHealth(double newHealth) {
         this.health = newHealth;
     }
-    public void use(Consumable consumable) throws InvalidActionException {
-        consumable.consume(this);
-    } 
     /**
      * Attempts to revive the player if has the one ring
      */
@@ -113,5 +108,11 @@ public class Character extends Entity implements Battleable{
     }
     public double getMaxHealth() {
         return this.maxHealth;
+    }
+    public Inventory getInventory() {
+        return this.inventory;
+    }
+    public double getBaseDefense() {
+        return this.baseDefense;
     }
 }

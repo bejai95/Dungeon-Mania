@@ -3,10 +3,11 @@ package dungeonmania;
 import dungeonmania.response.models.ItemResponse;
 
 abstract public class Item {
-    int uses;
-    int itemId;
-    public Item(int itemId) {
+    private int uses;
+    private int itemId;
+    public Item(int itemId, int uses) {
         this.itemId = itemId;
+        this.uses = uses;
     }
     public int getUses() {
         return this.uses;
@@ -32,5 +33,16 @@ abstract public class Item {
         Integer newItem = (Integer) getitemId();
         ItemResponse newItemResponse = new ItemResponse(newItem.toString(), getType());
         return newItemResponse;
+    }
+    public boolean canUse() {
+        if (this.getUses() > 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    public void use() {
+        this.setUses(this.getUses() - 1);
     }
 }

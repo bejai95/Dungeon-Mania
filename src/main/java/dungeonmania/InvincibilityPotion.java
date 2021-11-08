@@ -2,8 +2,7 @@ package dungeonmania;
 
 public class InvincibilityPotion extends Item implements Consumable {
     public InvincibilityPotion(int itemId) {
-        super(itemId);
-        setUses(1);
+        super(itemId, 1);
     }
     public void consume(Character character) {
         if (this.getUses() != 0) {

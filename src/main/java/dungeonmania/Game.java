@@ -105,7 +105,7 @@ public class Game {
     }
 
     public Inventory getInventory() {
-        return getPlayer().inventory;
+        return getPlayer().getInventory();
     }
 
     public List<String> getBuildables() {
@@ -183,11 +183,6 @@ public class Game {
             }
         }
         return ret;
-    }
-
-    private Consumable getConsumableFromId(String itemUsed) throws IllegalArgumentException{
-        return null; //TODO
-
     }
     /**
      * Gets a list of all the spawners on the map
@@ -401,15 +396,17 @@ public class Game {
     }
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
-        Inventory inventory = player.inventory;
+        Inventory inventory = player.getInventory();
         //use item
+        //parse itemUsed by removing the underscore
+        itemUsed = itemUsed.replaceAll("_", "");
         Item used = inventory.getItemFromType(itemUsed);
         if(used != null){
             if(!(used instanceof Consumable)){
                 throw(new IllegalArgumentException());
             }
             Consumable cons = (Consumable) used;
-            player.use(cons);
+            cons.consume(player);
         }
 
         entities.removeAll(getStaticEntities());

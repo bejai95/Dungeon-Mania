@@ -64,42 +64,42 @@ public class CharacterTest {
     public void testGetDamage() {
         //test no items
         Character character = new Character(1, "Character", new Position(5,5));
-        assertEquals(character.getDamage(), character.damage);
+        assertEquals(character.getDamage(), character.getBaseDamage());
         //test with items
         Sword sword = new Sword(4);
         //sword is now in inventory
-        character.inventory.addItemToInventory(sword);
-        assertEquals(character.getDamage(), character.damage + sword.getDamage());
+        character.getInventory().addItemToInventory(sword);
+        assertEquals(character.getDamage(), character.getBaseDamage() + sword.getDamage());
         //test that bow doubles it
         Bow bow = new Bow(6);
-        character.inventory.addItemToInventory(bow);
-        assertEquals(character.getDamage(), bow.getAmountOfAttacks()*(character.damage + sword.getDamage()));
+        character.getInventory().addItemToInventory(bow);
+        assertEquals(character.getDamage(), bow.getAmountOfAttacks()*(character.getBaseDamage() + sword.getDamage()));
     }
     @Test
     public void testGetDefense() {
         //test that defense does nothing
         Character character = new Character(1, "Character", new Position(5,5));
-        assertEquals(character.getDefense(), character.baseDefense);
+        assertEquals(character.getDefense(), character.getBaseDefense());
         //test that defense does more with items
         Shield shield = new Shield(2);
-        character.inventory.addItemToInventory(shield);
-        assertEquals(character.getDefense(), character.baseDefense + shield.getMultipler());
+        character.getInventory().addItemToInventory(shield);
+        assertEquals(character.getDefense(), character.getBaseDefense() + 0.25);
         //make sure armour stacks with shields
         Armour armour = new Armour(3);
-        character.inventory.addItemToInventory(armour);
-        assertEquals(character.getDefense(), character.baseDefense + shield.getMultipler() + armour.getMultipler());
+        character.getInventory().addItemToInventory(armour);
+        assertEquals(character.getDefense(), character.getBaseDefense() + 0.25 + 0.5);
         Armour armour2 = new Armour(4);
         Armour armour4 = new Armour(5);
         Armour armour5 = new Armour(6);
         Armour armour64 = new Armour(7);
         Armour armour65 = new Armour(8);
         Armour armour66 = new Armour(9);
-        character.inventory.addItemToInventory(armour2);
-        character.inventory.addItemToInventory(armour5);
-        character.inventory.addItemToInventory(armour4);
-        character.inventory.addItemToInventory(armour64);
-        character.inventory.addItemToInventory(armour65);
-        character.inventory.addItemToInventory(armour66);
+        character.getInventory().addItemToInventory(armour2);
+        character.getInventory().addItemToInventory(armour5);
+        character.getInventory().addItemToInventory(armour4);
+        character.getInventory().addItemToInventory(armour64);
+        character.getInventory().addItemToInventory(armour65);
+        character.getInventory().addItemToInventory(armour66);
         //make sure max armour is 1
         assertEquals(character.getDefense(), 1);
         //now check that multiplier is zero since should do no damage
@@ -122,24 +122,22 @@ public class CharacterTest {
         //test using an item that exist does not throw errors
         Character character = new Character(1, "Character", new Position(5,5));
         HealthPotion hp = new HealthPotion(2);
-        character.inventory.addItemToInventory(hp);
+        character.getInventory().addItemToInventory(hp);
         //trying to use should not throw error
-        assertDoesNotThrow(()-> {character.use(hp);});
+        assertDoesNotThrow(()-> {hp.consume(character);;});
         assertTrue(character.getHealth() == character.getMaxHealth());
         //reduce health
         character.setHealth(50);
         //try to use again should do nothing
-        character.use(hp);
+        hp.consume(character);
         assertTrue(character.getHealth() == 50);
         Bow bow = new Bow(3);
-        character.inventory.addItemToInventory(bow);
+        character.getInventory().addItemToInventory(bow);
         //using a bow should not cause error until after 3 times
-        assertDoesNotThrow(()-> {character.use(bow);});
-        assertDoesNotThrow(()-> {character.use(bow);});
-        assertDoesNotThrow(()-> {character.use(bow);});
+        assertDoesNotThrow(()-> {bow.getWeaponInfo();});
+        assertDoesNotThrow(()-> {bow.getWeaponInfo();});
+        assertDoesNotThrow(()-> {bow.getWeaponInfo();});
         //bow should be used up
-        int bowUses = bow.getUses();
-        character.use(bow);
-        assertTrue(bow.getUses() == bowUses);
+        assertTrue(!(bow.canUse()));
     }
 }

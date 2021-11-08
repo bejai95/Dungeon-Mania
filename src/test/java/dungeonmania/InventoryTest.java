@@ -76,34 +76,19 @@ public class InventoryTest {
 
         //check key goes to materials and consumable
         inventory.addItemToInventory(key);
-        assertTrue(inventory.getItem(key.getitemId(), inventory.getMaterials()) != null);
-        assertTrue(inventory.getItem(key.getitemId(), inventory.getConsumables()) != null);
+        assertTrue(inventory.getItem(key.getitemId()) != null);
 
         //check sword goes to consumable and swords
         inventory.addItemToInventory(sword);
-        assertTrue(inventory.getItem(sword.getitemId(), inventory.getSwords()) != null);
-        assertTrue(inventory.getItem(sword.getitemId(), inventory.getConsumables()) != null);
+        assertTrue(inventory.getItem(sword.getitemId()) != null);
 
         //check that wood goes to material
         inventory.addItemToInventory(wood);
-        assertTrue(inventory.getItem(wood.getitemId(), inventory.getMaterials()) != null);
+        assertTrue(inventory.getItem(wood.getitemId()) != null);
 
         //check that treasure goes materials
         inventory.addItemToInventory(treasure);
-        assertTrue(inventory.getItem(treasure.getitemId(), inventory.getMaterials()) != null);
-        //check that Shield and armour are in consumable and defenseItems
-        inventory.addItemToInventory(shield);
-        assertTrue(inventory.getItem(shield.getitemId(), inventory.getDefenseItems()) != null);  
-        assertTrue(inventory.getItem(shield.getitemId(), inventory.getConsumables()) != null); 
-        inventory.addItemToInventory(armour);  
-        assertTrue(inventory.getItem(armour.getitemId(), inventory.getDefenseItems()) != null);  
-        assertTrue(inventory.getItem(armour.getitemId(), inventory.getConsumables()) != null);  
-        //check bomb just goes to consumable
-        inventory.addItemToInventory(bomb);
-        assertTrue(inventory.getItem(bomb.getitemId(), inventory.getConsumables()) != null);
-        //check that potion just goes to consumable
-        inventory.addItemToInventory(hp);
-        assertTrue(inventory.getItem(hp.getitemId(), inventory.getConsumables()) != null);
+        assertTrue(inventory.getItem(treasure.getitemId()) != null);
     }
     @Test
     public void testRemoveItem() {
@@ -128,47 +113,24 @@ public class InventoryTest {
 
         //check key not materials and consumable
         inventory.removeItem(key);
-        assertTrue(inventory.getItem(key.getitemId(), inventory.getMaterials()) == null);
-        assertTrue(inventory.getItem(key.getitemId(), inventory.getConsumables()) == null);
+        assertTrue(inventory.getItem(key.getitemId()) == null);
 
         //check sword not consumable and swords
         inventory.removeItem(sword);
-        assertTrue(inventory.getItem(sword.getitemId(), inventory.getSwords()) == null);
-        assertTrue(inventory.getItem(sword.getitemId(), inventory.getConsumables()) == null);
-
-        //check not wood goes to material
-        inventory.removeItem(wood);
-        assertTrue(inventory.getItem(wood.getitemId(), inventory.getMaterials()) == null);
-
-        //check treasure not goes materials
-        inventory.removeItem(treasure);
-        assertTrue(inventory.getItem(treasure.getitemId(), inventory.getMaterials()) == null);
-        //check that Shield and armour not in consumable and defenseItems
-        inventory.removeItem(shield);
-        assertTrue(inventory.getItem(shield.getitemId(), inventory.getDefenseItems()) == null);  
-        assertTrue(inventory.getItem(shield.getitemId(), inventory.getConsumables()) == null); 
-        inventory.removeItem(armour);  
-        assertTrue(inventory.getItem(armour.getitemId(), inventory.getDefenseItems()) == null);  
-        assertTrue(inventory.getItem(armour.getitemId(), inventory.getConsumables()) == null);  
-        //check bomb not goes to consumable
-        inventory.removeItem(bomb);
-        assertTrue(inventory.getItem(bomb.getitemId(), inventory.getConsumables()) == null);
-        //check that potion not goes to consumable
-        inventory.removeItem(hp);
-        assertTrue(inventory.getItem(hp.getitemId(), inventory.getConsumables()) == null);
+        assertTrue(inventory.getItem(sword.getitemId()) == null);
 
     }
     @Test
     public void testRemoveDeadItems() {
         Character character = new Character(3,Character.class.getSimpleName() , new Position(3, 4));
         Sword sword = new Sword(1);
-        character.inventory.addItemToInventory(sword);
+        character.getInventory().addItemToInventory(sword);
         //now consume sword
         while (sword.getUses() > 0) {
-            sword.consume(character);
+            sword.getWeaponInfo();
         }
-        character.inventory.removeDeadItems();
-        assertTrue(character.inventory.getItem(sword.getitemId(), character.inventory.getItems()) == null);
+        character.getInventory().removeDeadItems();
+        assertTrue(character.getInventory().getItem(sword.getitemId()) == null);
     }
     @Test
     public void testAddRecipeGetRecipe() {
@@ -181,7 +143,7 @@ public class InventoryTest {
         Treasure t1 = new Treasure(5);
         inventory.addItemToInventory(wood1);
         inventory.addItemToInventory(t1);
-        assertTrue(inventory.getRecipe(Treasure.class.getSimpleName().toLowerCase()).equals(Arrays.asList(Wood.class.getSimpleName().toLowerCase(), Treasure.class.getSimpleName().toLowerCase())));
+        assertTrue(inventory.getRecipesOfItem(Treasure.class.getSimpleName().toLowerCase()).equals(Arrays.asList(Wood.class.getSimpleName().toLowerCase(), Treasure.class.getSimpleName().toLowerCase())));
     }
     @Test
     public void testGetBows() {
@@ -190,7 +152,7 @@ public class InventoryTest {
         Key key = new Key(4,1);
         inventory.addItemToInventory(bow);
         inventory.addItemToInventory(key);
-        assertEquals(inventory.getBows(), Arrays.asList(bow));
+        assertEquals(inventory.getWeapons(), Arrays.asList(bow));
     }
     @Test
     public void testGetSwords() {
