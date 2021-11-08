@@ -19,7 +19,7 @@ public class TickTests {
     
     private EntityResponse getPlayer(List<EntityResponse> entities){
         for(EntityResponse entity : entities){
-            if(entity.getType().equals("character")){
+            if(entity.getType().equals("player")){
                 return entity;
             }
         }
