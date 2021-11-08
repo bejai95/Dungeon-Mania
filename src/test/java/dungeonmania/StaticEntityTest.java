@@ -86,6 +86,8 @@ public class StaticEntityTest {
 
     //-----Boulder-----
     //Tests moving a boulder onto an empty cell
+
+    //has issues, if done in all tests it doesnt work, if u run just this test it works. Maybe a problem with static?
     @Test
     public void testBoulderMoveOpen(){
         Position startPos = new Position(1, 1);        

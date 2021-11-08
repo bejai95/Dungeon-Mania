@@ -184,11 +184,6 @@ public class Game {
         }
         return ret;
     }
-
-    private Consumable getConsumableFromId(String itemUsed) throws IllegalArgumentException{
-        return null; //TODO
-
-    }
     /**
      * Gets a list of all the spawners on the map
      * @return
@@ -403,6 +398,8 @@ public class Game {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
         //use item
+        //parse itemUsed by removing the underscore
+        itemUsed = itemUsed.replaceAll("_", "");
         Item used = inventory.getItemFromType(itemUsed);
         if(used != null){
             if(!(used instanceof Consumable)){
