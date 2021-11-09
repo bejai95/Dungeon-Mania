@@ -749,7 +749,7 @@ public class Game {
      */
     private boolean isCollision(Entity movingEntity, Position destination){
         for (Entity entity : entities) {
-            if (entity.getPosition().equals(destination) && entity.getPosition().getLayer() == destination.getLayer()) {
+            if (entity.getPosition().equals(destination) && entity.getPosition().getLayer() >= destination.getLayer()) {
                 return true;
             }
         }
