@@ -11,15 +11,6 @@ public class StaticEntity extends Entity {
         super(id, type, position);
     }
     //-----Methods-----
-    // //Checks to see if a collision with a static entity would occur at a given position
-    // public static boolean isCollision(Position cell){
-    //     for (StaticEntity staticEntityItem : staticEntitiesList) {
-    //         if (staticEntityItem.getPosition().equals(cell) && staticEntityItem.getPosition().getLayer() == cell.getLayer()) {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
 
     //-----Getters and Setters-----
 }

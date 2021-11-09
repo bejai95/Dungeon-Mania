@@ -12,6 +12,7 @@ public class Door extends StaticEntity {
         super(id, "door", position);
         this.isOpen = false;
         this.matchingKeyNum = matchingKeyNum;
+        this.setIsInteractable(true);
     }
 
     //-----Methods-----

@@ -19,6 +19,10 @@ import dungeonmania.util.Position;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
+import javax.sound.sampled.Port;
+
+import java.lang.reflect.*;
+
 public class Game {
     private String dungeonId;
     private String dungeonName;
@@ -226,6 +230,34 @@ public class Game {
         return ret;
     }
 
+    /**
+     * Gets a list of all floor switches on the map
+     * @return
+     */
+    private List<FloorSwitch> getSwitches(){
+        List<FloorSwitch> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof FloorSwitch){
+                ret.add((FloorSwitch) entity);
+            }
+        }
+        return ret;
+    }
+
+    /**
+     * Gets a list of all placed bombs
+     * @return
+     */
+    private List<PlacedBomb> getBombs(){
+        List<PlacedBomb> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            if(entity instanceof PlacedBomb){
+                ret.add((PlacedBomb) entity);
+            }
+        }
+        return ret;
+    }
+
     private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
         return null; //TODO
     }
@@ -426,22 +458,11 @@ public class Game {
     private void removeSpecifiedEntities(){
         return;
     }
-    /**
-     * Gets the item on the ground at the same position as the player  
-     * @return null if there is no such item
-     */
-    private UnpickedUpItem getItemOnPlayer(){
-        Character player = getPlayer();
-        for(Entity entity : entities){
-            if(entity instanceof UnpickedUpItem && Objects.equals(entity.getPosition(), player.getPosition())){
-                return (UnpickedUpItem) entity;
-            }
-        }
-        return null;
-    }
+
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
+        Position destinationTile = player.getPosition().translateBy(movementDirection);
         //use item
         //parse itemUsed by removing the underscore
         itemUsed = itemUsed.replaceAll("_", "");
@@ -453,17 +474,6 @@ public class Game {
             Consumable cons = (Consumable) used;
             cons.consume(player);
         }
-
-        /*
-        THIS SOLUTION DOESN'T WORK
-
-        NEED A BETTER SYSTEM FOR STATIC ENTITIES
-
-        entities.removeAll(getStaticEntities());
-        entities.addAll(StaticEntity.getStaticEntitiesList());
-        
-        
-        */
 
         //remove dead items
         inventory.removeDeadItems();
@@ -477,24 +487,12 @@ public class Game {
             mob.move();
         }
         
-        //spawn in enemies -- needs tick counter
+        //spawn in enemies 
         List<ZombieToastSpawner> spawners = getSpawners();
         for(ZombieToastSpawner spawner : spawners){
-            ZombieToast zomb = spawner.spawn(tickCounter, gameMode);
-            if(zomb != null){
-                entities.add(zomb);
-            }
+            zombieSpawn(spawner);
         }
-        UnpickedUpItem pickup = getItemOnPlayer();
-        if(pickup != null){
-            try {
-                inventory.addItemToInventory(pickup.pickupItem());
-                entities.remove(pickup);
-            }
-            catch (Exception e) {
-                throw new IllegalArgumentException("The item you are trying to pickup does not exist");
-            }
-        }
+
         spawnRandomEnemies();
 
 
@@ -511,7 +509,10 @@ public class Game {
             //entities.removeAll(dead);
 
             removeDeadEntities();
-        }        
+        }  
+
+        //This handles all interaction with static entities
+        findInteractableStaticEntity(movementDirection);
 
 
         //increment tick counter
@@ -531,6 +532,221 @@ public class Game {
             merc.setSpeed(Mercenary.defaultSpeed);
         }
     }
+
+    //From here donwards are methods to support static entity interactions
+
+    /**
+     * Checks to see if the tile that the character moves onto has a static entity
+     * to interact with
+     */
+    private void findInteractableStaticEntity(Direction movementDirection){
+        Position destinationTile = getPlayer().getPosition().translateBy(movementDirection);
+        List<StaticEntity> staticEntitiesList = new ArrayList<>();
+        staticEntitiesList = getStaticEntities();
+        for (StaticEntity staticEntityItem : staticEntitiesList) {
+            if (staticEntityItem.getPosition().equals(destinationTile) && staticEntityItem.canInteract()) {
+                interactStaticEntity(staticEntityItem, movementDirection);
+            }
+        }
+    }
+
+    /**
+     * Checks to see if the tile that the character moves onto has a static entity
+     * to interact with
+     */
+    private void interactStaticEntity(Entity interactionEntity, Direction movementDirection){
+        if (interactionEntity instanceof Portal)  {
+            //Teleports player when they step on a portal
+            Portal interactionPortal = (Portal)interactionEntity;
+            Position teleportLocation = interactionPortal.getTeleportLocation(getStaticEntities());
+            getPlayer().setPosition(teleportLocation);
+        } else if (interactionEntity instanceof Exit) {
+            //put code in here that will end the game
+        } else if (interactionEntity instanceof Door) {
+            //find out how inventory works and then add door interaction here
+        } else if (interactionEntity instanceof Boulder) {
+            Boulder interactionBoulder = (Boulder)interactionEntity;
+            moveBoulder(interactionBoulder, movementDirection);
+        } else if (interactionEntity instanceof UnpickedUpItem){
+            UnpickedUpItem interactionUnpickedUpItem = (UnpickedUpItem)interactionEntity;
+            pickupCurrentItem(interactionUnpickedUpItem);
+        }
+    }
+
+
+    /**
+     * Gets the item on the ground at the same position as the player  
+     * @return null if there is no such item
+     */
+    private void pickupCurrentItem(UnpickedUpItem selectedPickup){
+        Item newItem = null;
+        try {
+            newItem = selectedPickup.pickupItem();
+        } catch (IllegalAccessError | ClassNotFoundException | IllegalAccessException | InvocationTargetException
+                | InstantiationException | NoSuchMethodException e1) {
+            throw new IllegalArgumentException("The item you are trying to pickup does not exist");
+        }
+        if(newItem != null){
+            getPlayer().getInventory().addItemToInventory(newItem);
+            entities.remove(selectedPickup);
+        }
+    }
+
+    /**
+     * Moves the boulder
+     */
+    private void moveBoulder(Entity boulder, Direction movementDirection){
+        Position boulderPos = boulder.getPosition();
+        Position boulderNextPos = boulderPos.translateBy(movementDirection);
+        //Check to see if the boulder collides with anything
+        if (isCollision(boulder, boulderNextPos) == false) {
+            //If no collision it will move
+            boulder.setPosition(boulderNextPos);
+
+            //Activates the switch if moved onto a switch
+            FloorSwitch potentialPressedSwitch = isFloorSwitch(boulderNextPos);
+            if (potentialPressedSwitch != null) {
+                potentialPressedSwitch.setIsActive(true);
+                explodeOnSwitchCheck(potentialPressedSwitch);
+            }
+
+            //Deactivates a switch if it moves off a switch
+            FloorSwitch potentialUnpressedSwitch = isFloorSwitch(boulderPos);
+            if (potentialUnpressedSwitch != null) {
+                potentialUnpressedSwitch.setIsActive(false);
+            }
+        }
+    }
+
+    //temp ID until Bejai shows me how to implement IDs
+    private int tempID = 10000;
+
+
+    /**
+     * Places a bomb on the ground
+     */
+    private void placeBomb(Position placementPosition){
+        //temp ID until Bejai shows me how to implement IDs
+        this.tempID++;
+        PlacedBomb newBomb = new PlacedBomb(tempID, "Placed Bomb", placementPosition);
+        entities.add(newBomb);
+        //Add stuff here to remove bomb from inventory (check with Jeremy)
+    }
+
+    /*When a switch is pressed it can call this method with it's position to call
+    on any adjacent bombs to explode*/
+    private void explodeOnSwitchCheck (FloorSwitch checkingSwitch){
+        Position switchPos = checkingSwitch.getPosition(); 
+        List<Position> adjacentPositions = switchPos.getAdjacentPositions();
+        List<PlacedBomb> placedBombList = new ArrayList<PlacedBomb>();
+        List<PlacedBomb> explodeList = new ArrayList<PlacedBomb>();
+        placedBombList = getBombs();
+
+        /*Go through each adjacent location to the switch, then check the bombs list
+        if it finds any bombs add it to the explode list*/
+        for (Position edgeTile : adjacentPositions) {
+            for (PlacedBomb possibleBomb : placedBombList ) {
+                if (edgeTile.equals(possibleBomb.getPosition())) {
+                    explodeList.add(possibleBomb);
+                }   
+            }
+        }
+
+        //Explodes all bombs on the explode list
+        for (PlacedBomb explodeItem : explodeList) {
+            explode(explodeItem);
+        }
+    }
+
+    /*explodes killing all enemies 1 cell adjacent to the bomb
+    and removing the placed bomb*/
+    public void explode(PlacedBomb activeBomb) {
+        List<MovingEntity> movingEntityList = new ArrayList<>();
+        movingEntityList = getMovingEntities();
+        List<Position> adjacentPositions = activeBomb.getPosition().getAdjacentPositions();
+        List<MovingEntity> killList = new ArrayList<MovingEntity>();
+        //Removes the bomb from the placed bombs list
+        entities.remove(activeBomb);
+        //Finds which surrounding entities to kill
+        for (Position edgeTile : adjacentPositions) {
+            for (MovingEntity movingEntityItem : movingEntityList) {
+                if (edgeTile.equals(movingEntityItem.getPosition())) {
+                    killList.add(movingEntityItem);
+                }
+            }
+        }
+        //Removes surrounding entities that have been killed
+        for (MovingEntity deadEntity : killList) {
+            entities.remove(deadEntity);
+        }
+        return;
+    }
+
+    /**
+     * Will spawn a zombie toast on an adjacent open tile 
+     * and return the newly created zombie toast or null
+     */
+     public void zombieSpawn (ZombieToastSpawner activeSpawner) {
+        Position spawnerPosition = activeSpawner.getPosition();
+
+        //Checks to see if spawn conditions are met
+        if ((gameMode == "hard" && tickCounter % 15 == 0) || (gameMode != "hard" && tickCounter % 20 == 0)) {
+            //List of adjacent positions around spawner
+            List<Position> adjacentPositions = spawnerPosition.getAdjacentPositions();
+
+            //Sets the default spawn positions as on top of the spawner
+            Position spawnPoint = spawnerPosition;
+
+            //Find an adjacent open tile for the zombie toast to spawn
+            for (Position edgeCell : adjacentPositions) {
+                if (isEmpty(edgeCell)) {
+                    ;
+                } else {
+                    spawnPoint = edgeCell;
+                    break;
+                }
+            }
+
+            //Create new zombie toast
+            ZombieToast newZombieToast = new ZombieToast(120, spawnPoint, new RandomMovement());
+            entities.add(newZombieToast);
+        } else {
+            return;
+        }
+
+    }
+
+
+    /**
+     * Checks to see if a floor switch is present at a given position 
+     * and returns the floor switch or null
+     */
+    private FloorSwitch isFloorSwitch(Position tile) {
+        List<FloorSwitch> floorSwitchList = new ArrayList<>();
+        floorSwitchList = getSwitches();
+        for (FloorSwitch floorSwitchItem : floorSwitchList) {
+            if (floorSwitchItem.getPosition().equals(tile)) {
+                return floorSwitchItem;
+            }
+        }
+        return null;
+    }
+
+
+    /**
+     * Checks to see if a collision will occur when moving an entity from one 
+     * cell to another
+     */
+    private boolean isCollision(Entity movingEntity, Position destination){
+        for (Entity entity : entities) {
+            if (entity.getPosition().equals(destination) && entity.getPosition().getLayer() == destination.getLayer()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
     
     
 }
