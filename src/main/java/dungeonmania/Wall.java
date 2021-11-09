@@ -8,6 +8,7 @@ public class Wall  extends StaticEntity {
     //-----Constructors-----
     public Wall(int id, String type, Position position) {
         super(id, "wall", position);
+        this.setIsInteractable(false);
     }
 
     //-----Methods-----
