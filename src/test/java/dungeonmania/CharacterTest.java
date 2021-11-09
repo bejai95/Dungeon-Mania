@@ -19,7 +19,7 @@ public class CharacterTest {
     @Test
     public void testMove() {
         //test moving in every direction
-        Character character = new Character(1, "Character", new Position(5,5));
+        Character character = new Character(1, new Position(5,5));
         character.move(Direction.UP);
         //have not moved horizontally
         assertEquals(character.getPosition().getX(), 5);
@@ -63,7 +63,7 @@ public class CharacterTest {
     @Test
     public void testGetDamage() {
         //test no items
-        Character character = new Character(1, "Character", new Position(5,5));
+        Character character = new Character(1, new Position(5,5));
         assertEquals(character.getDamage(), character.getBaseDamage());
         //test with items
         Sword sword = new Sword(4);
@@ -78,7 +78,7 @@ public class CharacterTest {
     @Test
     public void testGetDefense() {
         //test that defense does nothing
-        Character character = new Character(1, "Character", new Position(5,5));
+        Character character = new Character(1, new Position(5,5));
         assertEquals(character.getDefense(), character.getBaseDefense());
         //test that defense does more with items
         Shield shield = new Shield(2);
@@ -109,7 +109,7 @@ public class CharacterTest {
     @Test
     public void testGetHealth() {
         //test before and after a battle
-        Character character = new Character(1, "Character", new Position(5,5));
+        Character character = new Character(1, new Position(5,5));
         Spider spider = new Spider(3, new Position(5,5), new SquareMovement());
         double healthBeforeBattle = character.getHealth();
         BattleManager battleManager = new BattleManager(character, spider, Collections.emptyList());
@@ -120,7 +120,7 @@ public class CharacterTest {
     public void testUse() {
         //test when trying to use an item you cant use throws exceptions
         //test using an item that exist does not throw errors
-        Character character = new Character(1, "Character", new Position(5,5));
+        Character character = new Character(1, new Position(5,5));
         HealthPotion hp = new HealthPotion(2);
         character.getInventory().addItemToInventory(hp);
         //trying to use should not throw error

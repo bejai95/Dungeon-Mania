@@ -20,7 +20,7 @@ public class ItemTest {
     //Test that when items are used their uses are decreased
     @Test
     public void usesTests() {
-        Character character = new Character(3, Character.class.getSimpleName(),new Position(3, 4));
+        Character character = new Character(3, new Position(3, 4));
         Armour a = new Armour(1);
         int startingUses = a.getUses();
         a.getMultipler();
@@ -73,7 +73,7 @@ public class ItemTest {
     @Test
     public void theOneRingTests() {
         //test that revive does work
-        Character character = new Character(3, "Character", new Position(3, 4));
+        Character character = new Character(3, new Position(3, 4));
         //now set health to 0 to pretend died
         character.setHealth(0);
         character.revive();
@@ -86,7 +86,7 @@ public class ItemTest {
     }
     @Test
     public void healthPotionTests() {
-        Character character = new Character(3, Character.class.getCanonicalName(), new Position(3, 4));
+        Character character = new Character(3, new Position(3, 4));
         HealthPotion hp = new HealthPotion(4);
         character.getInventory().addItemToInventory(hp);
         character.setHealth(50);
@@ -97,7 +97,7 @@ public class ItemTest {
     }
     @Test
     public void invicibilityTests() {
-        Character character = new Character(3, Character.class.getCanonicalName(), new Position(3, 4));
+        Character character = new Character(3, new Position(3, 4));
         InvincibilityPotion ip = new InvincibilityPotion(4);
         character.getInventory().addItemToInventory(ip);
         ip.consume(character);
@@ -113,7 +113,7 @@ public class ItemTest {
     }
     @Test
     public void InvisibilityTests() {
-        Character character = new Character(3, Character.class.getCanonicalName(), new Position(3, 4));
+        Character character = new Character(3, new Position(3, 4));
         InvisibilityPotion ip = new InvisibilityPotion(4);
         character.getInventory().addItemToInventory(ip);
         ip.consume(character);

@@ -8,7 +8,7 @@ public class Key extends Item implements Material {
      * @param keyNum
      */
     public Key(int itemId, int keyNum) {
-        super(itemId, 1);
+        super(itemId, 1, "key");
         this.keyNum = keyNum;
     }
 

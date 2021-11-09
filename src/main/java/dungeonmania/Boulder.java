@@ -8,7 +8,7 @@ public class Boulder extends StaticEntity {
     //-----Data-----
 
     //-----Constructors-----
-    public Boulder(int id, String type, Position position) {
+    public Boulder(int id, Position position) {
         super(id, "boulder", position);
         this.setIsInteractable(true);
     }

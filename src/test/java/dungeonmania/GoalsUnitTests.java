@@ -75,8 +75,8 @@ public class GoalsUnitTests {
     private List<Entity> getEntityListWithSpiderPlayerAndExit(){
         List<Entity> ents = new ArrayList<Entity>();
         MovingEntity spider1 = new Spider(0, new Position(0,0), new SquareMovement());
-        Character player = new Character(1, "character", new Position(0,1));
-        StaticEntity exit = new Exit(2, "exit", new Position(0,2));
+        Character player = new Character(1, new Position(0,1));
+        StaticEntity exit = new Exit(2, new Position(0,2));
         StaticEntity treasure = new UnpickedUpItem(3, "treasure", new Position(0,4), "Treasure");
         ents.add(spider1);
         ents.add(player);

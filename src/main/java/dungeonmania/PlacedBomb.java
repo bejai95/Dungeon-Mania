@@ -10,7 +10,7 @@ public class PlacedBomb extends StaticEntity {
     //-----Data-----
 
     //-----Constructors-----
-    public PlacedBomb(int id, String type, Position position) {
+    public PlacedBomb(int id, Position position) {
         super(id, "bomb", position);
         this.setIsInteractable(false);
     }

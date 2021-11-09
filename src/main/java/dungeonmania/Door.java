@@ -8,7 +8,7 @@ public class Door extends StaticEntity {
     private int matchingKeyNum;
 
     //-----Constructors-----
-    public Door(int id, String type, Position position, int matchingKeyNum) {
+    public Door(int id, Position position, int matchingKeyNum) {
         super(id, "door", position);
         this.isOpen = false;
         this.matchingKeyNum = matchingKeyNum;

@@ -12,8 +12,6 @@ public abstract class Entity implements interaction {
     private boolean isInteractable;
     private static int numEntityIds; // Initialized to zero
 
-    public Entity() {}
-
     public Entity(int id, String type, Position position) {
         this.id = id;
         this.type = type;

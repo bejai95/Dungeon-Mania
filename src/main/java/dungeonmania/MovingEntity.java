@@ -15,8 +15,6 @@ public class MovingEntity extends Entity implements Battleable{
     Movement moveBehaviour;
     Item currentItem;
 
-    public MovingEntity() {}
-
     public MovingEntity(int id, String type, Position position, Movement moveBehaviour) {
         super(id, type, position);
         this.moveBehaviour = moveBehaviour;
