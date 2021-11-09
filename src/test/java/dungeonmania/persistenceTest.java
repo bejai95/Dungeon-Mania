@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +31,8 @@ public class persistenceTest {
         // Test loading a game that does not exist
         assertThrows(IllegalArgumentException.class, () -> controller1.loadGame("NonexistentGame"));
         
+        controller1.deleteExistingGames();
+        
         // Test creating and then saving some games
         assertDoesNotThrow(() -> controller1.newGame("advanced", "Standard"));
         controller1.saveGame("save1");
@@ -39,7 +42,7 @@ public class persistenceTest {
         // Test that both games have been saved
         List<String> expected = Arrays.asList("save1", "save2");
         List<String> actual = controller1.allGames();
-        // assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
         //  Test that if the application is terminated, the current game state can be reloaded and play can continue from where it left off
         // Basically this means we should be able to create a new controller and access our other games from there
