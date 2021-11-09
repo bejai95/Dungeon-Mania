@@ -2,7 +2,7 @@ package dungeonmania;
 
 import dungeonmania.util.Position;
 
-public class StaticEntity extends Entity {
+    public abstract class StaticEntity extends Entity {
 
     //-----Data-----
 

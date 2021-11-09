@@ -6,7 +6,7 @@ public class Wall  extends StaticEntity {
 
     //-----Data-----
     //-----Constructors-----
-    public Wall(int id, String type, Position position) {
+    public Wall(int id, Position position) {
         super(id, "wall", position);
         this.setIsInteractable(false);
     }

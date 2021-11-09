@@ -66,7 +66,7 @@ public class persistenceTest {
     public void testPersistenseConsistency() {
         
         DungeonManiaController controller1 = new DungeonManiaController();
-        controller1.newGame("advanced", "Standard");
+        controller1.newGame("advanced-2", "Standard");
         
         for(int i = 0; i < 10; i++) {
             controller1.tick(null, Direction.RIGHT);
@@ -99,8 +99,8 @@ public class persistenceTest {
         Game previousGame = controller1.getCurrentlyAccessingGame();
         List<Item> previousInventory = previousGame.getInventory().getItems();
         String previousGoalsLeft = previousGame.getGoalsLeft();
-        //assertTrue(previousInventory.size() == 9);
-        //assertTrue(previousGoalsLeft.equals(":mercenary"));
+        assertTrue(previousInventory.size() == 10);
+        assertTrue(previousGoalsLeft.equals(":mercenary"));
 
 
         // Save the file, and load it from another file, check that the inventories and goals are the same

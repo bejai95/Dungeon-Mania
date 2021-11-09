@@ -9,13 +9,13 @@ import dungeonmania.util.Position;
 
 public class Portal extends StaticEntity {
     //-----Data-----
-    private String potalColour;
+    private String portalColour;
 
 
     //-----Constructors-----
-    public Portal(int id, String type, Position position, String potalColour) {
-        super(id, "potal", position);
-        this.potalColour = potalColour;
+    public Portal(int id, Position position, String portalColour) {
+        super(id, "portal", position);
+        this.portalColour = portalColour;
         this.setIsInteractable(true);
     }
 
@@ -26,7 +26,7 @@ public class Portal extends StaticEntity {
         for (StaticEntity staticEntityItem : staticEntitiesList) {
             if (staticEntityItem instanceof Portal) {
                 Portal potentialPortal = (Portal)staticEntityItem;
-                if ((potentialPortal != this) && (potentialPortal.getPotalColour() == this.potalColour)) {
+                if ((potentialPortal != this) && (potentialPortal.getportalColour() == this.portalColour)) {
                     return potentialPortal.getPosition();
                 }
             }
@@ -35,8 +35,8 @@ public class Portal extends StaticEntity {
     }
 
     //-----Getters and Setters-----
-    public String getPotalColour() {
-        return potalColour;
+    public String getportalColour() {
+        return portalColour;
     }
 
 }

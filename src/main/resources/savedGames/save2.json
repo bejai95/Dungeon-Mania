@@ -254,11 +254,6 @@
       "data": {
         "inventory": {
           "items": [],
-          "consumables": [],
-          "materials": [],
-          "bows": [],
-          "swords": [],
-          "defenceItems": [],
           "recipes": {
             "shield2": [
               "wood",
@@ -279,7 +274,7 @@
           }
         },
         "health": 200.0,
-        "damage": 20,
+        "baseDamage": 3,
         "baseDefense": 0.0,
         "InvincibleDuration": 0,
         "InvisibleDuration": 0,
@@ -306,7 +301,7 @@
           "y": 1,
           "layer": 0
         },
-        "isInteractable": false
+        "isInteractable": true
       }
     },
     {
@@ -568,7 +563,7 @@
           "y": 4,
           "layer": 0
         },
-        "isInteractable": false
+        "isInteractable": true
       }
     },
     {
@@ -604,7 +599,7 @@
         "currentGold": 0,
         "battleRadius": 2,
         "health": 200.0,
-        "damage": 15,
+        "damage": 3,
         "baseDefense": 0.0,
         "defense": 0.0,
         "speed": 1,
@@ -1051,7 +1046,7 @@
           "y": 10,
           "layer": 0
         },
-        "isInteractable": false
+        "isInteractable": true
       }
     },
     {
@@ -1066,7 +1061,7 @@
           "y": 10,
           "layer": 0
         },
-        "isInteractable": false
+        "isInteractable": true
       }
     },
     {
@@ -1619,6 +1614,7 @@
   "buildables": [],
   "tickCounter": 0,
   "gameMode": "Standard",
+  "spiderLimit": 4,
   "goal": {
     "className": "dungeonmania.AndGoal",
     "data": {
@@ -1634,6 +1630,7 @@
       ]
     }
   },
-  "mercenarySpawnChance": 0.05,
-  "spiderTicks": 10
+  "mercenarySpawnChance": 0.005,
+  "spiderTicks": 10,
+  "tempID": 10000
 }

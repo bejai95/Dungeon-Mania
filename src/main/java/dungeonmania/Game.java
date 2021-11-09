@@ -638,7 +638,7 @@ public class Game {
     private void placeBomb(Position placementPosition){
         //temp ID until Bejai shows me how to implement IDs
         this.tempID++;
-        PlacedBomb newBomb = new PlacedBomb(tempID, "Placed Bomb", placementPosition);
+        PlacedBomb newBomb = new PlacedBomb(tempID, placementPosition);
         entities.add(newBomb);
         //Add stuff here to remove bomb from inventory (check with Jeremy)
     }

@@ -9,7 +9,7 @@ public class Sword extends Item implements Weapon {
      * @param itemId
      */
     public Sword(int itemId) {
-        super(itemId, 3);
+        super(itemId, 3, "sword");
     }
     /**
      * reduces durability of sword

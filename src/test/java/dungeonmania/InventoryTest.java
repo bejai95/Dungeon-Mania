@@ -122,7 +122,7 @@ public class InventoryTest {
     }
     @Test
     public void testRemoveDeadItems() {
-        Character character = new Character(3,Character.class.getSimpleName() , new Position(3, 4));
+        Character character = new Character(3, new Position(3, 4));
         Sword sword = new Sword(1);
         character.getInventory().addItemToInventory(sword);
         //now consume sword
@@ -232,7 +232,7 @@ public class InventoryTest {
         int itemId = 3;
         HealthPotion hp = new HealthPotion(itemId);
         inventory.addItemToInventory(hp);
-        assertTrue(inventory.getItemFromType("healthpotion") == hp);
+        assertTrue(inventory.getItemFromType("health_potion") == hp);
         assertTrue(inventory.getItemFromType("cahskgah") == null);
     }
 }

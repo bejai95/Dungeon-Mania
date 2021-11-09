@@ -9,7 +9,7 @@ public class Bow extends Item implements Weapon {
      * @param itemId
      */
     public Bow(int itemId) {
-        super(itemId, 3);
+        super(itemId, 3, "bow");
     }
     /**
      * 
