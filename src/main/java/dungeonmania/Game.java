@@ -487,12 +487,10 @@ public class Game {
         inventory.removeDeadItems();
 
         //Interact with static entities
-        Boolean haltMovement = findInteractableStaticEntity(movementDirection);
+        findInteractableStaticEntity(movementDirection);
 
         //move in direction
-        if (haltMovement == false) {
-            player.move(movementDirection);
-        }
+        player.move(movementDirection);
         
         //move all the mobs -- needs list of moving entities
         List<MovingEntity> movingEntities = getMovingEntities();
@@ -549,29 +547,27 @@ public class Game {
      * Checks to see if the tile that the character moves onto has a static entity
      * to interact with. Returns a boolean to see if this should halt the movement.
      */
-    private Boolean findInteractableStaticEntity(Direction movementDirection){
+    private void findInteractableStaticEntity(Direction movementDirection){
         Position destinationTile = getPlayer().getPosition().translateBy(movementDirection);
         List<StaticEntity> staticEntitiesList = new ArrayList<>();
         staticEntitiesList = getStaticEntities();
         for (StaticEntity staticEntityItem : staticEntitiesList) {
             if (staticEntityItem.getPosition().equals(destinationTile) && staticEntityItem.canInteract()) {
-                return interactStaticEntity(staticEntityItem, movementDirection);
+                interactStaticEntity(staticEntityItem, movementDirection);
             }
         }
-        return false;
     }
 
     /**
      * Checks to see if the tile that the character moves onto has a static entity
      * to interact with. Returns a boolean to see if this should halt the movement.
      */
-    private Boolean interactStaticEntity(Entity interactionEntity, Direction movementDirection){
+    private void interactStaticEntity(Entity interactionEntity, Direction movementDirection){
         if (interactionEntity instanceof Portal)  {
             //Teleports player when they step on a portal
             Portal interactionPortal = (Portal)interactionEntity;
             Position teleportLocation = interactionPortal.getTeleportLocation(getStaticEntities());
             getPlayer().setPosition(teleportLocation);
-            return true;
         } else if (interactionEntity instanceof Exit) {
             //put code in here that will end the game
         } else if (interactionEntity instanceof Door) {
@@ -583,7 +579,6 @@ public class Game {
             UnpickedUpItem interactionUnpickedUpItem = (UnpickedUpItem)interactionEntity;
             pickupCurrentItem(interactionUnpickedUpItem);
         }
-        return false;
     }
 
 
