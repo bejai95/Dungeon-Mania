@@ -257,7 +257,7 @@
             {
               "className": "dungeonmania.Sword",
               "data": {
-                "uses": 3,
+                "uses": 2,
                 "itemId": 346,
                 "type": "sword"
               }
@@ -355,7 +355,7 @@
             ]
           }
         },
-        "health": 200.0,
+        "health": 190.0,
         "baseDamage": 3,
         "baseDefense": 0.0,
         "InvincibleDuration": 0,
@@ -1692,43 +1692,43 @@
             "direction": "UP",
             "path": [
               {
-                "x": 13,
+                "x": 9,
+                "y": 5,
+                "layer": 0
+              },
+              {
+                "x": 10,
+                "y": 5,
+                "layer": 0
+              },
+              {
+                "x": 11,
+                "y": 5,
+                "layer": 0
+              },
+              {
+                "x": 11,
+                "y": 6,
+                "layer": 0
+              },
+              {
+                "x": 11,
                 "y": 7,
                 "layer": 0
               },
               {
-                "x": 14,
+                "x": 10,
                 "y": 7,
                 "layer": 0
               },
               {
-                "x": 15,
+                "x": 9,
                 "y": 7,
                 "layer": 0
               },
               {
-                "x": 15,
-                "y": 8,
-                "layer": 0
-              },
-              {
-                "x": 15,
-                "y": 9,
-                "layer": 0
-              },
-              {
-                "x": 14,
-                "y": 9,
-                "layer": 0
-              },
-              {
-                "x": 13,
-                "y": 9,
-                "layer": 0
-              },
-              {
-                "x": 13,
-                "y": 8,
+                "x": 9,
+                "y": 6,
                 "layer": 0
               }
             ]
@@ -1737,75 +1737,8 @@
         "id": 455,
         "type": "spider",
         "position": {
-          "x": 13,
-          "y": 7,
-          "layer": 1
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Spider",
-      "data": {
-        "health": 50.0,
-        "damage": 2,
-        "baseDefense": 0.0,
-        "defense": 0.0,
-        "speed": 1,
-        "isHostile": false,
-        "moveBehaviour": {
-          "className": "dungeonmania.SquareMovement",
-          "data": {
-            "direction": "LEFT",
-            "path": [
-              {
-                "x": 4,
-                "y": 13,
-                "layer": 0
-              },
-              {
-                "x": 5,
-                "y": 13,
-                "layer": 0
-              },
-              {
-                "x": 6,
-                "y": 13,
-                "layer": 0
-              },
-              {
-                "x": 6,
-                "y": 14,
-                "layer": 0
-              },
-              {
-                "x": 6,
-                "y": 15,
-                "layer": 0
-              },
-              {
-                "x": 5,
-                "y": 15,
-                "layer": 0
-              },
-              {
-                "x": 4,
-                "y": 15,
-                "layer": 0
-              },
-              {
-                "x": 4,
-                "y": 14,
-                "layer": 0
-              }
-            ]
-          }
-        },
-        "id": 456,
-        "type": "spider",
-        "position": {
-          "x": 4,
-          "y": 15,
+          "x": 9,
+          "y": 5,
           "layer": 1
         },
         "isInteractable": false
@@ -1826,42 +1759,42 @@
             "direction": "DOWN",
             "path": [
               {
-                "x": 1,
+                "x": 13,
                 "y": 3,
                 "layer": 0
               },
               {
-                "x": 2,
+                "x": 14,
                 "y": 3,
                 "layer": 0
               },
               {
-                "x": 3,
+                "x": 15,
                 "y": 3,
                 "layer": 0
               },
               {
-                "x": 3,
+                "x": 15,
                 "y": 4,
                 "layer": 0
               },
               {
-                "x": 3,
+                "x": 15,
                 "y": 5,
                 "layer": 0
               },
               {
-                "x": 2,
+                "x": 14,
                 "y": 5,
                 "layer": 0
               },
               {
-                "x": 1,
+                "x": 13,
                 "y": 5,
                 "layer": 0
               },
               {
-                "x": 1,
+                "x": 13,
                 "y": 4,
                 "layer": 0
               }
@@ -1871,7 +1804,7 @@
         "id": 457,
         "type": "spider",
         "position": {
-          "x": 3,
+          "x": 15,
           "y": 5,
           "layer": 1
         },
@@ -1893,43 +1826,43 @@
             "direction": "RIGHT",
             "path": [
               {
-                "x": 13,
-                "y": 1,
+                "x": 14,
+                "y": 7,
+                "layer": 0
+              },
+              {
+                "x": 15,
+                "y": 7,
+                "layer": 0
+              },
+              {
+                "x": 16,
+                "y": 7,
+                "layer": 0
+              },
+              {
+                "x": 16,
+                "y": 8,
+                "layer": 0
+              },
+              {
+                "x": 16,
+                "y": 9,
+                "layer": 0
+              },
+              {
+                "x": 15,
+                "y": 9,
                 "layer": 0
               },
               {
                 "x": 14,
-                "y": 1,
-                "layer": 0
-              },
-              {
-                "x": 15,
-                "y": 1,
-                "layer": 0
-              },
-              {
-                "x": 15,
-                "y": 2,
-                "layer": 0
-              },
-              {
-                "x": 15,
-                "y": 3,
+                "y": 9,
                 "layer": 0
               },
               {
                 "x": 14,
-                "y": 3,
-                "layer": 0
-              },
-              {
-                "x": 13,
-                "y": 3,
-                "layer": 0
-              },
-              {
-                "x": 13,
-                "y": 2,
+                "y": 8,
                 "layer": 0
               }
             ]
@@ -1938,8 +1871,34 @@
         "id": 458,
         "type": "spider",
         "position": {
-          "x": 15,
-          "y": 1,
+          "x": 16,
+          "y": 7,
+          "layer": 1
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Spider",
+      "data": {
+        "health": 50.0,
+        "damage": 2,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": false,
+        "moveBehaviour": {
+          "className": "dungeonmania.SquareMovement",
+          "data": {
+            "direction": "UP",
+            "path": []
+          }
+        },
+        "id": 459,
+        "type": "spider",
+        "position": {
+          "x": 0,
+          "y": 2,
           "layer": 1
         },
         "isInteractable": false

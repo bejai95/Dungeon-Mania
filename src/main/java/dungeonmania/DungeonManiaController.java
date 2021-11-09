@@ -161,6 +161,7 @@ public class DungeonManiaController {
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         return currentlyAccessingGame.tick(itemUsed, movementDirection);
     }
+
     public DungeonResponse interact(String entityId) throws IllegalArgumentException, InvalidActionException {
         Game game = getCurrentlyAccessingGame();
         Entity ent = game.getEntityById(entityId);
@@ -180,14 +181,14 @@ public class DungeonManiaController {
 
 
     }
+
     public DungeonResponse build(String buildable) throws IllegalArgumentException, InvalidActionException {
         try {
-            currentlyAccessingGame.getInventory().craft(buildable,Entity.getNumEntityIds());
+            currentlyAccessingGame.getInventory().craft(buildable, Game.generateUniqueId());
         }
         catch (Exception e) {
             System.out.println("An error occured");
         }
-        Entity.incrementNumEntityId();
         return new DungeonResponse(currentlyAccessingGame.getDungeonId(), currentlyAccessingGame.getDungeonName(), currentlyAccessingGame.getEntities().stream().map(x -> x.getInfo()).collect(Collectors.toList()), currentlyAccessingGame.getInventory().getItemsAsResponse(), currentlyAccessingGame.getInventory().generateBuildables(), currentlyAccessingGame.getGoal().getGoalsLeft(currentlyAccessingGame.getEntities()));
 
     }
