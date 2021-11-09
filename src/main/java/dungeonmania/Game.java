@@ -478,6 +478,9 @@ public class Game {
         //remove dead items
         inventory.removeDeadItems();
 
+        //Interact with static entities
+        findInteractableStaticEntity(movementDirection);
+
         //move in direction
         player.move(movementDirection);
 
