@@ -16,6 +16,15 @@ public class BattleManager {
         this.baddie = baddie;
         this.mercenaries = mercenaries;
     }
+
+    public List<Battleable> getFighters(){
+        List<Battleable> alive = new ArrayList<>();
+        List<Mercenary> allies = getAlliesInRange();
+        alive.add(player);
+        alive.add(baddie);
+        alive.addAll(allies);
+        return alive;
+    }
     /**
      * Does a single battle instance between a player's ally and
      * the enemy
@@ -71,12 +80,8 @@ public class BattleManager {
      * @return
      */
     public List<Battleable> battle(){        
-        List<Battleable> alive = new ArrayList<>();
+        List<Battleable> dead = new ArrayList<>();
         List<Mercenary> allies = getAlliesInRange();
-        System.out.print(allies.size());
-        alive.add(player);
-        alive.add(baddie);
-        alive.addAll(allies);
         List<Mercenary> mercsInRange = getMercsInRange();
         for(Mercenary merc : mercsInRange){
             merc.doubleSpeed();
@@ -84,16 +89,16 @@ public class BattleManager {
         }
 
         while(player.getHealth() > 0 && baddie.getHealth() > 0){
-            alive.removeAll(battleInstance(player, baddie));
+            dead.addAll(battleInstance(player, baddie));
             for(Mercenary merc : allies){
-                if(!alive.contains(baddie)){
+                if(dead.contains(baddie)){
                     break;
                 }
-                alive.removeAll(battleInstance(merc, baddie));
+                dead.addAll(battleInstance(merc, baddie));
             }
         }
 
-        return alive;
+        return dead;
     }
 
     
