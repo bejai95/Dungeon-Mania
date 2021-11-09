@@ -459,23 +459,29 @@ public class Game {
         return;
     }
 
-    public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
+   public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
         Position destinationTile = player.getPosition().translateBy(movementDirection);
         //use item
         //parse itemUsed by removing the underscore
         if(itemUsed != null){
-            String itemUsedNoUnderscores = itemUsed.replaceAll("_", "");
-            Item used = inventory.getItemFromType(itemUsedNoUnderscores);
+            Item used = inventory.getItem(Integer.parseInt(itemUsed));
+            System.out.println(used);
             if(used != null){
-                if(!(used instanceof Consumable)){
-                    throw(new IllegalArgumentException());
+                if (used instanceof Bomb) {
+                    placeBomb(player.getPosition());
+                    inventory.removeItem(used);
+                } else {
+                    if(!(used instanceof Consumable)){
+                        throw(new IllegalArgumentException());
+                    }
+                    Consumable cons = (Consumable) used;
+                    cons.consume(player);
                 }
-                Consumable cons = (Consumable) used;
-                cons.consume(player);
             }
-        }
+        } 
+
 
         //remove dead items
         inventory.removeDeadItems();
