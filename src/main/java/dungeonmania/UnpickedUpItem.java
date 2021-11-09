@@ -21,6 +21,7 @@ public class UnpickedUpItem extends StaticEntity {
         super(id, type, position);
         this.itemClass = itemClass;
         this.keyNum = keyNum;
+        this.setIsInteractable(true);
     }
  
     //Constructor for any item that's not a key
@@ -28,6 +29,7 @@ public class UnpickedUpItem extends StaticEntity {
         super(id, type, position);
         this.itemClass = itemClass;
         this.keyNum = -1;
+        this.setIsInteractable(true);
     }
 
     //-----Methods-----
@@ -40,14 +42,11 @@ public class UnpickedUpItem extends StaticEntity {
             return (Item)newKey;
         }
 
-
         //Create the new item if the item isn't a key
         Class classType = Class.forName("dungeonmania." + itemClass);
         Constructor construct = classType.getConstructor(int.class);
         Item newItem = (Item)construct.newInstance(getId());
 
-        //Remove this object from the static entities list
-        super.removeStaticEntity();
 
         //return item
         return newItem;
