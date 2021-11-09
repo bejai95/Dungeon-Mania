@@ -10,13 +10,11 @@ public abstract class Entity implements interaction {
     private String type;
     private Position position;
     private boolean isInteractable;
-    private static int numEntityIds; // Initialized to zero
 
     public Entity(int id, String type, Position position) {
         this.id = id;
         this.type = type;
         this.position = position;
-        numEntityIds++;
     }
 
     /**
@@ -47,13 +45,6 @@ public abstract class Entity implements interaction {
 
     public EntityResponse getInfo() {
         return new EntityResponse(String.valueOf(id), type, position, isInteractable);
-    }
-
-    public static int getNumEntityIds() {
-        return numEntityIds;
-    }
-    public static void incrementNumEntityId() {
-        numEntityIds++;
     }
 
     public void setPosition(Position position) {

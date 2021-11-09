@@ -16,6 +16,7 @@ import java.util.List;
 
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.response.models.DungeonResponse;
+import dungeonmania.response.models.ItemResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.FileLoader;
 
@@ -92,27 +93,35 @@ public class persistenceTest {
             controller1.tick(null, Direction.UP);
         }
 
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 3; i++) {
             controller1.tick(null, Direction.LEFT);
         }
 
-        Game previousGame = controller1.getCurrentlyAccessingGame();
-        List<Item> previousInventory = previousGame.getInventory().getItems();
-        String previousGoalsLeft = previousGame.getGoalsLeft();
+        DungeonResponse res1 = controller1.tick(null, Direction.LEFT);
+        List<ItemResponse> previousInventory = res1.getInventory();
+        List<String> previousInventoryStrings = new ArrayList<>();
+        for (ItemResponse curr: previousInventory) {
+            String currItemString = curr.getId() + curr.getType();
+            previousInventoryStrings.add(currItemString);
+        }
+        String previousGoalsLeft = res1.getGoals();
+        
         assertTrue(previousInventory.size() == 10);
         assertTrue(previousGoalsLeft.equals(":mercenary"));
 
-
-        // Save the file, and load it from another file, check that the inventories and goals are the same
+        // Save the file, and load it from another controller, check that the inventories and goals are the same
         controller1.saveGame("random_save");
         DungeonManiaController controller2 = new DungeonManiaController();
-        controller2.loadGame("random_save");
-        Game newGame = controller2.getCurrentlyAccessingGame(); 
-        List<Item> newInventory = previousGame.getInventory().getItems();
-        String newGoalsLeft = previousGame.getGoalsLeft();
+        DungeonResponse res2 = controller2.loadGame("random_save");
+        List<ItemResponse> newInventory = res2.getInventory();
+        List<String> newInventoryStrings = new ArrayList<>();
+        for (ItemResponse curr: newInventory) {
+            String currItemString = curr.getId() + curr.getType();
+            newInventoryStrings.add(currItemString);
+        }
+        String newGoalsLeft = res1.getGoals();
         
-        assertTrue(previousInventory.equals(newInventory));
+        assertTrue(previousInventoryStrings.equals(newInventoryStrings));
         assertTrue(previousGoalsLeft.equals(newGoalsLeft));
     }
-
 }

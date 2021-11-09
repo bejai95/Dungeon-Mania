@@ -18,8 +18,7 @@ public class EntityDeserializerFromDungeon  implements JsonDeserializer<Entity> 
         
         JsonObject jsonObject = json.getAsJsonObject();
         
-        // Generate an Id for the new entity
-        int newEntityId = Entity.getNumEntityIds();
+        int newEntityId = Game.generateUniqueId();
         int x = jsonObject.get("x").getAsInt();
         int y = jsonObject.get("y").getAsInt();
         String type = jsonObject.get("type").getAsString();
