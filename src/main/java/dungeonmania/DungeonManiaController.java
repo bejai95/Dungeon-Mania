@@ -196,5 +196,15 @@ public class DungeonManiaController {
         return currentlyAccessingGame;
     }
 
-    
+    // Delete all currently existing saved games (useful for testing)
+    public void deleteExistingGames() {
+        String path = "src\\main\\resources\\savedGames\\";
+        File savedGamesDir = new File(path);
+        String[] saves = savedGamesDir.list();
+        for (String s: saves) {
+            File currentsavedGame = new File(savedGamesDir.getPath(), s);
+            currentsavedGame.delete();
+        }
+    }
+
 }
