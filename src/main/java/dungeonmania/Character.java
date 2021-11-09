@@ -21,7 +21,7 @@ public class Character extends Entity implements Battleable{
         super(id, type, position);
         this.health = 200;
         this.maxHealth = this.health;
-        this.baseDamage = 20;
+        this.baseDamage = 3;
         this.baseDefense = 0;
         this.InvincibleDuration = 0;
         this.InvisibleDuration = 0;

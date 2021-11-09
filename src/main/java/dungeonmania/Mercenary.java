@@ -6,7 +6,7 @@ import dungeonmania.util.Position;
 public class Mercenary extends MovingEntity implements interaction {
     
     public static int defaultHealth = 200;
-    public static int defaultAttack = 15;
+    public static int defaultAttack = 3;
     public static double defaultdefense = 0;
     public static int defaultSpeed = 1;
 
