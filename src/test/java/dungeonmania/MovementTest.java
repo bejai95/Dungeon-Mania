@@ -53,7 +53,7 @@ public class MovementTest {
 
     @Test
     public void testMercMove() {
-        Character c = new Character(1, "Character", new Position(0, 0));
+        Character c = new Character(1, new Position(0, 0));
 
         // Chase when above target
         Mercenary merc1 = new Mercenary(0, new Position(0,3), 1);

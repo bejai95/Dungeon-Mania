@@ -3,7 +3,7 @@ package dungeonmania;
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.util.Position;
 
-public class Mercenary extends MovingEntity implements interaction {
+public class Mercenary extends MovingEntity {
     
     public static int defaultHealth = 200;
     public static int defaultAttack = 3;

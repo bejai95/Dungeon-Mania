@@ -12,7 +12,7 @@ public class FloorSwitch extends StaticEntity {
     private Boolean isActive;
 
     //-----Constructors-----
-    public FloorSwitch(int id, String type, Position position) {
+    public FloorSwitch(int id, Position position) {
         super(id, "switch", position);
         isActive = false;
         this.setIsInteractable(false);

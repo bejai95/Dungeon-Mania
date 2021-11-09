@@ -2,7 +2,7 @@ package dungeonmania;
 
 public class Armour extends Item implements DefenseItem {
     public Armour(int itemId) {
-        super(itemId, 3);
+        super(itemId, 3, "armour");
     }
     public double getMultipler() {
         //has uses

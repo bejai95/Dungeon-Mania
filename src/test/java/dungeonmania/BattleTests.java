@@ -25,7 +25,7 @@ public class BattleTests {
     public void testWinAgainstSpider() {
         DungeonManiaController c = new DungeonManiaController();
 
-        Character character = new Character(1, "Character", new Position(5,5));
+        Character character = new Character(1, new Position(5,5));
         MovingEntity spider1 = new Spider(0, new Position(5,5), new SquareMovement());
         BattleManager bat = new BattleManager(character, spider1, Collections.emptyList());
 
@@ -39,7 +39,7 @@ public class BattleTests {
     public void testWinAgainstSpiderWithAlly() {
         DungeonManiaController c = new DungeonManiaController();
 
-        Character character = new Character(1, "Character", new Position(5,5));
+        Character character = new Character(1, new Position(5,5));
         Item treasure = new Treasure(3);
         character.getInventory().addItemToInventory(treasure);
         MovingEntity spider1 = new Spider(0, new Position(5,5), new SquareMovement());

@@ -6,7 +6,7 @@ public class InvisibilityPotion extends Item implements Consumable {
      * @param itemId
      */
     public InvisibilityPotion(int itemId) {
-        super(itemId, 1);
+        super(itemId, 1, "invisibility_potion");
     }
     /**
      * Set the invisibility duration of the character

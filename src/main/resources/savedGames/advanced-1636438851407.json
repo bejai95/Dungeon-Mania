@@ -253,7 +253,29 @@
       "className": "dungeonmania.Character",
       "data": {
         "inventory": {
-          "items": [],
+          "items": [
+            {
+              "className": "dungeonmania.Bomb",
+              "data": {
+                "uses": 1,
+                "itemId": 40
+              }
+            },
+            {
+              "className": "dungeonmania.InvincibilityPotion",
+              "data": {
+                "uses": 1,
+                "itemId": 77
+              }
+            },
+            {
+              "className": "dungeonmania.Treasure",
+              "data": {
+                "uses": 1,
+                "itemId": 76
+              }
+            }
+          ],
           "recipes": {
             "shield2": [
               "wood",
@@ -273,7 +295,7 @@
             ]
           }
         },
-        "health": 200.0,
+        "health": 120.0,
         "baseDamage": 3,
         "baseDefense": 0.0,
         "InvincibleDuration": 0,
@@ -282,26 +304,11 @@
         "id": 19,
         "type": "player",
         "position": {
-          "x": 1,
-          "y": 1,
+          "x": 5,
+          "y": 11,
           "layer": 1
         },
         "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.UnpickedUpItem",
-      "data": {
-        "itemClass": "Sword",
-        "keyNum": -1,
-        "id": 20,
-        "type": "sword",
-        "position": {
-          "x": 6,
-          "y": 1,
-          "layer": 0
-        },
-        "isInteractable": true
       }
     },
     {
@@ -552,21 +559,6 @@
       }
     },
     {
-      "className": "dungeonmania.UnpickedUpItem",
-      "data": {
-        "itemClass": "Bomb",
-        "keyNum": -1,
-        "id": 40,
-        "type": "bomb",
-        "position": {
-          "x": 13,
-          "y": 4,
-          "layer": 0
-        },
-        "isInteractable": true
-      }
-    },
-    {
       "className": "dungeonmania.Wall",
       "data": {
         "id": 41,
@@ -588,32 +580,6 @@
           "x": 0,
           "y": 5,
           "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Mercenary",
-      "data": {
-        "goldThreshold": 0,
-        "currentGold": 0,
-        "battleRadius": 2,
-        "health": 200.0,
-        "damage": 3,
-        "baseDefense": 0.0,
-        "defense": 0.0,
-        "speed": 1,
-        "isHostile": false,
-        "moveBehaviour": {
-          "className": "dungeonmania.ChaseMovement",
-          "data": {}
-        },
-        "id": 43,
-        "type": "mercenary",
-        "position": {
-          "x": 3,
-          "y": 5,
-          "layer": 1
         },
         "isInteractable": false
       }
@@ -1032,36 +998,6 @@
           "layer": 2
         },
         "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.UnpickedUpItem",
-      "data": {
-        "itemClass": "Treasure",
-        "keyNum": -1,
-        "id": 76,
-        "type": "treasure",
-        "position": {
-          "x": 7,
-          "y": 10,
-          "layer": 0
-        },
-        "isInteractable": true
-      }
-    },
-    {
-      "className": "dungeonmania.UnpickedUpItem",
-      "data": {
-        "itemClass": "InvincibilityPotion",
-        "keyNum": -1,
-        "id": 77,
-        "type": "invincibility_potion",
-        "position": {
-          "x": 11,
-          "y": 10,
-          "layer": 0
-        },
-        "isInteractable": true
       }
     },
     {
@@ -1609,10 +1545,278 @@
         },
         "isInteractable": false
       }
+    },
+    {
+      "className": "dungeonmania.Spider",
+      "data": {
+        "health": 50.0,
+        "damage": 2,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": false,
+        "moveBehaviour": {
+          "className": "dungeonmania.SquareMovement",
+          "data": {
+            "direction": "RIGHT",
+            "path": [
+              {
+                "x": 15,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 16,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 17,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 17,
+                "y": 14,
+                "layer": 0
+              },
+              {
+                "x": 17,
+                "y": 15,
+                "layer": 0
+              },
+              {
+                "x": 16,
+                "y": 15,
+                "layer": 0
+              },
+              {
+                "x": 15,
+                "y": 15,
+                "layer": 0
+              },
+              {
+                "x": 15,
+                "y": 14,
+                "layer": 0
+              }
+            ]
+          }
+        },
+        "id": 120,
+        "type": "spider",
+        "position": {
+          "x": 17,
+          "y": 13,
+          "layer": 1
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Spider",
+      "data": {
+        "health": 50.0,
+        "damage": 2,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": false,
+        "moveBehaviour": {
+          "className": "dungeonmania.SquareMovement",
+          "data": {
+            "direction": "LEFT",
+            "path": [
+              {
+                "x": 13,
+                "y": 0,
+                "layer": 0
+              },
+              {
+                "x": 14,
+                "y": 0,
+                "layer": 0
+              },
+              {
+                "x": 15,
+                "y": 0,
+                "layer": 0
+              },
+              {
+                "x": 15,
+                "y": 1,
+                "layer": 0
+              },
+              {
+                "x": 15,
+                "y": 2,
+                "layer": 0
+              },
+              {
+                "x": 14,
+                "y": 2,
+                "layer": 0
+              },
+              {
+                "x": 13,
+                "y": 2,
+                "layer": 0
+              },
+              {
+                "x": 13,
+                "y": 1,
+                "layer": 0
+              }
+            ]
+          }
+        },
+        "id": 122,
+        "type": "spider",
+        "position": {
+          "x": 13,
+          "y": 2,
+          "layer": 1
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Spider",
+      "data": {
+        "health": 50.0,
+        "damage": 2,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": false,
+        "moveBehaviour": {
+          "className": "dungeonmania.SquareMovement",
+          "data": {
+            "direction": "RIGHT",
+            "path": [
+              {
+                "x": 4,
+                "y": 11,
+                "layer": 0
+              },
+              {
+                "x": 5,
+                "y": 11,
+                "layer": 0
+              },
+              {
+                "x": 6,
+                "y": 11,
+                "layer": 0
+              },
+              {
+                "x": 6,
+                "y": 12,
+                "layer": 0
+              },
+              {
+                "x": 6,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 5,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 4,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 4,
+                "y": 12,
+                "layer": 0
+              }
+            ]
+          }
+        },
+        "id": 124,
+        "type": "spider",
+        "position": {
+          "x": 6,
+          "y": 11,
+          "layer": 1
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Spider",
+      "data": {
+        "health": 50.0,
+        "damage": 2,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": false,
+        "moveBehaviour": {
+          "className": "dungeonmania.SquareMovement",
+          "data": {
+            "direction": "LEFT",
+            "path": [
+              {
+                "x": 8,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 9,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 10,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 10,
+                "y": 14,
+                "layer": 0
+              },
+              {
+                "x": 10,
+                "y": 15,
+                "layer": 0
+              },
+              {
+                "x": 9,
+                "y": 15,
+                "layer": 0
+              },
+              {
+                "x": 8,
+                "y": 15,
+                "layer": 0
+              },
+              {
+                "x": 8,
+                "y": 14,
+                "layer": 0
+              }
+            ]
+          }
+        },
+        "id": 125,
+        "type": "spider",
+        "position": {
+          "x": 8,
+          "y": 15,
+          "layer": 1
+        },
+        "isInteractable": false
+      }
     }
   ],
   "buildables": [],
-  "tickCounter": 0,
+  "tickCounter": 107,
   "gameMode": "Standard",
   "spiderLimit": 4,
   "goal": {

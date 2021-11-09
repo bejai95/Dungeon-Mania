@@ -9,7 +9,7 @@ public class ZombieToastSpawner extends StaticEntity implements interaction {
     //-----Data-----
 
     //-----Constructors-----
-    public ZombieToastSpawner(int id, String type, Position position) {
+    public ZombieToastSpawner(int id, Position position) {
         super(id, "zombie_toast_spawner", position);
         this.setIsInteractable(false);
     }

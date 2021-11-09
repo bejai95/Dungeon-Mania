@@ -6,7 +6,7 @@ public class Shield extends Item implements DefenseItem {
      * @param itemId
      */
     public Shield(int itemId) {
-        super(itemId, 3);
+        super(itemId, 3, "shield");
     }
     public double getMultipler() {
         //has uses

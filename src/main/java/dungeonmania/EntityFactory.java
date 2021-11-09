@@ -8,28 +8,28 @@ public class EntityFactory {
         switch(type) {
             case "player":
                 Position positionPlayer = new Position(x, y, 1);
-                return new Character(id, "player", positionPlayer);
+                return new Character(id, positionPlayer);
             case "wall":
                 Position positionWall = new Position(x, y, 2);
-                return new Wall(id, "wall", positionWall);
+                return new Wall(id, positionWall);
             case "exit":
                 Position positionExit = new Position(x, y, 0);
-                return new Exit(id, "exit", positionExit);
+                return new Exit(id, positionExit);
             case "boulder":
                 Position positionBoulder = new Position(x, y, 3);
-                return new Boulder(id, "boulder", positionBoulder);
+                return new Boulder(id, positionBoulder);
             case "switch":
                 Position positionSwitch = new Position(x, y, 0);
-                return new FloorSwitch(id, "switch", positionSwitch);
+                return new FloorSwitch(id, positionSwitch);
             case "door":
                 Position positionDoor = new Position(x, y, 2);
-                return new Door(id, "door", positionDoor, matchingKeyNum);
+                return new Door(id, positionDoor, matchingKeyNum);
             case "portal":
                 Position positionPortal = new Position(x, y, 0);
-                return new Portal(id, "portal", positionPortal, portalColour);
+                return new Portal(id, positionPortal, portalColour);
             case "zombie_toast_spawner":
                 Position positionSpawner = new Position(x, y, 2);
-                return new ZombieToastSpawner(id, "zombie_toast_spawner", positionSpawner);
+                return new ZombieToastSpawner(id, positionSpawner);
             case "mercenary":
                 Position positionMercenary = new Position(x, y, 1);
                 return new Mercenary(id, positionMercenary, 0); 
@@ -71,7 +71,7 @@ public class EntityFactory {
                 return new UnpickedUpItem(id, "armour", positionArmour, "Armour");
             case "one_ring":
                 Position positionOneRing = new Position(x, y, 0);
-                return new UnpickedUpItem(id, "one_ring", positionOneRing, "OneRing");
+                return new UnpickedUpItem(id, "one_ring", positionOneRing, "TheOneRing");
             }
         
             return null;

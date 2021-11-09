@@ -5,9 +5,11 @@ import dungeonmania.response.models.ItemResponse;
 abstract public class Item {
     private int uses;
     private int itemId;
-    public Item(int itemId, int uses) {
+    private String type;
+    public Item(int itemId, int uses, String type) {
         this.itemId = itemId;
         this.uses = uses;
+        this.type = type;
     }
     public int getUses() {
         return this.uses;
@@ -23,7 +25,7 @@ abstract public class Item {
      * @return the class' simple name in all lowercase
      */
     public String getType() {
-        return this.getClass().getSimpleName().toLowerCase();
+        return this.type;
     }
     /**
      * 
