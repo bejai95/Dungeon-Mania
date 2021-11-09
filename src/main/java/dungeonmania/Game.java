@@ -444,14 +444,16 @@ public class Game {
         Inventory inventory = player.getInventory();
         //use item
         //parse itemUsed by removing the underscore
-        itemUsed = itemUsed.replaceAll("_", "");
-        Item used = inventory.getItemFromType(itemUsed);
-        if(used != null){
-            if(!(used instanceof Consumable)){
-                throw(new IllegalArgumentException());
+        if(itemUsed != null){
+            String itemUsedNoUnderscores = itemUsed.replaceAll("_", "");
+            Item used = inventory.getItemFromType(itemUsedNoUnderscores);
+            if(used != null){
+                if(!(used instanceof Consumable)){
+                    throw(new IllegalArgumentException());
+                }
+                Consumable cons = (Consumable) used;
+                cons.consume(player);
             }
-            Consumable cons = (Consumable) used;
-            cons.consume(player);
         }
 
         /*
