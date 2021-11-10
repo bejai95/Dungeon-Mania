@@ -23,7 +23,6 @@
         "arrow": "images/tileset/items/arrow_0.png",
         "exit": "images/tileset/entities/stairs_down.png",
         "treasure": "images/tileset/items/treasure_0.png",
-        "wall": "images/tileset/walls/wooden/wood_bottom.png",
         "wall": "images/tileset/walls/stone/sprite_192.png",
         "spider": "images/tileset/entities/spider_00.png",
         "mercenary": "images/tileset/entities/ranger.png",
