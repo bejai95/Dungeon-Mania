@@ -31,7 +31,6 @@ public class Game {
     private List<Entity> entities;
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
-
     private final List<AnimationQueue> animations = new ArrayList<>();
     private String gameMode;
     private static int numDungeonIds; // Initialized to zero
@@ -72,6 +71,14 @@ public class Game {
         int ret = uniqueIdNum;
         uniqueIdNum++;
         return ret;
+    }
+
+    public void setHealthBar(double newHealth) {
+        if (newHealth == 1) {
+            animations.add(new AnimationQueue("PostTick", Integer.toString(getPlayer().getId()), Arrays.asList("healthbar set 1", "healthbar tint 0x00ff00"), false, -1));
+        } else {
+            animations.add(new AnimationQueue("PostTick", Integer.toString(getPlayer().getId()), Arrays.asList("healthbar set " + newHealth, "healthbar tint 0xff0000"), false, -1));
+        }
     }
 
     /**
@@ -149,9 +156,10 @@ public class Game {
      */
     public DungeonResponse generateDungeonResponse() {
         if(getPlayer() == null){
-            return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), null, null, getGoalsLeft());
+            return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), null, null, getGoalsLeft(), animations);
         }
-        return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(), getGoalsLeft(),animations);
+        
+        return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(), getGoalsLeft(), animations);
     } 
 
     public void setGameMode(String gameMode) {
@@ -538,6 +546,10 @@ public class Game {
             System.out.println("Health After: " + player.getHealth());
             System.out.println("Number dead in Battle" + dead.size());
             //entities.removeAll(dead);
+
+            // Adjust the health bar now that a battle has taken place
+            double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
+            setHealthBar(healthInRequiredRegion);
 
             removeDeadEntities();
         }  
