@@ -81,6 +81,13 @@ public class DungeonManiaController {
             currentlyAccessingGame.initialiseBuildables();
             Game.incrementNumDungeonIds();
 
+            // Make all mercenaries chase the player
+            List<Mercenary> allMercenaries = currentlyAccessingGame.getMercenaries();
+            Character player = currentlyAccessingGame.getPlayer();
+            for (Mercenary cur: allMercenaries) {
+                cur.chase(player);
+            }
+
             return currentlyAccessingGame.generateDungeonResponse();
         }
         catch (IOException e) {
