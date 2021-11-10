@@ -79,6 +79,7 @@ public class DungeonManiaController {
             currentlyAccessingGame.setDungeonName(dungeonName);
             currentlyAccessingGame.setGameMode(gameMode);
             currentlyAccessingGame.initialiseBuildables();
+            currentlyAccessingGame.setHealthBar(1);
             Game.incrementNumDungeonIds();
 
             // Make all mercenaries chase the player
