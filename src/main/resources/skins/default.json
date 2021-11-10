@@ -24,10 +24,14 @@
         "exit": "images/tileset/entities/stairs_down.png",
         "treasure": "images/tileset/items/treasure_0.png",
         "wall": "images/tileset/walls/wooden/wood_bottom.png",
+        "wall": "images/tileset/walls/stone/sprite_192.png",
         "spider": "images/tileset/entities/spider_00.png",
         "mercenary": "images/tileset/entities/ranger.png",
         "switch": "images/tileset/floor_switch.png",
         "invincibility_potion": "images/tileset/items/potion_10.png",
-        "sword": "images/tileset/items/sword_silver.png"
+        "sword": "images/tileset/items/sword_silver.png",
+        "door": "images/tileset/walls/wooden/door_locked_silver.png",
+        "portal": "images/tileset/entities/portal_00.png",
+        "key": "images/tileset/items/key_gold.png"
     }
 }
