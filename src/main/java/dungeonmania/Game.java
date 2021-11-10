@@ -1,6 +1,7 @@
 package dungeonmania;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import dungeonmania.exceptions.InvalidActionException;
+import dungeonmania.response.models.AnimationQueue;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
@@ -30,7 +32,7 @@ public class Game {
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
 
-    // private final List<AnimationQueue> animations;
+    private final List<AnimationQueue> animations = null;
     private String gameMode;
     private static int numDungeonIds; // Initialized to zero
     private static int uniqueIdNum; // Initialized to zero
@@ -149,7 +151,7 @@ public class Game {
         if(getPlayer() == null){
             return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), null, null, getGoalsLeft());
         }
-        return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(), getGoalsLeft());
+        return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(), getGoalsLeft(),animations);
     } 
 
     public void setGameMode(String gameMode) {
@@ -606,7 +608,10 @@ public class Game {
         for (Item selectedItem : itemsList) {
             if (selectedItem.getType().equals("key")) {
                 Key inputKey = (Key)selectedItem;
-                interactionDoor.openDoor(inputKey);
+                if (interactionDoor.openDoor(inputKey)) {
+                    //Testing changing door sprite
+                    animations.add(new AnimationQueue("PostTick", Integer.toString(interactionDoor.getId()), Arrays.asList("sprite wall"), false, -1));
+                }
             }
         }  
     }
