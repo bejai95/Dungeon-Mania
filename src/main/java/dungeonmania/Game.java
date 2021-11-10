@@ -193,7 +193,7 @@ public class Game {
      * Gets a list of all the moving entities on the map
      * @return
      */
-    private List<MovingEntity> getMovingEntities(){
+    public List<MovingEntity> getMovingEntities(){
         List<MovingEntity> ret = new ArrayList<>();
         for(Entity entity : entities){
             if(entity instanceof MovingEntity){
@@ -226,7 +226,7 @@ public class Game {
      * Gets a list of all the static entities on the map
      * @return
      */
-    private List<StaticEntity> getStaticEntities(){
+    public List<StaticEntity> getStaticEntities(){
         List<StaticEntity> ret = new ArrayList<>();
         for(Entity entity : entities){
             if(entity instanceof StaticEntity){
@@ -239,7 +239,7 @@ public class Game {
      * Gets a list of all the spawners on the map
      * @return
      */
-    private List<ZombieToastSpawner> getSpawners(){
+    public List<ZombieToastSpawner> getSpawners(){
         List<ZombieToastSpawner> ret = new ArrayList<>();
         for(Entity entity : entities){
             if(entity instanceof ZombieToastSpawner){
@@ -253,7 +253,7 @@ public class Game {
      * Gets a list of all floor switches on the map
      * @return
      */
-    private List<FloorSwitch> getSwitches(){
+    public List<FloorSwitch> getSwitches(){
         List<FloorSwitch> ret = new ArrayList<>();
         for(Entity entity : entities){
             if(entity instanceof FloorSwitch){
@@ -267,7 +267,7 @@ public class Game {
      * Gets a list of all placed bombs
      * @return
      */
-    private List<PlacedBomb> getBombs(){
+    public List<PlacedBomb> getBombs(){
         List<PlacedBomb> ret = new ArrayList<>();
         for(Entity entity : entities){
             if(entity instanceof PlacedBomb){
@@ -277,9 +277,6 @@ public class Game {
         return ret;
     }
 
-    private Position getSpawnPositionSpawner(ZombieToastSpawner spawner){
-        return null; //TODO
-    }
     public Entity getEntityById(String id){
         Integer intId = Integer.parseInt(id);
         for(Entity entity : entities){
@@ -491,6 +488,10 @@ public class Game {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
         Position destinationTile = player.getPosition().translateBy(movementDirection);
+
+        //Create a new instance of the static entity interaction helper class
+        staticEntityInteract staticInteraction = new staticEntityInteract(this);
+
         //use item
         //parse itemUsed by removing the underscore
         if(itemUsed != null){
@@ -499,7 +500,7 @@ public class Game {
             if(used != null){
                 if (used instanceof Bomb) {
                     Bomb usedBomb = (Bomb)used;
-                    placeBomb(player.getPosition(),usedBomb.getitemId());
+                    staticInteraction.placeBomb(player.getPosition(),usedBomb.getitemId());
                     inventory.removeItem(used);
                 } else {
                     if(!(used instanceof Consumable)){
@@ -511,13 +512,11 @@ public class Game {
             }
         } 
 
-
-
         //remove dead items
         inventory.removeDeadItems();
 
         //Interact with static entities
-        findInteractableStaticEntity(movementDirection);
+        staticInteraction.findInteractableStaticEntity(movementDirection);
 
         //move in direction
         player.move(movementDirection);
@@ -528,10 +527,10 @@ public class Game {
             mob.move();
         }
         
-        //spawn in enemies 
+        //spawn in enemies
         List<ZombieToastSpawner> spawners = getSpawners();
         for(ZombieToastSpawner spawner : spawners){
-            zombieSpawn(spawner);
+            staticInteraction.zombieSpawn(spawner);
         }
 
         spawnRandomEnemies();
@@ -575,225 +574,41 @@ public class Game {
         }
     }
 
-    //From here donwards are methods to support static entity interactions
-
-    /**
-     * Checks to see if the tile that the character moves onto has a static entity
-     * to interact with. Returns a boolean to see if this should halt the movement.
+     /**
+     * Sets Portal Colours on the map
      */
-    private void findInteractableStaticEntity(Direction movementDirection){
-        Position destinationTile = getPlayer().getPosition().translateBy(movementDirection);
-        List<StaticEntity> staticEntitiesList = new ArrayList<>();
-        staticEntitiesList = getStaticEntities();
-        for (StaticEntity staticEntityItem : staticEntitiesList) {
-            if (staticEntityItem.getPosition().equals(destinationTile) && staticEntityItem.canInteract()) {
-                interactStaticEntity(staticEntityItem, movementDirection);
+    public void setPortalColours() {
+        for (Entity entity : entities) {
+            if (entity instanceof Portal) {
+                Portal selectedPortal = (Portal)entity;
+                String colour = selectedPortal.getportalColour().toLowerCase();
+                String portalName = "sprite portal_" + colour;
+                System.out.println(portalName);
+                animations.add(new AnimationQueue("PostTick", Integer.toString(selectedPortal.getId()), Arrays.asList(portalName), false, -1));
             }
         }
     }
 
-    /**
-     * Checks to see if the tile that the character moves onto has a static entity
-     * to interact with. Returns a boolean to see if this should halt the movement.
+     /**
+     * Adds an animation to the animation queue
      */
-    private void interactStaticEntity(Entity interactionEntity, Direction movementDirection){
-        if (interactionEntity instanceof Portal)  {
-            //Teleports player when they step on a portal
-            Portal interactionPortal = (Portal)interactionEntity;
-            Position teleportLocation = interactionPortal.getTeleportLocation(getStaticEntities());
-            getPlayer().setPosition(teleportLocation);
-        } else if (interactionEntity instanceof Exit) {
-            //put code in here that will end the game
-        } else if (interactionEntity instanceof Door) {
-            Door interactionDoor = (Door)interactionEntity;
-            doorInteraction(interactionDoor);
-        } else if (interactionEntity instanceof Boulder) {
-            Boulder interactionBoulder = (Boulder)interactionEntity;
-            moveBoulder(interactionBoulder, movementDirection);
-        } else if (interactionEntity instanceof UnpickedUpItem){
-            UnpickedUpItem interactionUnpickedUpItem = (UnpickedUpItem)interactionEntity;
-            pickupCurrentItem(interactionUnpickedUpItem);
-        }
+    public void addAnimation(String when, String entityId, List<String> queue, boolean loop, double duration) {
+        animations.add(new AnimationQueue(when, entityId, queue, loop, duration));
     }
 
-    /**
-     * This will handle interaction with a door
-     */
-    private void doorInteraction(Door interactionDoor){
-        List<Item> itemsList = getInventory().getItems();
-        for (Item selectedItem : itemsList) {
-            if (selectedItem.getType().equals("key")) {
-                Key inputKey = (Key)selectedItem;
-                if (interactionDoor.openDoor(inputKey)) {
-                    //Testing changing door sprite
-                    animations.add(new AnimationQueue("PostTick", Integer.toString(interactionDoor.getId()), Arrays.asList("sprite doorOpen"), false, -1));
-                }
-            }
-        }  
+    public int getTickCounter() {
+        return tickCounter;
     }
 
-
-    /**
-     * Gets the item on the ground at the same position as the player  
-     * @return null if there is no such item
-     */
-    private void pickupCurrentItem(UnpickedUpItem selectedPickup){
-        Item newItem = null;
-        try {
-            newItem = selectedPickup.pickupItem();
-        } catch (IllegalAccessError | ClassNotFoundException | IllegalAccessException | InvocationTargetException
-                | InstantiationException | NoSuchMethodException e1) {
-            throw new IllegalArgumentException("The item you are trying to pickup does not exist");
-        }
-        if(newItem != null){
-            getPlayer().getInventory().addItemToInventory(newItem);
-            entities.remove(selectedPickup);
-        }
+    public String getGameMode() {
+        return gameMode;
     }
-
-    /**
-     * Moves the boulder
-     */
-    private void moveBoulder(Entity boulder, Direction movementDirection){
-        Position boulderPos = boulder.getPosition();
-        Position boulderNextPos = boulderPos.translateBy(movementDirection);
-        //Check to see if the boulder collides with anything
-        if (isCollision(boulder, boulderNextPos) == false) {
-            //If no collision it will move
-            boulder.setPosition(boulderNextPos);
-
-            //Activates the switch if moved onto a switch
-            FloorSwitch potentialPressedSwitch = isFloorSwitch(boulderNextPos);
-            if (potentialPressedSwitch != null) {
-                potentialPressedSwitch.setIsActive(true);
-                explodeOnSwitchCheck(potentialPressedSwitch);
-            }
-
-            //Deactivates a switch if it moves off a switch
-            FloorSwitch potentialUnpressedSwitch = isFloorSwitch(boulderPos);
-            if (potentialUnpressedSwitch != null) {
-                potentialUnpressedSwitch.setIsActive(false);
-            }
-        }
-        return;
-    }
-
-    /**
-     * Places a bomb on the ground
-     */
-    private void placeBomb(Position placementPosition, int bombID){
-        PlacedBomb newBomb = new PlacedBomb(bombID, placementPosition);
-        entities.add(newBomb);
-
-    }
-
-    /*When a switch is pressed it can call this method with it's position to call
-    on any adjacent bombs to explode*/
-    private void explodeOnSwitchCheck (FloorSwitch checkingSwitch){
-        Position switchPos = checkingSwitch.getPosition(); 
-        List<Position> adjacentPositions = switchPos.getAdjacentPositions();
-        List<PlacedBomb> placedBombList = new ArrayList<PlacedBomb>();
-        List<PlacedBomb> explodeList = new ArrayList<PlacedBomb>();
-        placedBombList = getBombs();
-
-        /*Go through each adjacent location to the switch, then check the bombs list
-        if it finds any bombs add it to the explode list*/
-        for (Position edgeTile : adjacentPositions) {
-            for (PlacedBomb possibleBomb : placedBombList ) {
-                if (edgeTile.equals(possibleBomb.getPosition())) {
-                    explodeList.add(possibleBomb);
-                }   
-            }
-        }
-
-        //Explodes all bombs on the explode list
-        for (PlacedBomb explodeItem : explodeList) {
-            explode(explodeItem);
-        }
-    }
-
-    /*explodes killing all enemies 1 cell adjacent to the bomb
-    and removing the placed bomb*/
-    public void explode(PlacedBomb activeBomb) {
-        List<MovingEntity> movingEntityList = new ArrayList<>();
-        movingEntityList = getMovingEntities();
-        List<Position> adjacentPositions = activeBomb.getPosition().getAdjacentPositions();
-        List<MovingEntity> killList = new ArrayList<MovingEntity>();
-        //Removes the bomb from the placed bombs list
-        entities.remove(activeBomb);
-        //Finds which surrounding entities to kill
-        for (Position edgeTile : adjacentPositions) {
-            for (MovingEntity movingEntityItem : movingEntityList) {
-                if (edgeTile.equals(movingEntityItem.getPosition())) {
-                    killList.add(movingEntityItem);
-                }
-            }
-        }
-        //Removes surrounding entities that have been killed
-        for (MovingEntity deadEntity : killList) {
-            entities.remove(deadEntity);
-        }
-        return;
-    }
-
-    /**
-     * Will spawn a zombie toast on an adjacent open tile 
-     * and return the newly created zombie toast or null
-     */
-     public void zombieSpawn (ZombieToastSpawner activeSpawner) {
-        Position spawnerPosition = activeSpawner.getPosition();
-
-        //Checks to see if spawn conditions are met
-        if ((gameMode == "hard" && tickCounter % 15 == 0) || (gameMode != "hard" && tickCounter % 20 == 0)) {
-            //List of adjacent positions around spawner
-            List<Position> adjacentPositions = spawnerPosition.getAdjacentPositions();
-
-            //Sets the default spawn positions as on top of the spawner
-            Position spawnPoint = spawnerPosition;
-
-            //Find an adjacent open tile for the zombie toast to spawn
-            for (Position edgeCell : adjacentPositions) {
-                if (isEmpty(edgeCell)) {
-                    ;
-                } else {
-                    spawnPoint = edgeCell;
-                    break;
-                }
-            }
-
-            //Create new zombie toast
-            EntityFactory efactory = new EntityFactory();
-            ZombieToast zombie = (ZombieToast)efactory.createEntity(Game.generateUniqueId(), "zombie_toast",
-                    spawnPoint.getX(), spawnPoint.getY(), 0, null);
-            entities.add(zombie);
-        } else {
-            return;
-        }
-
-    }
-
-
-    /**
-     * Checks to see if a floor switch is present at a given position 
-     * and returns the floor switch or null
-     */
-    private FloorSwitch isFloorSwitch(Position tile) {
-        List<FloorSwitch> floorSwitchList = new ArrayList<>();
-        floorSwitchList = getSwitches();
-        for (FloorSwitch floorSwitchItem : floorSwitchList) {
-            if (floorSwitchItem.getPosition().equals(tile)) {
-                return floorSwitchItem;
-            }
-        }
-        return null;
-    }
-
 
     /**
      * Checks to see if a collision will occur when moving an entity from one 
      * cell to another
      */
-    private boolean isCollision(Entity movingEntity, Position destination){
+    public boolean isCollision(Entity movingEntity, Position destination){
         for (Entity entity : entities) {
             if (entity.getPosition().equals(destination) && entity.getPosition().getLayer() >= destination.getLayer()) {
                 return true;
@@ -801,8 +616,5 @@ public class Game {
         }
         return false;
     }
-
-    
-    
     
 }

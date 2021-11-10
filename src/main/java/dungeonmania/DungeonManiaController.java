@@ -82,6 +82,9 @@ public class DungeonManiaController {
             currentlyAccessingGame.setHealthBar(1);
             Game.incrementNumDungeonIds();
 
+            //Set portal colour sprites
+            currentlyAccessingGame.setPortalColours();
+
             // Make all mercenaries chase the player
             List<Mercenary> allMercenaries = currentlyAccessingGame.getMercenaries();
             Character player = currentlyAccessingGame.getPlayer();
