@@ -26,8 +26,8 @@ public class Portal extends StaticEntity {
         for (StaticEntity staticEntityItem : staticEntitiesList) {
             if (staticEntityItem instanceof Portal) {
                 Portal potentialPortal = (Portal)staticEntityItem;
-                if ((potentialPortal != this) && (potentialPortal.getportalColour() == this.portalColour)) {
-                    return potentialPortal.getPosition();
+                if ((potentialPortal != this) && (portalColour.equals(potentialPortal.getportalColour()))){
+                        return potentialPortal.getPosition();
                 }
             }
         }
