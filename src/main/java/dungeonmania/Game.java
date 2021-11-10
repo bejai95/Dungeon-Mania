@@ -1,6 +1,7 @@
 package dungeonmania;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -12,6 +13,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import dungeonmania.exceptions.InvalidActionException;
+import dungeonmania.response.models.AnimationQueue;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
@@ -30,7 +32,7 @@ public class Game {
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
 
-    // private final List<AnimationQueue> animations;
+    private final List<AnimationQueue> animations = new ArrayList<>();
     private String gameMode;
     private static int numDungeonIds; // Initialized to zero
     private static int uniqueIdNum; // Initialized to zero
@@ -149,7 +151,7 @@ public class Game {
         if(getPlayer() == null){
             return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), null, null, getGoalsLeft());
         }
-        return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(), getGoalsLeft());
+        return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(), getGoalsLeft(),animations);
     } 
 
     public void setGameMode(String gameMode) {
@@ -476,6 +478,7 @@ public class Game {
         return;
     }
 
+
    public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
@@ -487,7 +490,8 @@ public class Game {
             System.out.println(used);
             if(used != null){
                 if (used instanceof Bomb) {
-                    placeBomb(player.getPosition());
+                    Bomb usedBomb = (Bomb)used;
+                    placeBomb(player.getPosition(),usedBomb.getitemId());
                     inventory.removeItem(used);
                 } else {
                     if(!(used instanceof Consumable)){
@@ -498,6 +502,7 @@ public class Game {
                 }
             }
         } 
+
 
 
         //remove dead items
@@ -588,7 +593,8 @@ public class Game {
         } else if (interactionEntity instanceof Exit) {
             //put code in here that will end the game
         } else if (interactionEntity instanceof Door) {
-            //find out how inventory works and then add door interaction here
+            Door interactionDoor = (Door)interactionEntity;
+            doorInteraction(interactionDoor);
         } else if (interactionEntity instanceof Boulder) {
             Boulder interactionBoulder = (Boulder)interactionEntity;
             moveBoulder(interactionBoulder, movementDirection);
@@ -596,6 +602,22 @@ public class Game {
             UnpickedUpItem interactionUnpickedUpItem = (UnpickedUpItem)interactionEntity;
             pickupCurrentItem(interactionUnpickedUpItem);
         }
+    }
+
+    /**
+     * This will handle interaction with a door
+     */
+    private void doorInteraction(Door interactionDoor){
+        List<Item> itemsList = getInventory().getItems();
+        for (Item selectedItem : itemsList) {
+            if (selectedItem.getType().equals("key")) {
+                Key inputKey = (Key)selectedItem;
+                if (interactionDoor.openDoor(inputKey)) {
+                    //Testing changing door sprite
+                    animations.add(new AnimationQueue("PostTick", Integer.toString(interactionDoor.getId()), Arrays.asList("sprite dooropen"), false, -1));
+                }
+            }
+        }  
     }
 
 
@@ -644,19 +666,13 @@ public class Game {
         return;
     }
 
-    //temp ID until Bejai shows me how to implement IDs
-    private int tempID = 10000;
-
-
     /**
      * Places a bomb on the ground
      */
-    private void placeBomb(Position placementPosition){
-        //temp ID until Bejai shows me how to implement IDs
-        this.tempID++;
-        PlacedBomb newBomb = new PlacedBomb(tempID, placementPosition);
+    private void placeBomb(Position placementPosition, int bombID){
+        PlacedBomb newBomb = new PlacedBomb(bombID, placementPosition);
         entities.add(newBomb);
-        //Add stuff here to remove bomb from inventory (check with Jeremy)
+
     }
 
     /*When a switch is pressed it can call this method with it's position to call

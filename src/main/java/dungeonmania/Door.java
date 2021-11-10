@@ -1,5 +1,6 @@
 package dungeonmania;
 
+
 import dungeonmania.util.Position;
 
 public class Door extends StaticEntity {
@@ -16,11 +17,13 @@ public class Door extends StaticEntity {
     }
 
     //-----Methods-----
-    public void openDoor (Key inputKey){
+    public boolean openDoor (Key inputKey){
         if (inputKey.getKeyNum() == matchingKeyNum) {
             this.isOpen = true;
             inputKey.use();
+            return true;
         }
+        return false;
     }
 
     //-----Getters and Setters-----
