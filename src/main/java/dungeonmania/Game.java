@@ -397,6 +397,14 @@ public class Game {
      * @return
      */
     private Position getSpawnPositionRandom(){
+        
+        if(getXMin() >= getXMax() || getYMin() >= getYMax()){
+            Character player = getPlayer();
+            int x = player.getPosition().getX();
+            int y = player.getPosition().getY();
+            return new Position(ThreadLocalRandom.current().nextInt(x-5, x+5), ThreadLocalRandom.current().nextInt(y-5, y+5));
+        }
+        
         Position pos = getRandomPosition();
         List<Wall> boundaries = getBoundaries();
         List<Wall> toRight = getPiecesToRight(boundaries, pos);
