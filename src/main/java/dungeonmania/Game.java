@@ -503,8 +503,6 @@ public class Game {
             }
         } 
 
-
-
         //remove dead items
         inventory.removeDeadItems();
 
@@ -613,8 +611,7 @@ public class Game {
             if (selectedItem.getType().equals("key")) {
                 Key inputKey = (Key)selectedItem;
                 if (interactionDoor.openDoor(inputKey)) {
-                    //Testing changing door sprite
-                    animations.add(new AnimationQueue("PostTick", Integer.toString(interactionDoor.getId()), Arrays.asList("sprite dooropen"), false, -1));
+                    animations.add(new AnimationQueue("PostTick", Integer.toString(interactionDoor.getId()), Arrays.asList("sprite door_open"), false, -1));
                 }
             }
         }  
@@ -775,6 +772,22 @@ public class Game {
         }
         return null;
     }
+
+    /**
+     * Sets Portal Colours on the map
+     */
+    public void setPortalColours() {
+        for (Entity entity : entities) {
+            if (entity instanceof Portal) {
+                Portal selectedPortal = (Portal)entity;
+                String colour = selectedPortal.getportalColour().toLowerCase();
+                String portalName = "sprite portal_" + colour;
+                System.out.println(portalName);
+                animations.add(new AnimationQueue("PostTick", Integer.toString(selectedPortal.getId()), Arrays.asList(portalName), false, -1));
+            }
+        }
+    }
+    
 
 
     /**
