@@ -10,12 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.response.models.DungeonResponse;
+import dungeonmania.response.models.ItemResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.FileLoader;
 
@@ -29,6 +31,8 @@ public class persistenceTest {
         // Test loading a game that does not exist
         assertThrows(IllegalArgumentException.class, () -> controller1.loadGame("NonexistentGame"));
         
+        controller1.deleteExistingGames();
+        
         // Test creating and then saving some games
         assertDoesNotThrow(() -> controller1.newGame("advanced", "Standard"));
         controller1.saveGame("save1");
@@ -38,7 +42,7 @@ public class persistenceTest {
         // Test that both games have been saved
         List<String> expected = Arrays.asList("save1", "save2");
         List<String> actual = controller1.allGames();
-        // assertEquals(expected, actual);
+        assertEquals(expected, actual);
 
         //  Test that if the application is terminated, the current game state can be reloaded and play can continue from where it left off
         // Basically this means we should be able to create a new controller and access our other games from there
@@ -92,27 +96,35 @@ public class persistenceTest {
             controller1.tick(null, Direction.UP);
         }
 
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < 3; i++) {
             controller1.tick(null, Direction.LEFT);
         }
 
-        Game previousGame = controller1.getCurrentlyAccessingGame();
-        List<Item> previousInventory = previousGame.getInventory().getItems();
-        String previousGoalsLeft = previousGame.getGoalsLeft();
+        DungeonResponse res1 = controller1.tick(null, Direction.LEFT);
+        List<ItemResponse> previousInventory = res1.getInventory();
+        List<String> previousInventoryStrings = new ArrayList<>();
+        for (ItemResponse curr: previousInventory) {
+            String currItemString = curr.getId() + curr.getType();
+            previousInventoryStrings.add(currItemString);
+        }
+        String previousGoalsLeft = res1.getGoals();
+        
         assertTrue(previousInventory.size() == 10);
         assertTrue(previousGoalsLeft.equals(":mercenary"));
 
-
-        // Save the file, and load it from another file, check that the inventories and goals are the same
+        // Save the file, and load it from another controller, check that the inventories and goals are the same
         controller1.saveGame("random_save");
         DungeonManiaController controller2 = new DungeonManiaController();
-        controller2.loadGame("random_save");
-        Game newGame = controller2.getCurrentlyAccessingGame(); 
-        List<Item> newInventory = previousGame.getInventory().getItems();
-        String newGoalsLeft = previousGame.getGoalsLeft();
+        DungeonResponse res2 = controller2.loadGame("random_save");
+        List<ItemResponse> newInventory = res2.getInventory();
+        List<String> newInventoryStrings = new ArrayList<>();
+        for (ItemResponse curr: newInventory) {
+            String currItemString = curr.getId() + curr.getType();
+            newInventoryStrings.add(currItemString);
+        }
+        String newGoalsLeft = res1.getGoals();
         
-        assertTrue(previousInventory.equals(newInventory));
+        assertTrue(previousInventoryStrings.equals(newInventoryStrings));
         assertTrue(previousGoalsLeft.equals(newGoalsLeft));
     }
-
 }

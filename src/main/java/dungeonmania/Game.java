@@ -33,6 +33,7 @@ public class Game {
     // private final List<AnimationQueue> animations;
     private String gameMode;
     private static int numDungeonIds; // Initialized to zero
+    private static int uniqueIdNum; // Initialized to zero
     private final int spiderLimit = 4;
     
     @SerializedName(value="goal", alternate="goal-condition")
@@ -43,6 +44,7 @@ public class Game {
     
     public Game() {
     }
+
     public Goal getGoal(){ return goal;}
 
     public static int getNumDungeonIds() {
@@ -57,6 +59,17 @@ public class Game {
      */
     public void initialiseBuildables() {
         this.buildables = new ArrayList<String>();
+    }
+
+    /**
+     * Generates a unique id for an entity or item
+     * @param cell
+     * @return
+     */
+    static int generateUniqueId() {
+        int ret = uniqueIdNum;
+        uniqueIdNum++;
+        return ret;
     }
 
     /**
@@ -384,6 +397,14 @@ public class Game {
      * @return
      */
     private Position getSpawnPositionRandom(){
+        
+        if(getXMin() >= getXMax() || getYMin() >= getYMax()){
+            Character player = getPlayer();
+            int x = player.getPosition().getX();
+            int y = player.getPosition().getY();
+            return new Position(ThreadLocalRandom.current().nextInt(x-5, x+5), ThreadLocalRandom.current().nextInt(y-5, y+5));
+        }
+        
         Position pos = getRandomPosition();
         List<Wall> boundaries = getBoundaries();
         List<Wall> toRight = getPiecesToRight(boundaries, pos);
@@ -417,21 +438,21 @@ public class Game {
 
         if(roll < mercenarySpawnChance){
             pos = getSpawnPositionRandom();
-            Mercenary merc = (Mercenary)eFactory.createEntity(Entity.getNumEntityIds(), "mercenary", pos.getX(), pos.getY(), 0, null);
+            Mercenary merc = (Mercenary)eFactory.createEntity(Game.generateUniqueId(), "mercenary", pos.getX(), pos.getY(), 0, null);
             merc.chase(getPlayer());
             entities.add(merc);
         }
 
         if(tickCounter % spiderTicks == 0 && getNumberOfSpiders() < spiderLimit){
             pos = getSpawnPositionRandom();
-            MovingEntity spider = (Spider)eFactory.createEntity(Entity.getNumEntityIds(), "spider", pos.getX(), pos.getY(), 0, null);
+            MovingEntity spider = (Spider)eFactory.createEntity(Game.generateUniqueId(), "spider", pos.getX(), pos.getY(), 0, null);
             entities.add(spider);
         }
 
         return;
     }
     /**
-     * Gets the MovingEntity on the same position as the o=player
+     * Gets the MovingEntity on the same position as the player
      * @param player
      * @return null if there is no such moving entity
      */
@@ -721,8 +742,10 @@ public class Game {
             }
 
             //Create new zombie toast
-            ZombieToast newZombieToast = new ZombieToast(120, spawnPoint, new RandomMovement());
-            entities.add(newZombieToast);
+            EntityFactory efactory = new EntityFactory();
+            ZombieToast zombie = (ZombieToast)efactory.createEntity(Game.generateUniqueId(), "zombie_toast",
+                    spawnPoint.getX(), spawnPoint.getY(), 0, null);
+            entities.add(zombie);
         } else {
             return;
         }
