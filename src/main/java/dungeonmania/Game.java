@@ -499,7 +499,6 @@ public class Game {
             }
         } 
 
-
         //remove dead items
         inventory.removeDeadItems();
 
@@ -588,7 +587,8 @@ public class Game {
         } else if (interactionEntity instanceof Exit) {
             //put code in here that will end the game
         } else if (interactionEntity instanceof Door) {
-            //find out how inventory works and then add door interaction here
+            Door interactionDoor = (Door)interactionEntity;
+            doorInteraction(interactionDoor);
         } else if (interactionEntity instanceof Boulder) {
             Boulder interactionBoulder = (Boulder)interactionEntity;
             moveBoulder(interactionBoulder, movementDirection);
@@ -596,6 +596,19 @@ public class Game {
             UnpickedUpItem interactionUnpickedUpItem = (UnpickedUpItem)interactionEntity;
             pickupCurrentItem(interactionUnpickedUpItem);
         }
+    }
+
+    /**
+     * This will handle interaction with a door
+     */
+    private void doorInteraction(Door interactionDoor){
+        List<Item> itemsList = getInventory().getItems();
+        for (Item selectedItem : itemsList) {
+            if (selectedItem.getType().equals("key")) {
+                Key inputKey = (Key)selectedItem;
+                interactionDoor.openDoor(inputKey);
+            }
+        }  
     }
 
 
