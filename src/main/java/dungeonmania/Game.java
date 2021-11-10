@@ -32,7 +32,7 @@ public class Game {
     private List<String> buildables;
     private int tickCounter; // Initialized to zero
 
-    private final List<AnimationQueue> animations = null;
+    private final List<AnimationQueue> animations = new ArrayList<>();
     private String gameMode;
     private static int numDungeonIds; // Initialized to zero
     private static int uniqueIdNum; // Initialized to zero
@@ -478,6 +478,7 @@ public class Game {
         return;
     }
 
+
    public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
@@ -489,7 +490,8 @@ public class Game {
             System.out.println(used);
             if(used != null){
                 if (used instanceof Bomb) {
-                    placeBomb(player.getPosition());
+                    Bomb usedBomb = (Bomb)used;
+                    placeBomb(player.getPosition(),usedBomb.getitemId());
                     inventory.removeItem(used);
                 } else {
                     if(!(used instanceof Consumable)){
@@ -500,6 +502,8 @@ public class Game {
                 }
             }
         } 
+
+
 
         //remove dead items
         inventory.removeDeadItems();
@@ -610,7 +614,7 @@ public class Game {
                 Key inputKey = (Key)selectedItem;
                 if (interactionDoor.openDoor(inputKey)) {
                     //Testing changing door sprite
-                    animations.add(new AnimationQueue("PostTick", Integer.toString(interactionDoor.getId()), Arrays.asList("sprite wall"), false, -1));
+                    animations.add(new AnimationQueue("PostTick", Integer.toString(interactionDoor.getId()), Arrays.asList("sprite dooropen"), false, -1));
                 }
             }
         }  
@@ -662,19 +666,13 @@ public class Game {
         return;
     }
 
-    //temp ID until Bejai shows me how to implement IDs
-    private int tempID = 10000;
-
-
     /**
      * Places a bomb on the ground
      */
-    private void placeBomb(Position placementPosition){
-        //temp ID until Bejai shows me how to implement IDs
-        this.tempID++;
-        PlacedBomb newBomb = new PlacedBomb(tempID, placementPosition);
+    private void placeBomb(Position placementPosition, int bombID){
+        PlacedBomb newBomb = new PlacedBomb(bombID, placementPosition);
         entities.add(newBomb);
-        //Add stuff here to remove bomb from inventory (check with Jeremy)
+
     }
 
     /*When a switch is pressed it can call this method with it's position to call
