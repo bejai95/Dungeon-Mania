@@ -170,7 +170,7 @@ public class Game {
     /**
      * Gets a list of all the mercenaries on the map
      */
-    private List<Mercenary> getMercenaries(){
+    public List<Mercenary> getMercenaries(){
         List<Mercenary> ret = new ArrayList<>();
         for(Entity entity : entities){
             if(entity instanceof Mercenary){
@@ -193,10 +193,6 @@ public class Game {
         return ret;
     }
 
-    /**
-     * Gets a list of all the moving entities on the map
-     * @return
-     */
     private List<Battleable> getBattlebles(){
         List<Battleable> ret = new ArrayList<>();
         for(Entity entity : entities){
