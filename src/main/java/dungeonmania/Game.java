@@ -626,11 +626,7 @@ public class Game {
      */
     private void moveBoulder(Entity boulder, Direction movementDirection){
         Position boulderPos = boulder.getPosition();
-        System.out.println("boulderPos");
-        System.out.println(boulderPos);
         Position boulderNextPos = boulderPos.translateBy(movementDirection);
-        System.out.println("boulderNextPos");
-        System.out.println(boulderNextPos);
         //Check to see if the boulder collides with anything
         if (isCollision(boulder, boulderNextPos) == false) {
             //If no collision it will move
