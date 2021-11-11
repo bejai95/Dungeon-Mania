@@ -134,21 +134,23 @@ public class persistenceTest {
         DungeonManiaController controller1 = new DungeonManiaController();
         controller1.newGame("advanced-2", "Standard");
         
-        // Get a list of all the doors
-        List<Door> doors = new ArrayList<Door>();
+        // Get a list of ids of all the doors
+        List<Integer> doorIds = new ArrayList<Integer>();
         for (Entity curr: controller1.getCurrentlyAccessingGame().getEntities()) {
             if (curr.getType().equals("door")) {
-                doors.add((Door)curr);
+                doorIds.add(curr.getId());
             }
         }
 
-        assertTrue(doors.size() == 2);
+        assertTrue(doorIds.size() == 2);
 
         controller1.saveGame("Doors"); 
         controller1.loadGame("Doors");
 
-        for (Door curr: doors) {
-            assertTrue(curr.getIsOpen().equals(false));
+        for (Integer curr: doorIds) {
+            String idAsString = curr.toString();
+            Door door = (Door)controller1.getCurrentlyAccessingGame().getEntityById(idAsString);
+            assertTrue(door.getIsOpen().equals(false));
         }
 
         // Get the correct key for a certain door and unlock the door
@@ -170,9 +172,11 @@ public class persistenceTest {
 
         // Find the door which the player is currently standing on
         int openDoorId = -1;
-        for (Door curr: doors) {
-            if (controller1.getCurrentlyAccessingGame().getPlayer().getPosition().equals(curr.getPosition())) {
-                openDoorId = curr.getId();
+        for (Integer curr: doorIds) {
+            String idAsString = curr.toString();
+            Door door = (Door)controller1.getCurrentlyAccessingGame().getEntityById(idAsString);
+            if (controller1.getCurrentlyAccessingGame().getPlayer().getPosition().equals(door.getPosition())) {
+                openDoorId = door.getId();
             }
         }
 
@@ -185,11 +189,13 @@ public class persistenceTest {
         controller1.loadGame("Doors");
 
         // Make sure that the door we just unlocked is still open and the other door is still closed
-        for (Door curr: doors) {
-            if (curr.getId() == openDoorId) {
-                assertTrue(curr.getIsOpen().equals(true));
+        for (Integer curr: doorIds) {
+            String idAsString = curr.toString();
+            Door door = (Door)controller1.getCurrentlyAccessingGame().getEntityById(idAsString);
+            if (door.getId() == openDoorId) {
+                assertTrue(door.getIsOpen().equals(true));
             } else {
-                assertTrue(curr.getIsOpen().equals(false));
+                assertTrue(door.getIsOpen().equals(false));
             }
         }
     }
