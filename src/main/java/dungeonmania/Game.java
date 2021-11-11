@@ -577,13 +577,29 @@ public class Game {
      /**
      * Sets Portal Colours on the map
      */
-    public void setPortalColours() {
+    public void setSprites() {
         for (Entity entity : entities) {
             if (entity instanceof Portal) {
                 Portal selectedPortal = (Portal)entity;
                 String colour = selectedPortal.getportalColour().toLowerCase();
                 String portalName = "portal_" + colour;
                 selectedPortal.setType(portalName);
+            } else if (entity instanceof Door) {
+                Door selectedDoor = (Door)entity;
+                if (selectedDoor.getMatchingKeyNum() == 1) {
+                    selectedDoor.setType("door_silver");
+                } else {
+                    selectedDoor.setType("door_gold");
+                }
+            } else if (entity instanceof UnpickedUpItem){
+                UnpickedUpItem selectedItem = (UnpickedUpItem)entity;
+                if (selectedItem.getItemClass().equals("Key")) {
+                    if (selectedItem.getKeyNum() == 1) {
+                        selectedItem.setType("key_silver");
+                    } else {
+                        selectedItem.setType("key_gold");
+                    }
+                }
             }
         }
     }

@@ -40,4 +40,14 @@ public class Door extends StaticEntity {
     public void setIsOpen(Boolean isOpen) {
         this.isOpen = isOpen;
     }
+
+    public int getMatchingKeyNum() {
+        return matchingKeyNum;
+    }
+
+    public void setMatchingKeyNum(int matchingKeyNum) {
+        this.matchingKeyNum = matchingKeyNum;
+    }
+
+    
 }
