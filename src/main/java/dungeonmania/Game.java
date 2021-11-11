@@ -548,13 +548,12 @@ public class Game {
             System.out.println("Number dead in Battle" + dead.size());
             //entities.removeAll(dead);
 
-            // Adjust the health bar now that a battle has taken place
-            double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
-            setHealthBar(healthInRequiredRegion);
-
             removeDeadEntities();
         }  
 
+        // Adjust the health bar
+        double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
+        setHealthBar(healthInRequiredRegion);
 
         //increment tick counter
         tickCounter++;
