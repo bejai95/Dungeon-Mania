@@ -67,7 +67,7 @@ public class staticEntityInteract {
             if (selectedItem.getType().equals("key")) {
                 Key inputKey = (Key)selectedItem;
                 if (interactionDoor.openDoor(inputKey)) {
-                    currentGame.addAnimation("PostTick", Integer.toString(interactionDoor.getId()), Arrays.asList("sprite door_open"), false, -1);
+                    interactionDoor.setType("door_open");
                 }
             }
         }  

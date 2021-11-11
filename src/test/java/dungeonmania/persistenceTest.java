@@ -137,7 +137,7 @@ public class persistenceTest {
         // Get a list of ids of all the doors
         List<Integer> doorIds = new ArrayList<Integer>();
         for (Entity curr: controller1.getCurrentlyAccessingGame().getEntities()) {
-            if (curr.getType().equals("door")) {
+            if (curr.getType().startsWith("door")) {
                 doorIds.add(curr.getId());
             }
         }

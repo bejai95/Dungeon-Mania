@@ -56,5 +56,15 @@ public class UnpickedUpItem extends StaticEntity {
     public String getItemClass() {
         return itemClass;
     }
+
+    public int getKeyNum() {
+        return keyNum;
+    }
+
+    public void setKeyNum(int keyNum) {
+        this.keyNum = keyNum;
+    }
+
+    
     
 }
