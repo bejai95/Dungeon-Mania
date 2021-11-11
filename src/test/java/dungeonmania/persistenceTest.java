@@ -127,4 +127,70 @@ public class persistenceTest {
         assertTrue(previousInventoryStrings.equals(newInventoryStrings));
         assertTrue(previousGoalsLeft.equals(newGoalsLeft));
     }
+
+    // Test that the state of open and closed doors remains between saves
+    @Test
+    public void testDoorState() {
+        DungeonManiaController controller1 = new DungeonManiaController();
+        controller1.newGame("advanced-2", "Standard");
+        
+        // Get a list of all the doors
+        List<Door> doors = new ArrayList<Door>();
+        for (Entity curr: controller1.getCurrentlyAccessingGame().getEntities()) {
+            if (curr.getType().equals("door")) {
+                doors.add((Door)curr);
+            }
+        }
+
+        assertTrue(doors.size() == 2);
+
+        controller1.saveGame("Doors"); 
+        controller1.loadGame("Doors");
+
+        for (Door curr: doors) {
+            assertTrue(curr.getIsOpen().equals(false));
+        }
+
+        // Get the correct key for a certain door and unlock the door
+        for(int i = 0; i < 10; i++) {
+            controller1.tick(null, Direction.RIGHT);
+        }
+        for(int i = 0; i < 9; i++) { 
+            controller1.tick(null, Direction.DOWN);
+        }
+        for(int i = 0; i < 5; i++) {
+            controller1.tick(null, Direction.UP);
+        }
+        for(int i = 0; i < 4; i++) {
+            controller1.tick(null, Direction.RIGHT);
+        }
+        for(int i = 0; i < 4; i++) {
+            controller1.tick(null, Direction.DOWN);
+        }
+
+        // Find the door which the player is currently standing on
+        int openDoorId = -1;
+        for (Door curr: doors) {
+            if (controller1.getCurrentlyAccessingGame().getPlayer().getPosition().equals(curr.getPosition())) {
+                openDoorId = curr.getId();
+            }
+        }
+
+        // Move away from the door
+        for(int i = 0; i < 5; i++) {
+            controller1.tick(null, Direction.DOWN);
+        }
+
+        controller1.saveGame("Doors"); 
+        controller1.loadGame("Doors");
+
+        // Make sure that the door we just unlocked is still open and the other door is still closed
+        for (Door curr: doors) {
+            if (curr.getId() == openDoorId) {
+                assertTrue(curr.getIsOpen().equals(true));
+            } else {
+                assertTrue(curr.getIsOpen().equals(false));
+            }
+        }
+    }
 }
