@@ -59,4 +59,8 @@ public abstract class Entity implements interaction {
         // no interaction by default, subclasses implement unique interactions
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
 }
