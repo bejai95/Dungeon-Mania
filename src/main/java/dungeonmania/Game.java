@@ -582,18 +582,10 @@ public class Game {
             if (entity instanceof Portal) {
                 Portal selectedPortal = (Portal)entity;
                 String colour = selectedPortal.getportalColour().toLowerCase();
-                String portalName = "sprite portal_" + colour;
-                System.out.println(portalName);
-                animations.add(new AnimationQueue("PostTick", Integer.toString(selectedPortal.getId()), Arrays.asList(portalName), false, -1));
+                String portalName = "portal_" + colour;
+                selectedPortal.setType(portalName);
             }
         }
-    }
-
-     /**
-     * Adds an animation to the animation queue
-     */
-    public void addAnimation(String when, String entityId, List<String> queue, boolean loop, double duration) {
-        animations.add(new AnimationQueue(when, entityId, queue, loop, duration));
     }
 
     public int getTickCounter() {
