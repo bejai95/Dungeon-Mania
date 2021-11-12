@@ -64,7 +64,8 @@ public class Inventory {
         if (itemName.equals("bow")) {
             itemName = Bow.class.getCanonicalName();
         }
-        else if (itemName.equals("shield")) {
+        //must be a shield
+        else {
             itemName = Shield.class.getCanonicalName();
         }
         //create the new item

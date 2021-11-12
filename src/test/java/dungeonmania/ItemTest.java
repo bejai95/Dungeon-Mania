@@ -2,6 +2,9 @@ package dungeonmania;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import dungeonmania.util.Position;
@@ -145,5 +148,61 @@ public class ItemTest {
         assertTrue(bow.makeItemReponse().getId().equals(Integer.toString(bow.getitemId())));
         assertTrue(bow.makeItemReponse().getType().equals(bow.getType()));
 
+    }
+    @Test
+    public void testingBowIfOutOfUses() {
+        Bow bow = new Bow(3);
+        bow.getWeaponInfo();
+        bow.getWeaponInfo();
+        bow.getWeaponInfo();
+        //use bow 3 times
+        //now try
+        List<Integer> wep = bow.getWeaponInfo();
+        assertTrue(wep.get(0) == 0);
+        assertTrue(wep.get(1) == 0);
+    }
+    @Test
+    public void testArmourOutOfUses() {
+        Armour armour = new Armour(2);
+        armour.getMultipler();
+        armour.getMultipler();
+        armour.getMultipler();
+
+        assertTrue(armour.getMultipler() == 0);
+
+    }
+    @Test
+    public void testSwordOutOfUses() {
+        Sword sword = new Sword(1);
+        sword.getWeaponInfo();
+        sword.getWeaponInfo();
+        sword.getWeaponInfo();
+
+        List<Integer> wep = sword.getWeaponInfo();
+        assertTrue(wep.get(0) == 0);
+        assertTrue(wep.get(1) == 0);
+    }
+    @Test 
+    public void invisOutOfUses() {
+        InvisibilityPotion i = new InvisibilityPotion(1);
+        Character character = new Character(3, new Position(3, 4));
+        i.consume(character);
+        //used on that character so now on a different character it should have no uses and not work
+        //now do it again
+        Character character2 = new Character(3, new Position(3, 4));
+        i.consume(character2);
+        assertTrue(!(character2.isInvisible()));
+
+    }
+    @Test 
+    public void invincOutOfUses() {
+        InvincibilityPotion i = new  InvincibilityPotion(1);
+        Character character = new Character(3, new Position(3, 4));
+        i.consume(character);
+        //used on that character so now on a different character it should have no uses and not work
+        //now do it again
+        Character character2 = new Character(3, new Position(3, 4));
+        i.consume(character2);
+        assertTrue(!(character2.isInvincible()));
     }
 }
