@@ -497,6 +497,7 @@ public class Game {
         if(itemUsed != null){
             Item used = inventory.getItem(Integer.parseInt(itemUsed));
             System.out.println(used);
+            //if used != null then the item must exist in inventory
             if(used != null){
                 if (used instanceof Bomb) {
                     Bomb usedBomb = (Bomb)used;
@@ -510,12 +511,17 @@ public class Game {
                     cons.consume(player);
                 }
             }
-        } 
+            else {
+                //itemUsed was not null but used was so the item must not exist
+                throw (new InvalidActionException("Item does not exist in inventory"));
+            }
+        }
+        //we know that itemUsed == null, thats ok
 
         //remove dead items
         inventory.removeDeadItems();
 
-        //Interact with static entities
+        //Interact with static entities, such as picking up items
         staticInteraction.findInteractableStaticEntity(movementDirection);
 
         //move in direction

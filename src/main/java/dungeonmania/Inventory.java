@@ -180,7 +180,7 @@ public class Inventory {
         }
         return defense;
     }
-    public List<Consumable> getConsumables() {
+    /*public List<Consumable> getConsumables() {
         List<Consumable> consumable = new ArrayList<>();
         for (Item item: this.getItems()) {
             if (item instanceof Consumable) {
@@ -188,7 +188,7 @@ public class Inventory {
             }
         }
         return consumable;
-    }
+    }*/
     public List<Material> getMaterials() {
         List<Material> mats = new ArrayList<>();
         for (Item item: this.getItems()) {
