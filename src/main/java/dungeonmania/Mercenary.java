@@ -26,6 +26,21 @@ public class Mercenary extends MovingEntity {
 
     }
 
+    @Override
+    /**
+     * Moves as normal but will not move onto ally character
+     */
+    public void move() {
+        Position newPos = this.getPosition();
+        for (int i = 0; i < speed; i++) {
+            ChaseMovement chaseMove = (ChaseMovement)moveBehaviour;
+            if (!chaseMove.targetIsAdjacent(this.getPosition())) {
+                newPos = moveBehaviour.move(this.getPosition());
+            }
+        }
+        this.setPosition(newPos);
+    }
+
     public void setGoldThreshold(int goldThreshold) {
         this.goldThreshold = goldThreshold;
     }
