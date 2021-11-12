@@ -21,58 +21,35 @@ import dungeonmania.util.Position;
 
 
 public class GoalsUnitTests {
-    /*private List<Entity> getEmptyEntitiesList(){
-        List<Entity> ents = new ArrayList<Entity>();
-        return ents;
-    }
-
-    private List<Entity> getEntityListWithSpider(){
-        List<Entity> ents = new ArrayList<Entity>();
-        MovingEntity spider1 = new Spider(5, 1, new SquareMovement(), new Position(0,0));
-        ents.add(spider1);
-        return ents;
-    }
-    
-    @Test
-    public void testExitGoal() {
-        ExitGoal goal = new ExitGoal();
-        List<Entity> ents = getEntityListWithSpider();
-        assertEquals(goal.getGoalsLeft(ents), ":exit");
-    }
-
-    @Test
-    public void testAndGoal() {
-        JSONObject goals = new JSONObject();
-        goals.put("goal", "AND");
-        JSONArray subgoals = new JSONArray();
-        JSONObject subgoal1 = new JSONObject();
-        JSONObject subgoal2 = new JSONObject();
-        subgoal1.put("goal", "exit");
-        subgoal2.put("goal", "boulder");
-        subgoals.put(subgoal1);
-        subgoals.put(subgoal2);
-        goals.put("subgoals", subgoals);
-        Game game = new Game("id", "maze", "peaceful", goals.toString());
-        assertEquals(game.getGoalsLeft(), "(:exit AND :boulder)");
-    }
-
-    @Test
-    public void testOrGoal() {
-        JSONObject goals = new JSONObject();
-        goals.put("goal", "OR");
-        JSONArray subgoals = new JSONArray();
-        JSONObject subgoal1 = new JSONObject();
-        JSONObject subgoal2 = new JSONObject();
-        subgoal1.put("goal", "enemies");
-        subgoal2.put("goal", "treasure");
-        subgoals.put(subgoal1);
-        subgoals.put(subgoal2);
-        goals.put("subgoals", subgoals);
-        Game game = new Game("id", "maze", "peaceful", goals.toString());
-        assertEquals(game.getGoalsLeft(), "(:mercenary OR :treasure)");
-    }*/
     private List<Entity> getEmptyEntitiesList(){
         List<Entity> ents = new ArrayList<Entity>();
+        return ents;
+    }
+
+    private List<Entity> getBouldersNotOnSwitches(){
+        List<Entity> ents = new ArrayList<Entity>();
+        Boulder boulder = new Boulder(0, new Position(0,0));
+        FloorSwitch s = new FloorSwitch(1, new Position(0,1));
+        ents.add(boulder);
+        ents.add(s);
+        return ents;
+    }
+
+    private List<Entity> getBouldersOnSwitches(){
+        List<Entity> ents = new ArrayList<Entity>();
+        Boulder boulder = new Boulder(0, new Position(0,0));
+        FloorSwitch s = new FloorSwitch(1, new Position(0,0));
+        ents.add(boulder);
+        ents.add(s);
+        return ents;
+    }
+
+    private List<Entity> getPlayerOnExit(){
+        List<Entity> ents = new ArrayList<Entity>();
+        Character player = new Character(0, new Position(0, 0));
+        Exit exit = new Exit(1, new Position(0,0));
+        ents.add(player);
+        ents.add(exit);
         return ents;
     }
 
@@ -156,4 +133,80 @@ public class GoalsUnitTests {
         List<Entity> ents = getEmptyEntitiesList();
         assertEquals(agoal.getGoalsLeft(ents), ":exit");
     }
+
+    @Test
+    public void testBoulderGoalIncomplete() {
+
+        ExitGoal exgoal = new ExitGoal();
+        BoulderGoal bgoal = new BoulderGoal();
+
+        List<Goal> andsubs = new ArrayList<>();
+        andsubs.add(exgoal);
+        andsubs.add(bgoal);
+
+        AndGoal agoal = new AndGoal(andsubs);
+
+        List<Entity> ents = getBouldersNotOnSwitches();
+        assertEquals(agoal.getGoalsLeft(ents), "(:exit AND :switch)");
+    }
+
+    @Test
+    public void testBoulderGoalComplete() {
+
+        ExitGoal exgoal = new ExitGoal();
+        BoulderGoal bgoal = new BoulderGoal();
+
+        List<Goal> andsubs = new ArrayList<>();
+        andsubs.add(exgoal);
+        andsubs.add(bgoal);
+
+        AndGoal agoal = new AndGoal(andsubs);
+
+        List<Entity> ents = getBouldersOnSwitches();
+        assertEquals(agoal.getGoalsLeft(ents), ":exit");
+    }
+
+    @Test 
+    public void testAndEmpty(){
+        List<Goal> andsubs = new ArrayList<>();
+        AndGoal agoal = new AndGoal(andsubs);
+        List<Entity> ents = getEmptyEntitiesList();
+        assertEquals(agoal.getGoalsLeft(ents), "");
+
+    }
+
+    @Test 
+    public void testOrEmpty(){
+        List<Goal> osubs = new ArrayList<>();
+        OrGoal ogoal = new OrGoal(osubs);
+        List<Entity> ents = getEmptyEntitiesList();
+        assertEquals(ogoal.getGoalsLeft(ents), "");
+
+    }
+
+    @Test 
+    public void testOrSingleton(){
+        List<Goal> osubs = new ArrayList<>();
+        ExitGoal egoal = new ExitGoal();
+        osubs.add(egoal);
+        OrGoal ogoal = new OrGoal(osubs);
+        List<Entity> ents = getEmptyEntitiesList();
+        assertEquals(ogoal.getGoalsLeft(ents), ":exit");
+
+    }
+
+    @Test
+    public void testExitGoalComplete(){
+        ExitGoal egoal = new ExitGoal();
+        List<Entity> ents = getPlayerOnExit();
+        assertEquals(egoal.getGoalsLeft(ents), "");
+    }
+
+
+
+    
+
+
+
+
 }

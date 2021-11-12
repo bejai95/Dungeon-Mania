@@ -43,5 +43,12 @@ public class GoalsSystemTests {
         DungeonManiaController c = new DungeonManiaController();
         DungeonResponse r = c.newGame("advanced", "Peaceful");
         assertEquals(r.getGoals(), "(:mercenary AND :treasure)"); 
+    } 
+
+    @Test
+    public void testOrGoalsCorrect() {
+        DungeonManiaController c = new DungeonManiaController();
+        DungeonResponse r = c.newGame("or", "Peaceful");
+        assertEquals(r.getGoals(), "(:mercenary OR :treasure)"); 
     }
 }
