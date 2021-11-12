@@ -56,7 +56,7 @@ public class MovementTest {
         Character c = new Character(1, new Position(0, 0));
 
         // Chase when above target
-        Mercenary merc1 = new Mercenary(0, new Position(0,3), 1);
+        Mercenary merc1 = new Mercenary(0, new Position(0,3));
         merc1.chase(c);
         merc1.move();
         assertEquals(merc1.getPosition(), new Position(0, 2));

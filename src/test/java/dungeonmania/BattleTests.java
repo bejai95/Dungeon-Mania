@@ -44,7 +44,7 @@ public class BattleTests {
         character.getInventory().addItemToInventory(treasure);
         MovingEntity spider1 = new Spider(0, new Position(5,5), new SquareMovement());
         List<Mercenary> mercs = new ArrayList<>();
-        Mercenary merc = new Mercenary(2, new Position(5,4), 1);
+        Mercenary merc = new Mercenary(2, new Position(5,4));
         merc.chase(character);
         merc.interact(character);
         mercs.add(merc);

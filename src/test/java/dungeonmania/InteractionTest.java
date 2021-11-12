@@ -4,9 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import dungeonmania.exceptions.InvalidActionException;
+import java.lang.IllegalArgumentException;
+import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
 public class InteractionTest {
@@ -56,10 +61,12 @@ public class InteractionTest {
         assertThrows(InvalidActionException.class, () -> distantSpawner8.interact(ch));
     }
         
-    public void testBribe() {
+    @Test
+    public void testBribeFunction() {
 
         Character ch = new Character(0, new Position(0, -1));
-        Mercenary merc = new Mercenary(1, new Position(0, 0), 4);
+        Mercenary merc = new Mercenary(1, new Position(0, 0));
+        merc.setGoldThreshold(4);
         merc.chase(ch);
         
         // Merc out of range
@@ -106,6 +113,27 @@ public class InteractionTest {
         assertDoesNotThrow(() -> merc.interact(ch));
         ch.setPosition(new Position(-2,0));
         assertDoesNotThrow(() -> merc.interact(ch));
+    }
+
+    @Test
+    public void testBribeInGame() {
+        DungeonManiaController c1 = new DungeonManiaController();
+        c1.newGame("bribe-test", "Standard");
+
+        // Test case invalid id
+        assertThrows(IllegalArgumentException.class, () -> c1.interact("not a real id"));
+
+        String mercId = "37";
+
+        // Player spawns out of range, with no coins
+        assertThrows(InvalidActionException.class, () -> c1.interact(mercId));
+        // Collect coin
+        c1.tick(null, Direction.LEFT);
+        // Player should still be out of range
+        assertThrows(InvalidActionException.class, () -> c1.interact(mercId));
+        // Player now in range
+        c1.tick(null, Direction.RIGHT);
+        assertDoesNotThrow(() -> c1.interact(mercId));
     }
 
 }
