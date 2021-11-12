@@ -90,4 +90,9 @@ public class Mercenary extends MovingEntity {
         super.setMovement(newMovement);
     }
 
+    @Override
+    public boolean isAlly(){
+        return !isHostile;
+    }
+
 }
