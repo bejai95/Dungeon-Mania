@@ -11,6 +11,7 @@ public class MovingEntity extends Entity implements Battleable{
     double baseDefense;
     double defense;
     int speed;
+
     boolean isHostile;
     Movement moveBehaviour;
     Item currentItem;
@@ -18,7 +19,8 @@ public class MovingEntity extends Entity implements Battleable{
     public MovingEntity(int id, String type, Position position, Movement moveBehaviour) {
         super(id, type, position);
         this.moveBehaviour = moveBehaviour;
-
+        this.isHostile = true;
+        this.currentItem = null;
     }
 
     public void setHealth(int health) {
@@ -61,10 +63,25 @@ public class MovingEntity extends Entity implements Battleable{
         this.moveBehaviour = move;
     }
 
+    public void setIsHostile(boolean bool) {
+        this.isHostile = bool;
+    }
+
+    /**
+     * @return The position of the next move in this
+     * entity's movement pattern
+     */
+    public Position getNextMove() {
+        return moveBehaviour.move(this.getPosition());
+    }
+
+    /**
+     * Set this entity's position to where its movement would take it
+     * after 'speed' times
+     */
     public void move() {
         Position newPos = this.getPosition();
         for (int i = 0; i < speed; i++) {
-            // TODO layer collision logic - redo move if colliding
             newPos = moveBehaviour.move(newPos);
         }
         this.setPosition(newPos);

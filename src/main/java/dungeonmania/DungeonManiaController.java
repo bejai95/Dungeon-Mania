@@ -174,22 +174,7 @@ public class DungeonManiaController {
     }
 
     public DungeonResponse interact(String entityId) throws IllegalArgumentException, InvalidActionException {
-        Game game = getCurrentlyAccessingGame();
-        Entity ent = game.getEntityById(entityId);
-        if (ent == null) {
-            throw new IllegalArgumentException("Id does not exist");
-        } else if (!ent.canInteract()) {
-            throw new IllegalArgumentException("Cannot interact with this entity");
-        }
-
-        ent.interact(game.getPlayer());
-
-        Inventory inv = game.getPlayer().getInventory();
-
-        return new DungeonResponse(game.getDungeonId(), game.getDungeonName(), 
-        game.getEntities().stream().map(x -> x.getInfo()).collect(Collectors.toList()), 
-        inv.getItemsAsResponse(), inv.generateBuildables(), game.getGoalsLeft());
-
+        return currentlyAccessingGame.interact(entityId);
 
     }
 

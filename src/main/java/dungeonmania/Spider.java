@@ -21,5 +21,5 @@ public class Spider extends MovingEntity {
         setDefense(defaultdefense);
         setSpeed(defaultSpeed);
     }
-
+    //TODO reverse direction on collision
 }
