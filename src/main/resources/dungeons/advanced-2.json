@@ -448,6 +448,11 @@
         "type": "wood"
       },
       {
+        "x": 14,
+        "y": 14,
+        "type": "health_potion"
+      },
+      {
         "x": 17,
         "y": 10,
         "type": "wall"

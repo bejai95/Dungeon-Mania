@@ -39,11 +39,7 @@ public class Inventory {
      * @description craft will be in charge of adding items to proper lists and taking away what is needed
      */
     public Item craft(String itemName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
-          IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException, IllegalArgumentException {
-        //if it is not a Shield and is not equal 
-        if (!(Shield.class.getSimpleName().toLowerCase().equals(itemName) || Bow.class.getSimpleName().toLowerCase().equals(itemName))) {
-            throw new IllegalArgumentException("Cannot craft something that is not a bow or a shield");
-        }
+          IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException {
         //first finds the first recipe that can craft ur item
         List<String> recipe = this.getRecipesOfItem(itemName);
         //the recipe cant be crafted

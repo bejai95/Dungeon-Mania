@@ -1,11 +1,11 @@
 {
-  "dungeonId": "3",
+  "dungeonId": "2",
   "dungeonName": "advanced-2",
   "entities": [
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 456,
+        "id": 326,
         "type": "wall",
         "position": {
           "x": 0,
@@ -18,7 +18,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 457,
+        "id": 327,
         "type": "wall",
         "position": {
           "x": 1,
@@ -31,7 +31,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 458,
+        "id": 328,
         "type": "wall",
         "position": {
           "x": 2,
@@ -44,7 +44,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 459,
+        "id": 329,
         "type": "wall",
         "position": {
           "x": 3,
@@ -57,7 +57,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 460,
+        "id": 330,
         "type": "wall",
         "position": {
           "x": 4,
@@ -70,7 +70,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 461,
+        "id": 331,
         "type": "wall",
         "position": {
           "x": 5,
@@ -83,7 +83,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 462,
+        "id": 332,
         "type": "wall",
         "position": {
           "x": 6,
@@ -96,7 +96,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 463,
+        "id": 333,
         "type": "wall",
         "position": {
           "x": 7,
@@ -109,7 +109,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 464,
+        "id": 334,
         "type": "wall",
         "position": {
           "x": 8,
@@ -122,7 +122,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 465,
+        "id": 335,
         "type": "wall",
         "position": {
           "x": 9,
@@ -135,7 +135,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 466,
+        "id": 336,
         "type": "wall",
         "position": {
           "x": 10,
@@ -148,7 +148,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 467,
+        "id": 337,
         "type": "wall",
         "position": {
           "x": 11,
@@ -161,7 +161,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 468,
+        "id": 338,
         "type": "wall",
         "position": {
           "x": 12,
@@ -174,7 +174,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 469,
+        "id": 339,
         "type": "wall",
         "position": {
           "x": 13,
@@ -187,7 +187,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 470,
+        "id": 340,
         "type": "wall",
         "position": {
           "x": 14,
@@ -200,7 +200,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 471,
+        "id": 341,
         "type": "wall",
         "position": {
           "x": 15,
@@ -213,7 +213,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 472,
+        "id": 342,
         "type": "wall",
         "position": {
           "x": 16,
@@ -226,7 +226,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 473,
+        "id": 343,
         "type": "wall",
         "position": {
           "x": 17,
@@ -239,7 +239,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 474,
+        "id": 344,
         "type": "wall",
         "position": {
           "x": 0,
@@ -255,10 +255,18 @@
         "inventory": {
           "items": [
             {
+              "className": "dungeonmania.HealthPotion",
+              "data": {
+                "uses": 1,
+                "itemId": 346,
+                "type": "health_potion"
+              }
+            },
+            {
               "className": "dungeonmania.Sword",
               "data": {
-                "uses": 2,
-                "itemId": 476,
+                "uses": 3,
+                "itemId": 347,
                 "type": "sword"
               }
             }
@@ -282,13 +290,13 @@
             ]
           }
         },
-        "health": 190.0,
+        "health": 200.0,
         "baseDamage": 3,
         "baseDefense": 0.0,
         "InvincibleDuration": 0,
         "InvisibleDuration": 0,
         "maxHealth": 200.0,
-        "id": 475,
+        "id": 345,
         "type": "player",
         "position": {
           "x": 15,
@@ -301,7 +309,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 477,
+        "id": 348,
         "type": "wall",
         "position": {
           "x": 17,
@@ -314,7 +322,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 478,
+        "id": 349,
         "type": "wall",
         "position": {
           "x": 0,
@@ -327,7 +335,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 479,
+        "id": 350,
         "type": "wall",
         "position": {
           "x": 3,
@@ -340,7 +348,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 480,
+        "id": 351,
         "type": "wall",
         "position": {
           "x": 6,
@@ -353,7 +361,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 481,
+        "id": 352,
         "type": "wall",
         "position": {
           "x": 7,
@@ -366,7 +374,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 482,
+        "id": 353,
         "type": "wall",
         "position": {
           "x": 8,
@@ -379,7 +387,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 483,
+        "id": 354,
         "type": "wall",
         "position": {
           "x": 9,
@@ -392,7 +400,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 484,
+        "id": 355,
         "type": "wall",
         "position": {
           "x": 12,
@@ -405,7 +413,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 485,
+        "id": 356,
         "type": "wall",
         "position": {
           "x": 13,
@@ -418,7 +426,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 486,
+        "id": 357,
         "type": "wall",
         "position": {
           "x": 14,
@@ -431,7 +439,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 487,
+        "id": 358,
         "type": "wall",
         "position": {
           "x": 15,
@@ -444,7 +452,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 488,
+        "id": 359,
         "type": "wall",
         "position": {
           "x": 17,
@@ -457,7 +465,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 489,
+        "id": 360,
         "type": "wall",
         "position": {
           "x": 0,
@@ -470,7 +478,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 490,
+        "id": 361,
         "type": "wall",
         "position": {
           "x": 3,
@@ -483,7 +491,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 491,
+        "id": 362,
         "type": "wall",
         "position": {
           "x": 4,
@@ -496,7 +504,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 492,
+        "id": 363,
         "type": "wall",
         "position": {
           "x": 15,
@@ -509,7 +517,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 493,
+        "id": 364,
         "type": "wall",
         "position": {
           "x": 17,
@@ -522,7 +530,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 494,
+        "id": 365,
         "type": "wall",
         "position": {
           "x": 0,
@@ -535,7 +543,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 495,
+        "id": 366,
         "type": "wall",
         "position": {
           "x": 8,
@@ -550,7 +558,7 @@
       "data": {
         "itemClass": "Bomb",
         "keyNum": -1,
-        "id": 496,
+        "id": 367,
         "type": "bomb",
         "position": {
           "x": 13,
@@ -563,7 +571,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 497,
+        "id": 368,
         "type": "wall",
         "position": {
           "x": 17,
@@ -576,7 +584,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 498,
+        "id": 369,
         "type": "wall",
         "position": {
           "x": 0,
@@ -631,7 +639,7 @@
                 "InvincibleDuration": 0,
                 "InvisibleDuration": 0,
                 "maxHealth": 200.0,
-                "id": 475,
+                "id": 345,
                 "type": "player",
                 "position": {
                   "x": 1,
@@ -643,7 +651,7 @@
             }
           }
         },
-        "id": 499,
+        "id": 370,
         "type": "mercenary",
         "position": {
           "x": 3,
@@ -656,7 +664,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 500,
+        "id": 371,
         "type": "wall",
         "position": {
           "x": 8,
@@ -669,7 +677,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 501,
+        "id": 372,
         "type": "wall",
         "position": {
           "x": 17,
@@ -682,7 +690,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 502,
+        "id": 373,
         "type": "wall",
         "position": {
           "x": 0,
@@ -695,7 +703,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 503,
+        "id": 374,
         "type": "wall",
         "position": {
           "x": 6,
@@ -708,7 +716,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 504,
+        "id": 375,
         "type": "wall",
         "position": {
           "x": 8,
@@ -721,7 +729,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 505,
+        "id": 376,
         "type": "wall",
         "position": {
           "x": 9,
@@ -734,7 +742,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 506,
+        "id": 377,
         "type": "wall",
         "position": {
           "x": 13,
@@ -747,7 +755,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 507,
+        "id": 378,
         "type": "wall",
         "position": {
           "x": 17,
@@ -760,7 +768,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 508,
+        "id": 379,
         "type": "wall",
         "position": {
           "x": 0,
@@ -773,7 +781,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 509,
+        "id": 380,
         "type": "wall",
         "position": {
           "x": 6,
@@ -786,7 +794,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 510,
+        "id": 381,
         "type": "wall",
         "position": {
           "x": 12,
@@ -799,7 +807,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 511,
+        "id": 382,
         "type": "wall",
         "position": {
           "x": 13,
@@ -812,7 +820,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 512,
+        "id": 383,
         "type": "wall",
         "position": {
           "x": 17,
@@ -825,7 +833,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 513,
+        "id": 384,
         "type": "wall",
         "position": {
           "x": 0,
@@ -838,7 +846,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 514,
+        "id": 385,
         "type": "wall",
         "position": {
           "x": 3,
@@ -851,7 +859,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 515,
+        "id": 386,
         "type": "wall",
         "position": {
           "x": 4,
@@ -864,7 +872,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 516,
+        "id": 387,
         "type": "wall",
         "position": {
           "x": 5,
@@ -877,7 +885,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 517,
+        "id": 388,
         "type": "wall",
         "position": {
           "x": 6,
@@ -890,7 +898,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 518,
+        "id": 389,
         "type": "wall",
         "position": {
           "x": 8,
@@ -903,7 +911,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 519,
+        "id": 390,
         "type": "wall",
         "position": {
           "x": 9,
@@ -916,7 +924,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 520,
+        "id": 391,
         "type": "wall",
         "position": {
           "x": 10,
@@ -929,7 +937,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 521,
+        "id": 392,
         "type": "wall",
         "position": {
           "x": 13,
@@ -942,7 +950,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 522,
+        "id": 393,
         "type": "wall",
         "position": {
           "x": 17,
@@ -955,7 +963,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 523,
+        "id": 394,
         "type": "wall",
         "position": {
           "x": 0,
@@ -968,7 +976,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 524,
+        "id": 395,
         "type": "wall",
         "position": {
           "x": 9,
@@ -981,7 +989,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 525,
+        "id": 396,
         "type": "wall",
         "position": {
           "x": 13,
@@ -994,7 +1002,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 526,
+        "id": 397,
         "type": "wall",
         "position": {
           "x": 14,
@@ -1007,7 +1015,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 527,
+        "id": 398,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1020,7 +1028,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 528,
+        "id": 399,
         "type": "wall",
         "position": {
           "x": 0,
@@ -1033,7 +1041,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 529,
+        "id": 400,
         "type": "wall",
         "position": {
           "x": 3,
@@ -1046,7 +1054,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 530,
+        "id": 401,
         "type": "wall",
         "position": {
           "x": 5,
@@ -1059,7 +1067,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 531,
+        "id": 402,
         "type": "wall",
         "position": {
           "x": 6,
@@ -1074,7 +1082,7 @@
       "data": {
         "itemClass": "Treasure",
         "keyNum": -1,
-        "id": 532,
+        "id": 403,
         "type": "treasure",
         "position": {
           "x": 7,
@@ -1089,7 +1097,7 @@
       "data": {
         "isOpen": true,
         "matchingKeyNum": 1,
-        "id": 533,
+        "id": 404,
         "type": "door_open",
         "position": {
           "x": 15,
@@ -1104,7 +1112,7 @@
       "data": {
         "isOpen": false,
         "matchingKeyNum": 2,
-        "id": 534,
+        "id": 405,
         "type": "door_gold",
         "position": {
           "x": 4,
@@ -1119,7 +1127,7 @@
       "data": {
         "itemClass": "Key",
         "keyNum": 2,
-        "id": 536,
+        "id": 407,
         "type": "key_gold",
         "position": {
           "x": 12,
@@ -1134,7 +1142,7 @@
       "data": {
         "itemClass": "Wood",
         "keyNum": -1,
-        "id": 537,
+        "id": 408,
         "type": "wood",
         "position": {
           "x": 11,
@@ -1149,7 +1157,7 @@
       "data": {
         "itemClass": "Wood",
         "keyNum": -1,
-        "id": 538,
+        "id": 409,
         "type": "wood",
         "position": {
           "x": 11,
@@ -1164,7 +1172,7 @@
       "data": {
         "itemClass": "Arrow",
         "keyNum": -1,
-        "id": 539,
+        "id": 410,
         "type": "arrow",
         "position": {
           "x": 11,
@@ -1179,7 +1187,7 @@
       "data": {
         "itemClass": "Arrow",
         "keyNum": -1,
-        "id": 540,
+        "id": 411,
         "type": "arrow",
         "position": {
           "x": 11,
@@ -1194,7 +1202,7 @@
       "data": {
         "itemClass": "Arrow",
         "keyNum": -1,
-        "id": 541,
+        "id": 412,
         "type": "arrow",
         "position": {
           "x": 12,
@@ -1209,7 +1217,7 @@
       "data": {
         "itemClass": "Wood",
         "keyNum": -1,
-        "id": 542,
+        "id": 413,
         "type": "wood",
         "position": {
           "x": 13,
@@ -1220,9 +1228,24 @@
       }
     },
     {
+      "className": "dungeonmania.UnpickedUpItem",
+      "data": {
+        "itemClass": "HealthPotion",
+        "keyNum": -1,
+        "id": 414,
+        "type": "health_potion",
+        "position": {
+          "x": 14,
+          "y": 14,
+          "layer": 0
+        },
+        "isInteractable": true
+      }
+    },
+    {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 543,
+        "id": 415,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1235,7 +1258,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 544,
+        "id": 416,
         "type": "wall",
         "position": {
           "x": 0,
@@ -1248,7 +1271,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 545,
+        "id": 417,
         "type": "wall",
         "position": {
           "x": 3,
@@ -1261,7 +1284,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 546,
+        "id": 418,
         "type": "wall",
         "position": {
           "x": 6,
@@ -1274,7 +1297,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 547,
+        "id": 419,
         "type": "wall",
         "position": {
           "x": 8,
@@ -1287,7 +1310,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 548,
+        "id": 420,
         "type": "wall",
         "position": {
           "x": 9,
@@ -1300,7 +1323,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 549,
+        "id": 421,
         "type": "wall",
         "position": {
           "x": 10,
@@ -1313,7 +1336,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 550,
+        "id": 422,
         "type": "wall",
         "position": {
           "x": 12,
@@ -1326,7 +1349,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 551,
+        "id": 423,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1339,7 +1362,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 552,
+        "id": 424,
         "type": "wall",
         "position": {
           "x": 0,
@@ -1352,7 +1375,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 553,
+        "id": 425,
         "type": "wall",
         "position": {
           "x": 3,
@@ -1365,7 +1388,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 554,
+        "id": 426,
         "type": "wall",
         "position": {
           "x": 9,
@@ -1378,7 +1401,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 555,
+        "id": 427,
         "type": "wall",
         "position": {
           "x": 12,
@@ -1391,7 +1414,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 556,
+        "id": 428,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1404,7 +1427,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 557,
+        "id": 429,
         "type": "wall",
         "position": {
           "x": 0,
@@ -1417,7 +1440,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 558,
+        "id": 430,
         "type": "wall",
         "position": {
           "x": 3,
@@ -1430,7 +1453,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 559,
+        "id": 431,
         "type": "wall",
         "position": {
           "x": 4,
@@ -1443,7 +1466,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 560,
+        "id": 432,
         "type": "wall",
         "position": {
           "x": 5,
@@ -1456,7 +1479,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 561,
+        "id": 433,
         "type": "wall",
         "position": {
           "x": 12,
@@ -1469,7 +1492,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 562,
+        "id": 434,
         "type": "wall",
         "position": {
           "x": 13,
@@ -1482,7 +1505,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 563,
+        "id": 435,
         "type": "wall",
         "position": {
           "x": 14,
@@ -1495,7 +1518,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 564,
+        "id": 436,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1508,7 +1531,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 565,
+        "id": 437,
         "type": "wall",
         "position": {
           "x": 0,
@@ -1521,7 +1544,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 566,
+        "id": 438,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1534,7 +1557,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 567,
+        "id": 439,
         "type": "wall",
         "position": {
           "x": 0,
@@ -1547,7 +1570,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 568,
+        "id": 440,
         "type": "wall",
         "position": {
           "x": 1,
@@ -1560,7 +1583,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 569,
+        "id": 441,
         "type": "wall",
         "position": {
           "x": 2,
@@ -1573,7 +1596,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 570,
+        "id": 442,
         "type": "wall",
         "position": {
           "x": 3,
@@ -1586,7 +1609,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 571,
+        "id": 443,
         "type": "wall",
         "position": {
           "x": 4,
@@ -1599,7 +1622,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 572,
+        "id": 444,
         "type": "wall",
         "position": {
           "x": 5,
@@ -1612,7 +1635,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 573,
+        "id": 445,
         "type": "wall",
         "position": {
           "x": 6,
@@ -1625,7 +1648,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 574,
+        "id": 446,
         "type": "wall",
         "position": {
           "x": 7,
@@ -1638,7 +1661,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 575,
+        "id": 447,
         "type": "wall",
         "position": {
           "x": 8,
@@ -1651,7 +1674,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 576,
+        "id": 448,
         "type": "wall",
         "position": {
           "x": 9,
@@ -1664,7 +1687,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 577,
+        "id": 449,
         "type": "wall",
         "position": {
           "x": 10,
@@ -1677,7 +1700,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 578,
+        "id": 450,
         "type": "wall",
         "position": {
           "x": 11,
@@ -1690,7 +1713,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 579,
+        "id": 451,
         "type": "wall",
         "position": {
           "x": 12,
@@ -1703,7 +1726,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 580,
+        "id": 452,
         "type": "wall",
         "position": {
           "x": 13,
@@ -1716,7 +1739,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 581,
+        "id": 453,
         "type": "wall",
         "position": {
           "x": 14,
@@ -1729,7 +1752,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 582,
+        "id": 454,
         "type": "wall",
         "position": {
           "x": 15,
@@ -1742,7 +1765,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 583,
+        "id": 455,
         "type": "wall",
         "position": {
           "x": 16,
@@ -1755,7 +1778,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 584,
+        "id": 456,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1780,53 +1803,120 @@
             "direction": "RIGHT",
             "path": [
               {
+                "x": 6,
+                "y": 11,
+                "layer": 0
+              },
+              {
                 "x": 7,
-                "y": 6,
+                "y": 11,
                 "layer": 0
               },
               {
                 "x": 8,
-                "y": 6,
-                "layer": 0
-              },
-              {
-                "x": 9,
-                "y": 6,
-                "layer": 0
-              },
-              {
-                "x": 9,
-                "y": 7,
-                "layer": 0
-              },
-              {
-                "x": 9,
-                "y": 8,
+                "y": 11,
                 "layer": 0
               },
               {
                 "x": 8,
-                "y": 8,
+                "y": 12,
+                "layer": 0
+              },
+              {
+                "x": 8,
+                "y": 13,
                 "layer": 0
               },
               {
                 "x": 7,
-                "y": 8,
+                "y": 13,
                 "layer": 0
               },
               {
-                "x": 7,
-                "y": 7,
+                "x": 6,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 6,
+                "y": 12,
                 "layer": 0
               }
             ]
           }
         },
-        "id": 586,
+        "id": 457,
         "type": "spider",
         "position": {
-          "x": 9,
-          "y": 6,
+          "x": 8,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Spider",
+      "data": {
+        "health": 50.0,
+        "damage": 2,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": true,
+        "moveBehaviour": {
+          "className": "dungeonmania.SquareMovement",
+          "data": {
+            "direction": "RIGHT",
+            "path": [
+              {
+                "x": 12,
+                "y": 4,
+                "layer": 0
+              },
+              {
+                "x": 13,
+                "y": 4,
+                "layer": 0
+              },
+              {
+                "x": 14,
+                "y": 4,
+                "layer": 0
+              },
+              {
+                "x": 14,
+                "y": 5,
+                "layer": 0
+              },
+              {
+                "x": 14,
+                "y": 6,
+                "layer": 0
+              },
+              {
+                "x": 13,
+                "y": 6,
+                "layer": 0
+              },
+              {
+                "x": 12,
+                "y": 6,
+                "layer": 0
+              },
+              {
+                "x": 12,
+                "y": 5,
+                "layer": 0
+              }
+            ]
+          }
+        },
+        "id": 458,
+        "type": "spider",
+        "position": {
+          "x": 14,
+          "y": 4,
           "layer": 2
         },
         "isInteractable": false
@@ -1848,52 +1938,52 @@
             "path": [
               {
                 "x": 6,
-                "y": 0,
+                "y": 7,
                 "layer": 0
               },
               {
                 "x": 7,
-                "y": 0,
+                "y": 7,
                 "layer": 0
               },
               {
                 "x": 8,
-                "y": 0,
+                "y": 7,
                 "layer": 0
               },
               {
                 "x": 8,
-                "y": 1,
+                "y": 8,
                 "layer": 0
               },
               {
                 "x": 8,
-                "y": 2,
+                "y": 9,
                 "layer": 0
               },
               {
                 "x": 7,
-                "y": 2,
+                "y": 9,
                 "layer": 0
               },
               {
                 "x": 6,
-                "y": 2,
+                "y": 9,
                 "layer": 0
               },
               {
                 "x": 6,
-                "y": 1,
+                "y": 8,
                 "layer": 0
               }
             ]
           }
         },
-        "id": 587,
+        "id": 459,
         "type": "spider",
         "position": {
           "x": 6,
-          "y": 0,
+          "y": 7,
           "layer": 2
         },
         "isInteractable": false
@@ -1914,53 +2004,53 @@
             "direction": "LEFT",
             "path": [
               {
-                "x": 1,
-                "y": 7,
+                "x": 12,
+                "y": 4,
                 "layer": 0
               },
               {
-                "x": 2,
-                "y": 7,
+                "x": 13,
+                "y": 4,
                 "layer": 0
               },
               {
-                "x": 3,
-                "y": 7,
+                "x": 14,
+                "y": 4,
                 "layer": 0
               },
               {
-                "x": 3,
-                "y": 8,
+                "x": 14,
+                "y": 5,
                 "layer": 0
               },
               {
-                "x": 3,
-                "y": 9,
+                "x": 14,
+                "y": 6,
                 "layer": 0
               },
               {
-                "x": 2,
-                "y": 9,
+                "x": 13,
+                "y": 6,
                 "layer": 0
               },
               {
-                "x": 1,
-                "y": 9,
+                "x": 12,
+                "y": 6,
                 "layer": 0
               },
               {
-                "x": 1,
-                "y": 8,
+                "x": 12,
+                "y": 5,
                 "layer": 0
               }
             ]
           }
         },
-        "id": 588,
+        "id": 460,
         "type": "spider",
         "position": {
-          "x": 1,
-          "y": 9,
+          "x": 12,
+          "y": 6,
           "layer": 2
         },
         "isInteractable": false
@@ -1972,7 +2062,7 @@
   "animations": [
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -1982,7 +2072,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -1992,7 +2082,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2002,7 +2092,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2012,7 +2102,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2022,7 +2112,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2032,7 +2122,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2042,7 +2132,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2052,7 +2142,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2062,7 +2152,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2072,7 +2162,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2082,7 +2172,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2092,7 +2182,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2102,7 +2192,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2112,7 +2202,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2122,7 +2212,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2132,7 +2222,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2142,7 +2232,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2152,7 +2242,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2162,7 +2252,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2172,7 +2262,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 1",
         "healthbar tint 0x00ff00"
@@ -2182,7 +2272,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2192,7 +2282,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2202,7 +2292,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2212,7 +2302,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2222,7 +2312,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2232,7 +2322,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2242,7 +2332,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2252,7 +2342,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2262,7 +2352,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2272,7 +2362,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2282,7 +2372,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2292,7 +2382,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2302,7 +2392,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2312,7 +2402,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2322,7 +2412,7 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
         "healthbar set 0.95",
         "healthbar tint 0xff0000"
@@ -2332,20 +2422,20 @@
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
-        "healthbar set 0.95",
-        "healthbar tint 0xff0000"
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
       ],
       "loop": false,
       "duration": -1.0
     },
     {
       "when": "PostTick",
-      "entityId": "475",
+      "entityId": "345",
       "queue": [
-        "healthbar set 0.95",
-        "healthbar tint 0xff0000"
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
       ],
       "loop": false,
       "duration": -1.0
