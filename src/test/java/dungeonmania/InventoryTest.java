@@ -235,4 +235,17 @@ public class InventoryTest {
         assertTrue(inventory.getItemFromType("health_potion") == hp);
         assertTrue(inventory.getItemFromType("cahskgah") == null);
     }
+    @Test
+    public void testAddAndRemoveItemTwice() {
+        Inventory inventory = new Inventory();
+        Bow bow = new Bow(1);
+        inventory.addItemToInventory(bow);
+        inventory.addItemToInventory(bow);
+        //second one did nothing
+        assertTrue(inventory.getItems().size() == 1);
+        inventory.removeItem(bow);
+        assertTrue(inventory.getItems().size() == 0);
+        assertDoesNotThrow(()->inventory.removeItem(bow));
+
+    }
 }
