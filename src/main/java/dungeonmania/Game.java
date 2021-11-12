@@ -497,6 +497,7 @@ public class Game {
         if(itemUsed != null){
             Item used = inventory.getItem(Integer.parseInt(itemUsed));
             System.out.println(used);
+            //if used != null then the item must exist in inventory
             if(used != null){
                 if (used instanceof Bomb) {
                     Bomb usedBomb = (Bomb)used;
@@ -510,12 +511,17 @@ public class Game {
                     cons.consume(player);
                 }
             }
-        } 
+            else {
+                //itemUsed was not null but used was so the item must not exist
+                throw (new InvalidActionException("Item does not exist in inventory"));
+            }
+        }
+        //we know that itemUsed == null, thats ok
 
         //remove dead items
         inventory.removeDeadItems();
 
-        //Interact with static entities
+        //Interact with static entities, such as picking up items
         staticInteraction.findInteractableStaticEntity(movementDirection);
 
         //move in direction
@@ -546,7 +552,7 @@ public class Game {
         //battle -- needs list of mercenaries, needs movingEntity on same tile as player
 
         MovingEntity baddie = getEntityOnPlayer(player);
-        if(baddie != null){
+        if(baddie != null && !baddie.isAlly()){
             System.out.println("Health Before: " + player.getHealth());
             BattleManager bat = new BattleManager(player, baddie, getMercenaries());
             List<Battleable> dead = bat.battle();
@@ -554,13 +560,12 @@ public class Game {
             System.out.println("Number dead in Battle" + dead.size());
             //entities.removeAll(dead);
 
-            // Adjust the health bar now that a battle has taken place
-            double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
-            setHealthBar(healthInRequiredRegion);
-
             removeDeadEntities();
         }  
 
+        // Adjust the health bar
+        double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
+        setHealthBar(healthInRequiredRegion);
 
         //increment tick counter
         tickCounter++;
@@ -601,23 +606,31 @@ public class Game {
      /**
      * Sets Portal Colours on the map
      */
-    public void setPortalColours() {
+    public void setSprites() {
         for (Entity entity : entities) {
             if (entity instanceof Portal) {
                 Portal selectedPortal = (Portal)entity;
                 String colour = selectedPortal.getportalColour().toLowerCase();
-                String portalName = "sprite portal_" + colour;
-                System.out.println(portalName);
-                animations.add(new AnimationQueue("PostTick", Integer.toString(selectedPortal.getId()), Arrays.asList(portalName), false, -1));
+                String portalName = "portal_" + colour;
+                selectedPortal.setType(portalName);
+            } else if (entity instanceof Door) {
+                Door selectedDoor = (Door)entity;
+                if (selectedDoor.getMatchingKeyNum() == 1) {
+                    selectedDoor.setType("door_silver");
+                } else {
+                    selectedDoor.setType("door_gold");
+                }
+            } else if (entity instanceof UnpickedUpItem){
+                UnpickedUpItem selectedItem = (UnpickedUpItem)entity;
+                if (selectedItem.getItemClass().equals("Key")) {
+                    if (selectedItem.getKeyNum() == 1) {
+                        selectedItem.setType("key_silver");
+                    } else {
+                        selectedItem.setType("key_gold");
+                    }
+                }
             }
         }
-    }
-
-     /**
-     * Adds an animation to the animation queue
-     */
-    public void addAnimation(String when, String entityId, List<String> queue, boolean loop, double duration) {
-        animations.add(new AnimationQueue(when, entityId, queue, loop, duration));
     }
 
     public int getTickCounter() {
