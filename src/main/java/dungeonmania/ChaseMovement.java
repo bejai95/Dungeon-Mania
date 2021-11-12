@@ -40,6 +40,10 @@ public class ChaseMovement implements Movement {
         return currentPos.translateBy(offset);
     }
 
+    public boolean targetIsAdjacent(Position currentPos) {
+        return Position.isAdjacent(currentPos, target.getPosition());
+    }
+
     public void setTarget(Entity target) {
         this.target = target;
     }
