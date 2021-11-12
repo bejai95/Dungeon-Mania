@@ -1,6 +1,7 @@
 package dungeonmania;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dungeonmania.exceptions.InvalidActionException;
@@ -84,7 +85,9 @@ public class Inventory {
         List<String> recipesBuildable = new ArrayList<>();
         HashMap<String, List<String>> recipes = getRecipes();
         //for each recipe
-        for (String recipeName: recipes.keySet()) {
+        List<String> recipeKeys = new ArrayList<>(recipes.keySet());
+        Collections.sort(recipeKeys);
+        for (String recipeName: recipeKeys) {
             if (this.isRecipeBuildable(recipeName)) {
                 //if can build
                 recipesBuildable.add(recipeName);
@@ -147,7 +150,11 @@ public class Inventory {
      */
     public List<String> getRecipesOfItem(String itemName) {
         //for a given item name go through all recipes that contain itemName and check which one to return
-        for (String recipeName: getRecipes().keySet()) {
+        HashMap<String, List<String>> recipes = getRecipes();
+        //for each recipe
+        List<String> recipeKeys = new ArrayList<>(recipes.keySet());
+        Collections.sort(recipeKeys);
+        for (String recipeName: recipeKeys) {
             if (this.isRecipeBuildable(recipeName) && recipeName.contains(itemName)) {
                 return getRecipes().get(recipeName);
             }
@@ -180,7 +187,7 @@ public class Inventory {
         }
         return defense;
     }
-    public List<Consumable> getConsumables() {
+    /*public List<Consumable> getConsumables() {
         List<Consumable> consumable = new ArrayList<>();
         for (Item item: this.getItems()) {
             if (item instanceof Consumable) {
@@ -188,7 +195,7 @@ public class Inventory {
             }
         }
         return consumable;
-    }
+    }*/
     public List<Material> getMaterials() {
         List<Material> mats = new ArrayList<>();
         for (Item item: this.getItems()) {

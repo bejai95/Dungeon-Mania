@@ -36,7 +36,7 @@ public class UnpickedUpItem extends StaticEntity {
     //Method for picking up an item
     //Note: I am temporarily Using 0 for ID until ID system implemented
     //Note the ID gets transferred to the item on pickup
-    public Item pickupItem () throws ClassNotFoundException, IllegalAccessError, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
+    public Item pickupItem() throws ClassNotFoundException, IllegalAccessError, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
         if (itemClass.equals("Key")) {
             Key newKey = new Key(getId(),keyNum);
             return (Item)newKey;
