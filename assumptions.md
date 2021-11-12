@@ -8,3 +8,4 @@ Assuming that there can only be one game being accessed by a controller at a tim
 Assuming that the String id given to saveGame does not have the extension (e.g. .json) on the end, we will take care of that ourselves
 Assuming that only one unpicked up item can be on a square at a time
 Assuming that if the player tries to move but cannot move (e.g hits a wall), a tick will still go by
+Assuming that if a bow is able to be built with both recipes (ie materials are available for both recipes) then the treasure will be used rather than the key

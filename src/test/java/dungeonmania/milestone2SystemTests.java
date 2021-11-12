@@ -182,7 +182,7 @@ public class milestone2SystemTests {
         assertTrue(controller1.getCurrentlyAccessingGame().getPlayer().getHealth() == 
                 controller1.getCurrentlyAccessingGame().getPlayer().getMaxHealth());
 
-        // Test building a bow and a shield
+        // Test building a bow and a shield, also test our assumption that the treasure gets used up instead of the key when building shields and both are available
         assertTrue(res.getInventory().size() == 8);
         res = controller1.build("bow");
         res = controller1.build("shield");
@@ -191,51 +191,47 @@ public class milestone2SystemTests {
         boolean containsShield = false; 
         boolean containsWood = false;
         boolean containsArrow = false;
+        boolean containsTreasure = false; 
+        boolean containsKey = false;
         for (ItemResponse curr: res.getInventory()) {
-            if (curr.getType().equals("bow")) {
-                containsBow = true;
-            } else if (curr.getType().equals("shield")) {
-                containsShield = true;
-            } else if (curr.getType().equals("wood")) {
-                containsWood = true;
-            } else if (curr.getType().equals("arrow")) {
-                containsArrow = true;
+            switch (curr.getType()) {
+                case "bow":
+                    containsBow = true;
+                    break;
+                case "shield":
+                    containsShield = true;
+                    break;
+                case "wood":
+                    containsWood = true;
+                    break;
+                case "arrow":
+                    containsArrow = true;
+                    break;
+                case "treasure":
+                    containsTreasure = true;
+                    break;
+                case "key":
+                    containsKey = true;
+                    break; 
             }
         }
-        assertTrue(containsBow == true && containsShield == true && containsWood == false && containsArrow == false);
+        assertTrue(containsBow == true && containsShield == true && containsWood == false && containsArrow == false && containsTreasure == false && containsKey == true);
 
         // Test exceptions with building
         assertThrows(IllegalArgumentException.class, () -> controller1.build("randomString"));
         assertThrows(IllegalArgumentException.class, () -> controller1.build("treasure"));
         assertThrows(InvalidActionException.class, () -> controller1.build("bow"));
 
-        // Now that we have used up the key 
-
-
-
-
-
-        
-        
-
-
-
-        
-
-
-        
-
-
-
-
-
-
-
-        
-        
-
-    
-    
-    
+        // We still should have our key left over after the build of the shield, so test that our key unlocks the other door
+        controller1.tick(null, Direction.RIGHT);
+        for(int i = 0; i < 4; i++) {
+            res = controller1.tick(null, Direction.UP);
+        }
+        Position originalPosition4 = currentGame.getPlayer().getPosition(); 
+        controller1.tick(null, Direction.UP);
+        Position newPosition4 = currentGame.getPlayer().getPosition();
+        assertTrue(originalPosition4.getX() != newPosition4.getX() && originalPosition4.getY() != newPosition4.getY());
+        controller1.tick(null, Direction.UP);
+        assertTrue(currentPlayer.getInventory().getItems().size() == 2); // Remaining key should have been used now
     }
 }
