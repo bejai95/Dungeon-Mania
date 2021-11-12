@@ -40,6 +40,8 @@
         "portal_grey": "images/tileset/entities/portal_12.png",
         "key": "images/tileset/items/key_gold.png",
         "key_gold": "images/tileset/items/key_gold.png",
-        "key_silver": "images/tileset/items/key_silver.png"
+        "key_silver": "images/tileset/items/key_silver.png",
+        "health_potion": "images/tileset/items/potion_2.png",
+        "shield": "images/tileset/items/shield.png"
     }
 }
