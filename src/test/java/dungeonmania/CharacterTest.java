@@ -140,4 +140,20 @@ public class CharacterTest {
         //bow should be used up
         assertTrue(!(bow.canUse()));
     }
+    //try to revive when health not zero
+    @Test
+    public void testReviveWhenAlive() {
+        //test revive when health not zero
+        Character character = new Character(1, new Position(5,5));
+        //test when alive and dont have item
+        character.setHealth(50);
+        character.revive();
+        assertTrue(character.getHealth() == 50);
+        TheOneRing item = new TheOneRing(3);
+        character.getInventory().addItemToInventory(item);
+        //reduce health
+        //try to use again should do nothing
+        character.revive();
+        assertTrue(character.getHealth() == 50);
+    }
 }
