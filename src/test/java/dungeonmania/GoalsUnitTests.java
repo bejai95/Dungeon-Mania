@@ -71,6 +71,10 @@ public class GoalsUnitTests {
         Game game = new Game("id", "maze", "peaceful", goals.toString());
         assertEquals(game.getGoalsLeft(), "(:mercenary OR :treasure)");
     }*/
+    private List<Entity> getEmptyEntitiesList(){
+        List<Entity> ents = new ArrayList<Entity>();
+        return ents;
+    }
 
     private List<Entity> getEntityListWithSpiderPlayerAndExit(){
         List<Entity> ents = new ArrayList<Entity>();
@@ -109,5 +113,47 @@ public class GoalsUnitTests {
 
         List<Entity> ents = getEntityListWithSpiderPlayerAndExit();
         assertEquals(agoal.getGoalsLeft(ents), "(:mercenary AND (:treasure OR :exit))");
+    }
+
+    @Test
+    public void testAndOrGoalNoEntities() {
+
+        
+        ExitGoal exgoal = new ExitGoal();
+        EnemiesGoal engoal = new EnemiesGoal();
+        TreasureGoal tgoal = new TreasureGoal();
+
+        List<Goal> orsubs = new ArrayList<>();
+        orsubs.add(tgoal);
+        orsubs.add(exgoal);
+
+
+
+        OrGoal ogoal = new OrGoal(orsubs);
+
+        List<Goal> andsubs = new ArrayList<>();
+        andsubs.add(engoal);
+        andsubs.add(ogoal);
+
+        AndGoal agoal = new AndGoal(andsubs);
+
+        List<Entity> ents = getEmptyEntitiesList();
+        assertEquals(agoal.getGoalsLeft(ents), "");
+    }
+
+    @Test
+    public void testBoulderGoalNoEntities() {
+
+        ExitGoal exgoal = new ExitGoal();
+        BoulderGoal bgoal = new BoulderGoal();
+
+        List<Goal> andsubs = new ArrayList<>();
+        andsubs.add(exgoal);
+        andsubs.add(bgoal);
+
+        AndGoal agoal = new AndGoal(andsubs);
+
+        List<Entity> ents = getEmptyEntitiesList();
+        assertEquals(agoal.getGoalsLeft(ents), ":exit");
     }
 }
