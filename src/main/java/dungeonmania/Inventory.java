@@ -104,7 +104,7 @@ public class Inventory {
                 itemsBuildable.add(Shield.class.getSimpleName().toLowerCase());
             }
         }
-        return recipesBuildable;
+        return itemsBuildable;
     }
     public void addItemToInventory(Item item) {
         //adds an item and adds them to the nessecary lists

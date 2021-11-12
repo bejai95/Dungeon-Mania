@@ -109,7 +109,7 @@ public class persistenceTest {
         }
         String previousGoalsLeft = res1.getGoals();
         
-        assertTrue(previousInventory.size() == 10);
+        assertTrue(previousInventory.size() == 11);
         assertTrue(previousGoalsLeft.equals(":mercenary"));
 
         // Save the file, and load it from another controller, check that the inventories and goals are the same
