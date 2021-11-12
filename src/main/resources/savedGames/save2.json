@@ -1,11 +1,11 @@
 {
-  "dungeonId": "0",
-  "dungeonName": "advanced",
+  "dungeonId": "2",
+  "dungeonName": "maze",
   "entities": [
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 0,
+        "id": 250,
         "type": "wall",
         "position": {
           "x": 0,
@@ -18,7 +18,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 1,
+        "id": 251,
         "type": "wall",
         "position": {
           "x": 1,
@@ -31,7 +31,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 2,
+        "id": 252,
         "type": "wall",
         "position": {
           "x": 2,
@@ -44,7 +44,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 3,
+        "id": 253,
         "type": "wall",
         "position": {
           "x": 3,
@@ -57,7 +57,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 4,
+        "id": 254,
         "type": "wall",
         "position": {
           "x": 4,
@@ -70,7 +70,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 5,
+        "id": 255,
         "type": "wall",
         "position": {
           "x": 5,
@@ -83,7 +83,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 6,
+        "id": 256,
         "type": "wall",
         "position": {
           "x": 6,
@@ -96,7 +96,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 7,
+        "id": 257,
         "type": "wall",
         "position": {
           "x": 7,
@@ -109,7 +109,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 8,
+        "id": 258,
         "type": "wall",
         "position": {
           "x": 8,
@@ -122,7 +122,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 9,
+        "id": 259,
         "type": "wall",
         "position": {
           "x": 9,
@@ -135,7 +135,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 10,
+        "id": 260,
         "type": "wall",
         "position": {
           "x": 10,
@@ -148,7 +148,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 11,
+        "id": 261,
         "type": "wall",
         "position": {
           "x": 11,
@@ -161,7 +161,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 12,
+        "id": 262,
         "type": "wall",
         "position": {
           "x": 12,
@@ -174,7 +174,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 13,
+        "id": 263,
         "type": "wall",
         "position": {
           "x": 13,
@@ -187,7 +187,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 14,
+        "id": 264,
         "type": "wall",
         "position": {
           "x": 14,
@@ -200,7 +200,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 15,
+        "id": 265,
         "type": "wall",
         "position": {
           "x": 15,
@@ -213,7 +213,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 16,
+        "id": 266,
         "type": "wall",
         "position": {
           "x": 16,
@@ -226,7 +226,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 17,
+        "id": 267,
         "type": "wall",
         "position": {
           "x": 17,
@@ -239,7 +239,33 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 18,
+        "id": 268,
+        "type": "wall",
+        "position": {
+          "x": 18,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 269,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 270,
         "type": "wall",
         "position": {
           "x": 0,
@@ -279,7 +305,7 @@
         "InvincibleDuration": 0,
         "InvisibleDuration": 0,
         "maxHealth": 200.0,
-        "id": 19,
+        "id": 271,
         "type": "player",
         "position": {
           "x": 1,
@@ -290,24 +316,48 @@
       }
     },
     {
-      "className": "dungeonmania.UnpickedUpItem",
+      "className": "dungeonmania.Wall",
       "data": {
-        "itemClass": "Sword",
-        "keyNum": -1,
-        "id": 20,
-        "type": "sword",
+        "id": 272,
+        "type": "wall",
         "position": {
-          "x": 6,
+          "x": 2,
           "y": 1,
-          "layer": 0
+          "layer": 2
         },
-        "isInteractable": true
+        "isInteractable": false
       }
     },
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 21,
+        "id": 273,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 1,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 274,
+        "type": "wall",
+        "position": {
+          "x": 16,
+          "y": 1,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 275,
         "type": "wall",
         "position": {
           "x": 17,
@@ -320,7 +370,33 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 22,
+        "id": 276,
+        "type": "wall",
+        "position": {
+          "x": 18,
+          "y": 1,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 277,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 1,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 278,
         "type": "wall",
         "position": {
           "x": 0,
@@ -333,10 +409,10 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 23,
+        "id": 279,
         "type": "wall",
         "position": {
-          "x": 3,
+          "x": 2,
           "y": 2,
           "layer": 2
         },
@@ -346,7 +422,33 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 24,
+        "id": 280,
+        "type": "wall",
+        "position": {
+          "x": 4,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 281,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 282,
         "type": "wall",
         "position": {
           "x": 6,
@@ -359,7 +461,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 25,
+        "id": 283,
         "type": "wall",
         "position": {
           "x": 7,
@@ -372,7 +474,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 26,
+        "id": 284,
         "type": "wall",
         "position": {
           "x": 8,
@@ -385,7 +487,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 27,
+        "id": 285,
         "type": "wall",
         "position": {
           "x": 9,
@@ -398,493 +500,790 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 28,
-        "type": "wall",
-        "position": {
-          "x": 12,
-          "y": 2,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 29,
-        "type": "wall",
-        "position": {
-          "x": 13,
-          "y": 2,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 30,
-        "type": "wall",
-        "position": {
-          "x": 14,
-          "y": 2,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 31,
-        "type": "wall",
-        "position": {
-          "x": 15,
-          "y": 2,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 32,
-        "type": "wall",
-        "position": {
-          "x": 17,
-          "y": 2,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 33,
-        "type": "wall",
-        "position": {
-          "x": 0,
-          "y": 3,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 34,
-        "type": "wall",
-        "position": {
-          "x": 3,
-          "y": 3,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 35,
-        "type": "wall",
-        "position": {
-          "x": 4,
-          "y": 3,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 36,
-        "type": "wall",
-        "position": {
-          "x": 15,
-          "y": 3,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 37,
-        "type": "wall",
-        "position": {
-          "x": 17,
-          "y": 3,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 38,
-        "type": "wall",
-        "position": {
-          "x": 0,
-          "y": 4,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 39,
-        "type": "wall",
-        "position": {
-          "x": 8,
-          "y": 4,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.UnpickedUpItem",
-      "data": {
-        "itemClass": "Bomb",
-        "keyNum": -1,
-        "id": 40,
-        "type": "bomb",
-        "position": {
-          "x": 13,
-          "y": 4,
-          "layer": 0
-        },
-        "isInteractable": true
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 41,
-        "type": "wall",
-        "position": {
-          "x": 17,
-          "y": 4,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 42,
-        "type": "wall",
-        "position": {
-          "x": 0,
-          "y": 5,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Mercenary",
-      "data": {
-        "goldThreshold": 0,
-        "currentGold": 0,
-        "battleRadius": 2,
-        "health": 200.0,
-        "damage": 3,
-        "baseDefense": 0.0,
-        "defense": 0.0,
-        "speed": 1,
-        "isHostile": false,
-        "moveBehaviour": {
-          "className": "dungeonmania.ChaseMovement",
-          "data": {}
-        },
-        "id": 43,
-        "type": "mercenary",
-        "position": {
-          "x": 3,
-          "y": 5,
-          "layer": 1
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 44,
-        "type": "wall",
-        "position": {
-          "x": 8,
-          "y": 5,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 45,
-        "type": "wall",
-        "position": {
-          "x": 17,
-          "y": 5,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 46,
-        "type": "wall",
-        "position": {
-          "x": 0,
-          "y": 6,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 47,
-        "type": "wall",
-        "position": {
-          "x": 6,
-          "y": 6,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 48,
-        "type": "wall",
-        "position": {
-          "x": 8,
-          "y": 6,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 49,
-        "type": "wall",
-        "position": {
-          "x": 9,
-          "y": 6,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 50,
-        "type": "wall",
-        "position": {
-          "x": 13,
-          "y": 6,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 51,
-        "type": "wall",
-        "position": {
-          "x": 17,
-          "y": 6,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 52,
-        "type": "wall",
-        "position": {
-          "x": 0,
-          "y": 7,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 53,
-        "type": "wall",
-        "position": {
-          "x": 6,
-          "y": 7,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 54,
-        "type": "wall",
-        "position": {
-          "x": 12,
-          "y": 7,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 55,
-        "type": "wall",
-        "position": {
-          "x": 13,
-          "y": 7,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 56,
-        "type": "wall",
-        "position": {
-          "x": 17,
-          "y": 7,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 57,
-        "type": "wall",
-        "position": {
-          "x": 0,
-          "y": 8,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 58,
-        "type": "wall",
-        "position": {
-          "x": 3,
-          "y": 8,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 59,
-        "type": "wall",
-        "position": {
-          "x": 4,
-          "y": 8,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 60,
-        "type": "wall",
-        "position": {
-          "x": 5,
-          "y": 8,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 61,
-        "type": "wall",
-        "position": {
-          "x": 6,
-          "y": 8,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 62,
-        "type": "wall",
-        "position": {
-          "x": 8,
-          "y": 8,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 63,
-        "type": "wall",
-        "position": {
-          "x": 9,
-          "y": 8,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 64,
+        "id": 286,
         "type": "wall",
         "position": {
           "x": 10,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 287,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 288,
+        "type": "wall",
+        "position": {
+          "x": 12,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 289,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 290,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 291,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 292,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 293,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 294,
+        "type": "wall",
+        "position": {
+          "x": 14,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 295,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 296,
+        "type": "wall",
+        "position": {
+          "x": 16,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 297,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 298,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 299,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 300,
+        "type": "wall",
+        "position": {
+          "x": 1,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 301,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 302,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 303,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 304,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 305,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 306,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 307,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 308,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 309,
+        "type": "wall",
+        "position": {
+          "x": 1,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 310,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 311,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 312,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 313,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 314,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 315,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 316,
+        "type": "wall",
+        "position": {
+          "x": 14,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 317,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 318,
+        "type": "wall",
+        "position": {
+          "x": 16,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 319,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 320,
+        "type": "wall",
+        "position": {
+          "x": 18,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 321,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 322,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 323,
+        "type": "wall",
+        "position": {
+          "x": 1,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 324,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 325,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 326,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 327,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 328,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 329,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 330,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 331,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 332,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 333,
+        "type": "wall",
+        "position": {
+          "x": 1,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 334,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 335,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 336,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 337,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 338,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 339,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 340,
+        "type": "wall",
+        "position": {
+          "x": 12,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 341,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 342,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 343,
+        "type": "wall",
+        "position": {
+          "x": 16,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 344,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 345,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 346,
+        "type": "wall",
+        "position": {
+          "x": 0,
           "y": 8,
           "layer": 2
         },
@@ -894,7 +1293,46 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 65,
+        "id": 347,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 348,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 349,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 350,
         "type": "wall",
         "position": {
           "x": 13,
@@ -907,7 +1345,20 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 66,
+        "id": 351,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 352,
         "type": "wall",
         "position": {
           "x": 17,
@@ -920,7 +1371,20 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 67,
+        "id": 353,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 354,
         "type": "wall",
         "position": {
           "x": 0,
@@ -933,7 +1397,59 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 68,
+        "id": 355,
+        "type": "wall",
+        "position": {
+          "x": 2,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 356,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 357,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 358,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 359,
         "type": "wall",
         "position": {
           "x": 9,
@@ -946,7 +1462,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 69,
+        "id": 360,
         "type": "wall",
         "position": {
           "x": 13,
@@ -959,10 +1475,10 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 70,
+        "id": 361,
         "type": "wall",
         "position": {
-          "x": 14,
+          "x": 15,
           "y": 9,
           "layer": 2
         },
@@ -972,7 +1488,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 71,
+        "id": 362,
         "type": "wall",
         "position": {
           "x": 17,
@@ -985,7 +1501,20 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 72,
+        "id": 363,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 364,
         "type": "wall",
         "position": {
           "x": 0,
@@ -998,10 +1527,10 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 73,
+        "id": 365,
         "type": "wall",
         "position": {
-          "x": 3,
+          "x": 2,
           "y": 10,
           "layer": 2
         },
@@ -1011,7 +1540,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 74,
+        "id": 366,
         "type": "wall",
         "position": {
           "x": 5,
@@ -1024,10 +1553,10 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 75,
+        "id": 367,
         "type": "wall",
         "position": {
-          "x": 6,
+          "x": 7,
           "y": 10,
           "layer": 2
         },
@@ -1035,39 +1564,74 @@
       }
     },
     {
-      "className": "dungeonmania.UnpickedUpItem",
+      "className": "dungeonmania.Wall",
       "data": {
-        "itemClass": "Treasure",
-        "keyNum": -1,
-        "id": 76,
-        "type": "treasure",
+        "id": 368,
+        "type": "wall",
         "position": {
-          "x": 7,
+          "x": 9,
           "y": 10,
-          "layer": 0
+          "layer": 2
         },
-        "isInteractable": true
+        "isInteractable": false
       }
     },
     {
-      "className": "dungeonmania.UnpickedUpItem",
+      "className": "dungeonmania.Wall",
       "data": {
-        "itemClass": "InvincibilityPotion",
-        "keyNum": -1,
-        "id": 77,
-        "type": "invincibility_potion",
+        "id": 369,
+        "type": "wall",
+        "position": {
+          "x": 10,
+          "y": 10,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 370,
+        "type": "wall",
         "position": {
           "x": 11,
           "y": 10,
-          "layer": 0
+          "layer": 2
         },
-        "isInteractable": true
+        "isInteractable": false
       }
     },
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 78,
+        "id": 371,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 10,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 372,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 10,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 373,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1080,7 +1644,20 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 79,
+        "id": 374,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 10,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 375,
         "type": "wall",
         "position": {
           "x": 0,
@@ -1093,11 +1670,141 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 80,
+        "id": 376,
+        "type": "wall",
+        "position": {
+          "x": 2,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 377,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 378,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 379,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 380,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 381,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 382,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 383,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 384,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 385,
+        "type": "wall",
+        "position": {
+          "x": 2,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 386,
         "type": "wall",
         "position": {
           "x": 3,
-          "y": 11,
+          "y": 12,
           "layer": 2
         },
         "isInteractable": false
@@ -1106,11 +1813,11 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 81,
+        "id": 387,
         "type": "wall",
         "position": {
-          "x": 6,
-          "y": 11,
+          "x": 5,
+          "y": 12,
           "layer": 2
         },
         "isInteractable": false
@@ -1119,75 +1826,23 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 82,
+        "id": 388,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 389,
         "type": "wall",
         "position": {
           "x": 8,
-          "y": 11,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 83,
-        "type": "wall",
-        "position": {
-          "x": 9,
-          "y": 11,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 84,
-        "type": "wall",
-        "position": {
-          "x": 10,
-          "y": 11,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 85,
-        "type": "wall",
-        "position": {
-          "x": 12,
-          "y": 11,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 86,
-        "type": "wall",
-        "position": {
-          "x": 17,
-          "y": 11,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 87,
-        "type": "wall",
-        "position": {
-          "x": 0,
           "y": 12,
           "layer": 2
         },
@@ -1197,20 +1852,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 88,
-        "type": "wall",
-        "position": {
-          "x": 3,
-          "y": 12,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 89,
+        "id": 390,
         "type": "wall",
         "position": {
           "x": 9,
@@ -1223,10 +1865,10 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 90,
+        "id": 391,
         "type": "wall",
         "position": {
-          "x": 12,
+          "x": 11,
           "y": 12,
           "layer": 2
         },
@@ -1236,7 +1878,33 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 91,
+        "id": 392,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 393,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 394,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1249,7 +1917,20 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 92,
+        "id": 395,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 396,
         "type": "wall",
         "position": {
           "x": 0,
@@ -1262,7 +1943,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 93,
+        "id": 397,
         "type": "wall",
         "position": {
           "x": 3,
@@ -1275,20 +1956,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 94,
-        "type": "wall",
-        "position": {
-          "x": 4,
-          "y": 13,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 95,
+        "id": 398,
         "type": "wall",
         "position": {
           "x": 5,
@@ -1301,10 +1969,10 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 96,
+        "id": 399,
         "type": "wall",
         "position": {
-          "x": 12,
+          "x": 9,
           "y": 13,
           "layer": 2
         },
@@ -1314,7 +1982,20 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 97,
+        "id": 400,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 401,
         "type": "wall",
         "position": {
           "x": 13,
@@ -1327,10 +2008,10 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 98,
+        "id": 402,
         "type": "wall",
         "position": {
-          "x": 14,
+          "x": 15,
           "y": 13,
           "layer": 2
         },
@@ -1340,7 +2021,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 99,
+        "id": 403,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1353,7 +2034,20 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 100,
+        "id": 404,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 405,
         "type": "wall",
         "position": {
           "x": 0,
@@ -1366,7 +2060,124 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 101,
+        "id": 406,
+        "type": "wall",
+        "position": {
+          "x": 1,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 407,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 408,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 409,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 410,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 411,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 412,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 413,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 414,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 415,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1379,7 +2190,20 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 102,
+        "id": 416,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 417,
         "type": "wall",
         "position": {
           "x": 0,
@@ -1392,7 +2216,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 103,
+        "id": 418,
         "type": "wall",
         "position": {
           "x": 1,
@@ -1405,20 +2229,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 104,
-        "type": "wall",
-        "position": {
-          "x": 2,
-          "y": 15,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 105,
+        "id": 419,
         "type": "wall",
         "position": {
           "x": 3,
@@ -1431,7 +2242,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 106,
+        "id": 420,
         "type": "wall",
         "position": {
           "x": 4,
@@ -1444,59 +2255,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 107,
-        "type": "wall",
-        "position": {
-          "x": 5,
-          "y": 15,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 108,
-        "type": "wall",
-        "position": {
-          "x": 6,
-          "y": 15,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 109,
-        "type": "wall",
-        "position": {
-          "x": 7,
-          "y": 15,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 110,
-        "type": "wall",
-        "position": {
-          "x": 8,
-          "y": 15,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 111,
+        "id": 421,
         "type": "wall",
         "position": {
           "x": 9,
@@ -1509,20 +2268,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 112,
-        "type": "wall",
-        "position": {
-          "x": 10,
-          "y": 15,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 113,
+        "id": 422,
         "type": "wall",
         "position": {
           "x": 11,
@@ -1535,20 +2281,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 114,
-        "type": "wall",
-        "position": {
-          "x": 12,
-          "y": 15,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 115,
+        "id": 423,
         "type": "wall",
         "position": {
           "x": 13,
@@ -1561,46 +2294,7 @@
     {
       "className": "dungeonmania.Wall",
       "data": {
-        "id": 116,
-        "type": "wall",
-        "position": {
-          "x": 14,
-          "y": 15,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 117,
-        "type": "wall",
-        "position": {
-          "x": 15,
-          "y": 15,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 118,
-        "type": "wall",
-        "position": {
-          "x": 16,
-          "y": 15,
-          "layer": 2
-        },
-        "isInteractable": false
-      }
-    },
-    {
-      "className": "dungeonmania.Wall",
-      "data": {
-        "id": 119,
+        "id": 424,
         "type": "wall",
         "position": {
           "x": 17,
@@ -1609,28 +2303,431 @@
         },
         "isInteractable": false
       }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 425,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 426,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 16,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 427,
+        "type": "wall",
+        "position": {
+          "x": 1,
+          "y": 16,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 428,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 16,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 429,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 16,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 430,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 16,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 431,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 16,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 432,
+        "type": "wall",
+        "position": {
+          "x": 16,
+          "y": 16,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 433,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 16,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Exit",
+      "data": {
+        "id": 434,
+        "type": "exit",
+        "position": {
+          "x": 18,
+          "y": 16,
+          "layer": 0
+        },
+        "isInteractable": true
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 435,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 16,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 436,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 437,
+        "type": "wall",
+        "position": {
+          "x": 1,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 438,
+        "type": "wall",
+        "position": {
+          "x": 2,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 439,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 440,
+        "type": "wall",
+        "position": {
+          "x": 4,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 441,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 442,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 443,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 444,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 445,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 446,
+        "type": "wall",
+        "position": {
+          "x": 10,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 447,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 448,
+        "type": "wall",
+        "position": {
+          "x": 12,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 449,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 450,
+        "type": "wall",
+        "position": {
+          "x": 14,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 451,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 452,
+        "type": "wall",
+        "position": {
+          "x": 16,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 453,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 454,
+        "type": "wall",
+        "position": {
+          "x": 18,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 455,
+        "type": "wall",
+        "position": {
+          "x": 19,
+          "y": 17,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
     }
   ],
   "buildables": [],
   "tickCounter": 0,
+  "animations": [
+    {
+      "when": "PostTick",
+      "entityId": "271",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    }
+  ],
   "gameMode": "Standard",
   "spiderLimit": 4,
   "goal": {
-    "className": "dungeonmania.AndGoal",
-    "data": {
-      "subgoals": [
-        {
-          "className": "dungeonmania.EnemiesGoal",
-          "data": {}
-        },
-        {
-          "className": "dungeonmania.TreasureGoal",
-          "data": {}
-        }
-      ]
-    }
+    "className": "dungeonmania.ExitGoal",
+    "data": {}
   },
   "mercenarySpawnChance": 0.005,
-  "spiderTicks": 10,
-  "tempID": 10000
+  "spiderTicks": 10
 }
