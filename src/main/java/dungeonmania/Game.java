@@ -525,12 +525,18 @@ public class Game {
         staticInteraction.findInteractableStaticEntity(movementDirection);
 
         //move in direction
+        if (isCollision(player, player.getPosition().translateBy(movementDirection))) {
+            movementDirection = Direction.NONE;
+        }
         player.move(movementDirection);
         
         //move all the mobs -- needs list of moving entities
         List<MovingEntity> movingEntities = getMovingEntities();
         for(MovingEntity mob : movingEntities){
-            mob.move();
+            if (!isCollision(mob, mob.getNextMove())) {
+                mob.move();
+            }
+            // TODO else collision response
         }
         
         //spawn in enemies
@@ -568,6 +574,24 @@ public class Game {
         //DungeonResponse ret = new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), inventory.getItemsAsResponse(), getInventory().generateBuildables(), goal.getGoalsLeft(entities));
         return generateDungeonResponse();
     }
+
+    public DungeonResponse interact(String entityId) {
+        
+        Entity ent = getEntityById(entityId);
+        if (ent == null) {
+            System.out.println("Id does not exist");
+            throw new IllegalArgumentException("Id does not exist");
+        } else if (!ent.canInteract()) {
+            System.out.println("Cannot interact with this entity");
+            throw new IllegalArgumentException("Cannot interact with this entity");
+        }
+        System.out.println("Interacting with " + ent.getType());
+        
+        ent.interact(getPlayer());
+
+        return generateDungeonResponse();
+    }
+
 
     /**
      * Resets the speeds of all mercenaries in the game
@@ -622,12 +646,20 @@ public class Game {
      * cell to another
      */
     public boolean isCollision(Entity movingEntity, Position destination){
+
+        // Get the highest layer on the destination tile
+        int highestLayer = 0;
         for (Entity entity : entities) {
-            if (entity.getPosition().equals(destination) && entity.getPosition().getLayer() >= destination.getLayer()) {
-                return true;
+            if (entity.getPosition().equals(destination) && entity instanceof StaticEntity) {
+                highestLayer = Math.max(highestLayer, entity.getPosition().getLayer());
             }
         }
+
+        if (movingEntity.getPosition().getLayer() < highestLayer) {
+            return true;
+        }
+
         return false;
     }
-    
+
 }

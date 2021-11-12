@@ -9,22 +9,27 @@ public class Mercenary extends MovingEntity {
     public static int defaultAttack = 3;
     public static double defaultdefense = 0;
     public static int defaultSpeed = 1;
-
-    int goldThreshold;
-    int currentGold;
+    
+    int goldThreshold = 1;
+    int currentGold = 0;
     int battleRadius = 2;
 
-    public Mercenary(int id, Position position, int goldThreshold) {
+    public Mercenary(int id, Position position) {
         super(id, "mercenary", position, new ChaseMovement());
-        this.goldThreshold = goldThreshold;
         this.currentGold = 0;
-
+        setIsInteractable(true);
+        
         setHealth(defaultHealth);
         setDamage(defaultAttack);
         setDefense(defaultdefense);
         setSpeed(defaultSpeed);
 
     }
+
+    public void setGoldThreshold(int goldThreshold) {
+        this.goldThreshold = goldThreshold;
+    }
+
     
     public void doubleSpeed() {
         int currSpeed = getSpeed();
@@ -46,6 +51,10 @@ public class Mercenary extends MovingEntity {
      */
     public void interact(Character ch) throws InvalidActionException {
 
+        System.out.println("INTERACTION CALLED");
+
+        if (!getIsHostile()) return;
+
         if (!inBribingRange(ch)) {
             throw new InvalidActionException("Player not within 2 cardinal tiles of mercenary");
         }
@@ -59,28 +68,29 @@ public class Mercenary extends MovingEntity {
         }
 
         if (currentGold >= goldThreshold) {
-            isHostile = false;
-            // TODO might cause problems walking through door
-            getPosition().asLayer(0);
+            setIsInteractable(false);
+            setIsHostile(false);
+            System.out.println("BRIBE SUCCESSFUL");
         }
     }
 
     private boolean inBribingRange(Character ch) {
-
         // Get position of character, relative to mercenary
         Position relativePos = Position.calculatePositionBetween(this.getPosition(), ch.getPosition());
 
         // relativePos must have at least one 0 component for the player to be
         // in a cardinal direction (straight line) from merc
         if(Math.abs(relativePos.getX())*Math.abs(relativePos.getY()) != 0) {
+            System.out.println("OUT OF RANGE");
             return false;
         }
 
         // If the non-zero component exceeds bribe range, character is out of range
         if (Math.abs(relativePos.getX()) > 2 || Math.abs(relativePos.getY()) > 2) {
+            System.out.println("OUT OF RANGE");
             return false;
         }
-
+        System.out.println("IN RANGE");
         return true;
     }
 
