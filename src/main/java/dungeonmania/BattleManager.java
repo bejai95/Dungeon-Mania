@@ -90,11 +90,14 @@ public class BattleManager {
 
         while(player.getHealth() > 0 && baddie.getHealth() > 0){
             dead.addAll(battleInstance(player, baddie));
-            for(Mercenary merc : allies){
+            for(Mercenary ally : allies){
                 if(dead.contains(baddie)){
                     break;
                 }
-                dead.addAll(battleInstance(merc, baddie));
+                if(dead.contains(ally)){
+                    continue;
+                }
+                dead.addAll(battleInstance(ally, baddie));
             }
         }
 

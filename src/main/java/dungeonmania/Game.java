@@ -540,7 +540,7 @@ public class Game {
         //battle -- needs list of mercenaries, needs movingEntity on same tile as player
 
         MovingEntity baddie = getEntityOnPlayer(player);
-        if(baddie != null){
+        if(baddie != null && !baddie.isAlly()){
             System.out.println("Health Before: " + player.getHealth());
             BattleManager bat = new BattleManager(player, baddie, getMercenaries());
             List<Battleable> dead = bat.battle();
