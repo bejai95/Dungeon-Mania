@@ -63,7 +63,10 @@ public class Character extends Entity implements Battleable{
         return this.health;
     }
     public void setHealth(double newHealth) {
-        this.health = newHealth;
+        if (!(this.isInvincible())) {
+            this.health = newHealth;
+        }
+
     }
     /**
      * Attempts to revive the player if has the one ring

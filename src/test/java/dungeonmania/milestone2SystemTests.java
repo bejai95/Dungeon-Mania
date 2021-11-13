@@ -60,7 +60,7 @@ public class milestone2SystemTests {
                 healthPotionId = curr.getId();
             }
         }
-        controller1.tick(healthPotionId, Direction.NONE);
+        controller1.tick(healthPotionId, Direction.LEFT);
         assertTrue(currentPlayer.getInventory().getItems().size() == 0);
         assertTrue(currentPlayer.getHealth() == currentPlayer.getMaxHealth());
 
@@ -125,7 +125,7 @@ public class milestone2SystemTests {
         Position originalPosition3 = currentGame.getPlayer().getPosition(); 
         controller1.tick(null, Direction.DOWN);
         Position newPosition3 = currentGame.getPlayer().getPosition();
-        assertTrue(originalPosition3.getX() != newPosition3.getX() && originalPosition3.getY() != newPosition3.getY());
+        assertTrue(originalPosition3.getX() != newPosition3.getX() || originalPosition3.getY() != newPosition3.getY());
         controller1.tick(null, Direction.UP);
         assertTrue(currentPlayer.getInventory().getItems().size() == 0); // Key should have been used now
 
@@ -181,6 +181,7 @@ public class milestone2SystemTests {
         res = controller1.loadGame("large_game_save");
         assertTrue(controller1.getCurrentlyAccessingGame().getPlayer().getHealth() == 
                 controller1.getCurrentlyAccessingGame().getPlayer().getMaxHealth());
+        currentGame = controller1.getCurrentlyAccessingGame();
 
         // Test building a bow and a shield, also test our assumption that the treasure gets used up instead of the key when building shields and both are available
         assertTrue(res.getInventory().size() == 8);
@@ -225,13 +226,13 @@ public class milestone2SystemTests {
         // We still should have our key left over after the build of the shield, so test that our key unlocks the other door
         controller1.tick(null, Direction.RIGHT);
         for(int i = 0; i < 4; i++) {
-            res = controller1.tick(null, Direction.UP);
+            controller1.tick(null, Direction.UP);
         }
         Position originalPosition4 = currentGame.getPlayer().getPosition(); 
         controller1.tick(null, Direction.UP);
         Position newPosition4 = currentGame.getPlayer().getPosition();
-        assertTrue(originalPosition4.getX() != newPosition4.getX() && originalPosition4.getY() != newPosition4.getY());
+        assertTrue(originalPosition4.getX() != newPosition4.getX() || originalPosition4.getY() != newPosition4.getY());
         controller1.tick(null, Direction.UP);
-        assertTrue(currentPlayer.getInventory().getItems().size() == 2); // Remaining key should have been used now
+        assertTrue(currentGame.getPlayer().getInventory().getItems().size() == 2); // Remaining key should have been used now
     }
 }

@@ -121,10 +121,14 @@ public class InteractionTest {
         c1.newGame("bribe-test", "Standard");
 
         // Test case invalid id
-        assertThrows(IllegalArgumentException.class, () -> c1.interact("not a real id"));
+        assertThrows(IllegalArgumentException.class, () -> c1.interact("999"));
+
+        // Test case non interactable
+        String wallId = "1";
+        assertThrows(IllegalArgumentException.class, () -> c1.interact(wallId));
+
 
         String mercId = "37";
-
         // Player spawns out of range, with no coins
         assertThrows(InvalidActionException.class, () -> c1.interact(mercId));
         // Collect coin
