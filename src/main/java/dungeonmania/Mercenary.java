@@ -14,7 +14,7 @@ public class Mercenary extends MovingEntity {
     int currentGold = 0;
     int battleRadius = 2;
 
-    public Mercenary(int id, Position position) {
+    public Mercenary(int id, Position position, double armourChance) {
         super(id, "mercenary", position, new ChaseMovement());
         this.currentGold = 0;
         setIsInteractable(true);
@@ -24,12 +24,14 @@ public class Mercenary extends MovingEntity {
         setDefense(defaultdefense);
         setSpeed(defaultSpeed);
 
+        this.spawnArmour(armourChance);
+
     }
 
-    @Override
     /**
      * Moves as normal but will not move onto ally character
      */
+    @Override
     public void move() {
         Position newPos = this.getPosition();
         for (int i = 0; i < speed; i++) {
@@ -92,7 +94,7 @@ public class Mercenary extends MovingEntity {
         }
     }
 
-    private boolean inBribingRange(Character ch) {
+    public boolean inBribingRange(Character ch) {
         // Get position of character, relative to mercenary
         Position relativePos = Position.calculatePositionBetween(this.getPosition(), ch.getPosition());
 

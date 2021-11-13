@@ -32,10 +32,13 @@ public class EntityFactory {
                 return new ZombieToastSpawner(id, positionSpawner);
             case "mercenary":
                 Position positionMercenary = new Position(x, y, 1);
-                return new Mercenary(id, positionMercenary); 
+                return new Mercenary(id, positionMercenary, 0.30); 
+            case "assassin":
+                Position positionAssassin = new Position(x, y, 1);
+                return new Assassin(id, positionAssassin, 0.30);
             case "zombie_toast":
                 Position positionZombie = new Position(x, y, 1);
-                return new ZombieToast(id, positionZombie, new RandomMovement()); 
+                return new ZombieToast(id, positionZombie, new RandomMovement(), 0.10); 
             case "spider":
                 Position positionSpider = new Position(x, y, 2);
                 return new Spider(id, positionSpider, new SquareMovement()); 
