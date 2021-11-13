@@ -265,6 +265,10 @@
               "wood",
               "treasure"
             ],
+            "midnight_armour": [
+              "armour",
+              "sunstone"
+            ],
             "bow": [
               "wood",
               "arrow",
@@ -622,6 +626,10 @@
                       "wood",
                       "wood",
                       "treasure"
+                    ],
+                    "midnight_armour": [
+                      "armour",
+                      "sunstone"
                     ],
                     "bow": [
                       "wood",
