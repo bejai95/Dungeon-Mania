@@ -278,7 +278,7 @@ public class InventoryTest {
         assertTrue(character.getInventory().generateBuildables(Arrays.asList()).equals(Arrays.asList("midnight_armour")));
         //without zombie
         //with zombie
-        ZombieToast zt = new ZombieToast(3, new Position(2, 3), new SquareMovement());
+        ZombieToast zt = new ZombieToast(3, new Position(2, 3), new SquareMovement(), 0.1);
         assertTrue(character.getInventory().generateBuildables(Arrays.asList(zt)).equals(Arrays.asList()));
         //try crafting, assuming that it passed generateBuildables so there are no zombies
         assertDoesNotThrow(()->character.getInventory().craft("midnight_armour", 5));
