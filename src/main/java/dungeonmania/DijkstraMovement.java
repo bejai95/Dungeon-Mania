@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -56,10 +57,19 @@ public class DijkstraMovement implements Movement{
     }
 
 
-    @Override
-    public Position move(Position currentPos) {
-        // TODO Auto-generated method stub
-        return null;
+    private Position walkBackThroughPath(Position placeInPath, Map<Position, Position> pre, Position source){
+        Position last = pre.get(placeInPath);
+        if(Objects.equals(last, source)){
+            return placeInPath;
+        }
+        return walkBackThroughPath(last, pre, source);
     }
+    @Override
+    public Position move(Position currentPos, Map<Position, Map<Position, Double>> grid) {
+        return walkBackThroughPath(target.getPosition(), dijkstras(grid, currentPos), currentPos);
+    }
+
+
+    
 
 }

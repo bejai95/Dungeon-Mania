@@ -534,9 +534,10 @@ public class Game {
         
         //move all the mobs -- needs list of moving entities
         List<MovingEntity> movingEntities = getMovingEntities();
+        Map<Position, Map<Position, Double>> grid = generateAdjacencyMatrix();
         for(MovingEntity mob : movingEntities){
-            if (!isCollision(mob, mob.getNextMove())) {
-                mob.move();
+            if (!isCollision(mob, mob.getNextMove(grid))) {
+                mob.move(grid);
             }
             // TODO else collision response
         }
@@ -566,8 +567,10 @@ public class Game {
         }  
 
         // Adjust the health bar
-        double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
-        setHealthBar(healthInRequiredRegion);
+        if(getPlayer() != null){
+            double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
+            setHealthBar(healthInRequiredRegion);
+        }
 
         //increment tick counter
         tickCounter++;
@@ -643,12 +646,7 @@ public class Game {
         return gameMode;
     }
 
-    /**
-     * Checks to see if a collision will occur when moving an entity from one 
-     * cell to another
-     */
-    public boolean isCollision(Entity movingEntity, Position destination){
-
+    private int getHighestLayer(Position destination){
         // Get the highest layer on the destination tile
         int highestLayer = 0;
         for (Entity entity : entities) {
@@ -656,7 +654,14 @@ public class Game {
                 highestLayer = Math.max(highestLayer, entity.getPosition().getLayer());
             }
         }
-
+        return highestLayer;
+    }
+    /**
+     * Checks to see if a collision will occur when moving an entity from one 
+     * cell to another
+     */
+    public boolean isCollision(Entity movingEntity, Position destination){
+        int highestLayer = getHighestLayer(destination);
         if (movingEntity.getPosition().getLayer() < highestLayer) {
             return true;
         }
@@ -665,13 +670,53 @@ public class Game {
     }
 
     private List<Position> generatePositionList(){
-        return null;
-        //TODO
+        int maxX = 0;
+        int maxY = 0;
+        int minX = 0;
+        int minY = 0;
+
+        for(Entity entity : entities){
+            Position pos = entity.getPosition();
+            int x = pos.getX();
+            int y = pos.getY();
+            if(x < minX){
+                minX = x;
+            }
+            if(x > maxX){
+                maxX = x;
+            }
+            if(y < minY){
+                minY = y;
+            }
+            if(y > maxY){
+                maxY = y;
+            }
+        }
+        List<Position> ret = new ArrayList<>();
+        for(Entity entity : entities){
+            Position pos = entity.getPosition();
+            int x = pos.getX();
+            int y = pos.getY();
+            if((x >= minX && x <= maxX) && (y >= minY && y <= maxY)){
+                ret.add(pos);
+            }
+        }
+
+        return ret;
     }
 
     private Double cost(Position pos1, Position pos2){
-        return null;
-        //TODO
+        if(!(Position.isAdjacent(pos1, pos2)) || getHighestLayer(pos1) > 1 || getHighestLayer(pos2) > 1){
+            return Double.POSITIVE_INFINITY;
+        }
+        /*
+        if(pos1 instanceof SwampTile){
+            SwampTile pos1Swamp = (SwampTile) pos1;
+            return pos1Swamp.getMovementFactor();
+        }
+        */
+        return 1.0;
+        
     }
     public Map<Position, Map<Position, Double>> generateAdjacencyMatrix(){
         Map<Position, Map<Position, Double>> grid = new HashMap<>();

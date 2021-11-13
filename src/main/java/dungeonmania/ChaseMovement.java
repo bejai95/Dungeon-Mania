@@ -2,6 +2,8 @@ package dungeonmania;
 
 import dungeonmania.util.Position;
 
+import java.util.Map;
+
 public class ChaseMovement implements Movement {
     
     Entity target;
@@ -14,7 +16,7 @@ public class ChaseMovement implements Movement {
      * Move object by 1 in the direction that would minimise
      * distance to target
      */
-    public Position move(Position currentPos) {
+    public Position move(Position currentPos, Map<Position, Map<Position, Double>> grid) {
 
         if (target == null) {
             return currentPos;

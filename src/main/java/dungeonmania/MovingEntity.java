@@ -2,6 +2,8 @@ package dungeonmania;
 
 import dungeonmania.util.Position;
 
+import java.util.Map;
+
 public class MovingEntity extends Entity implements Battleable{
     
     //TODO dont forget to set values to the default battle stats in subclasses
@@ -71,18 +73,18 @@ public class MovingEntity extends Entity implements Battleable{
      * @return The position of the next move in this
      * entity's movement pattern
      */
-    public Position getNextMove() {
-        return moveBehaviour.move(this.getPosition());
+    public Position getNextMove(Map<Position, Map<Position, Double>> grid) {
+        return moveBehaviour.move(this.getPosition(), grid);
     }
 
     /**
      * Set this entity's position to where its movement would take it
      * after 'speed' times
      */
-    public void move() {
+    public void move(Map<Position, Map<Position, Double>> grid) {
         Position newPos = this.getPosition();
         for (int i = 0; i < speed; i++) {
-            newPos = moveBehaviour.move(newPos);
+            newPos = moveBehaviour.move(newPos, grid);
         }
         this.setPosition(newPos);
     }
