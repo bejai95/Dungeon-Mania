@@ -1800,7 +1800,7 @@
         "moveBehaviour": {
           "className": "dungeonmania.SquareMovement",
           "data": {
-            "direction": "DOWN",
+            "direction": "RIGHT",
             "path": [
               {
                 "x": 6,
@@ -2274,8 +2274,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2284,8 +2284,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2294,8 +2294,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2304,8 +2304,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2314,8 +2314,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2324,8 +2324,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2334,8 +2334,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2344,8 +2344,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2354,8 +2354,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2364,8 +2364,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2374,8 +2374,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2384,8 +2384,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2394,8 +2394,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2404,8 +2404,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2414,8 +2414,8 @@
       "when": "PostTick",
       "entityId": "345",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
