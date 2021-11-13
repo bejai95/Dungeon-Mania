@@ -33,9 +33,9 @@ public class EntityFactory {
             case "mercenary":
                 Position positionMercenary = new Position(x, y, 1);
                 return new Mercenary(id, positionMercenary, 0.30); 
-            case "assassin":
+            /*case "assassin":
                 Position positionAssassin = new Position(x, y, 1);
-                return new Assassin(id, positionAssassin, 0.30);
+                return new Assassin(id, positionAssassin, 0.30);*/
             case "zombie_toast":
                 Position positionZombie = new Position(x, y, 1);
                 return new ZombieToast(id, positionZombie, new RandomMovement(), 0.10); 
