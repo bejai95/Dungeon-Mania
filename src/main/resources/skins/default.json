@@ -44,6 +44,13 @@
         "health_potion": "images/tileset/items/potion_2.png",
         "shield": "images/tileset/items/shield.png",
         "zombie_toast_spawner": "images/tileset/entities/zombie_spawner.png",
-        "zombie_toast": "images/tileset/entities/zombie_01.png"
+        "zombie_toast": "images/tileset/entities/zombie_01.png",
+        "armour": "images/tileset/items/armour.png",
+        "assassin": "images/tileset/entities/assassin.png",
+        "hydra": "images/tileset/entities/hydra.png",
+        "sun_stone": "images/tileset/entities/sun_stone.png",
+        "anduril":  "images/tileset/entities/anduril.png",
+        "sceptre": "images/tileset/entities/sceptre.png",
+        "midnight_armour": "images/tileset/entities/midnight_armour.png"
     }
 }
