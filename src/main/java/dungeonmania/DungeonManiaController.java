@@ -179,15 +179,21 @@ public class DungeonManiaController {
     }
 
     public DungeonResponse build(String buildable) throws IllegalArgumentException, InvalidActionException {
+        if (!(buildable.equals("bow") || buildable.equals("shield") || buildable.equals("midnight_armour") || buildable.equals("sceptre"))) {
+            throw new IllegalArgumentException("buildable needs to be either bow, shield, midnight armour or sceptre");
+        }
         try {
             currentlyAccessingGame.getInventory().craft(buildable, Game.generateUniqueId());
+            return currentlyAccessingGame.generateDungeonResponse();
+        } catch (InvalidActionException e) {
+            throw new InvalidActionException("You don't have the resources to craft this item");
+        } catch (Exception e) {
+            System.out.println("An error occurred");
+            e.printStackTrace();
+            return null;
         }
-        catch (Exception e) {
-            System.out.println("An error occured");
-        }
-        return new DungeonResponse(currentlyAccessingGame.getDungeonId(), currentlyAccessingGame.getDungeonName(), currentlyAccessingGame.getEntities().stream().map(x -> x.getInfo()).collect(Collectors.toList()), currentlyAccessingGame.getInventory().getItemsAsResponse(), currentlyAccessingGame.getInventory().generateBuildables(), currentlyAccessingGame.getGoal().getGoalsLeft(currentlyAccessingGame.getEntities()));
-
     }
+
     public Game getCurrentlyAccessingGame() {
         return currentlyAccessingGame;
     }

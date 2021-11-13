@@ -274,6 +274,10 @@
               "wood",
               "treasure"
             ],
+            "midnight_armour": [
+              "armour",
+              "sunstone"
+            ],
             "bow": [
               "wood",
               "arrow",
@@ -589,7 +593,7 @@
     {
       "className": "dungeonmania.Mercenary",
       "data": {
-        "goldThreshold": 0,
+        "goldThreshold": 1,
         "currentGold": 0,
         "battleRadius": 2,
         "health": 200.0,
@@ -597,7 +601,7 @@
         "baseDefense": 0.0,
         "defense": 0.0,
         "speed": 1,
-        "isHostile": false,
+        "isHostile": true,
         "moveBehaviour": {
           "className": "dungeonmania.ChaseMovement",
           "data": {
@@ -616,6 +620,10 @@
                       "wood",
                       "wood",
                       "treasure"
+                    ],
+                    "midnight_armour": [
+                      "armour",
+                      "sunstone"
                     ],
                     "bow": [
                       "wood",
@@ -646,11 +654,11 @@
         "id": 499,
         "type": "mercenary",
         "position": {
-          "x": 1,
-          "y": 1,
+          "x": 3,
+          "y": 4,
           "layer": 1
         },
-        "isInteractable": false
+        "isInteractable": true
       }
     },
     {
@@ -1773,50 +1781,50 @@
         "baseDefense": 0.0,
         "defense": 0.0,
         "speed": 1,
-        "isHostile": false,
+        "isHostile": true,
         "moveBehaviour": {
           "className": "dungeonmania.SquareMovement",
           "data": {
-            "direction": "DOWN",
+            "direction": "RIGHT",
             "path": [
               {
-                "x": 7,
-                "y": 7,
-                "layer": 0
-              },
-              {
-                "x": 8,
-                "y": 7,
-                "layer": 0
-              },
-              {
-                "x": 9,
-                "y": 7,
-                "layer": 0
-              },
-              {
-                "x": 9,
-                "y": 8,
-                "layer": 0
-              },
-              {
-                "x": 9,
+                "x": 13,
                 "y": 9,
                 "layer": 0
               },
               {
-                "x": 8,
+                "x": 14,
                 "y": 9,
                 "layer": 0
               },
               {
-                "x": 7,
+                "x": 15,
                 "y": 9,
                 "layer": 0
               },
               {
-                "x": 7,
-                "y": 8,
+                "x": 15,
+                "y": 10,
+                "layer": 0
+              },
+              {
+                "x": 15,
+                "y": 11,
+                "layer": 0
+              },
+              {
+                "x": 14,
+                "y": 11,
+                "layer": 0
+              },
+              {
+                "x": 13,
+                "y": 11,
+                "layer": 0
+              },
+              {
+                "x": 13,
+                "y": 10,
                 "layer": 0
               }
             ]
@@ -1825,9 +1833,9 @@
         "id": 585,
         "type": "spider",
         "position": {
-          "x": 9,
-          "y": 9,
-          "layer": 1
+          "x": 15,
+          "y": 11,
+          "layer": 2
         },
         "isInteractable": false
       }
@@ -1840,50 +1848,50 @@
         "baseDefense": 0.0,
         "defense": 0.0,
         "speed": 1,
-        "isHostile": false,
+        "isHostile": true,
         "moveBehaviour": {
           "className": "dungeonmania.SquareMovement",
           "data": {
             "direction": "RIGHT",
             "path": [
               {
-                "x": -1,
-                "y": 8,
+                "x": 1,
+                "y": 5,
                 "layer": 0
               },
               {
-                "x": 0,
-                "y": 8,
+                "x": 2,
+                "y": 5,
+                "layer": 0
+              },
+              {
+                "x": 3,
+                "y": 5,
+                "layer": 0
+              },
+              {
+                "x": 3,
+                "y": 6,
+                "layer": 0
+              },
+              {
+                "x": 3,
+                "y": 7,
+                "layer": 0
+              },
+              {
+                "x": 2,
+                "y": 7,
                 "layer": 0
               },
               {
                 "x": 1,
-                "y": 8,
+                "y": 7,
                 "layer": 0
               },
               {
                 "x": 1,
-                "y": 9,
-                "layer": 0
-              },
-              {
-                "x": 1,
-                "y": 10,
-                "layer": 0
-              },
-              {
-                "x": 0,
-                "y": 10,
-                "layer": 0
-              },
-              {
-                "x": -1,
-                "y": 10,
-                "layer": 0
-              },
-              {
-                "x": -1,
-                "y": 9,
+                "y": 6,
                 "layer": 0
               }
             ]
@@ -1892,9 +1900,9 @@
         "id": 586,
         "type": "spider",
         "position": {
-          "x": 1,
-          "y": 8,
-          "layer": 1
+          "x": 3,
+          "y": 5,
+          "layer": 2
         },
         "isInteractable": false
       }
@@ -1907,50 +1915,50 @@
         "baseDefense": 0.0,
         "defense": 0.0,
         "speed": 1,
-        "isHostile": false,
+        "isHostile": true,
         "moveBehaviour": {
           "className": "dungeonmania.SquareMovement",
           "data": {
             "direction": "UP",
             "path": [
               {
-                "x": 15,
-                "y": 2,
+                "x": 10,
+                "y": 5,
                 "layer": 0
               },
               {
-                "x": 16,
-                "y": 2,
+                "x": 11,
+                "y": 5,
                 "layer": 0
               },
               {
-                "x": 17,
-                "y": 2,
+                "x": 12,
+                "y": 5,
                 "layer": 0
               },
               {
-                "x": 17,
-                "y": 3,
+                "x": 12,
+                "y": 6,
                 "layer": 0
               },
               {
-                "x": 17,
-                "y": 4,
+                "x": 12,
+                "y": 7,
                 "layer": 0
               },
               {
-                "x": 16,
-                "y": 4,
+                "x": 11,
+                "y": 7,
                 "layer": 0
               },
               {
-                "x": 15,
-                "y": 4,
+                "x": 10,
+                "y": 7,
                 "layer": 0
               },
               {
-                "x": 15,
-                "y": 3,
+                "x": 10,
+                "y": 6,
                 "layer": 0
               }
             ]
@@ -1959,9 +1967,9 @@
         "id": 587,
         "type": "spider",
         "position": {
-          "x": 15,
-          "y": 2,
-          "layer": 1
+          "x": 10,
+          "y": 5,
+          "layer": 2
         },
         "isInteractable": false
       }
@@ -1974,50 +1982,50 @@
         "baseDefense": 0.0,
         "defense": 0.0,
         "speed": 1,
-        "isHostile": false,
+        "isHostile": true,
         "moveBehaviour": {
           "className": "dungeonmania.SquareMovement",
           "data": {
             "direction": "LEFT",
             "path": [
               {
-                "x": 2,
-                "y": 7,
+                "x": 9,
+                "y": -1,
                 "layer": 0
               },
               {
-                "x": 3,
-                "y": 7,
+                "x": 10,
+                "y": -1,
                 "layer": 0
               },
               {
-                "x": 4,
-                "y": 7,
+                "x": 11,
+                "y": -1,
                 "layer": 0
               },
               {
-                "x": 4,
-                "y": 8,
+                "x": 11,
+                "y": 0,
                 "layer": 0
               },
               {
-                "x": 4,
-                "y": 9,
+                "x": 11,
+                "y": 1,
                 "layer": 0
               },
               {
-                "x": 3,
-                "y": 9,
+                "x": 10,
+                "y": 1,
                 "layer": 0
               },
               {
-                "x": 2,
-                "y": 9,
+                "x": 9,
+                "y": 1,
                 "layer": 0
               },
               {
-                "x": 2,
-                "y": 8,
+                "x": 9,
+                "y": 0,
                 "layer": 0
               }
             ]
@@ -2026,9 +2034,9 @@
         "id": 588,
         "type": "spider",
         "position": {
-          "x": 2,
-          "y": 9,
-          "layer": 1
+          "x": 9,
+          "y": 1,
+          "layer": 2
         },
         "isInteractable": false
       }
@@ -2251,8 +2259,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2261,8 +2269,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2271,8 +2279,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2281,8 +2289,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2291,8 +2299,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2301,8 +2309,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2311,8 +2319,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2321,8 +2329,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2331,8 +2339,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2341,8 +2349,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2351,8 +2359,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2361,8 +2369,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2371,8 +2379,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2381,8 +2389,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
@@ -2391,8 +2399,8 @@
       "when": "PostTick",
       "entityId": "475",
       "queue": [
-        "healthbar set 1",
-        "healthbar tint 0x00ff00"
+        "healthbar set 0.95",
+        "healthbar tint 0xff0000"
       ],
       "loop": false,
       "duration": -1.0
