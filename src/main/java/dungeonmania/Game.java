@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import com.google.gson.annotations.SerializedName;
@@ -660,6 +662,29 @@ public class Game {
         }
 
         return false;
+    }
+
+    private List<Position> generatePositionList(){
+        return null;
+        //TODO
+    }
+
+    private Double cost(Position pos1, Position pos2){
+        return null;
+        //TODO
+    }
+    public Map<Position, Map<Position, Double>> generateAdjacencyMatrix(){
+        Map<Position, Map<Position, Double>> grid = new HashMap<>();
+        List<Position> positions = generatePositionList();
+        for(Position pos1 : positions){
+            Map<Position, Double> col = new HashMap<>();
+            for(Position pos2 : positions){
+                col.put(pos2, cost(pos1, pos2));
+            }
+            grid.put(pos1, col);
+        }
+        
+        return grid;
     }
 
 }
