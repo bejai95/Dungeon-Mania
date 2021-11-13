@@ -55,10 +55,11 @@ public class InventoryTest {
         inventory.addItemToInventory(arrow);
         inventory.addItemToInventory(arrow2);
         inventory.addItemToInventory(arrow3);
-        assertTrue(inventory.generateBuildables().get(0).equals(Bow.class.getSimpleName().toLowerCase()));
+        //these functions dont require any entities to exist
+        assertTrue(inventory.generateBuildables(Arrays.asList()).get(0).equals(Bow.class.getSimpleName().toLowerCase()));
         //check that if you are an item short that it doesnt do anything
         inventory.removeItem(arrow);
-        assertTrue(inventory.generateBuildables().equals(new ArrayList<String>()));
+        assertTrue(inventory.generateBuildables(Arrays.asList()).equals(new ArrayList<String>()));
 
     }
     @Test
@@ -182,7 +183,6 @@ public class InventoryTest {
         //test if have material of one shield it works
         Inventory inventory = new Inventory();
         //make sure errors are thrown correctly
-        assertThrows(IllegalArgumentException.class,() -> inventory.craft("gogogaga", 1));
         assertThrows(InvalidActionException.class, () -> inventory.craft("bow", 6));
         Wood wood = new Wood(1);
         Wood wood2 = new Wood(2);
@@ -246,6 +246,44 @@ public class InventoryTest {
         inventory.removeItem(bow);
         assertTrue(inventory.getItems().size() == 0);
         assertDoesNotThrow(()->inventory.removeItem(bow));
+
+    }
+    @Test
+    public void testMidnightArmour() {
+        //test all things related to midnight armour
+        //get a new midnightarmour and check values
+        Character character = new Character(4, new Position(3, 3));
+        MidnightArmour ma = new MidnightArmour(3);
+        //check if the damage gets used and so is defense
+        character.getInventory().addItemToInventory(ma);
+        assertTrue(character.getDamage() == character.getBaseDamage() + ma.getWeaponInfo().get(0));
+        assertTrue(character.getDefense() == ma.getMultipler());
+        //has 4 uses so must use 3 more times
+        character.getDamage();
+        character.getDefense();
+        character.getDamage();
+        character.getDefense();
+        character.getDamage();
+        character.getDefense();
+        //should have no more uses left, try to use and make sure no damage
+        assertTrue(ma.getWeaponInfo().get(0)== 0);
+        assertTrue(ma.getMultipler() == 0);
+        //remove ma since it isnt used in this test
+        character.getInventory().removeItem(ma);
+        SunStone ss = new SunStone(1);
+        character.getInventory().addItemToInventory(ss);
+        Armour a = new Armour(40);
+        character.getInventory().addItemToInventory(a);
+        //test if buildable
+        assertTrue(character.getInventory().generateBuildables(Arrays.asList()).equals(Arrays.asList("midnight_armour")));
+        //without zombie
+        //with zombie
+        ZombieToast zt = new ZombieToast(3, new Position(2, 3), new SquareMovement());
+        assertTrue(character.getInventory().generateBuildables(Arrays.asList(zt)).equals(Arrays.asList()));
+        //try crafting, assuming that it passed generateBuildables so there are no zombies
+        assertDoesNotThrow(()->character.getInventory().craft("midnight_armour", 5));
+        //check inventory size just one now, should only be midnight armour
+        assertTrue(character.getInventory().getItems().size() == 1);
 
     }
 }

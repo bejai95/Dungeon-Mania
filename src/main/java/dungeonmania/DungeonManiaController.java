@@ -179,10 +179,9 @@ public class DungeonManiaController {
     }
 
     public DungeonResponse build(String buildable) throws IllegalArgumentException, InvalidActionException {
-        if (!(buildable.equals("bow") || buildable.equals("shield"))) {
-            throw new IllegalArgumentException("buildable needs to be either bow or shield");
+        if (!(buildable.equals("bow") || buildable.equals("shield") || buildable.equals("midnight_armour") || buildable.equals("sceptre"))) {
+            throw new IllegalArgumentException("buildable needs to be either bow, shield, midnight armour or sceptre");
         }
-        
         try {
             currentlyAccessingGame.getInventory().craft(buildable, Game.generateUniqueId());
             return currentlyAccessingGame.generateDungeonResponse();

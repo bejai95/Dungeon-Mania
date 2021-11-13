@@ -265,6 +265,10 @@
               "wood",
               "treasure"
             ],
+            "midnight_armour": [
+              "armour",
+              "sunstone"
+            ],
             "bow": [
               "wood",
               "arrow",
@@ -595,7 +599,7 @@
     {
       "className": "dungeonmania.Mercenary",
       "data": {
-        "goldThreshold": 0,
+        "goldThreshold": 1,
         "currentGold": 0,
         "battleRadius": 2,
         "health": 200.0,
@@ -603,7 +607,7 @@
         "baseDefense": 0.0,
         "defense": 0.0,
         "speed": 1,
-        "isHostile": false,
+        "isHostile": true,
         "moveBehaviour": {
           "className": "dungeonmania.ChaseMovement",
           "data": {
@@ -622,6 +626,10 @@
                       "wood",
                       "wood",
                       "treasure"
+                    ],
+                    "midnight_armour": [
+                      "armour",
+                      "sunstone"
                     ],
                     "bow": [
                       "wood",
@@ -656,7 +664,7 @@
           "y": 5,
           "layer": 1
         },
-        "isInteractable": false
+        "isInteractable": true
       }
     },
     {
