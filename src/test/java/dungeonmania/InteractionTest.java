@@ -122,8 +122,8 @@ public class InteractionTest {
 
         // Test case invalid id
         assertThrows(IllegalArgumentException.class, () -> c1.interact("not a real id"));
-
-        String mercId = "37";
+        MovingEntity merc = c1.getCurrentlyAccessingGame().getMovingEntities().get(0);
+        String mercId = Integer.toString(merc.getId());
 
         // Player spawns out of range, with no coins
         assertThrows(InvalidActionException.class, () -> c1.interact(mercId));
@@ -139,15 +139,16 @@ public class InteractionTest {
     @Test
     public void testBribeAssassinInGame() {
         DungeonManiaController c1 = new DungeonManiaController();
-        c1.newGame("bribe-test-2", "Standard");
-        
-        String assId = "37";
-        
+        c1.newGame("bribe-test2", "Standard");
+
+        MovingEntity ass = c1.getCurrentlyAccessingGame().getMovingEntities().get(0);
+        String assId = Integer.toString(ass.getId());
+
         // Player spawns out of range, with no coins
         assertThrows(InvalidActionException.class, () -> c1.interact(assId));
         // Collect coin
         c1.tick(null, Direction.LEFT);
-        // Collect one_ring
+        // Collect one ring
         c1.tick(null, Direction.LEFT);
         // Player should still be out of range
         assertThrows(InvalidActionException.class, () -> c1.interact(assId));
