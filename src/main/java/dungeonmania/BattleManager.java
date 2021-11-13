@@ -90,8 +90,27 @@ public class BattleManager {
 
         while(player.getHealth() > 0 && baddie.getHealth() > 0){
             dead.addAll(battleInstance(player, baddie));
+            if(dead.contains(player)){
+                player.revive();
+            }
+            if(dead.contains(baddie)){
+                Item drop = baddie.dropItem();
+                /*System.out.println("This is the item: " + drop.getType());
+                System.out.println("And this is its id: " + drop.getitemId());*/
+                if(drop != null){
+                    player.getInventory().addItemToInventory(drop);
+                }
+                break;
+            }
             for(Mercenary ally : allies){
+                if(dead.contains(player)){
+                    player.revive();
+                }
                 if(dead.contains(baddie)){
+                    Item drop = baddie.dropItem();
+                    if(drop != null){
+                        player.getInventory().addItemToInventory(drop);
+                    }
                     break;
                 }
                 if(dead.contains(ally)){
