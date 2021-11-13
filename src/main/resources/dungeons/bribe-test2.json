@@ -1,6 +1,6 @@
 
 {
-    "width": 8,
+    "width": 10,
     "height": 9,
     "entities": [
       {
@@ -46,11 +46,6 @@
       {
         "x": 6,
         "y": 1,
-        "type": "wall"
-      },
-      {
-        "x": 0,
-        "y": 2,
         "type": "wall"
       },
       {
@@ -189,9 +184,14 @@
         "type": "treasure"
       },
       {
+        "x": 0,
+        "y": 2,
+        "type": "one_ring"
+      },
+      {
         "x": 5,
         "y": 2,
-        "type": "mercenary"
+        "type": "assassin"
       }
     ],
     "goal-condition": {

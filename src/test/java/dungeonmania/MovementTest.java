@@ -42,7 +42,7 @@ public class MovementTest {
 
     @Test
     public void testZombieMove() {
-        MovingEntity zombie1 = new ZombieToast(0, new Position(0,0), new RandomMovement());
+        MovingEntity zombie1 = new ZombieToast(0, new Position(0,0), new RandomMovement(), 0);
 
         for (int i = 0; i < 100; i++) {
             Position originalPos = zombie1.getPosition();
@@ -56,7 +56,7 @@ public class MovementTest {
         Character c = new Character(1, new Position(0, 0));
 
         // Chase when above target
-        Mercenary merc1 = new Mercenary(0, new Position(0,3));
+        Mercenary merc1 = new Mercenary(0, new Position(0,3), 0);
         merc1.chase(c);
         merc1.move();
         assertEquals(merc1.getPosition(), new Position(0, 2));
