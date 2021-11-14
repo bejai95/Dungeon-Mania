@@ -91,6 +91,8 @@ public class DungeonManiaController {
             currentlyAccessingGame.setDungeonId(newDungeonId);
             currentlyAccessingGame.setDungeonName(dungeonName);
             currentlyAccessingGame.setGameMode(gameMode);
+            Character player = currentlyAccessingGame.getPlayer();
+            player.setGameMode(gameMode);
             currentlyAccessingGame.initialiseBuildables();
             currentlyAccessingGame.setHealthBar(1);
 
@@ -99,7 +101,6 @@ public class DungeonManiaController {
 
             // Make all mercenaries chase the player
             List<Mercenary> allMercenaries = currentlyAccessingGame.getMercenaries();
-            Character player = currentlyAccessingGame.getPlayer();
             for (Mercenary cur: allMercenaries) {
                 cur.chase(player);
             }
