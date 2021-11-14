@@ -2,6 +2,7 @@ package dungeonmania;
 
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.util.Position;
+import java.util.Map;
 
 public class Mercenary extends MovingEntity {
     
@@ -31,16 +32,15 @@ public class Mercenary extends MovingEntity {
     /**
      * Moves as normal but will not move onto ally character
      */
-    @Override
-    public void move() {
+    public void move(Map<PositionSimple, Map<PositionSimple, Double>> grid) {
         Position newPos = this.getPosition();
         for (int i = 0; i < speed; i++) {
             ChaseMovement chaseMove = (ChaseMovement)moveBehaviour;
             // Only moves if merc is hostile, or if ally player is not adjacent
             if (getIsHostile()) {
-                newPos = moveBehaviour.move(this.getPosition());
+                newPos = moveBehaviour.move(this.getPosition(), grid);
             } else if (!chaseMove.targetIsAdjacent(this.getPosition())) {
-                newPos = moveBehaviour.move(this.getPosition());
+                newPos = moveBehaviour.move(this.getPosition(), grid);
             }
         }
         this.setPosition(newPos);
