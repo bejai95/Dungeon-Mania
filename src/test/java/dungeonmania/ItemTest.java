@@ -108,6 +108,7 @@ public class ItemTest {
     @Test
     public void invicibilityTests() {
         Character character = new Character(3, new Position(3, 4));
+        character.setGameMode("normal");
         InvincibilityPotion ip = new InvincibilityPotion(4);
         character.getInventory().addItemToInventory(ip);
         ip.consume(character);
