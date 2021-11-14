@@ -15,6 +15,7 @@ import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.response.models.EntityResponse;
 import dungeonmania.response.models.ItemResponse;
 import dungeonmania.util.Direction;
+import dungeonmania.util.Position;
 
 public class TickTests {
     
@@ -31,7 +32,8 @@ public class TickTests {
     public void testInvalidMove() {
         DungeonManiaController c = new DungeonManiaController();
         DungeonResponse r = c.newGame("maze", "Peaceful");
-        assertEquals(getPlayer(c.tick(null, Direction.LEFT).getEntities()), getPlayer(r.getEntities()));
+        Position initPos = getPlayer(r.getEntities()).getPosition();
+        assertEquals(getPlayer(c.tick(null, Direction.LEFT).getEntities()).getPosition(), initPos);
     }
 
     @Test
