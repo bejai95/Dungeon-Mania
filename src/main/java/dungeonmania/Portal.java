@@ -16,7 +16,6 @@ public class Portal extends StaticEntity {
     public Portal(int id, Position position, String portalColour) {
         super(id, "portal", position);
         this.portalColour = portalColour;
-        this.setIsInteractable(true);
     }
 
     //-----Methods-----

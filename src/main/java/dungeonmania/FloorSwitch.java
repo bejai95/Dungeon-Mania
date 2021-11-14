@@ -15,7 +15,6 @@ public class FloorSwitch extends StaticEntity {
     public FloorSwitch(int id, Position position) {
         super(id, "switch", position);
         isActive = false;
-        this.setIsInteractable(false);
     }
 
     //-----Methods-----

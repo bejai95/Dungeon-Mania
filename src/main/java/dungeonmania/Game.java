@@ -470,14 +470,20 @@ public class Game {
         return null;
     }
     /**
-     * Removes all entities whose health is 0 or less from the entities list
+     * Removes all entities whose were killed/destroyed this tick
      */
     private void removeDeadEntities(){
+
+        // remove enemies killed in combat
         System.out.println("Entities before: " + entities.size());
         List<Battleable> deadEnts = getBattlebles().stream().filter(x -> x.getHealth() <= 0.0).collect(Collectors.toList());
         System.out.println("Number of dead entities: " + deadEnts.size());
         entities.removeAll(batToEnts(deadEnts));
         System.out.println("Entities after: " + entities.size());
+
+        // remove static entitites that were destroyed
+        List<Entity> staticEnts = getStaticEntities().stream().filter(x -> x.isDestroyed() == true).collect(Collectors.toList());
+        entities.removeAll(staticEnts);
     }
 
     private void removeSpecifiedEntities(){
@@ -536,7 +542,16 @@ public class Game {
         Map<Position, Map<Position, Double>> grid = generateAdjacencyMatrix();
         for(MovingEntity mob : movingEntities){
             if (!isCollision(mob, mob.getNextMove(grid))) {
-                mob.move(grid);
+                if (mob instanceof ZombieToast) {
+                    ZombieToast zt = (ZombieToast) mob;
+                    zt.applyNextMove();
+                }
+                else {
+                    mob.move(grid);
+                }
+            }
+            else {
+                System.out.println(mob.getType() + " could not pass through the wall");
             }
             // TODO else collision response
         }
@@ -561,9 +576,10 @@ public class Game {
             System.out.println("Health After: " + player.getHealth());
             System.out.println("Number dead in Battle" + dead.size());
             //entities.removeAll(dead);
-
             removeDeadEntities();
+
         }  
+
 
         // Adjust the health bar
         if(getPlayer() != null){
@@ -579,6 +595,10 @@ public class Game {
         return generateDungeonResponse();
     }
 
+    private void battle() {
+
+    }
+
     public DungeonResponse interact(String entityId) {
         
         Entity ent = getEntityById(entityId);
@@ -592,7 +612,7 @@ public class Game {
         System.out.println("Interacting with " + ent.getType());
         
         ent.interact(getPlayer());
-
+        removeDeadEntities();
         return generateDungeonResponse();
     }
 

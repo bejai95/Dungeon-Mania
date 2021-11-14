@@ -37,7 +37,7 @@ public class milestone2SystemTests {
         assertThrows(IllegalArgumentException.class, () -> controller1.newGame("InvalidDungeonName", "Standard"));
 
         // Properly use newGame
-        controller1.newGame("advanced-2", "Standard");
+        DungeonResponse res = controller1.newGame("advanced-2", "Standard");
 
         // Test battling a mercenary, player health should decrease
         Game currentGame = controller1.getCurrentlyAccessingGame();
@@ -46,22 +46,22 @@ public class milestone2SystemTests {
             controller1.tick(null, Direction.DOWN);
         }
         for(int i = 0; i < 3; i++) { 
-            controller1.tick(null, Direction.UP);
+            res = controller1.tick(null, Direction.UP);
         }
         assertTrue(currentPlayer.getHealth() < currentPlayer.getMaxHealth());
 
         // Now if we pick up and use a health potion, the player should regenerate to full health, and the player's inventory should go from being empty, to containing 1 item, to being empty again
-        assertTrue(currentPlayer.getInventory().getItems().size() == 0);
-        DungeonResponse res = controller1.tick(null, Direction.RIGHT);
-        assertTrue(currentPlayer.getInventory().getItems().size() == 1);
+        assertTrue(getInventorySizeExcludingArmour(res) == 0);
+        res = controller1.tick(null, Direction.RIGHT);
+        assertTrue(getInventorySizeExcludingArmour(res) == 1);
         String healthPotionId = null;
         for (ItemResponse curr: res.getInventory()) {
             if (curr.getType().equals("health_potion")) {
                 healthPotionId = curr.getId();
             }
         }
-        controller1.tick(healthPotionId, Direction.LEFT);
-        assertTrue(currentPlayer.getInventory().getItems().size() == 0);
+        res = controller1.tick(healthPotionId, Direction.LEFT);
+        assertTrue(getInventorySizeExcludingArmour(res) == 0);
         assertTrue(currentPlayer.getHealth() == currentPlayer.getMaxHealth());
 
         // Test walking into a wall, character should remain in same position (tick should still pass by)
@@ -117,17 +117,17 @@ public class milestone2SystemTests {
             controller1.tick(null, Direction.DOWN);
         }
         for(int i = 0; i < 3; i++) {
-            controller1.tick(null, Direction.RIGHT);
+            res = controller1.tick(null, Direction.RIGHT);
         }
 
         // Test trying to walk through that same locked door now that we have the key (should now be able to walk through it)
-        assertTrue(currentPlayer.getInventory().getItems().size() == 1); // Should just be the key
+        assertTrue(getInventorySizeExcludingArmour(res) == 1); // Should just be the key
         Position originalPosition3 = currentGame.getPlayer().getPosition(); 
-        controller1.tick(null, Direction.DOWN);
+        res = controller1.tick(null, Direction.DOWN);
         Position newPosition3 = currentGame.getPlayer().getPosition();
         assertTrue(originalPosition3.getX() != newPosition3.getX() || originalPosition3.getY() != newPosition3.getY());
-        controller1.tick(null, Direction.UP);
-        assertTrue(currentPlayer.getInventory().getItems().size() == 0); // Key should have been used now
+        res = controller1.tick(null, Direction.UP);
+        assertTrue(getInventorySizeExcludingArmour(res) == 0); // Key should have been used now
 
         // Try to use an item in tick that is on the map but is not currently in the player's inventory (should throw exception)
         res = controller1.tick(null, Direction.UP); // Should do nothing as there is a wall there
@@ -184,10 +184,10 @@ public class milestone2SystemTests {
         currentGame = controller1.getCurrentlyAccessingGame();
 
         // Test building a bow and a shield, also test our assumption that the treasure gets used up instead of the key when building shields and both are available
-        assertTrue(res.getInventory().size() == 8);
+        assertTrue(getInventorySizeExcludingArmour(res) == 8);
         res = controller1.build("bow");
         res = controller1.build("shield");
-        assertTrue(res.getInventory().size() == 3);
+        assertTrue(getInventorySizeExcludingArmour(res) == 3);
         boolean containsBow = false;
         boolean containsShield = false; 
         boolean containsWood = false;
@@ -232,7 +232,107 @@ public class milestone2SystemTests {
         controller1.tick(null, Direction.UP);
         Position newPosition4 = currentGame.getPlayer().getPosition();
         assertTrue(originalPosition4.getX() != newPosition4.getX() || originalPosition4.getY() != newPosition4.getY());
-        controller1.tick(null, Direction.UP);
-        assertTrue(currentGame.getPlayer().getInventory().getItems().size() == 2); // Remaining key should have been used now
+        res = controller1.tick(null, Direction.UP);
+        assertTrue(getInventorySizeExcludingArmour(res) == 2); // Remaining key should have been used now
+    }
+
+    // Test that interact works correctly
+    @Test
+    public void testInteract() {
+        
+        DungeonManiaController controller1 = new DungeonManiaController();
+        DungeonManiaController controller2 = new DungeonManiaController();
+
+        DungeonResponse res1 =  controller1.newGame("advanced-2", "Standard");
+        DungeonResponse res2 = controller2.newGame("battleground", "Standard");
+        
+        // Test interact with an id that does not correspond with any entity
+        assertThrows(IllegalArgumentException.class, () -> controller1.interact("NonValidEntityId"));
+        
+        // Test interact with id's that correspond to entities but are not interactable (only mercenaries and spawners are interactable)
+        List<EntityResponse> allEntities = res1.getEntities();
+        for (EntityResponse curr: allEntities) {
+            if (!(curr.getType().equals("mercenary") || curr.getType().equals("zombie_toast_spawner"))) {
+                String entityId = curr.getId();
+                assertThrows(IllegalArgumentException.class, () -> controller1.interact(entityId));
+            }
+        }
+
+        // Test interact exception when player is more than 2 tiles away from the mercenary
+        String mercenary1Id = null;
+        String mercenary2Id = null;
+        for (EntityResponse curr: res2.getEntities()) {
+            if (curr.getPosition().getX() == 4 && curr.getPosition().getY() == 1) {
+                mercenary1Id = curr.getId();
+            } else if (curr.getPosition().getX() == 8 && curr.getPosition().getY() == 1) {
+                mercenary2Id = curr.getId();
+            }
+        }
+        final String mercenary1IdFinal = mercenary1Id;
+        assertThrows(InvalidActionException.class, () -> controller2.interact(mercenary1IdFinal));
+
+        // Test interact exception when player does not have any gold and attempts to bribe a mercenary
+        controller2.tick(null, Direction.LEFT); // Player should collide with the wall
+        assertThrows(InvalidActionException.class, () -> controller2.interact(mercenary1IdFinal));
+
+        // Battle the first mercenary, pick up some treasure and then test bribing the second mercenary
+        for (int i = 0; i < 2; i++) {
+            res2 = controller2.tick(null, Direction.RIGHT);
+        }
+        Mercenary merc2 = (Mercenary)controller2.getCurrentlyAccessingGame().getEntityById(mercenary2Id);
+        assertTrue(merc2.getIsHostile() == true);
+        controller2.interact(mercenary2Id);
+        assertTrue(merc2.getIsHostile() == false);
+
+        // Pick up and use a health potion
+        for (int i = 0; i < 3; i++) {
+            res2 = controller2.tick(null, Direction.RIGHT);
+        }
+        String healthPotionId = null;
+        for (ItemResponse curr: res2.getInventory()) {
+            if (curr.getType().equals("health_potion")) {
+                healthPotionId = curr.getId();
+            }
+        }
+        res2 = controller2.tick(healthPotionId, Direction.RIGHT);
+
+        // Test interact when the player is not cardinally adjacent to the spawner
+        String spawnerId = null;
+        for (EntityResponse curr: res2.getEntities()) {
+            if (curr.getType().equals("zombie_toast_spawner")) {
+                spawnerId = curr.getId();
+            }
+        }
+        final String spawnerIdFinal = spawnerId;
+        assertThrows(InvalidActionException.class, () -> controller2.interact(spawnerIdFinal));
+
+        // Test interact when the character does not have a sword to use on the spawner
+        for (int i = 0; i < 8; i++) {
+            res2 = controller2.tick(null, Direction.RIGHT);
+        }
+        assertThrows(InvalidActionException.class, () -> controller2.interact(spawnerIdFinal));
+
+        // Pick up a sword and then interact with the spawner, test that it has been destroyed
+        controller2.tick(null, Direction.DOWN);
+        controller2.tick(null, Direction.UP);
+        res2 = controller2.interact(spawnerIdFinal);
+        boolean containsSpawner = false;
+        for (EntityResponse curr: res2.getEntities()) {
+            if (curr.getType().equals("zombie_toast_spawner")) {
+                containsSpawner = true;
+            }
+        }
+        assertTrue(containsSpawner == false);
+    }
+
+    // Helper function to get the size of the inventory, not including armour (as this is random and cannot be controlled)
+    private int getInventorySizeExcludingArmour(DungeonResponse res) {
+        int count = 0;
+        for (ItemResponse curr: res.getInventory()) {
+                if (!curr.getType().equals("armour")) {
+                    count++;
+                }
+        }
+        return count;
     }
 }

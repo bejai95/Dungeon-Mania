@@ -4,6 +4,54 @@
     "height": 16,
     "entities": [
       {
+        "x": 3,
+        "y": 1,
+        "type": "portal",
+        "colour": "BLUE"
+      },
+      {
+        "x": 10,
+        "y": 4,
+        "type": "portal",
+        "colour": "BLUE"
+      },
+      {
+        "x": 5,
+        "y": 4,
+        "type": "portal",
+        "colour": "RED"
+      },
+      {
+        "x": 1,
+        "y": 10,
+        "type": "portal",
+        "colour": "RED"
+      },
+      {
+        "x": 3,
+        "y": 7,
+        "type": "portal",
+        "colour": "YELLOW"
+      },
+      {
+        "x": 15,
+        "y": 13,
+        "type": "portal",
+        "colour": "YELLOW"
+      },
+      {
+        "x": 15,
+        "y": 7,
+        "type": "portal",
+        "colour": "GREY"
+      },
+      {
+        "x": 8,
+        "y": 13,
+        "type": "portal",
+        "colour": "GREY"
+      },
+      {
         "x": 0,
         "y": 0,
         "type": "wall"
@@ -102,11 +150,6 @@
         "x": 1,
         "y": 1,
         "type": "player"
-      },
-      {
-        "x": 2,
-        "y": 1,
-        "type": "health_potion"
       },
       {
         "x": 6,
@@ -446,11 +489,6 @@
         "x": 13,
         "y": 14,
         "type": "wood"
-      },
-      {
-        "x": 14,
-        "y": 14,
-        "type": "health_potion"
       },
       {
         "x": 17,

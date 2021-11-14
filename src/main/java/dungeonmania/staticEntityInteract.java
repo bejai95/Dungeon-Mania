@@ -27,7 +27,7 @@ public class staticEntityInteract {
         List<StaticEntity> staticEntitiesList = new ArrayList<>();
         staticEntitiesList = currentGame.getStaticEntities();
         for (StaticEntity staticEntityItem : staticEntitiesList) {
-            if (staticEntityItem.getPosition().equals(destinationTile) && staticEntityItem.canInteract()) {
+            if (staticEntityItem.getPosition().equals(destinationTile)) {
                 interactStaticEntity(staticEntityItem, movementDirection);
             }
         }
@@ -194,11 +194,9 @@ public class staticEntityInteract {
             //Find an adjacent open tile for the zombie toast to spawn
             for (Position edgeCell : adjacentPositions) {
                 if (currentGame.isEmpty(edgeCell)) {
-                    ;
-                } else {
                     spawnPoint = edgeCell;
                     break;
-                }
+                } 
             }
 
             //Create new zombie toast

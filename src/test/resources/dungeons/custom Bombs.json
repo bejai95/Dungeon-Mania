@@ -4,6 +4,131 @@
     "height": 16,
     "entities": [
       {
+        "x": 6,
+        "y": 6,
+        "type": "spider"
+      },
+      {
+        "x": 6,
+        "y": 4,
+        "type": "spider"
+      },
+      {
+        "x": 6,
+        "y": 7,
+        "type": "spider"
+      },
+      {
+        "x": 7,
+        "y": 7,
+        "type": "spider"
+      },
+      {
+        "x": 8,
+        "y": 7,
+        "type": "spider"
+      },
+      {
+        "x": 9,
+        "y": 3,
+        "type": "spider"
+      },
+      {
+        "x": 9,
+        "y": 4,
+        "type": "spider"
+      },
+      {
+        "x": 9,
+        "y": 5,
+        "type": "spider"
+      },
+      {
+        "x": 9,
+        "y": 6,
+        "type": "spider"
+      },
+      {
+        "x": 9,
+        "y": 7,
+        "type": "spider"
+      },
+      {
+        "x": 6,
+        "y": 3,
+        "type": "spider"
+      },
+      {
+        "x": 7,
+        "y": 3,
+        "type": "spider"
+      },
+      {
+        "x": 8,
+        "y": 3,
+        "type": "spider"
+      },
+      {
+        "x": 9,
+        "y": 3,
+        "type": "spider"
+      },
+      {
+        "x": 1,
+        "y": 4,
+        "type": "bomb"
+      },
+      {
+        "x": 1,
+        "y": 3,
+        "type": "bomb"
+      },
+      {
+        "x": 6,
+        "y": 4,
+        "type": "spider"
+      },
+      {
+        "x": 6,
+        "y": 6,
+        "type": "spider"
+      },
+      {
+        "x": 7,
+        "y": 6,
+        "type": "spider"
+      },
+      {
+        "x": 8,
+        "y": 5,
+        "type": "spider"
+      },
+      {
+        "x": 8,
+        "y": 4,
+        "type": "spider"
+      },
+      {
+        "x": 7,
+        "y": 4,
+        "type": "spider"
+      },
+      {
+        "x": 7,
+        "y": 5,
+        "type": "switch"
+      }, 
+      {
+        "x": 6,
+        "y": 5,
+        "type": "boulder"
+      },
+      {
+        "x": 1,
+        "y": 2,
+        "type": "bomb"
+      },
+      {
         "x": 0,
         "y": 0,
         "type": "wall"
@@ -104,31 +229,6 @@
         "type": "player"
       },
       {
-        "x": 3,
-        "y": 1,
-        "type": "treasure"
-      },
-      {
-        "x": 4,
-        "y": 1,
-        "type": "mercenary"
-      },
-      {
-        "x": 6,
-        "y": 1,
-        "type": "health_potion"
-      },
-      {
-        "x": 8,
-        "y": 1,
-        "type": "mercenary"
-      },
-      {
-        "x": 16,
-        "y": 1,
-        "type": "zombie_toast_spawner"
-      },
-      {
         "x": 17,
         "y": 1,
         "type": "wall"
@@ -137,11 +237,6 @@
         "x": 0,
         "y": 2,
         "type": "wall"
-      },
-      {
-        "x": 15,
-        "y": 2,
-        "type": "sword"
       },
       {
         "x": 17,
