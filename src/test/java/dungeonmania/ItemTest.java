@@ -79,7 +79,7 @@ public class ItemTest {
         Character character = new Character(3, new Position(3, 4));
         //now set health to 0 to pretend died, did nothing since one ring
         character.revive();
-        assertTrue(character.getHealth() == 200);
+        assertTrue(character.getHealth() == character.getMaxHealth());
         character.setHealth(0);
         character.revive();
         assertTrue(character.getHealth() == 0);
