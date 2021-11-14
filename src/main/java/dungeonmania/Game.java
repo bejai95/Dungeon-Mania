@@ -495,6 +495,7 @@ public class Game {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
         Position destinationTile = player.getPosition().translateBy(movementDirection);
+        Map<Position, Map<Position, Double>> grid = generateAdjacencyMatrix();
 
         //Create a new instance of the static entity interaction helper class
         staticEntityInteract staticInteraction = new staticEntityInteract(this);
@@ -539,7 +540,6 @@ public class Game {
         
         //move all the mobs -- needs list of moving entities
         List<MovingEntity> movingEntities = getMovingEntities();
-        Map<Position, Map<Position, Double>> grid = generateAdjacencyMatrix();
         for(MovingEntity mob : movingEntities){
             if (!isCollision(mob, mob.getNextMove(grid))) {
                 if (mob instanceof ZombieToast) {

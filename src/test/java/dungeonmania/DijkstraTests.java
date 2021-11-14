@@ -62,7 +62,23 @@ public class DijkstraTests {
 
     @Test
     public void testSwampStraight() {
-        
+        DungeonManiaController d = new DungeonManiaController();
+        d.newGame("advanced-2", "Hard");
+        Mercenary merc = null;
+        for(Entity ent : d.getCurrentlyAccessingGame().getEntities()){
+            if(ent instanceof Mercenary){
+                merc = (Mercenary)ent;
+            }
+        }
+        Position pos = null;
+        for (EntityResponse s : d.tick(null, Direction.NONE).getEntities()){
+            if(Integer.parseInt(s.getId()) == merc.getId()){
+                pos = s.getPosition();
+            }
+        }
+        assertEquals(pos, new Position(3, 4));
+
+
     }
 
     
