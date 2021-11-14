@@ -62,7 +62,7 @@ public class Assassin extends Mercenary {
         if (currentGold >= goldThreshold && hasRing) {
             setIsInteractable(false);
             setIsHostile(false);
-            System.out.println("BRIBE SUCCESSFUL");
+            //System.out.println("BRIBE SUCCESSFUL");
         }
     }
 

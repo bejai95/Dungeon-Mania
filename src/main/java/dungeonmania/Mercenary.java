@@ -71,7 +71,7 @@ public class Mercenary extends MovingEntity {
      */
     public void interact(Character ch) throws InvalidActionException {
 
-        System.out.println("INTERACTION CALLED");
+        //System.out.println("INTERACTION CALLED");
 
         if (!getIsHostile()) return;
 
@@ -94,7 +94,7 @@ public class Mercenary extends MovingEntity {
         if (currentGold >= goldThreshold) {
             setIsInteractable(false);
             setIsHostile(false);
-            System.out.println("BRIBE SUCCESSFUL");
+            //System.out.println("BRIBE SUCCESSFUL");
         }
     }
 
@@ -105,16 +105,16 @@ public class Mercenary extends MovingEntity {
         // relativePos must have at least one 0 component for the player to be
         // in a cardinal direction (straight line) from merc
         if(Math.abs(relativePos.getX())*Math.abs(relativePos.getY()) != 0) {
-            System.out.println("OUT OF RANGE");
+            //System.out.println("OUT OF RANGE");
             return false;
         }
 
         // If the non-zero component exceeds bribe range, character is out of range
         if (Math.abs(relativePos.getX()) > 2 || Math.abs(relativePos.getY()) > 2) {
-            System.out.println("OUT OF RANGE");
+            //System.out.println("OUT OF RANGE");
             return false;
         }
-        System.out.println("IN RANGE");
+        //System.out.println("IN RANGE");
         return true;
     }
 

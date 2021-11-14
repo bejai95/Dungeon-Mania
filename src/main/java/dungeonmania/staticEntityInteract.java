@@ -20,7 +20,7 @@ public class staticEntityInteract {
     //-----Methods-----
     /**
      * Checks to see if the tile that the character moves onto has a static entity
-     * to interact with. Returns a boolean to see if this should halt the movement.
+     * to interact with. 
      */
     public void findInteractableStaticEntity(Direction movementDirection){
         Position destinationTile = currentGame.getPlayer().getPosition().translateBy(movementDirection);
@@ -36,7 +36,7 @@ public class staticEntityInteract {
 
     /**
      * Checks to see if the tile that the character moves onto has a static entity
-     * to interact with. Returns a boolean to see if this should halt the movement.
+     * to interact with. 
      */
     private void interactStaticEntity(Entity interactionEntity, Direction movementDirection){
         if (interactionEntity instanceof Portal)  {
