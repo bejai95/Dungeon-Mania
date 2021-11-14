@@ -14,7 +14,7 @@ public class AndGoal implements Goal{
      * Helper function which combines a listm of strings by
      * concattenating and placing AND between all elements
      * @param gs
-     * @return
+     * @return goals left
      */
     private String andifiy(List<String> gs){
         if(gs.size() == 0){
@@ -35,6 +35,9 @@ public class AndGoal implements Goal{
         }
         return ret;
     }
+    /**
+     * Gets the goals left by calling the andify on subgoals
+     */
     @Override
     public String getGoalsLeft(List<Entity> entities) {
         List<String> subgoalStrings = subgoals.stream().map(x -> x.getGoalsLeft(entities)).filter(x -> !x.equals("")).collect(Collectors.toList());

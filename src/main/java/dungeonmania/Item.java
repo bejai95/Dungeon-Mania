@@ -36,6 +36,10 @@ abstract public class Item {
         ItemResponse newItemResponse = new ItemResponse(newItem.toString(), getType());
         return newItemResponse;
     }
+    /**
+     * 
+     * @return use if still durable
+     */
     public boolean canUse() {
         if (this.getUses() > 0) {
             return true;

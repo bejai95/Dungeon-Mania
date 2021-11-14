@@ -20,6 +20,9 @@ public class ZombieToast extends MovingEntity {
         super.spawnArmour(armourChance);
 
     }
+    /**
+     * actually applies the random move since we want to see what our next move is before we do it for random movement
+     */
     public void applyNextMove() {
         if (moveBehaviour instanceof RandomMovement) {
             RandomMovement rm = (RandomMovement) moveBehaviour;

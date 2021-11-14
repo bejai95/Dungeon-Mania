@@ -16,7 +16,10 @@ public class BattleManager {
         this.baddie = baddie;
         this.mercenaries = mercenaries;
     }
-
+    /**
+     * 
+     * @return the fighters that will be in the battle
+     */
     public List<Battleable> getFighters(){
         List<Battleable> alive = new ArrayList<>();
         List<Mercenary> allies = getAlliesInRange();

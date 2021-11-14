@@ -8,6 +8,9 @@ public class Shield extends Item implements DefenseItem {
     public Shield(int itemId) {
         super(itemId, 3, "shield");
     }
+    /**
+     * returns defense multipler if still durable
+     */
     public double getMultipler() {
         //has uses
         if (canUse()) {

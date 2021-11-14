@@ -94,6 +94,11 @@ public class Inventory {
         //invariant, assume the item can be crafted
         return newItem;
     }
+    /**
+     * 
+     * @param entitiesOnMap
+     * @return a list of items which can be built at the current time
+     */
     public List<String> generateBuildables(List<Entity> entitiesOnMap) {
         List<String> recipesBuildable = new ArrayList<>();
         HashMap<String, List<String>> recipes = getRecipes();

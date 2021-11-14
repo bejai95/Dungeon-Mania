@@ -3,7 +3,16 @@ package dungeonmania;
 import dungeonmania.util.Position;
 
 public class EntityFactory {
-
+    /**
+     * 
+     * @param id
+     * @param type
+     * @param x
+     * @param y
+     * @param matchingKeyNum
+     * @param portalColour
+     * @return the entity that was created by the factory
+     */
     public Entity createEntity (int id, String type, int x, int y, int matchingKeyNum, String portalColour) {
         switch(type) {
             case "player":
