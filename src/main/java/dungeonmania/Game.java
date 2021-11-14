@@ -691,12 +691,11 @@ public class Game {
                 maxY = y;
             }
         }
+        //System.out.println("Bounds: " + "x: " + minX + " " + maxX + " y: " + minY + " " + maxY);
         List<Position> ret = new ArrayList<>();
-        for(Entity entity : entities){
-            Position pos = entity.getPosition();
-            int x = pos.getX();
-            int y = pos.getY();
-            if((x >= minX && x <= maxX) && (y >= minY && y <= maxY)){
+        for(int x = minX; x <= maxX; x++){
+            for(int y = minY; y <= maxY; y++){
+                Position pos = new Position(x, y);
                 ret.add(pos);
             }
         }
@@ -717,6 +716,17 @@ public class Game {
         return 1.0;
         
     }
+
+    private String getPosString(Position pos){
+        return ("(" + pos.getX() + ", " + pos.getY() + ")");
+    }
+    public void printGrid(Map<Position, Map<Position, Double>> grid){
+        for(Position pos1 : grid.keySet()){
+            for(Position pos2 : grid.get(pos1).keySet()){
+                System.out.println("Pos1: " + getPosString(pos1) + " Pos2: " + getPosString(pos2) + " Value " + grid.get(pos1).get(pos2));
+            }
+        }
+    }
     public Map<Position, Map<Position, Double>> generateAdjacencyMatrix(){
         Map<Position, Map<Position, Double>> grid = new HashMap<>();
         List<Position> positions = generatePositionList();
@@ -727,7 +737,8 @@ public class Game {
             }
             grid.put(pos1, col);
         }
-        
+        //System.out.println(grid.size());
+        //printGrid(grid);
         return grid;
     }
 

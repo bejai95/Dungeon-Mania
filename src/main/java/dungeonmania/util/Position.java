@@ -77,10 +77,10 @@ public final class Position {
         return new Position(b.x - a.x, b.y - a.y);
     }
 
-    public  static final boolean isAdjacent(Position a, Position b) {
+    public static final boolean isAdjacent(Position a, Position b) {
         int x = a.x - b.x;
         int y = a.y - b.y;
-        return Math.abs(x + y) == 1;
+        return Math.abs(x) + Math.abs(y) == 1;
     }
 
     // (Note: doesn't include z)
