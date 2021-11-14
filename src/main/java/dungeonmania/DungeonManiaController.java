@@ -100,6 +100,7 @@ public class DungeonManiaController {
             // Make all mercenaries chase the player
             List<Mercenary> allMercenaries = currentlyAccessingGame.getMercenaries();
             Character player = currentlyAccessingGame.getPlayer();
+            player.setGameMode(gameMode);
             for (Mercenary cur: allMercenaries) {
                 cur.chase(player);
             }
