@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import com.google.gson.annotations.SerializedName;
@@ -35,12 +37,14 @@ public class Game {
     private String gameMode;
     private static int uniqueIdNum; // Initialized to zero
     private final int spiderLimit = 4;
+    private final double oneRingChance = 0.05;
     
     @SerializedName(value="goal", alternate="goal-condition")
     private Goal goal;
     
     private double mercenarySpawnChance = 0.005;
     private int spiderTicks = 10;
+    private int hydraTicks = 50;
     
     public Game() {
 
@@ -451,6 +455,13 @@ public class Game {
             entities.add(spider);
         }
 
+        if((gameMode.equals("Hard") || gameMode.equals("hard")) && tickCounter % hydraTicks == 0){
+            pos = getSpawnPositionRandom();
+            MovingEntity hydra = (Hydra)eFactory.createEntity(Game.generateUniqueId(), "hydra", pos.getX(), pos.getY(), 0, null);
+            entities.add(hydra);
+
+        } 
+
         return;
     }
     /**
@@ -488,11 +499,17 @@ public class Game {
         return;
     }
 
-
+    private void printSourceCol(Map<Position, Map<Position, Double>> grid, Position source){
+        for(Position pos : grid.get(source).keySet()){
+            System.out.println(getPosString(pos) + ":" + grid.get(source).get(pos));
+        }
+    }
    public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
         Position destinationTile = player.getPosition().translateBy(movementDirection);
+        Map<PositionSimple, Map<PositionSimple, Double>> grid = generateAdjacencyMatrix();
+        //printSourceCol(grid, new Position(3, 5));
 
         //Create a new instance of the static entity interaction helper class
         staticEntityInteract staticInteraction = new staticEntityInteract(this);
@@ -538,13 +555,13 @@ public class Game {
         //move all the mobs -- needs list of moving entities
         List<MovingEntity> movingEntities = getMovingEntities();
         for(MovingEntity mob : movingEntities){
-            if (!isCollision(mob, mob.getNextMove())) {
+            if (!isCollision(mob, mob.getNextMove(grid))) {
                 if (mob instanceof ZombieToast) {
                     ZombieToast zt = (ZombieToast) mob;
                     zt.applyNextMove();
                 }
                 else {
-                    mob.move();
+                    mob.move(grid);
                 }
             }
             else {
@@ -581,8 +598,16 @@ public class Game {
 
 
         // Adjust the health bar
-        double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
-        setHealthBar(healthInRequiredRegion);
+        if(getPlayer() != null){
+            double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
+            setHealthBar(healthInRequiredRegion);
+
+            EntityFactory eFactory = new EntityFactory();
+            if(ThreadLocalRandom.current().nextInt(0, 1) < oneRingChance){
+                TheOneRing oneRing = new TheOneRing(Game.generateUniqueId());
+                player.getInventory().addItemToInventory(oneRing);
+            }
+        }
 
         //increment tick counter
         tickCounter++;
@@ -662,12 +687,7 @@ public class Game {
         return gameMode;
     }
 
-    /**
-     * Checks to see if a collision will occur when moving an entity from one 
-     * cell to another
-     */
-    public boolean isCollision(Entity movingEntity, Position destination){
-
+    private int getHighestLayer(Position destination){
         // Get the highest layer on the destination tile
         int highestLayer = 0;
         for (Entity entity : entities) {
@@ -675,12 +695,97 @@ public class Game {
                 highestLayer = Math.max(highestLayer, entity.getPosition().getLayer());
             }
         }
-
+        return highestLayer;
+    }
+    /**
+     * Checks to see if a collision will occur when moving an entity from one 
+     * cell to another
+     */
+    public boolean isCollision(Entity movingEntity, Position destination){
+        int highestLayer = getHighestLayer(destination);
         if (movingEntity.getPosition().getLayer() < highestLayer) {
             return true;
         }
 
         return false;
+    }
+
+    private List<Position> generatePositionList(){
+        int maxX = 0;
+        int maxY = 0;
+        int minX = 0;
+        int minY = 0;
+
+        for(Entity entity : entities){
+            Position pos = entity.getPosition();
+            int x = pos.getX();
+            int y = pos.getY();
+            if(x < minX){
+                minX = x;
+            }
+            if(x > maxX){
+                maxX = x;
+            }
+            if(y < minY){
+                minY = y;
+            }
+            if(y > maxY){
+                maxY = y;
+            }
+        }
+        //System.out.println("Bounds: " + "x: " + minX + " " + maxX + " y: " + minY + " " + maxY);
+        List<Position> ret = new ArrayList<>();
+        for(int x = minX; x <= maxX; x++){
+            for(int y = minY; y <= maxY; y++){
+                Position pos = new Position(x, y);
+                //List<Position> uniquePos = entities.stream().map(a -> a.getPosition()).filter(a -> a.equals(posTemp)).collect(Collectors.toList());
+                //ret.addAll(uniquePos);
+                ret.add(pos);
+            }
+        }
+
+        return ret;
+    }
+
+    private Double cost(Position pos1, Position pos2){
+        if(!(Position.isAdjacent(pos1, pos2)) || getHighestLayer(pos1) > 1 || getHighestLayer(pos2) > 1){
+            return Double.POSITIVE_INFINITY;
+        }
+        SwampTile swamp = null;
+        for(Entity entity : entities){
+            if(entity instanceof SwampTile){
+                swamp = (SwampTile) entity;
+                return swamp.getMovementFactor();
+            }
+        }
+        
+        return 1.0;
+        
+    }
+
+    private String getPosString(Position pos){
+        return ("(" + pos.getX() + ", " + pos.getY() + ")");
+    }
+    public void printGrid(Map<Position, Map<Position, Double>> grid){
+        for(Position pos1 : grid.keySet()){
+            for(Position pos2 : grid.get(pos1).keySet()){
+                System.out.println("Pos1: " + getPosString(pos1) + " Pos2: " + getPosString(pos2) + " Value " + grid.get(pos1).get(pos2));
+            }
+        }
+    }
+    public Map<PositionSimple, Map<PositionSimple, Double>> generateAdjacencyMatrix(){
+        Map<PositionSimple, Map<PositionSimple, Double>> grid = new HashMap<>();
+        List<Position> positions = generatePositionList();
+        for(Position pos1 : positions){
+            Map<PositionSimple, Double> col = new HashMap<>();
+            for(Position pos2 : positions){
+                col.put(new PositionSimple(pos2), cost(pos1, pos2));
+            }
+            grid.put(new PositionSimple(pos1), col);
+        }
+        //System.out.println(grid.size());
+        //printGrid(grid);
+        return grid;
     }
 
 }

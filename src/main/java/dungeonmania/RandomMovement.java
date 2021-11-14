@@ -4,13 +4,14 @@ import java.util.Random;
 
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
+import java.util.Map;
 
 public class RandomMovement implements Movement {
     Position nextPos = null;
     /**
      * Move object by 1 in a random cardinal direction
      */
-    public Position move(Position currentPos) {
+    public Position move(Position currentPos, Map<PositionSimple, Map<PositionSimple, Double>> grid) {
         Random rand = new Random();
         int randDirection = rand.nextInt(4);
         // TODO find a cleaner way to do this
