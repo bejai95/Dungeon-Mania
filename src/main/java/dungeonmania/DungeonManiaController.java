@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 public class DungeonManiaController {
     private Game currentlyAccessingGame;
+    private static int dungeonIdNum; // Initialized to zero
     
     public DungeonManiaController() {
         currentlyAccessingGame = null;
@@ -40,6 +41,18 @@ public class DungeonManiaController {
     public List<String> getGameModes() {
         return Arrays.asList("Standard", "Peaceful", "Hard");
     }
+
+    /**
+     * Generates a unique dungeon id
+     * @param cell
+     * @return
+     */
+    private static int generateUniqueDungeonId() {
+        int ret = dungeonIdNum;
+        dungeonIdNum++;
+        return ret;
+    }
+
     /**
      * /dungeons
      * 
@@ -71,7 +84,7 @@ public class DungeonManiaController {
                 .create();
                 
             // Generate an Id for the new dungeon
-            String newDungeonId = String.valueOf(Game.getNumDungeonIds());
+            String newDungeonId = String.valueOf(generateUniqueDungeonId());
 
             // Create a new game
             currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
@@ -80,7 +93,6 @@ public class DungeonManiaController {
             currentlyAccessingGame.setGameMode(gameMode);
             currentlyAccessingGame.initialiseBuildables();
             currentlyAccessingGame.setHealthBar(1);
-            Game.incrementNumDungeonIds();
 
             //Set portal colour sprites
             currentlyAccessingGame.setSprites();

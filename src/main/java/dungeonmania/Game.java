@@ -33,7 +33,6 @@ public class Game {
     private int tickCounter; // Initialized to zero
     private final List<AnimationQueue> animations = new ArrayList<>();
     private String gameMode;
-    private static int numDungeonIds; // Initialized to zero
     private static int uniqueIdNum; // Initialized to zero
     private final int spiderLimit = 4;
     
@@ -49,13 +48,6 @@ public class Game {
 
     public Goal getGoal(){ return goal;}
 
-    public static int getNumDungeonIds() {
-        return numDungeonIds;
-    }
-
-    public static void incrementNumDungeonIds() {
-        numDungeonIds++;
-    }
     /**
      * Initialises the inventory and buildables lists
      */
@@ -68,7 +60,7 @@ public class Game {
      * @param cell
      * @return
      */
-    static int generateUniqueId() {
+    public static int generateUniqueId() {
         int ret = uniqueIdNum;
         uniqueIdNum++;
         return ret;

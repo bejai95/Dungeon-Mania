@@ -36,8 +36,10 @@ public class persistenceTest {
         // Test creating and then saving some games
         assertDoesNotThrow(() -> controller1.newGame("advanced", "Standard"));
         controller1.saveGame("save1");
+        String save1Id = controller1.getCurrentlyAccessingGame().getDungeonId();
         assertDoesNotThrow(() -> controller1.newGame("maze", "Standard"));
         controller1.saveGame("save2");
+        String save2Id = controller1.getCurrentlyAccessingGame().getDungeonId();
 
         // Test that both games have been saved
         List<String> expected = Arrays.asList("save1", "save2");
@@ -48,10 +50,10 @@ public class persistenceTest {
         // Basically this means we should be able to create a new controller and access our other games from there
         DungeonManiaController controller2 = new DungeonManiaController();
         DungeonResponse response1 = assertDoesNotThrow(() -> controller2.loadGame("save1"));
-        assertEquals("0", response1.getDungeonId());
+        assertEquals(save1Id, response1.getDungeonId());
         assertEquals("advanced", response1.getDungeonName());
         DungeonResponse response2 = assertDoesNotThrow(() -> controller2.loadGame("save2"));
-        assertEquals("1", response2.getDungeonId());
+        assertEquals(save2Id, response2.getDungeonId());
         assertEquals("maze", response2.getDungeonName());
 
         // Testing overwriting save files -> Should work
@@ -61,7 +63,7 @@ public class persistenceTest {
         assertDoesNotThrow(() -> controller3.loadGame("save2"));
         controller3.saveGame("save2");
         DungeonResponse response3 = assertDoesNotThrow(() -> controller3.loadGame("save2"));
-        assertEquals("0", response3.getDungeonId()); // Should be the contents of save1
+        assertEquals(save1Id, response3.getDungeonId()); // Should be the contents of save1
         assertEquals("advanced", response3.getDungeonName());
     }
 
@@ -101,24 +103,22 @@ public class persistenceTest {
         }
 
         DungeonResponse res1 = controller1.tick(null, Direction.LEFT);
-        List<ItemResponse> previousInventory = res1.getInventory();
         List<String> previousInventoryStrings = new ArrayList<>();
-        for (ItemResponse curr: previousInventory) {
+        for (ItemResponse curr: res1.getInventory()) {
             String currItemString = curr.getId() + curr.getType();
             previousInventoryStrings.add(currItemString);
         }
         String previousGoalsLeft = res1.getGoals();
         
-        assertTrue(previousInventory.size() == 12);
+        assertTrue(getInventorySizeExcludingArmour(res1) == 12);
         assertTrue(previousGoalsLeft.equals(":mercenary"));
 
         // Save the file, and load it from another controller, check that the inventories and goals are the same
         controller1.saveGame("random_save");
         DungeonManiaController controller2 = new DungeonManiaController();
         DungeonResponse res2 = controller2.loadGame("random_save");
-        List<ItemResponse> newInventory = res2.getInventory();
         List<String> newInventoryStrings = new ArrayList<>();
-        for (ItemResponse curr: newInventory) {
+        for (ItemResponse curr: res2.getInventory()) {
             String currItemString = curr.getId() + curr.getType();
             newInventoryStrings.add(currItemString);
         }
@@ -198,5 +198,16 @@ public class persistenceTest {
                 assertTrue(door.getIsOpen().equals(false));
             }
         }
+    }
+
+    // Helper function to get the size of the inventory, not including armour (as this is random and cannot be controlled)
+    private int getInventorySizeExcludingArmour(DungeonResponse res) {
+        int count = 0;
+        for (ItemResponse curr: res.getInventory()) {
+                if (!curr.getType().equals("armour")) {
+                    count++;
+                }
+        }
+        return count;
     }
 }
