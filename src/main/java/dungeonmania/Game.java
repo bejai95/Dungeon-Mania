@@ -460,12 +460,12 @@ public class Game {
             entities.add(spider);
         }
 
-        if((gameMode.equals("Hard") || gameMode.equals("hard")) && tickCounter % hydraTicks == 0){
+        /*if((gameMode.equals("Hard") || gameMode.equals("hard")) && tickCounter % hydraTicks == 0){
             pos = getSpawnPositionRandom();
             MovingEntity hydra = (Hydra)eFactory.createEntity(Game.generateUniqueId(), "hydra", pos.getX(), pos.getY(), 0, null);
-            entities.add(hydra);
+            entities.add(hydra);    
 
-        } 
+        } */
 
         return;
     }
