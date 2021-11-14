@@ -44,7 +44,8 @@ public class Game {
     @SerializedName(value="goal", alternate="goal-condition")
     private Goal goal;
     
-    private double mercenarySpawnChance = 0.005;
+    private double mercenarySpawnChance = 0.01;
+    private double assassinChance = 0.2;
     private int spiderTicks = 10;
     private int hydraTicks = 50;
     
@@ -449,9 +450,16 @@ public class Game {
 
         if(roll < mercenarySpawnChance){
             pos = getSpawnPositionRandom();
-            Mercenary merc = (Mercenary)eFactory.createEntity(Game.generateUniqueId(), "mercenary", pos.getX(), pos.getY(), 0, null);
-            merc.chase(getPlayer());
-            entities.add(merc);
+            Double roll2 = ThreadLocalRandom.current().nextDouble(0, 1);
+            if(roll2 < assassinChance){
+                Assassin ass = (Assassin)eFactory.createEntity(Game.generateUniqueId(), "assassin", pos.getX(), pos.getY(), 0, null);
+                ass.chase(getPlayer());
+                entities.add(ass);
+            } else{
+                Mercenary merc = (Mercenary)eFactory.createEntity(Game.generateUniqueId(), "mercenary", pos.getX(), pos.getY(), 0, null);
+                merc.chase(getPlayer());
+                entities.add(merc);
+            }
         }
 
         if(tickCounter % spiderTicks == 0 && getNumberOfSpiders() < spiderLimit){
