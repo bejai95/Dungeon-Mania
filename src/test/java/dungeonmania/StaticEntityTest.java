@@ -420,7 +420,7 @@ public class StaticEntityTest {
 
         //Assert Zombie spawns in allowed positions
         Position zombiePos = zombie1.getPosition();
-        assertTrue(zombiePos.equals(new Position(3, 1))  || zombiePos.equals(new Position(4, 1)) || zombiePos.equals(new Position(5, 1)) || zombiePos.equals(new Position(5, 2)) || zombiePos.equals(new Position(5, 3))); 
+        assertTrue(zombiePos.equals(new Position(3, 1, 1))  || zombiePos.equals(new Position(4, 1, 1)) || zombiePos.equals(new Position(5, 1, 1)) || zombiePos.equals(new Position(5, 2, 1)) || zombiePos.equals(new Position(5, 3, 1))); 
 
         //Spawn another Zombie
         for(int i = 0; i < 20; i++) {
