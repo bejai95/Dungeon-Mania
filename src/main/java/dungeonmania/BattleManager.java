@@ -37,8 +37,8 @@ public class BattleManager {
         ret.add(goodie);
         ret.add(baddie);
         
-        goodie.setHealth((goodie.getHealth() - (baddie.getHealth() * baddie.getDamage())/10)*goodie.getDefenseMultiplier());
-        baddie.setHealth((baddie.getHealth() - (goodie.getHealth() * goodie.getDamage())/5)*baddie.getDefenseMultiplier());
+        goodie.setHealth((goodie.getHealth() - (baddie.getHealth() * (baddie.getDamage())/10*goodie.getDefenseMultiplier())));
+        baddie.setHealth((baddie.getHealth() - (goodie.getHealth() * (goodie.getDamage())/5*baddie.getDefenseMultiplier())));
         
         return ret.stream().filter(x -> x.getHealth() <= 0).collect(Collectors.toList());
     }
