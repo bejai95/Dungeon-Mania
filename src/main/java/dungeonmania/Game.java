@@ -531,11 +531,11 @@ public class Game {
         }
         //we know that itemUsed == null, thats ok
 
-        //remove dead items
-        inventory.removeDeadItems();
-
         //Interact with static entities, such as picking up items
         staticInteraction.findInteractableStaticEntity(movementDirection);
+
+        //remove dead items
+        inventory.removeDeadItems();
 
         //move in direction
         if (isCollision(player, player.getPosition().translateBy(movementDirection))) {

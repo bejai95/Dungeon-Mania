@@ -68,6 +68,7 @@ public class staticEntityInteract {
             if (selectedItem.getType().equals("sun_stone")) {
                 if (interactionDoor.openDoor(selectedItem)) {
                     interactionDoor.setType("door_open");
+                    return;
                 }
             }
         }
