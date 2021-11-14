@@ -193,7 +193,7 @@ public class staticEntityInteract {
         Position spawnerPosition = activeSpawner.getPosition();
 
         //Checks to see if spawn conditions are met
-        if ((currentGame.getGameMode() == "hard" && currentGame.getTickCounter() % 15 == 0) || (currentGame.getGameMode() != "hard" && currentGame.getTickCounter() % 20 == 0)) {
+        if ((currentGame.getGameMode() == "hard" && currentGame.getTickCounter() % 14 == 0) || (currentGame.getGameMode() != "hard" && currentGame.getTickCounter() % 19 == 0)) {
             //List of adjacent positions around spawner
             List<Position> adjacentPositions = spawnerPosition.getAdjacentPositions();
 

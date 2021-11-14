@@ -18,8 +18,40 @@ public class StaticEntityTest {
     //-----Game Setup Helper Function-----
     private Game startGame() {
     	DungeonManiaController controller1 = new DungeonManiaController();
-        controller1.newGame("advanced-2", "Standard");
+        controller1.newGame("advanced-2", "standard");
         return controller1.getCurrentlyAccessingGame();
+    }
+
+    //-----Picking up item Tests-----
+    @Test
+    public void itemPickupTest(){
+        //Crete the game
+        Game game1 = startGame();
+
+        //Gather Variables
+		Character player1 = game1.getPlayer();
+		Position player1Pos = player1.getPosition();
+		Inventory inventory1 = game1.getInventory();
+
+        //Create a key unpickedup item
+		int kID = Game.generateUniqueId();
+        Position keyPos =  player1Pos.translateBy(Direction.DOWN);
+		UnpickedUpItem unpickKey = new UnpickedUpItem(kID, "key", keyPos, "Key", 1);
+        game1.getEntities().add(unpickKey);
+
+        //Create a non key unpickedup item (wood)
+		int wID = Game.generateUniqueId();
+        Position woodPos = keyPos.translateBy(Direction.DOWN);
+		UnpickedUpItem unpickWood = new UnpickedUpItem(wID, "wood", woodPos, "Wood");
+        game1.getEntities().add(unpickWood);
+
+        //Move down and collect items
+		game1.tick(null, Direction.DOWN);
+        game1.tick(null, Direction.DOWN);
+
+        //Check if items correctly picked up
+		assertTrue(inventory1.getItem(kID) != null);
+        assertTrue(inventory1.getItem(wID) != null);
     }
 
 	//-----Boulder/Bomb/Switch Tests-----
@@ -71,13 +103,26 @@ public class StaticEntityTest {
         }
         assertTrue(bombPresent);
 
-        //Push Bulder
+        //Move into position
         game1.tick(null, Direction.RIGHT);
         for(int i = 0; i < 3; i++) {
             game1.tick(null, Direction.DOWN);
         }
         game1.tick(null, Direction.LEFT);
+
+        //Spawn spider
+        int sp1ID = Game.generateUniqueId();
+        Spider spider1 = new Spider(sp1ID, new Position(2, 4), new SquareMovement());
+        game1.getEntities().add(spider1);
+
+        //Check spider in the game
+        assertTrue(game1.getEntities().contains(spider1));
+
+        //Move boulder onto switch
         game1.tick(null, Direction.UP);
+
+        //Check spider is removed
+        assertFalse(game1.getEntities().contains(spider1));
 
         //Test positions
         assertEquals(player1.getPosition(), boulderPos);
@@ -306,4 +351,105 @@ public class StaticEntityTest {
         assertTrue(inventory1.getItem(k2id) != null);
         
     }
+
+    //-----Zombie Spawner Tests-----
+    //Spawn a zombie on standard mode
+    @Test
+    public void zombieSpawnerTestStandard(){
+        //Crete the game
+        Game game1 = startGame();
+
+        //Gather Variables
+        Character player1 = game1.getPlayer();
+
+        //Create Zombie Spawner
+        int zspID = Game.generateUniqueId();
+		ZombieToastSpawner zombieSpawner1 = new ZombieToastSpawner(zspID, new Position(4, 2));
+		game1.getEntities().add(zombieSpawner1);
+
+        //Spawn Zombie
+        for(int i = 0; i < 20; i++) {
+            game1.tick(null, Direction.NONE);
+        }
+
+        //Find Zombie
+        ZombieToast zombie1 = null;
+        for (Entity ent : game1.getEntities()) {
+            if (ent instanceof ZombieToast) {
+                zombie1 = (ZombieToast)ent;
+            }
+        }
+
+
+        //Assert Zombie created
+        assertTrue(zombie1 != null); 
+
+        //Assert Zombie spawns in allowed positions
+        Position zombiePos = zombie1.getPosition();
+        assertTrue(zombiePos.equals(new Position(3, 1))  || zombiePos.equals(new Position(4, 1)) || zombiePos.equals(new Position(5, 1)) || zombiePos.equals(new Position(5, 2)) || zombiePos.equals(new Position(5, 3))); 
+
+        //Spawn another Zombie
+        for(int i = 0; i < 20; i++) {
+            game1.tick(null, Direction.NONE);
+        }
+
+        //Find Zombie 
+        ZombieToast zombie2 = null;
+        for (Entity ent : game1.getEntities()) {
+            if (ent instanceof ZombieToast) {
+                ZombieToast currZombie = (ZombieToast)ent;
+                if (! currZombie.equals(zombie1)) {
+                    zombie2 = currZombie;
+                }
+            }
+        }
+
+        //Assert Zombie created
+        assertTrue(zombie2 != null); 
+
+        //Assert Zombie spawns in allowed positions
+        Position zombiePos2 = zombie2.getPosition();
+        assertTrue(zombiePos2.equals(new Position(3, 1))  || zombiePos2.equals(new Position(4, 1)) || zombiePos2.equals(new Position(5, 1)) || zombiePos2.equals(new Position(5, 2)) || zombiePos2.equals(new Position(5, 3))); 
+
+    }
+
+    //Spawn a zombie on hard mode
+    @Test
+    public void zombieSpawnerTestHard(){
+        //Crete the game
+        DungeonManiaController controller1 = new DungeonManiaController();
+        controller1.newGame("advanced-2", "hard");
+        Game game1 = controller1.getCurrentlyAccessingGame();
+
+        //Gather Variables
+        Character player1 = game1.getPlayer();
+
+        //Create Zombie Spawner
+        int zspID = Game.generateUniqueId();
+        ZombieToastSpawner zombieSpawner1 = new ZombieToastSpawner(zspID, new Position(4, 2));
+        game1.getEntities().add(zombieSpawner1);
+
+        //Spawn Zombie
+        for(int i = 0; i < 15; i++) {
+            game1.tick(null, Direction.NONE);
+        }
+
+        //Find Zombie
+        ZombieToast zombie1 = null;
+        for (Entity ent : game1.getEntities()) {
+            if (ent instanceof ZombieToast) {
+                zombie1 = (ZombieToast)ent;
+            }
+        }
+
+        //Assert Zombie created
+        assertTrue(zombie1 != null); 
+
+        //Assert Zombie spawns in allowed positions
+        Position zombiePos = zombie1.getPosition();
+        assertTrue(zombiePos.equals(new Position(3, 1))  || zombiePos.equals(new Position(4, 1)) || zombiePos.equals(new Position(5, 1)) || zombiePos.equals(new Position(5, 2)) || zombiePos.equals(new Position(5, 3))); 
+    }
+
+    
 }
+
