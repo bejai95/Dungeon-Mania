@@ -20,5 +20,10 @@ public class ZombieToast extends MovingEntity {
         super.spawnArmour(armourChance);
 
     }
-
+    public void applyNextMove() {
+        if (moveBehaviour instanceof RandomMovement) {
+            RandomMovement rm = (RandomMovement) moveBehaviour;
+            this.setPosition(rm.getNextPos());
+        }
+    }
 }

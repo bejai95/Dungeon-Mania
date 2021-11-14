@@ -194,11 +194,9 @@ public class staticEntityInteract {
             //Find an adjacent open tile for the zombie toast to spawn
             for (Position edgeCell : adjacentPositions) {
                 if (currentGame.isEmpty(edgeCell)) {
-                    ;
-                } else {
                     spawnPoint = edgeCell;
                     break;
-                }
+                } 
             }
 
             //Create new zombie toast
