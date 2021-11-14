@@ -44,7 +44,8 @@ public class Game {
     @SerializedName(value="goal", alternate="goal-condition")
     private Goal goal;
     
-    private double mercenarySpawnChance = 0.005;
+    private double mercenarySpawnChance = 0.01;
+    private double assassinChance = 0.2;
     private int spiderTicks = 10;
     private int hydraTicks = 50;
     
@@ -451,9 +452,16 @@ public class Game {
 
         if(roll < mercenarySpawnChance){
             pos = getSpawnPositionRandom();
-            Mercenary merc = (Mercenary)eFactory.createEntity(Game.generateUniqueId(), "mercenary", pos.getX(), pos.getY(), 0, null);
-            merc.chase(getPlayer());
-            entities.add(merc);
+            Double roll2 = ThreadLocalRandom.current().nextDouble(0, 1);
+            if(roll2 < assassinChance){
+                Assassin ass = (Assassin)eFactory.createEntity(Game.generateUniqueId(), "assassin", pos.getX(), pos.getY(), 0, null);
+                ass.chase(getPlayer());
+                entities.add(ass);
+            } else{
+                Mercenary merc = (Mercenary)eFactory.createEntity(Game.generateUniqueId(), "mercenary", pos.getX(), pos.getY(), 0, null);
+                merc.chase(getPlayer());
+                entities.add(merc);
+            }
         }
 
         if(tickCounter % spiderTicks == 0 && getNumberOfSpiders() < spiderLimit){
@@ -729,7 +737,10 @@ public class Game {
     }
 
     /**
-     * Raph Sentence 
+     * Calculates how many ticks it would take to get from pos1 to pos2 as an assassin or mercenary in 1 move.
+     * Cost is infinite if a mercenary could not travel from pos1 to pos2 in 1 move (assuming moving
+     * off a swamp tile is 1 move no matter how many ticks it takes). I.e. if the tiles are not adjacent
+     * or there's a wall or something in the way
      */
     private Double cost(Position pos1, Position pos2){
         if(!(Position.isAdjacent(pos1, pos2)) || getHighestLayer(pos1) > 1 || getHighestLayer(pos2) > 1){
@@ -755,7 +766,7 @@ public class Game {
     }
     
     /**
-     * Raph sentence 
+     * Helper function which prints an adjacency matrix for debugging
      * @param grid
      */
     public void printGrid(Map<Position, Map<Position, Double>> grid){
@@ -767,7 +778,7 @@ public class Game {
     }
 
     /**
-     * Raph sentence
+     * Generates the adjacency matrix representation of the graph used as input in Dijkstra's algorithm
      * @return
      */
     public Map<PositionSimple, Map<PositionSimple, Double>> generateAdjacencyMatrix(){
