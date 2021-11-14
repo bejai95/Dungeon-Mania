@@ -507,7 +507,6 @@ public class Game {
    public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
-        Position destinationTile = player.getPosition().translateBy(movementDirection);
         Map<PositionSimple, Map<PositionSimple, Double>> grid = generateAdjacencyMatrix();
         //printSourceCol(grid, new Position(3, 5));
 

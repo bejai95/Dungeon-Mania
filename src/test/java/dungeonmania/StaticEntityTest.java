@@ -362,6 +362,17 @@ public class StaticEntityTest {
         //Gather Variables
         Character player1 = game1.getPlayer();
 
+        //Protect the player
+        int w1ID = Game.generateUniqueId();
+		Wall wall1 = new Wall(w1ID, new Position(2, 1));
+		game1.getEntities().add(wall1);
+        int w2ID = Game.generateUniqueId();
+		Wall wall2 = new Wall(w2ID, new Position(2, 2));
+		game1.getEntities().add(wall2);
+        int w3ID = Game.generateUniqueId();
+		Wall wall3 = new Wall(w3ID, new Position(1, 2));
+		game1.getEntities().add(wall2);
+
         //Create Zombie Spawner
         int zspID = Game.generateUniqueId();
 		ZombieToastSpawner zombieSpawner1 = new ZombieToastSpawner(zspID, new Position(4, 2));
@@ -413,42 +424,6 @@ public class StaticEntityTest {
 
     }
 
-    //Spawn a zombie on hard mode
-    @Test
-    public void zombieSpawnerTestHard(){
-        //Crete the game
-        DungeonManiaController controller1 = new DungeonManiaController();
-        controller1.newGame("advanced-2", "hard");
-        Game game1 = controller1.getCurrentlyAccessingGame();
-
-        //Gather Variables
-        Character player1 = game1.getPlayer();
-
-        //Create Zombie Spawner
-        int zspID = Game.generateUniqueId();
-        ZombieToastSpawner zombieSpawner1 = new ZombieToastSpawner(zspID, new Position(4, 2));
-        game1.getEntities().add(zombieSpawner1);
-
-        //Spawn Zombie
-        for(int i = 0; i < 15; i++) {
-            game1.tick(null, Direction.NONE);
-        }
-
-        //Find Zombie
-        ZombieToast zombie1 = null;
-        for (Entity ent : game1.getEntities()) {
-            if (ent instanceof ZombieToast) {
-                zombie1 = (ZombieToast)ent;
-            }
-        }
-
-        //Assert Zombie created
-        assertTrue(zombie1 != null); 
-
-        //Assert Zombie spawns in allowed positions
-        Position zombiePos = zombie1.getPosition();
-        assertTrue(zombiePos.equals(new Position(3, 1))  || zombiePos.equals(new Position(4, 1)) || zombiePos.equals(new Position(5, 1)) || zombiePos.equals(new Position(5, 2)) || zombiePos.equals(new Position(5, 3))); 
-    }
 
     
 }
