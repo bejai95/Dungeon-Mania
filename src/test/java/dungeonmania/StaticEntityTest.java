@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,6 +21,28 @@ public class StaticEntityTest {
     	DungeonManiaController controller1 = new DungeonManiaController();
         controller1.newGame("advanced-2", "standard");
         return controller1.getCurrentlyAccessingGame();
+    }
+
+    //-----Exit test-----
+    @Test
+    public void exitTest(){
+        //Crete the game
+        Game game1 = startGame();
+
+        //Gather Variables
+        Character player1 = game1.getPlayer();
+        Position player1Pos = player1.getPosition();
+        Inventory inventory1 = game1.getInventory();
+
+        //Create an exit next to the player
+        int exID = Game.generateUniqueId();
+        Position exitPos =  player1Pos.translateBy(Direction.RIGHT);
+        Exit exit1 = new Exit(exID, exitPos);
+        game1.getEntities().add(exit1);
+
+        //Move onto exit
+        game1.tick(null, Direction.RIGHT);
+        assertEquals("", game1.getGoalsLeft());
     }
 
     //-----Picking up item Tests-----
