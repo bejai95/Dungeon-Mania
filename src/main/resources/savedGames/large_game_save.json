@@ -1,0 +1,3041 @@
+{
+  "dungeonId": "0",
+  "dungeonName": "advanced-2",
+  "entities": [
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 0,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 1,
+        "type": "wall",
+        "position": {
+          "x": 1,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 2,
+        "type": "wall",
+        "position": {
+          "x": 2,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 3,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 4,
+        "type": "wall",
+        "position": {
+          "x": 4,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 5,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 6,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 7,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 8,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 9,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 10,
+        "type": "wall",
+        "position": {
+          "x": 10,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 11,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 12,
+        "type": "wall",
+        "position": {
+          "x": 12,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 13,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 14,
+        "type": "wall",
+        "position": {
+          "x": 14,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 15,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 16,
+        "type": "wall",
+        "position": {
+          "x": 16,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 17,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 0,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 18,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 1,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Character",
+      "data": {
+        "inventory": {
+          "items": [
+            {
+              "className": "dungeonmania.Treasure",
+              "data": {
+                "uses": 1,
+                "itemId": 77,
+                "type": "treasure"
+              }
+            },
+            {
+              "className": "dungeonmania.Key",
+              "data": {
+                "keyNum": 1,
+                "uses": 1,
+                "itemId": 80,
+                "type": "key"
+              }
+            },
+            {
+              "className": "dungeonmania.Wood",
+              "data": {
+                "uses": 1,
+                "itemId": 82,
+                "type": "wood"
+              }
+            },
+            {
+              "className": "dungeonmania.Wood",
+              "data": {
+                "uses": 1,
+                "itemId": 83,
+                "type": "wood"
+              }
+            },
+            {
+              "className": "dungeonmania.Arrow",
+              "data": {
+                "uses": 1,
+                "itemId": 84,
+                "type": "arrow"
+              }
+            },
+            {
+              "className": "dungeonmania.Arrow",
+              "data": {
+                "uses": 1,
+                "itemId": 85,
+                "type": "arrow"
+              }
+            },
+            {
+              "className": "dungeonmania.Arrow",
+              "data": {
+                "uses": 1,
+                "itemId": 86,
+                "type": "arrow"
+              }
+            },
+            {
+              "className": "dungeonmania.Wood",
+              "data": {
+                "uses": 1,
+                "itemId": 87,
+                "type": "wood"
+              }
+            }
+          ],
+          "recipes": {
+            "shield2": [
+              "wood",
+              "wood",
+              "key"
+            ],
+            "shield1": [
+              "wood",
+              "wood",
+              "treasure"
+            ],
+            "midnight_armour": [
+              "armour",
+              "sunstone"
+            ],
+            "bow": [
+              "wood",
+              "arrow",
+              "arrow",
+              "arrow"
+            ]
+          }
+        },
+        "health": 200.0,
+        "baseDamage": 3,
+        "baseDefense": 0.0,
+        "InvincibleDuration": 0,
+        "InvisibleDuration": 0,
+        "maxHealth": 200.0,
+        "id": 19,
+        "type": "player",
+        "position": {
+          "x": 14,
+          "y": 14,
+          "layer": 1
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.UnpickedUpItem",
+      "data": {
+        "itemClass": "Sword",
+        "keyNum": -1,
+        "id": 21,
+        "type": "sword",
+        "position": {
+          "x": 6,
+          "y": 1,
+          "layer": 0
+        },
+        "isInteractable": true
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 22,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 1,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 23,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 24,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 25,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 26,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 27,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 28,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 29,
+        "type": "wall",
+        "position": {
+          "x": 12,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 30,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 31,
+        "type": "wall",
+        "position": {
+          "x": 14,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 32,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 33,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 2,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 34,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 35,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 36,
+        "type": "wall",
+        "position": {
+          "x": 4,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 37,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 38,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 39,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 40,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.UnpickedUpItem",
+      "data": {
+        "itemClass": "Bomb",
+        "keyNum": -1,
+        "id": 41,
+        "type": "bomb",
+        "position": {
+          "x": 13,
+          "y": 4,
+          "layer": 0
+        },
+        "isInteractable": true
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 42,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 4,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 43,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 45,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 46,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 5,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 47,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 48,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 49,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 50,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 51,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 52,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 6,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 53,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 54,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 55,
+        "type": "wall",
+        "position": {
+          "x": 12,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 56,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 57,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 7,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 58,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 59,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 60,
+        "type": "wall",
+        "position": {
+          "x": 4,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 61,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 62,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 63,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 64,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 65,
+        "type": "wall",
+        "position": {
+          "x": 10,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 66,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 67,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 8,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 68,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 69,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 70,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 71,
+        "type": "wall",
+        "position": {
+          "x": 14,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 72,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 73,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 10,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 74,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 10,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 75,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 10,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 76,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 10,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Door",
+      "data": {
+        "isOpen": false,
+        "matchingKeyNum": 1,
+        "id": 78,
+        "type": "door_silver",
+        "position": {
+          "x": 15,
+          "y": 9,
+          "layer": 2
+        },
+        "isInteractable": true
+      }
+    },
+    {
+      "className": "dungeonmania.Door",
+      "data": {
+        "isOpen": true,
+        "matchingKeyNum": 2,
+        "id": 79,
+        "type": "door_open",
+        "position": {
+          "x": 4,
+          "y": 10,
+          "layer": 0
+        },
+        "isInteractable": true
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 89,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 10,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 90,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 91,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 92,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 93,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 94,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 95,
+        "type": "wall",
+        "position": {
+          "x": 10,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 96,
+        "type": "wall",
+        "position": {
+          "x": 12,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 97,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 11,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 98,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 99,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 100,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 101,
+        "type": "wall",
+        "position": {
+          "x": 12,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 102,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 103,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 104,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 105,
+        "type": "wall",
+        "position": {
+          "x": 4,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 106,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 107,
+        "type": "wall",
+        "position": {
+          "x": 12,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 108,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 109,
+        "type": "wall",
+        "position": {
+          "x": 14,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 110,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 13,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 111,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 112,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 14,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 113,
+        "type": "wall",
+        "position": {
+          "x": 0,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 114,
+        "type": "wall",
+        "position": {
+          "x": 1,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 115,
+        "type": "wall",
+        "position": {
+          "x": 2,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 116,
+        "type": "wall",
+        "position": {
+          "x": 3,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 117,
+        "type": "wall",
+        "position": {
+          "x": 4,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 118,
+        "type": "wall",
+        "position": {
+          "x": 5,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 119,
+        "type": "wall",
+        "position": {
+          "x": 6,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 120,
+        "type": "wall",
+        "position": {
+          "x": 7,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 121,
+        "type": "wall",
+        "position": {
+          "x": 8,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 122,
+        "type": "wall",
+        "position": {
+          "x": 9,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 123,
+        "type": "wall",
+        "position": {
+          "x": 10,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 124,
+        "type": "wall",
+        "position": {
+          "x": 11,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 125,
+        "type": "wall",
+        "position": {
+          "x": 12,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 126,
+        "type": "wall",
+        "position": {
+          "x": 13,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 127,
+        "type": "wall",
+        "position": {
+          "x": 14,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 128,
+        "type": "wall",
+        "position": {
+          "x": 15,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 129,
+        "type": "wall",
+        "position": {
+          "x": 16,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Wall",
+      "data": {
+        "id": 130,
+        "type": "wall",
+        "position": {
+          "x": 17,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Spider",
+      "data": {
+        "health": 50.0,
+        "damage": 2,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": true,
+        "moveBehaviour": {
+          "className": "dungeonmania.SquareMovement",
+          "data": {
+            "direction": "LEFT",
+            "path": [
+              {
+                "x": 8,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 9,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 10,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 10,
+                "y": 14,
+                "layer": 0
+              },
+              {
+                "x": 10,
+                "y": 15,
+                "layer": 0
+              },
+              {
+                "x": 9,
+                "y": 15,
+                "layer": 0
+              },
+              {
+                "x": 8,
+                "y": 15,
+                "layer": 0
+              },
+              {
+                "x": 8,
+                "y": 14,
+                "layer": 0
+              }
+            ]
+          }
+        },
+        "id": 131,
+        "type": "spider",
+        "position": {
+          "x": 9,
+          "y": 15,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Spider",
+      "data": {
+        "health": 50.0,
+        "damage": 2,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": true,
+        "moveBehaviour": {
+          "className": "dungeonmania.SquareMovement",
+          "data": {
+            "direction": "DOWN",
+            "path": [
+              {
+                "x": 5,
+                "y": 11,
+                "layer": 0
+              },
+              {
+                "x": 6,
+                "y": 11,
+                "layer": 0
+              },
+              {
+                "x": 7,
+                "y": 11,
+                "layer": 0
+              },
+              {
+                "x": 7,
+                "y": 12,
+                "layer": 0
+              },
+              {
+                "x": 7,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 6,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 5,
+                "y": 13,
+                "layer": 0
+              },
+              {
+                "x": 5,
+                "y": 12,
+                "layer": 0
+              }
+            ]
+          }
+        },
+        "id": 132,
+        "type": "spider",
+        "position": {
+          "x": 7,
+          "y": 12,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Spider",
+      "data": {
+        "health": 50.0,
+        "damage": 2,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": true,
+        "moveBehaviour": {
+          "className": "dungeonmania.SquareMovement",
+          "data": {
+            "direction": "RIGHT",
+            "path": [
+              {
+                "x": 0,
+                "y": 10,
+                "layer": 0
+              },
+              {
+                "x": 1,
+                "y": 10,
+                "layer": 0
+              },
+              {
+                "x": 2,
+                "y": 10,
+                "layer": 0
+              },
+              {
+                "x": 2,
+                "y": 11,
+                "layer": 0
+              },
+              {
+                "x": 2,
+                "y": 12,
+                "layer": 0
+              },
+              {
+                "x": 1,
+                "y": 12,
+                "layer": 0
+              },
+              {
+                "x": 0,
+                "y": 12,
+                "layer": 0
+              },
+              {
+                "x": 0,
+                "y": 11,
+                "layer": 0
+              }
+            ]
+          }
+        },
+        "id": 133,
+        "type": "spider",
+        "position": {
+          "x": 1,
+          "y": 10,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Spider",
+      "data": {
+        "health": 50.0,
+        "damage": 2,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": true,
+        "moveBehaviour": {
+          "className": "dungeonmania.SquareMovement",
+          "data": {
+            "direction": "UP",
+            "path": [
+              {
+                "x": 7,
+                "y": 2,
+                "layer": 0
+              },
+              {
+                "x": 8,
+                "y": 2,
+                "layer": 0
+              },
+              {
+                "x": 9,
+                "y": 2,
+                "layer": 0
+              },
+              {
+                "x": 9,
+                "y": 3,
+                "layer": 0
+              },
+              {
+                "x": 9,
+                "y": 4,
+                "layer": 0
+              },
+              {
+                "x": 8,
+                "y": 4,
+                "layer": 0
+              },
+              {
+                "x": 7,
+                "y": 4,
+                "layer": 0
+              },
+              {
+                "x": 7,
+                "y": 3,
+                "layer": 0
+              }
+            ]
+          }
+        },
+        "id": 134,
+        "type": "spider",
+        "position": {
+          "x": 7,
+          "y": 3,
+          "layer": 2
+        },
+        "isInteractable": false
+      }
+    },
+    {
+      "className": "dungeonmania.Mercenary",
+      "data": {
+        "goldThreshold": 1,
+        "currentGold": 0,
+        "battleRadius": 2,
+        "health": 200.0,
+        "damage": 3,
+        "baseDefense": 0.0,
+        "defense": 0.0,
+        "speed": 1,
+        "isHostile": true,
+        "moveBehaviour": {
+          "className": "dungeonmania.ChaseMovement",
+          "data": {
+            "target": {
+              "className": "dungeonmania.Character",
+              "data": {
+                "inventory": {
+                  "items": [
+                    {
+                      "className": "dungeonmania.Treasure",
+                      "data": {
+                        "uses": 1,
+                        "itemId": 77,
+                        "type": "treasure"
+                      }
+                    },
+                    {
+                      "className": "dungeonmania.Key",
+                      "data": {
+                        "keyNum": 1,
+                        "uses": 1,
+                        "itemId": 80,
+                        "type": "key"
+                      }
+                    },
+                    {
+                      "className": "dungeonmania.Wood",
+                      "data": {
+                        "uses": 1,
+                        "itemId": 82,
+                        "type": "wood"
+                      }
+                    },
+                    {
+                      "className": "dungeonmania.Wood",
+                      "data": {
+                        "uses": 1,
+                        "itemId": 83,
+                        "type": "wood"
+                      }
+                    },
+                    {
+                      "className": "dungeonmania.Arrow",
+                      "data": {
+                        "uses": 1,
+                        "itemId": 84,
+                        "type": "arrow"
+                      }
+                    },
+                    {
+                      "className": "dungeonmania.Arrow",
+                      "data": {
+                        "uses": 1,
+                        "itemId": 85,
+                        "type": "arrow"
+                      }
+                    },
+                    {
+                      "className": "dungeonmania.Arrow",
+                      "data": {
+                        "uses": 1,
+                        "itemId": 86,
+                        "type": "arrow"
+                      }
+                    },
+                    {
+                      "className": "dungeonmania.Wood",
+                      "data": {
+                        "uses": 1,
+                        "itemId": 87,
+                        "type": "wood"
+                      }
+                    }
+                  ],
+                  "recipes": {
+                    "shield2": [
+                      "wood",
+                      "wood",
+                      "key"
+                    ],
+                    "shield1": [
+                      "wood",
+                      "wood",
+                      "treasure"
+                    ],
+                    "midnight_armour": [
+                      "armour",
+                      "sunstone"
+                    ],
+                    "bow": [
+                      "wood",
+                      "arrow",
+                      "arrow",
+                      "arrow"
+                    ]
+                  }
+                },
+                "health": 200.0,
+                "baseDamage": 3,
+                "baseDefense": 0.0,
+                "InvincibleDuration": 0,
+                "InvisibleDuration": 0,
+                "maxHealth": 200.0,
+                "id": 19,
+                "type": "player",
+                "position": {
+                  "x": 14,
+                  "y": 14,
+                  "layer": 1
+                },
+                "isInteractable": false
+              }
+            }
+          }
+        },
+        "armour": {
+          "uses": 3,
+          "itemId": 136,
+          "type": "armour"
+        },
+        "id": 135,
+        "type": "mercenary",
+        "position": {
+          "x": 2,
+          "y": 8,
+          "layer": 1
+        },
+        "isInteractable": true
+      }
+    }
+  ],
+  "buildables": [],
+  "tickCounter": 94,
+  "animations": [
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 0.44667999999999997",
+        "healthbar tint 0xff0000"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 0.44667999999999997",
+        "healthbar tint 0xff0000"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 0.44667999999999997",
+        "healthbar tint 0xff0000"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 0.44667999999999997",
+        "healthbar tint 0xff0000"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 0.44667999999999997",
+        "healthbar tint 0xff0000"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    },
+    {
+      "when": "PostTick",
+      "entityId": "19",
+      "queue": [
+        "healthbar set 1",
+        "healthbar tint 0x00ff00"
+      ],
+      "loop": false,
+      "duration": -1.0
+    }
+  ],
+  "gameMode": "Standard",
+  "spiderLimit": 4,
+  "goal": {
+    "className": "dungeonmania.AndGoal",
+    "data": {
+      "subgoals": [
+        {
+          "className": "dungeonmania.EnemiesGoal",
+          "data": {}
+        },
+        {
+          "className": "dungeonmania.TreasureGoal",
+          "data": {}
+        }
+      ]
+    }
+  },
+  "mercenarySpawnChance": 0.005,
+  "spiderTicks": 10
+}

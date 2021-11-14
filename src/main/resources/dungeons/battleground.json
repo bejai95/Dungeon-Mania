@@ -104,9 +104,24 @@
         "type": "player"
       },
       {
-        "x": 5,
+        "x": 3,
         "y": 1,
-        "type": "sword"
+        "type": "treasure"
+      },
+      {
+        "x": 4,
+        "y": 1,
+        "type": "mercenary"
+      },
+      {
+        "x": 6,
+        "y": 1,
+        "type": "health_potion"
+      },
+      {
+        "x": 8,
+        "y": 1,
+        "type": "mercenary"
       },
       {
         "x": 16,
@@ -122,6 +137,11 @@
         "x": 0,
         "y": 2,
         "type": "wall"
+      },
+      {
+        "x": 15,
+        "y": 2,
+        "type": "sword"
       },
       {
         "x": 17,
