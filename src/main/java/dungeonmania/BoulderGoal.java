@@ -48,7 +48,9 @@ public class BoulderGoal implements Goal{
         }
         return false;
     }
-    
+    /**
+     * @return the goals left to do
+     */
     @Override
     public String getGoalsLeft(List<Entity> entities) {
         List<Entity> boulders = getBoulders(entities);

@@ -18,6 +18,9 @@ public class Bow extends Item implements Weapon {
     public int getAmountOfAttacks() {
         return 2;
     }
+    /**
+     * @return damage of the bow, which is 0.
+     */
     public int getDamage() {
         return 0;
     }

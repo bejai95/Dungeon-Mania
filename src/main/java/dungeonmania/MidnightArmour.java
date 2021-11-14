@@ -10,6 +10,9 @@ public class MidnightArmour extends Item implements Weapon, DefenseItem {
         super(itemId, 4, "midnight_armour");
         this.setUses(this.getUses() * 2);
     }
+    /**
+     * gets the attack damage and amount of attacks
+     */
     public List<Integer> getWeaponInfo() {
         //create an array list which will just return 0,0 if not being used
         List<Integer> weaponInfo = new ArrayList<>(Arrays.asList(0,0));
@@ -27,6 +30,9 @@ public class MidnightArmour extends Item implements Weapon, DefenseItem {
     public int getDamage() {
         return 10;
     }
+    /**
+     * gets armour multipler if still durable
+     */
     public double getMultipler() {
         //has uses
         if (canUse()) {
