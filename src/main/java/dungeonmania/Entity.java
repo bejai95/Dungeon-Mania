@@ -15,6 +15,7 @@ public abstract class Entity implements interaction {
         this.id = id;
         this.type = type;
         this.position = position;
+        isInteractable = false;
     }
 
     /**

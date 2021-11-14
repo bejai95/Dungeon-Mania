@@ -12,7 +12,6 @@ public class PlacedBomb extends StaticEntity {
     //-----Constructors-----
     public PlacedBomb(int id, Position position) {
         super(id, "bomb", position);
-        this.setIsInteractable(false);
     }
 
     

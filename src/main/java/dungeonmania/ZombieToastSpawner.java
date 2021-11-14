@@ -5,13 +5,13 @@ import dungeonmania.util.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZombieToastSpawner extends StaticEntity implements interaction {
+public class ZombieToastSpawner extends StaticEntity {
     //-----Data-----
 
     //-----Constructors-----
     public ZombieToastSpawner(int id, Position position) {
         super(id, "zombie_toast_spawner", position);
-        this.setIsInteractable(false);
+        this.setIsInteractable(true);
     }
 
     //-----Methods-----
@@ -27,7 +27,7 @@ public class ZombieToastSpawner extends StaticEntity implements interaction {
             throw new InvalidActionException("Player does not have a sword");
         }
 
-        // TODO destroy self somehow
+        destroy();        
 
     }
 
