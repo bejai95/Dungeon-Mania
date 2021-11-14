@@ -37,7 +37,7 @@ public class milestone2SystemTests {
         assertThrows(IllegalArgumentException.class, () -> controller1.newGame("InvalidDungeonName", "Standard"));
 
         // Properly use newGame
-        controller1.newGame("advanced-2", "Standard");
+        DungeonResponse res = controller1.newGame("advanced-2", "Standard");
 
         // Test battling a mercenary, player health should decrease
         Game currentGame = controller1.getCurrentlyAccessingGame();
@@ -46,22 +46,22 @@ public class milestone2SystemTests {
             controller1.tick(null, Direction.DOWN);
         }
         for(int i = 0; i < 3; i++) { 
-            controller1.tick(null, Direction.UP);
+            res = controller1.tick(null, Direction.UP);
         }
         assertTrue(currentPlayer.getHealth() < currentPlayer.getMaxHealth());
 
         // Now if we pick up and use a health potion, the player should regenerate to full health, and the player's inventory should go from being empty, to containing 1 item, to being empty again
-        assertTrue(currentPlayer.getInventory().getItems().size() == 0);
-        DungeonResponse res = controller1.tick(null, Direction.RIGHT);
-        assertTrue(currentPlayer.getInventory().getItems().size() == 1);
+        assertTrue(getInventorySizeExcludingArmour(res) == 0);
+        res = controller1.tick(null, Direction.RIGHT);
+        assertTrue(getInventorySizeExcludingArmour(res) == 1);
         String healthPotionId = null;
         for (ItemResponse curr: res.getInventory()) {
             if (curr.getType().equals("health_potion")) {
                 healthPotionId = curr.getId();
             }
         }
-        controller1.tick(healthPotionId, Direction.LEFT);
-        assertTrue(currentPlayer.getInventory().getItems().size() == 0);
+        res = controller1.tick(healthPotionId, Direction.LEFT);
+        assertTrue(getInventorySizeExcludingArmour(res) == 0);
         assertTrue(currentPlayer.getHealth() == currentPlayer.getMaxHealth());
 
         // Test walking into a wall, character should remain in same position (tick should still pass by)
@@ -117,17 +117,17 @@ public class milestone2SystemTests {
             controller1.tick(null, Direction.DOWN);
         }
         for(int i = 0; i < 3; i++) {
-            controller1.tick(null, Direction.RIGHT);
+            res = controller1.tick(null, Direction.RIGHT);
         }
 
         // Test trying to walk through that same locked door now that we have the key (should now be able to walk through it)
-        assertTrue(currentPlayer.getInventory().getItems().size() == 1); // Should just be the key
+        assertTrue(getInventorySizeExcludingArmour(res) == 1); // Should just be the key
         Position originalPosition3 = currentGame.getPlayer().getPosition(); 
-        controller1.tick(null, Direction.DOWN);
+        res = controller1.tick(null, Direction.DOWN);
         Position newPosition3 = currentGame.getPlayer().getPosition();
         assertTrue(originalPosition3.getX() != newPosition3.getX() || originalPosition3.getY() != newPosition3.getY());
-        controller1.tick(null, Direction.UP);
-        assertTrue(currentPlayer.getInventory().getItems().size() == 0); // Key should have been used now
+        res = controller1.tick(null, Direction.UP);
+        assertTrue(getInventorySizeExcludingArmour(res) == 0); // Key should have been used now
 
         // Try to use an item in tick that is on the map but is not currently in the player's inventory (should throw exception)
         res = controller1.tick(null, Direction.UP); // Should do nothing as there is a wall there
@@ -184,10 +184,10 @@ public class milestone2SystemTests {
         currentGame = controller1.getCurrentlyAccessingGame();
 
         // Test building a bow and a shield, also test our assumption that the treasure gets used up instead of the key when building shields and both are available
-        assertTrue(res.getInventory().size() == 8);
+        assertTrue(getInventorySizeExcludingArmour(res) == 8);
         res = controller1.build("bow");
         res = controller1.build("shield");
-        assertTrue(res.getInventory().size() == 3);
+        assertTrue(getInventorySizeExcludingArmour(res) == 3);
         boolean containsBow = false;
         boolean containsShield = false; 
         boolean containsWood = false;
@@ -232,8 +232,8 @@ public class milestone2SystemTests {
         controller1.tick(null, Direction.UP);
         Position newPosition4 = currentGame.getPlayer().getPosition();
         assertTrue(originalPosition4.getX() != newPosition4.getX() || originalPosition4.getY() != newPosition4.getY());
-        controller1.tick(null, Direction.UP);
-        assertTrue(currentGame.getPlayer().getInventory().getItems().size() == 2); // Remaining key should have been used now
+        res = controller1.tick(null, Direction.UP);
+        assertTrue(getInventorySizeExcludingArmour(res) == 2); // Remaining key should have been used now
     }
 
     // Test that interact works correctly
@@ -323,5 +323,16 @@ public class milestone2SystemTests {
             }
         }
         assertTrue(containsSpawner == false);
+    }
+
+    // Helper function to get the size of the inventory, not including armour (as this is random and cannot be controlled)
+    private int getInventorySizeExcludingArmour(DungeonResponse res) {
+        int count = 0;
+        for (ItemResponse curr: res.getInventory()) {
+                if (!curr.getType().equals("armour")) {
+                    count++;
+                }
+        }
+        return count;
     }
 }

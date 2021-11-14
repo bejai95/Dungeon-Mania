@@ -19,7 +19,7 @@ public class Character extends Entity implements Battleable{
 
     public Character(int id, Position position) {
         super(id, "player", position);
-        this.health = 200;
+        this.health = 500;
         this.maxHealth = this.health;
         this.baseDamage = 3;
         this.baseDefense = 0;
