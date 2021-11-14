@@ -104,6 +104,9 @@ public class DungeonManiaController {
             for (Mercenary cur: allMercenaries) {
                 cur.chase(player);
             }
+            
+            player.setGameMode(gameModeLowercase);
+            
             return currentlyAccessingGame.generateDungeonResponse();
         }
         catch (IOException e) {
