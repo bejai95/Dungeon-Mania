@@ -216,7 +216,7 @@ public class Game {
     }
 
     /**
-     * 
+     * Converts a list of type Battleable to list of type Entity
      * @param bats
      */
     private List<Entity> batToEnts(List<Battleable> bats){
@@ -230,7 +230,6 @@ public class Game {
     }
     /**
      * Gets a list of all the static entities on the map
-     * @return
      */
     public List<StaticEntity> getStaticEntities(){
         List<StaticEntity> ret = new ArrayList<>();
@@ -243,7 +242,6 @@ public class Game {
     }
     /**
      * Gets a list of all the spawners on the map
-     * @return
      */
     public List<ZombieToastSpawner> getSpawners(){
         List<ZombieToastSpawner> ret = new ArrayList<>();
@@ -257,7 +255,6 @@ public class Game {
 
     /**
      * Gets a list of all floor switches on the map
-     * @return
      */
     public List<FloorSwitch> getSwitches(){
         List<FloorSwitch> ret = new ArrayList<>();
@@ -271,7 +268,6 @@ public class Game {
 
     /**
      * Gets a list of all placed bombs
-     * @return
      */
     public List<PlacedBomb> getBombs(){
         List<PlacedBomb> ret = new ArrayList<>();
@@ -283,6 +279,10 @@ public class Game {
         return ret;
     }
 
+    /**
+     * Returns an entity given the id of that entity
+     * @param id
+     */
     public Entity getEntityById(String id){
         Integer intId = Integer.parseInt(id);
         for(Entity entity : entities){
@@ -292,9 +292,9 @@ public class Game {
         }
         return null;
     }
+
     /**
      * Gets a list of all the walls in the game
-     * @return
      */
     private List<Wall> getWalls(){
         List<Wall> ret = new ArrayList<>();
