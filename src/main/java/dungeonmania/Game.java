@@ -37,12 +37,14 @@ public class Game {
     private String gameMode;
     private static int uniqueIdNum; // Initialized to zero
     private final int spiderLimit = 4;
+    private final double oneRingChance = 0.05;
     
     @SerializedName(value="goal", alternate="goal-condition")
     private Goal goal;
     
     private double mercenarySpawnChance = 0.005;
     private int spiderTicks = 10;
+    private int hydraTicks = 50;
     
     public Game() {
 
@@ -453,6 +455,13 @@ public class Game {
             entities.add(spider);
         }
 
+        if((gameMode.equals("Hard") || gameMode.equals("hard")) && tickCounter % hydraTicks == 0){
+            pos = getSpawnPositionRandom();
+            MovingEntity hydra = (Hydra)eFactory.createEntity(Game.generateUniqueId(), "hydra", pos.getX(), pos.getY(), 0, null);
+            entities.add(hydra);
+
+        } 
+
         return;
     }
     /**
@@ -592,6 +601,12 @@ public class Game {
         if(getPlayer() != null){
             double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
             setHealthBar(healthInRequiredRegion);
+
+            EntityFactory eFactory = new EntityFactory();
+            if(ThreadLocalRandom.current().nextInt(0, 1) < oneRingChance){
+                TheOneRing oneRing = new TheOneRing(Game.generateUniqueId());
+                player.getInventory().addItemToInventory(oneRing);
+            }
         }
 
         //increment tick counter
@@ -736,12 +751,14 @@ public class Game {
         if(!(Position.isAdjacent(pos1, pos2)) || getHighestLayer(pos1) > 1 || getHighestLayer(pos2) > 1){
             return Double.POSITIVE_INFINITY;
         }
-        /*
-        if(pos1 instanceof SwampTile){
-            SwampTile pos1Swamp = (SwampTile) pos1;
-            return pos1Swamp.getMovementFactor();
+        SwampTile swamp = null;
+        for(Entity entity : entities){
+            if(entity instanceof SwampTile){
+                swamp = (SwampTile) entity;
+                return swamp.getMovementFactor();
+            }
         }
-        */
+        
         return 1.0;
         
     }
