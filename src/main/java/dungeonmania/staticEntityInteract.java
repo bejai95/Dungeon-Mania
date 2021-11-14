@@ -45,7 +45,7 @@ public class staticEntityInteract {
             Position teleportLocation = interactionPortal.getTeleportLocation(currentGame.getStaticEntities());
             currentGame.getPlayer().setPosition(teleportLocation);
         } else if (interactionEntity instanceof Exit) {
-            //put code in here that will end the game
+            currentGame.setOnExit(true);
         } else if (interactionEntity instanceof Door) {
             Door interactionDoor = (Door)interactionEntity;
             doorInteraction(interactionDoor);

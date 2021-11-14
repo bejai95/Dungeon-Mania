@@ -39,6 +39,7 @@ public class Game {
     private static int uniqueIdNum; // Initialized to zero
     private final int spiderLimit = 4;
     private final double oneRingChance = 0.05;
+    private Boolean onExit = false;
     
     @SerializedName(value="goal", alternate="goal-condition")
     private Goal goal;
@@ -140,6 +141,9 @@ public class Game {
      * Gets all the goals left to complete
      */
    public String getGoalsLeft() {
+       if (onExit) {
+           return "";
+       }
         if (goal == null)  {
             return null;
         } else {
@@ -782,5 +786,15 @@ public class Game {
         //printGrid(grid);
         return grid;
     }
+
+    public Boolean getOnExit() {
+        return onExit;
+    }
+
+    public void setOnExit(Boolean onExit) {
+        this.onExit = onExit;
+    }
+
+    
 
 }
