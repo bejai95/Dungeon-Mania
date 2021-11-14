@@ -286,4 +286,17 @@ public class InventoryTest {
         assertTrue(character.getInventory().getItems().size() == 1);
 
     }
+    @Test
+    public void testHard() {
+        Character character = new Character(4, new Position(3, 3));
+        character.setGameMode("hard");
+        //make sure health is lower
+        assertTrue(character.getHealth() == 200);
+        InvincibilityPotion ip = new InvincibilityPotion(3);
+        character.getInventory().addItemToInventory(ip);
+        ip.consume(character);
+        //make sure that not invincibility
+        assertTrue(!(character.isInvincible()));
+
+    }
 }
