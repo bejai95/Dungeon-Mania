@@ -21,7 +21,6 @@ public class UnpickedUpItem extends StaticEntity {
         super(id, type, position);
         this.itemClass = itemClass;
         this.keyNum = keyNum;
-        this.setIsInteractable(true);
     }
  
     //Constructor for any item that's not a key
@@ -29,7 +28,6 @@ public class UnpickedUpItem extends StaticEntity {
         super(id, type, position);
         this.itemClass = itemClass;
         this.keyNum = -1;
-        this.setIsInteractable(true);
     }
 
     //-----Methods-----
