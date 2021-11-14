@@ -80,7 +80,7 @@ public class DijkstraTests {
                 pos = s.getPosition();
             }
         }
-        //assertEquals(pos, new Position(3, 4));
+        assertEquals(pos, new Position(3, 4));
 
 
     }
