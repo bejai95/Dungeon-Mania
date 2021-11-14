@@ -564,10 +564,10 @@ public class Game {
             System.out.println("Health After: " + player.getHealth());
             System.out.println("Number dead in Battle" + dead.size());
             //entities.removeAll(dead);
+            removeDeadEntities();
 
         }  
 
-        removeDeadEntities();
 
         // Adjust the health bar
         double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
