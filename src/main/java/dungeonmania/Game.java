@@ -156,13 +156,13 @@ public class Game {
         if(getPlayer() == null){
             return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), null, null, getGoalsLeft(), animations);
         }
-        System.out.println(dungeonId);
-        System.out.println(dungeonName);
-        System.out.println(dungeonId);
-        //breaks at the line below
-        System.out.println(entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()));
-        System.out.println(getInventory().getItemsAsResponse());
-        System.out.println(getInventory().generateBuildables(this.getEntities()));
+        // System.out.println(dungeonId);
+        // System.out.println(dungeonName);
+        // System.out.println(dungeonId);
+        // //breaks at the line below
+        // System.out.println(entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()));
+        // System.out.println(getInventory().getItemsAsResponse());
+        // System.out.println(getInventory().generateBuildables(this.getEntities()));
         return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(this.getEntities()), getGoalsLeft(), animations);
     } 
 
@@ -485,11 +485,11 @@ public class Game {
     private void removeDeadEntities(){
 
         // remove enemies killed in combat
-        System.out.println("Entities before: " + entities.size());
+        //System.out.println("Entities before: " + entities.size());
         List<Battleable> deadEnts = getBattlebles().stream().filter(x -> x.getHealth() <= 0.0).collect(Collectors.toList());
-        System.out.println("Number of dead entities: " + deadEnts.size());
+        //System.out.println("Number of dead entities: " + deadEnts.size());
         entities.removeAll(batToEnts(deadEnts));
-        System.out.println("Entities after: " + entities.size());
+        //System.out.println("Entities after: " + entities.size());
 
         // remove static entitites that were destroyed
         List<Entity> staticEnts = getStaticEntities().stream().filter(x -> x.isDestroyed() == true).collect(Collectors.toList());
@@ -508,7 +508,6 @@ public class Game {
    public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
-        Position destinationTile = player.getPosition().translateBy(movementDirection);
         Map<PositionSimple, Map<PositionSimple, Double>> grid = generateAdjacencyMatrix();
         //printSourceCol(grid, new Position(3, 5));
 
@@ -519,7 +518,6 @@ public class Game {
         //parse itemUsed by removing the underscore
         if(itemUsed != null){
             Item used = inventory.getItem(Integer.parseInt(itemUsed));
-            System.out.println(used);
             //if used != null then the item must exist in inventory
             if(used != null){
                 if (used instanceof Bomb) {
@@ -566,7 +564,7 @@ public class Game {
                 }
             }
             else {
-                System.out.println(mob.getType() + " could not pass through the wall");
+                //System.out.println(mob.getType() + " could not pass through the wall");
             }
             // TODO else collision response
         }
@@ -622,13 +620,13 @@ public class Game {
         
         Entity ent = getEntityById(entityId);
         if (ent == null) {
-            System.out.println("Id does not exist");
+            //System.out.println("Id does not exist");
             throw new IllegalArgumentException("Id does not exist");
         } else if (!ent.canInteract()) {
-            System.out.println("Cannot interact with this entity");
+            //System.out.println("Cannot interact with this entity");
             throw new IllegalArgumentException("Cannot interact with this entity");
         }
-        System.out.println("Interacting with " + ent.getType());
+        //System.out.println("Interacting with " + ent.getType());
         
         ent.interact(getPlayer());
         removeDeadEntities();

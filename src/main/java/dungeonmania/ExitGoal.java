@@ -14,7 +14,7 @@ public class ExitGoal implements Goal{
     
     @Override
     public String getGoalsLeft(List<Entity> entities) {
-        System.out.println("starting");
+       // System.out.println("starting");
         Character player = getPlayer(entities);
         for(Entity entity : entities){
             if(entity instanceof Exit){

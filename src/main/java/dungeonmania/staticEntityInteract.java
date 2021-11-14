@@ -20,7 +20,7 @@ public class staticEntityInteract {
     //-----Methods-----
     /**
      * Checks to see if the tile that the character moves onto has a static entity
-     * to interact with. Returns a boolean to see if this should halt the movement.
+     * to interact with. 
      */
     public void findInteractableStaticEntity(Direction movementDirection){
         Position destinationTile = currentGame.getPlayer().getPosition().translateBy(movementDirection);
@@ -36,7 +36,7 @@ public class staticEntityInteract {
 
     /**
      * Checks to see if the tile that the character moves onto has a static entity
-     * to interact with. Returns a boolean to see if this should halt the movement.
+     * to interact with. 
      */
     private void interactStaticEntity(Entity interactionEntity, Direction movementDirection){
         if (interactionEntity instanceof Portal)  {
@@ -193,7 +193,7 @@ public class staticEntityInteract {
         Position spawnerPosition = activeSpawner.getPosition();
 
         //Checks to see if spawn conditions are met
-        if ((currentGame.getGameMode() == "hard" && currentGame.getTickCounter() % 15 == 0) || (currentGame.getGameMode() != "hard" && currentGame.getTickCounter() % 20 == 0)) {
+        if ((currentGame.getGameMode() == "hard" && currentGame.getTickCounter() % 14 == 0) || (currentGame.getGameMode() != "hard" && currentGame.getTickCounter() % 19 == 0)) {
             //List of adjacent positions around spawner
             List<Position> adjacentPositions = spawnerPosition.getAdjacentPositions();
 

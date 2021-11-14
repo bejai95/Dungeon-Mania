@@ -18,7 +18,6 @@ public class Door extends StaticEntity {
     //-----Methods-----
     //This will open a door and will return true if the door is sucessfully opened 
     public boolean openDoor (Item inputItem){
-        System.out.println("yes");
         if (inputItem instanceof SunStone) {
             openDoorAction();
             return true;
