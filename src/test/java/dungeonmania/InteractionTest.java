@@ -157,4 +157,43 @@ public class InteractionTest {
         assertDoesNotThrow(() -> c1.interact(assId));
     }
 
+    @Test
+    public void testBribeMercWithSunStone() {
+        DungeonManiaController c1 = new DungeonManiaController();
+        c1.newGame("bribe-test3", "Standard");
+        MovingEntity merc = c1.getCurrentlyAccessingGame().getMovingEntities().get(0);
+        String mercId = Integer.toString(merc.getId());
+
+        // Player spawns out of range, with no coins
+        assertThrows(InvalidActionException.class, () -> c1.interact(mercId));
+        // Collect sun stone
+        c1.tick(null, Direction.LEFT);
+        // Player should still be out of range
+        assertThrows(InvalidActionException.class, () -> c1.interact(mercId));
+        // Player now in range, should be a
+        c1.tick(null, Direction.RIGHT);
+        assertDoesNotThrow(() -> c1.interact(mercId));
+    }
+
+    @Test
+    public void testBribeAssassinWithSunStone() {
+        DungeonManiaController c1 = new DungeonManiaController();
+        c1.newGame("bribe-test4", "Standard");
+
+        MovingEntity ass = c1.getCurrentlyAccessingGame().getMovingEntities().get(0);
+        String assId = Integer.toString(ass.getId());
+
+        // Player spawns out of range, with no coins
+        assertThrows(InvalidActionException.class, () -> c1.interact(assId));
+        // Collect Sun Stone
+        c1.tick(null, Direction.LEFT);
+        // Collect one ring
+        c1.tick(null, Direction.LEFT);
+        // Player should still be out of range
+        assertThrows(InvalidActionException.class, () -> c1.interact(assId));
+        // Player now in range
+        c1.tick(null, Direction.RIGHT);
+        assertDoesNotThrow(() -> c1.interact(assId));
+    }
+
 }

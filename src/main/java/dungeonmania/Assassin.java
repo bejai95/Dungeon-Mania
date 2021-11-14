@@ -42,16 +42,18 @@ public class Assassin extends Mercenary {
 
         Item t = ch.getInventory().getItemFromType("treasure");
         Item r = ch.getInventory().getItemFromType("one_ring");
-
-        if(t == null) {
+        Item ss = ch.getInventory().getItemFromType("sun_stone");
+        if (ss != null) {
+            currentGold++;
+        }
+        else if (t != null) {
+            // Remove the treasure
+            ch.getInventory().removeItem(t);
+            currentGold++;
+        } else {
             throw new InvalidActionException("Player does not have any treasure to bribe with");
         }
 
-        // Remove the treasure
-        if (t != null) {
-            ch.getInventory().removeItem(t);
-            currentGold++;
-        }
         // Remove one ring
         if(r != null && !hasRing) {
             ch.getInventory().removeItem(r);
