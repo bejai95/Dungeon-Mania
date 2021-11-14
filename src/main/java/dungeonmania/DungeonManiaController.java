@@ -45,7 +45,6 @@ public class DungeonManiaController {
     /**
      * Generates a unique dungeon id
      * @param cell
-     * @return
      */
     private static int generateUniqueDungeonId() {
         int ret = dungeonIdNum;
@@ -65,6 +64,13 @@ public class DungeonManiaController {
             return new ArrayList<>();
         }
     }
+    
+    /**
+     * newGame
+     * @param dungeonName
+     * @param gameMode
+     * @throws IllegalArgumentException
+     */
     public DungeonResponse newGame(String dungeonName, String gameMode) throws IllegalArgumentException {
         String gameModeLowercase = gameMode.toLowerCase();
 
@@ -114,6 +120,10 @@ public class DungeonManiaController {
         }
     }
     
+    /**
+     * saveGame
+     * @param name
+     */
     public DungeonResponse saveGame(String name) {
         try {
             Gson gson = new GsonBuilder()
@@ -144,6 +154,11 @@ public class DungeonManiaController {
         }
     }
 
+    /**
+     * loadGame
+     * @param name
+     * @throws IllegalArgumentException
+     */
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
         try {
             
@@ -174,6 +189,9 @@ public class DungeonManiaController {
         }
     }
     
+    /**
+     * allGames
+     */
     public List<String> allGames() {
         try {
             String path = "savedGames/";
@@ -184,15 +202,34 @@ public class DungeonManiaController {
         }
     }
 
+    /**
+     * tick
+     * @param itemUsed
+     * @param movementDirection
+     * @throws IllegalArgumentException
+     * @throws InvalidActionException
+     */
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         return currentlyAccessingGame.tick(itemUsed, movementDirection);
     }
 
+    /**
+     * interact
+     * @param entityId
+     * @throws IllegalArgumentException
+     * @throws InvalidActionException
+     */
     public DungeonResponse interact(String entityId) throws IllegalArgumentException, InvalidActionException {
         return currentlyAccessingGame.interact(entityId);
 
     }
 
+    /**
+     * build
+     * @param buildable
+     * @throws IllegalArgumentException
+     * @throws InvalidActionException
+     */
     public DungeonResponse build(String buildable) throws IllegalArgumentException, InvalidActionException {
         if (!(buildable.equals("bow") || buildable.equals("shield") || buildable.equals("midnight_armour") || buildable.equals("sceptre"))) {
             throw new IllegalArgumentException("buildable needs to be either bow, shield, midnight armour or sceptre");
@@ -213,7 +250,9 @@ public class DungeonManiaController {
         return currentlyAccessingGame;
     }
 
-    // Delete all currently existing saved games (useful for testing)
+    /**
+     * Delete all currently existing saved games (useful for testing)
+     */
     public void deleteExistingGames() {
         String path = "savedGames/";
         File savedGamesDir = new File(path);
@@ -223,5 +262,4 @@ public class DungeonManiaController {
             currentsavedGame.delete();
         }
     }
-
 }
