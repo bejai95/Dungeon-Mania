@@ -39,7 +39,7 @@ public class DungeonManiaController {
         return "en_US";
     }
     public List<String> getGameModes() {
-        return Arrays.asList("Standard", "Peaceful", "Hard");
+        return Arrays.asList("standard", "peaceful", "hard");
     }
 
     /**
@@ -66,9 +66,10 @@ public class DungeonManiaController {
         }
     }
     public DungeonResponse newGame(String dungeonName, String gameMode) throws IllegalArgumentException {
-        
+        String gameModeLowercase = gameMode.toLowerCase();
+
         // Deal with throwing exceptions
-        if (!this.getGameModes().contains(gameMode)) {
+        if (!getGameModes().contains(gameModeLowercase)) {
             throw new IllegalArgumentException("Invalid gameMode argument");
         } else if (!DungeonManiaController.dungeons().contains(dungeonName)) {
             throw new IllegalArgumentException("Invalid dungeonName argument");
@@ -90,7 +91,7 @@ public class DungeonManiaController {
             currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
             currentlyAccessingGame.setDungeonId(newDungeonId);
             currentlyAccessingGame.setDungeonName(dungeonName);
-            currentlyAccessingGame.setGameMode(gameMode);
+            currentlyAccessingGame.setGameMode(gameModeLowercase);
             currentlyAccessingGame.initialiseBuildables();
             currentlyAccessingGame.setHealthBar(1);
 
