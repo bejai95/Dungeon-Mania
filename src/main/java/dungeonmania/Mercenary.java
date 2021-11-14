@@ -32,7 +32,7 @@ public class Mercenary extends MovingEntity {
     /**
      * Moves as normal but will not move onto ally character
      */
-    public void move(Map<Position, Map<Position, Double>> grid) {
+    public void move(Map<PositionSimple, Map<PositionSimple, Double>> grid) {
         Position newPos = this.getPosition();
         for (int i = 0; i < speed; i++) {
             ChaseMovement chaseMove = (ChaseMovement)moveBehaviour;

@@ -490,12 +490,17 @@ public class Game {
         return;
     }
 
-
+    private void printSourceCol(Map<Position, Map<Position, Double>> grid, Position source){
+        for(Position pos : grid.get(source).keySet()){
+            System.out.println(getPosString(pos) + ":" + grid.get(source).get(pos));
+        }
+    }
    public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         Character player = getPlayer();
         Inventory inventory = player.getInventory();
         Position destinationTile = player.getPosition().translateBy(movementDirection);
-        Map<Position, Map<Position, Double>> grid = generateAdjacencyMatrix();
+        Map<PositionSimple, Map<PositionSimple, Double>> grid = generateAdjacencyMatrix();
+        //printSourceCol(grid, new Position(3, 5));
 
         //Create a new instance of the static entity interaction helper class
         staticEntityInteract staticInteraction = new staticEntityInteract(this);
@@ -716,6 +721,8 @@ public class Game {
         for(int x = minX; x <= maxX; x++){
             for(int y = minY; y <= maxY; y++){
                 Position pos = new Position(x, y);
+                //List<Position> uniquePos = entities.stream().map(a -> a.getPosition()).filter(a -> a.equals(posTemp)).collect(Collectors.toList());
+                //ret.addAll(uniquePos);
                 ret.add(pos);
             }
         }
@@ -747,15 +754,15 @@ public class Game {
             }
         }
     }
-    public Map<Position, Map<Position, Double>> generateAdjacencyMatrix(){
-        Map<Position, Map<Position, Double>> grid = new HashMap<>();
+    public Map<PositionSimple, Map<PositionSimple, Double>> generateAdjacencyMatrix(){
+        Map<PositionSimple, Map<PositionSimple, Double>> grid = new HashMap<>();
         List<Position> positions = generatePositionList();
         for(Position pos1 : positions){
-            Map<Position, Double> col = new HashMap<>();
+            Map<PositionSimple, Double> col = new HashMap<>();
             for(Position pos2 : positions){
-                col.put(pos2, cost(pos1, pos2));
+                col.put(new PositionSimple(pos2), cost(pos1, pos2));
             }
-            grid.put(pos1, col);
+            grid.put(new PositionSimple(pos1), col);
         }
         //System.out.println(grid.size());
         //printGrid(grid);

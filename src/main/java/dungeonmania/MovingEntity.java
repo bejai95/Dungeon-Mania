@@ -31,7 +31,7 @@ public class MovingEntity extends Entity implements Battleable{
      * @return The position of the next move in this
      * entity's movement pattern
      */
-    public Position getNextMove(Map<Position, Map<Position, Double>> grid) {
+    public Position getNextMove(Map<PositionSimple, Map<PositionSimple, Double>> grid) {
         return moveBehaviour.move(this.getPosition(), grid);
     }
 
@@ -39,7 +39,7 @@ public class MovingEntity extends Entity implements Battleable{
      * Set this entity's position to where its movement would take it
      * after 'speed' times
      */
-    public void move(Map<Position, Map<Position, Double>> grid) {
+    public void move(Map<PositionSimple, Map<PositionSimple, Double>> grid) {
         Position newPos = this.getPosition();
         for (int i = 0; i < speed; i++) {
             newPos = moveBehaviour.move(newPos, grid);

@@ -7,6 +7,6 @@ import dungeonmania.util.Position;
 public interface Movement {
     
 
-    public Position move(Position currentPos, Map<Position, Map<Position, Double>> grid);
+    public Position move(Position currentPos, Map<PositionSimple, Map<PositionSimple, Double>> grid);
 
 }

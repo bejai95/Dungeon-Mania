@@ -21,7 +21,7 @@ public class ChaseMovement implements Movement {
      * Move object by 1 in the direction that would minimise
      * distance to target
      */
-    /*public Position move(Position currentPos, Map<Position, Map<Position, Double>> grid) {
+    /*public Position move(Position currentPos, Map<PositionSimple, Map<PositionSimple, Double>> grid) {
 
         if (target == null) {
             return currentPos;
@@ -55,33 +55,34 @@ public class ChaseMovement implements Movement {
         this.target = target;
     }
 
-    private String getPosString(Position pos){
+    private String getPosString(PositionSimple pos){
         return ("(" + pos.getX() + ", " + pos.getY() + ")");
     }
-    private void printSourceCol(Map<Position, Map<Position, Double>> grid, Position source){
-        for(Position pos : grid.get(source).keySet()){
+    private void printSourceCol(Map<PositionSimple, Map<PositionSimple, Double>> grid, PositionSimple source){
+        for(PositionSimple pos : grid.get(source).keySet()){
             System.out.println(getPosString(pos) + ":" + grid.get(source).get(pos));
         }
     }
 
-    private List<Position> getAdjacentPositionsInGrid(Position pos, Map<Position, Map<Position, Double>> grid){
+    private List<PositionSimple> getAdjacentPositionsInGrid(PositionSimple pos, Map<PositionSimple, Map<PositionSimple, Double>> grid){
         return pos.getCardinallyAdjacentPositions().stream().filter(x -> grid.keySet().contains(x)).collect(Collectors.toList());
     }
-    private Map<Position, Position> dijkstras(Map<Position, Map<Position, Double>> grid, Position source){
+    private Map<PositionSimple, PositionSimple> dijkstras(Map<PositionSimple, Map<PositionSimple, Double>> grid, Position source){
         //printSourceCol(grid, source);
-        Map<Position, Double> dist = new HashMap<Position, Double>();
-        Map<Position, Position> prev = new HashMap<Position, Position>();
+        PositionSimple sourceSimp = new PositionSimple(source);
+        Map<PositionSimple, Double> dist = new HashMap<PositionSimple, Double>();
+        Map<PositionSimple, PositionSimple> prev = new HashMap<PositionSimple, PositionSimple>();
 
-        for(Position p : grid.keySet()){
+        for(PositionSimple p : grid.keySet()){
             dist.put(p, Double.POSITIVE_INFINITY);
             prev.put(p, null);
         }
-        dist.put(source, 0.0);
-        PriorityQueue<Position> queue = new PriorityQueue<Position>(grid.keySet().size(), (a, b) -> Double.compare(dist.get(a), dist.get(b)));
-        queue.add(source);
+        dist.put(sourceSimp, 0.0);
+        PriorityQueue<PositionSimple> queue = new PriorityQueue<PositionSimple>(grid.keySet().size(), (a, b) -> Double.compare(dist.get(a), dist.get(b)));
+        queue.add(sourceSimp);
         while(!queue.isEmpty()){
-            Position u = queue.remove();
-            for(Position v : getAdjacentPositionsInGrid(u, grid)){
+            PositionSimple u = queue.remove();
+            for(PositionSimple v : getAdjacentPositionsInGrid(u, grid)){
                 /*printSourceCol(grid, u);
                 System.out.println("v now");
                 printSourceCol(grid, v);*/
@@ -102,15 +103,16 @@ public class ChaseMovement implements Movement {
         - The recursion below looks fine, but it could be what's causing issues, take another look
     */
 
-    private Position walkBackThroughPath(Position placeInPath, Map<Position, Position> pre, Position source, Position init){
-        Position last = pre.get(placeInPath);
+    private Position walkBackThroughPath(PositionSimple placeInPath, Map<PositionSimple, PositionSimple> pre, Position source, Position init){
+        PositionSimple last = pre.get(placeInPath);
+        PositionSimple sourceSimp = new PositionSimple(source);
         if(last == null){
             System.out.println("Nowhere to move");
             return init;
         }
-        if(Objects.equals(last, source)){
+        if(Objects.equals(last, sourceSimp)){
             System.out.println(placeInPath);
-            return placeInPath;
+            return new Position(placeInPath.getX(), placeInPath.getY());
         }
         return walkBackThroughPath(last, pre, source, init);
     }
@@ -124,10 +126,10 @@ public class ChaseMovement implements Movement {
     }*/
     
     @Override
-    public Position move(Position currentPos, Map<Position, Map<Position, Double>> grid) {
-        Map<Position, Position> ret = dijkstras(grid, currentPos);
+    public Position move(Position currentPos, Map<PositionSimple, Map<PositionSimple, Double>> grid) {
+        Map<PositionSimple, PositionSimple> ret = dijkstras(grid, currentPos);
         //printMap(ret);
-        return walkBackThroughPath(target.getPosition(), ret, currentPos, currentPos);
+        return walkBackThroughPath(new PositionSimple(target.getPosition()), ret, currentPos, currentPos);
     }
 
 }

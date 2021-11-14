@@ -23,7 +23,7 @@ public class SquareMovement implements Movement {
      * unless it would move to a non-path tile, in which case
      * turn right
      */
-    public Position move(Position currentPos, Map<Position, Map<Position, Double>> grid) {
+    public Position move(Position currentPos, Map<PositionSimple, Map<PositionSimple, Double>> grid) {
 
         // If this is the first move() call, define the path around currentPos
         if (path.isEmpty()) {
