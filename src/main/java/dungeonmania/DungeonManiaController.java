@@ -125,7 +125,7 @@ public class DungeonManiaController {
                 .create();
             
             String JSONString = gson.toJson(this.currentlyAccessingGame);
-            String path = "src\\main\\resources\\savedGames\\";
+            String path = "src/main/resources/savedGames/";
 
             // Create the savedGames directory if it does not already exist
             Files.createDirectories(Paths.get(path));
@@ -147,7 +147,7 @@ public class DungeonManiaController {
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
         try {
             
-            String path = "src\\main\\resources\\savedGames\\" + name + ".json";
+            String path = "src/main/resources/savedGames/" + name + ".json";
 
             // Make sure that the file exists
             if (!FileLoader.listFileNamesInDirectoryOutsideOfResources(path).contains(name)) {
@@ -176,7 +176,7 @@ public class DungeonManiaController {
     
     public List<String> allGames() {
         try {
-            String path = "src\\main\\resources\\savedGames\\";
+            String path = "src/main/resources/savedGames/";
             return FileLoader.listFileNamesInDirectoryOutsideOfResources(path);
         } catch (IOException e) {
             e.printStackTrace();
@@ -215,7 +215,7 @@ public class DungeonManiaController {
 
     // Delete all currently existing saved games (useful for testing)
     public void deleteExistingGames() {
-        String path = "src\\main\\resources\\savedGames\\";
+        String path = "src/main/resources/savedGames/";
         File savedGamesDir = new File(path);
         String[] saves = savedGamesDir.list();
         for (String s: saves) {

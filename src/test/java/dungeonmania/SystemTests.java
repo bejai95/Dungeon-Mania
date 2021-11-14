@@ -51,9 +51,9 @@ import dungeonmania.util.Position;
             assertTrue(currentPlayer.getHealth() < currentPlayer.getMaxHealth());
 
             // Now if we pick up and use a health potion, the player should regenerate to full health, and the player's inventory should go from being empty, to containing 1 item, to being empty again
-            assertTrue(getInventorySizeExcludingArmour(res) == 0);
+            assertTrue(getInventorySizeExcludingRandom(res) == 0);
             res = controller1.tick(null, Direction.RIGHT);
-            assertTrue(getInventorySizeExcludingArmour(res) == 1);
+            assertTrue(getInventorySizeExcludingRandom(res) == 1);
             String healthPotionId = null;
             for (ItemResponse curr: res.getInventory()) {
                 if (curr.getType().equals("health_potion")) {
@@ -61,7 +61,7 @@ import dungeonmania.util.Position;
                 }
             }
             res = controller1.tick(healthPotionId, Direction.LEFT);
-            assertTrue(getInventorySizeExcludingArmour(res) == 0);
+            assertTrue(getInventorySizeExcludingRandom(res) == 0);
             assertTrue(currentPlayer.getHealth() == currentPlayer.getMaxHealth());
 
             // Test walking into a wall, character should remain in same position (tick should still pass by)
@@ -121,13 +121,13 @@ import dungeonmania.util.Position;
             }
 
             // Test trying to walk through that same locked door now that we have the key (should now be able to walk through it)
-            assertTrue(getInventorySizeExcludingArmour(res) == 1); // Should just be the key
+            assertTrue(getInventorySizeExcludingRandom(res) == 1); // Should just be the key
             Position originalPosition3 = currentGame.getPlayer().getPosition(); 
             res = controller1.tick(null, Direction.DOWN);
             Position newPosition3 = currentGame.getPlayer().getPosition();
             assertTrue(originalPosition3.getX() != newPosition3.getX() || originalPosition3.getY() != newPosition3.getY());
             res = controller1.tick(null, Direction.UP);
-            assertTrue(getInventorySizeExcludingArmour(res) == 0); // Key should have been used now
+            assertTrue(getInventorySizeExcludingRandom(res) == 0); // Key should have been used now
 
             // Try to use an item in tick that is on the map but is not currently in the player's inventory (should throw exception)
             res = controller1.tick(null, Direction.UP); // Should do nothing as there is a wall there
@@ -184,10 +184,10 @@ import dungeonmania.util.Position;
             currentGame = controller1.getCurrentlyAccessingGame();
 
             // Test building a bow and a shield, also test our assumption that the treasure gets used up instead of the key when building shields and both are available
-            assertTrue(getInventorySizeExcludingArmour(res) == 8);
+            assertTrue(getInventorySizeExcludingRandom(res) == 8);
             res = controller1.build("bow");
             res = controller1.build("shield");
-            assertTrue(getInventorySizeExcludingArmour(res) == 3);
+            assertTrue(getInventorySizeExcludingRandom(res) == 3);
             boolean containsBow = false;
             boolean containsShield = false; 
             boolean containsWood = false;
@@ -233,7 +233,7 @@ import dungeonmania.util.Position;
             Position newPosition4 = currentGame.getPlayer().getPosition();
             assertTrue(originalPosition4.getX() != newPosition4.getX() || originalPosition4.getY() != newPosition4.getY());
             res = controller1.tick(null, Direction.UP);
-            assertTrue(getInventorySizeExcludingArmour(res) == 2); // Remaining key should have been used now
+            assertTrue(getInventorySizeExcludingRandom(res) == 2); // Remaining key should have been used now
         }
 
         // Test that interact works correctly
@@ -325,11 +325,12 @@ import dungeonmania.util.Position;
             assertTrue(containsSpawner == false);
         }
 
-        // Helper function to get the size of the inventory, not including armour (as this is random and cannot be controlled)
-        private int getInventorySizeExcludingArmour(DungeonResponse res) {
+        // Helper function to get the size of the inventory, not including armour, sword, one ring, anduril (as these are random and cannot be controlled)
+        private int getInventorySizeExcludingRandom(DungeonResponse res) {
             int count = 0;
             for (ItemResponse curr: res.getInventory()) {
-                    if (!curr.getType().equals("armour")) {
+                    if (!(curr.getType().equals("armour") || curr.getType().equals("sword") || curr.getType().equals("one_ring") 
+                            || curr.getType().equals("anduril"))) {
                         count++;
                     }
             }
