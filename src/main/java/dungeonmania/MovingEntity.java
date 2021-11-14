@@ -131,7 +131,7 @@ public class MovingEntity extends Entity implements Battleable{
     }
 
     public boolean isAlly(){
-        return isHostile;
+        return !isHostile;
     }
 
 }
