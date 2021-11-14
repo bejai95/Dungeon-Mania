@@ -43,6 +43,7 @@ public class Game {
     private int spiderTicks = 10;
     
     public Game() {
+
     }
 
     public Goal getGoal(){ return goal;}
@@ -150,6 +151,13 @@ public class Game {
         if(getPlayer() == null){
             return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), null, null, getGoalsLeft(), animations);
         }
+        System.out.println(dungeonId);
+        System.out.println(dungeonName);
+        System.out.println(dungeonId);
+        //breaks at the line below
+        System.out.println(entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()));
+        System.out.println(getInventory().getItemsAsResponse());
+        System.out.println(getInventory().generateBuildables(this.getEntities()));
         return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(this.getEntities()), getGoalsLeft(), animations);
     } 
 
@@ -515,11 +523,11 @@ public class Game {
         }
         //we know that itemUsed == null, thats ok
 
-        //remove dead items
-        inventory.removeDeadItems();
-
         //Interact with static entities, such as picking up items
         staticInteraction.findInteractableStaticEntity(movementDirection);
+
+        //remove dead items
+        inventory.removeDeadItems();
 
         //move in direction
         if (isCollision(player, player.getPosition().translateBy(movementDirection))) {

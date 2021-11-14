@@ -103,7 +103,6 @@ public class DungeonManiaController {
             for (Mercenary cur: allMercenaries) {
                 cur.chase(player);
             }
-
             return currentlyAccessingGame.generateDungeonResponse();
         }
         catch (IOException e) {
