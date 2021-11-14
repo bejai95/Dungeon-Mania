@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -585,17 +586,17 @@ public class Game {
         //battle -- needs list of mercenaries, needs movingEntity on same tile as player
 
         MovingEntity baddie = getEntityOnPlayer(player);
-        //System.out.println(gameMode);
-        //System.out.println(gameMode != "Peaceful");
-        if(!gameMode.equals("Peaceful") && !gameMode.equals("peaceful") && baddie != null && !baddie.isAlly()){
-            //System.out.println("Health Before: " + player.getHealth());
+        if(!gameMode.equals("peaceful") && baddie != null && !baddie.isAlly()){
             BattleManager bat = new BattleManager(player, baddie, getMercenaries());
-            List<Battleable> dead = bat.battle();
-            //System.out.println("Health After: " + player.getHealth());
-            //System.out.println("Number dead in Battle" + dead.size());
-            //entities.removeAll(dead);
+            bat.battle();
             removeDeadEntities();
 
+            // Occasionally give the player a one ring if they win the battle
+            Random random = new Random();
+            if(random.nextDouble() < oneRingChance){
+                TheOneRing oneRing = new TheOneRing(Game.generateUniqueId());
+                player.getInventory().addItemToInventory(oneRing);
+            }
         }  
 
 
@@ -604,11 +605,7 @@ public class Game {
             double healthInRequiredRegion = player.getHealth() / player.getMaxHealth();
             setHealthBar(healthInRequiredRegion);
 
-            EntityFactory eFactory = new EntityFactory();
-            if(ThreadLocalRandom.current().nextInt(0, 1) < oneRingChance){
-                TheOneRing oneRing = new TheOneRing(Game.generateUniqueId());
-                player.getInventory().addItemToInventory(oneRing);
-            }
+            
         }
 
         //increment tick counter
