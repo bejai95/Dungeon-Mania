@@ -109,8 +109,10 @@ public class persistenceTest {
             previousInventoryStrings.add(currItemString);
         }
         String previousGoalsLeft = res1.getGoals();
-        
-        assertTrue(getInventorySizeExcludingArmour(res1) == 12);
+        for (ItemResponse curr: res1.getInventory()) {
+            System.out.println(curr.getType());
+        }
+        assertTrue(getInventorySizeExcludingRandom(res1) == 11);
         assertTrue(previousGoalsLeft.equals(":mercenary"));
 
         // Save the file, and load it from another controller, check that the inventories and goals are the same
@@ -200,14 +202,16 @@ public class persistenceTest {
         }
     }
 
-    // Helper function to get the size of the inventory, not including armour (as this is random and cannot be controlled)
-    private int getInventorySizeExcludingArmour(DungeonResponse res) {
+    // Helper function to get the size of the inventory, not including armour, sword, one ring, anduril (as these are random and cannot be controlled)
+    private int getInventorySizeExcludingRandom(DungeonResponse res) {
         int count = 0;
         for (ItemResponse curr: res.getInventory()) {
-                if (!curr.getType().equals("armour")) {
+                if (!(curr.getType().equals("armour") || curr.getType().equals("sword") || curr.getType().equals("one_ring") 
+                        || curr.getType().equals("anduril"))) {
                     count++;
                 }
         }
         return count;
     }
 }
+

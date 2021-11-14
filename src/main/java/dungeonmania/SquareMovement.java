@@ -5,6 +5,8 @@ import java.util.List;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
+import java.util.Map;
+
 public class SquareMovement implements Movement {
     
     Direction direction;
@@ -21,7 +23,7 @@ public class SquareMovement implements Movement {
      * unless it would move to a non-path tile, in which case
      * turn right
      */
-    public Position move(Position currentPos) {
+    public Position move(Position currentPos, Map<PositionSimple, Map<PositionSimple, Double>> grid) {
 
         // If this is the first move() call, define the path around currentPos
         if (path.isEmpty()) {
