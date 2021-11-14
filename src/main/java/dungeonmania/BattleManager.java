@@ -16,6 +16,15 @@ public class BattleManager {
         this.baddie = baddie;
         this.mercenaries = mercenaries;
     }
+
+    public List<Battleable> getFighters(){
+        List<Battleable> alive = new ArrayList<>();
+        List<Mercenary> allies = getAlliesInRange();
+        alive.add(player);
+        alive.add(baddie);
+        alive.addAll(allies);
+        return alive;
+    }
     /**
      * Does a single battle instance between a player's ally and
      * the enemy
@@ -28,8 +37,8 @@ public class BattleManager {
         ret.add(goodie);
         ret.add(baddie);
         
-        goodie.setHealth((goodie.getHealth() - (baddie.getHealth() * baddie.getDamage())/10)*goodie.getDefenseMultiplier());
-        baddie.setHealth((baddie.getHealth() - (goodie.getHealth() * goodie.getDamage())/5)*baddie.getDefenseMultiplier());
+        goodie.setHealth((goodie.getHealth() - (baddie.getHealth() * (baddie.getDamage())/10*goodie.getDefenseMultiplier())));
+        baddie.setHealth((baddie.getHealth() - (goodie.getHealth() * (goodie.getDamage())/5*baddie.getDefenseMultiplier())));
         
         return ret.stream().filter(x -> x.getHealth() <= 0).collect(Collectors.toList());
     }
@@ -71,12 +80,8 @@ public class BattleManager {
      * @return
      */
     public List<Battleable> battle(){        
-        List<Battleable> alive = new ArrayList<>();
+        List<Battleable> dead = new ArrayList<>();
         List<Mercenary> allies = getAlliesInRange();
-        System.out.print(allies.size());
-        alive.add(player);
-        alive.add(baddie);
-        alive.addAll(allies);
         List<Mercenary> mercsInRange = getMercsInRange();
         for(Mercenary merc : mercsInRange){
             merc.doubleSpeed();
@@ -84,16 +89,38 @@ public class BattleManager {
         }
 
         while(player.getHealth() > 0 && baddie.getHealth() > 0){
-            alive.removeAll(battleInstance(player, baddie));
-            for(Mercenary merc : allies){
-                if(!alive.contains(baddie)){
+            dead.addAll(battleInstance(player, baddie));
+            if(dead.contains(player)){
+                player.revive();
+            }
+            if(dead.contains(baddie)){
+                Item drop = baddie.dropItem();
+                /*System.out.println("This is the item: " + drop.getType());
+                System.out.println("And this is its id: " + drop.getitemId());*/
+                if(drop != null){
+                    player.getInventory().addItemToInventory(drop);
+                }
+                break;
+            }
+            for(Mercenary ally : allies){
+                if(dead.contains(player)){
+                    player.revive();
+                }
+                if(dead.contains(baddie)){
+                    Item drop = baddie.dropItem();
+                    if(drop != null){
+                        player.getInventory().addItemToInventory(drop);
+                    }
                     break;
                 }
-                alive.removeAll(battleInstance(merc, baddie));
+                if(dead.contains(ally)){
+                    continue;
+                }
+                dead.addAll(battleInstance(ally, baddie));
             }
         }
 
-        return alive;
+        return dead;
     }
 
     

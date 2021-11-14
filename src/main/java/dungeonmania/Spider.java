@@ -5,7 +5,7 @@ import dungeonmania.util.Position;
 public class Spider extends MovingEntity {
 
     public static int defaultHealth = 50;
-    public static int defaultAttack = 5;
+    public static int defaultAttack = 2;
     public static double defaultdefense = 0;
     public static int defaultSpeed = 1;
 
@@ -21,5 +21,5 @@ public class Spider extends MovingEntity {
         setDefense(defaultdefense);
         setSpeed(defaultSpeed);
     }
-
+    //TODO reverse direction on collision
 }

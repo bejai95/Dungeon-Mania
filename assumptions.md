@@ -1,9 +1,16 @@
 [Assumptions]
 No two entities can occupy the same tile 
 There can exist multiple exits in a level
-Interactions can only happen between adjacent entities
+Interactions can only happen between adjacent entities -> But this is not what the spec says? 
 Bows use 1 arrow every time they attack
 Player always exists is our assumption
 Assuming that there can only be one game being accessed by a controller at a time. This game was either loaded or created by that controller. Also assuming that the frontend will not call saveGame when there is not a game currently being accessed (makes sense when you think about it). 
 Assuming that the String id given to saveGame does not have the extension (e.g. .json) on the end, we will take care of that ourselves
 Assuming that only one unpicked up item can be on a square at a time
+Assuming that if the player tries to move but cannot move (e.g hits a wall), a tick will still go by
+Assuming that if a bow is able to be built with both recipes (ie materials are available for both recipes) then the treasure will be used rather than the key
+
+When crafting an item it retains the itemId of the unpickedupitem entity.
+When crafting an item with multiple recipes it will choose to build the first recipe that it comes across unless it is between a recipe with a key or a treasure, the treasure one will be picked first.
+
+A player can only battle one entity per tick.

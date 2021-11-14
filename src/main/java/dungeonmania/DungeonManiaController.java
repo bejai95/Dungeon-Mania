@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 public class DungeonManiaController {
     private Game currentlyAccessingGame;
+    private static int dungeonIdNum; // Initialized to zero
     
     public DungeonManiaController() {
         currentlyAccessingGame = null;
@@ -38,8 +39,20 @@ public class DungeonManiaController {
         return "en_US";
     }
     public List<String> getGameModes() {
-        return Arrays.asList("Standard", "Peaceful", "Hard");
+        return Arrays.asList("standard", "peaceful", "hard");
     }
+
+    /**
+     * Generates a unique dungeon id
+     * @param cell
+     * @return
+     */
+    private static int generateUniqueDungeonId() {
+        int ret = dungeonIdNum;
+        dungeonIdNum++;
+        return ret;
+    }
+
     /**
      * /dungeons
      * 
@@ -53,9 +66,10 @@ public class DungeonManiaController {
         }
     }
     public DungeonResponse newGame(String dungeonName, String gameMode) throws IllegalArgumentException {
-        
+        String gameModeLowercase = gameMode.toLowerCase();
+
         // Deal with throwing exceptions
-        if (!this.getGameModes().contains(gameMode)) {
+        if (!getGameModes().contains(gameModeLowercase)) {
             throw new IllegalArgumentException("Invalid gameMode argument");
         } else if (!DungeonManiaController.dungeons().contains(dungeonName)) {
             throw new IllegalArgumentException("Invalid dungeonName argument");
@@ -71,16 +85,28 @@ public class DungeonManiaController {
                 .create();
                 
             // Generate an Id for the new dungeon
-            String newDungeonId = String.valueOf(Game.getNumDungeonIds());
+            String newDungeonId = String.valueOf(generateUniqueDungeonId());
 
             // Create a new game
             currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
             currentlyAccessingGame.setDungeonId(newDungeonId);
             currentlyAccessingGame.setDungeonName(dungeonName);
-            currentlyAccessingGame.setGameMode(gameMode);
+            currentlyAccessingGame.setGameMode(gameModeLowercase);
             currentlyAccessingGame.initialiseBuildables();
-            Game.incrementNumDungeonIds();
+            currentlyAccessingGame.setHealthBar(1);
 
+            //Set portal colour sprites
+            currentlyAccessingGame.setSprites();
+
+            // Make all mercenaries chase the player
+            List<Mercenary> allMercenaries = currentlyAccessingGame.getMercenaries();
+            Character player = currentlyAccessingGame.getPlayer();
+            for (Mercenary cur: allMercenaries) {
+                cur.chase(player);
+            }
+            
+            player.setGameMode(gameModeLowercase);
+            
             return currentlyAccessingGame.generateDungeonResponse();
         }
         catch (IOException e) {
@@ -99,7 +125,7 @@ public class DungeonManiaController {
                 .create();
             
             String JSONString = gson.toJson(this.currentlyAccessingGame);
-            String path = "src\\main\\resources\\savedGames\\";
+            String path = "savedGames/";
 
             // Create the savedGames directory if it does not already exist
             Files.createDirectories(Paths.get(path));
@@ -121,7 +147,7 @@ public class DungeonManiaController {
     public DungeonResponse loadGame(String name) throws IllegalArgumentException {
         try {
             
-            String path = "src\\main\\resources\\savedGames\\" + name + ".json";
+            String path = "savedGames/" + name + ".json";
 
             // Make sure that the file exists
             if (!FileLoader.listFileNamesInDirectoryOutsideOfResources(path).contains(name)) {
@@ -150,7 +176,7 @@ public class DungeonManiaController {
     
     public List<String> allGames() {
         try {
-            String path = "src\\main\\resources\\savedGames\\";
+            String path = "savedGames/";
             return FileLoader.listFileNamesInDirectoryOutsideOfResources(path);
         } catch (IOException e) {
             e.printStackTrace();
@@ -161,39 +187,41 @@ public class DungeonManiaController {
     public DungeonResponse tick(String itemUsed, Direction movementDirection) throws IllegalArgumentException, InvalidActionException {
         return currentlyAccessingGame.tick(itemUsed, movementDirection);
     }
+
     public DungeonResponse interact(String entityId) throws IllegalArgumentException, InvalidActionException {
-        Game game = getCurrentlyAccessingGame();
-        Entity ent = game.getEntityById(entityId);
-        if (ent == null) {
-            throw new IllegalArgumentException("Id does not exist");
-        } else if (!ent.canInteract()) {
-            throw new IllegalArgumentException("Cannot interact with this entity");
-        }
-
-        ent.interact(game.getPlayer());
-
-        Inventory inv = game.getPlayer().getInventory();
-
-        return new DungeonResponse(game.getDungeonId(), game.getDungeonName(), 
-        game.getEntities().stream().map(x -> x.getInfo()).collect(Collectors.toList()), 
-        inv.getItemsAsResponse(), inv.generateBuildables(), game.getGoalsLeft());
-
+        return currentlyAccessingGame.interact(entityId);
 
     }
+
     public DungeonResponse build(String buildable) throws IllegalArgumentException, InvalidActionException {
+        if (!(buildable.equals("bow") || buildable.equals("shield") || buildable.equals("midnight_armour") || buildable.equals("sceptre"))) {
+            throw new IllegalArgumentException("buildable needs to be either bow, shield, midnight armour or sceptre");
+        }
         try {
-            currentlyAccessingGame.getInventory().craft(buildable,Entity.getNumEntityIds());
+            currentlyAccessingGame.getInventory().craft(buildable, Game.generateUniqueId());
+            return currentlyAccessingGame.generateDungeonResponse();
+        } catch (InvalidActionException e) {
+            throw new InvalidActionException("You don't have the resources to craft this item");
+        } catch (Exception e) {
+            System.out.println("An error occurred");
+            e.printStackTrace();
+            return null;
         }
-        catch (Exception e) {
-            System.out.println("An error occured");
-        }
-        Entity.incrementNumEntityId();
-        return new DungeonResponse(currentlyAccessingGame.getDungeonId(), currentlyAccessingGame.getDungeonName(), currentlyAccessingGame.getEntities().stream().map(x -> x.getInfo()).collect(Collectors.toList()), currentlyAccessingGame.getInventory().getItemsAsResponse(), currentlyAccessingGame.getInventory().generateBuildables(), currentlyAccessingGame.getGoal().getGoalsLeft(currentlyAccessingGame.getEntities()));
-
     }
+
     public Game getCurrentlyAccessingGame() {
         return currentlyAccessingGame;
     }
 
-    
+    // Delete all currently existing saved games (useful for testing)
+    public void deleteExistingGames() {
+        String path = "savedGames/";
+        File savedGamesDir = new File(path);
+        String[] saves = savedGamesDir.list();
+        for (String s: saves) {
+            File currentsavedGame = new File(savedGamesDir.getPath(), s);
+            currentsavedGame.delete();
+        }
+    }
+
 }

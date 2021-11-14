@@ -10,15 +10,12 @@ public abstract class Entity implements interaction {
     private String type;
     private Position position;
     private boolean isInteractable;
-    private static int numEntityIds; // Initialized to zero
-
-    public Entity() {}
 
     public Entity(int id, String type, Position position) {
         this.id = id;
         this.type = type;
         this.position = position;
-        numEntityIds++;
+        isInteractable = false;
     }
 
     /**
@@ -51,13 +48,6 @@ public abstract class Entity implements interaction {
         return new EntityResponse(String.valueOf(id), type, position, isInteractable);
     }
 
-    public static int getNumEntityIds() {
-        return numEntityIds;
-    }
-    public static void incrementNumEntityId() {
-        numEntityIds++;
-    }
-
     public void setPosition(Position position) {
         this.position = position;
     }
@@ -68,6 +58,10 @@ public abstract class Entity implements interaction {
     
     public void interact(Character ch) {
         // no interaction by default, subclasses implement unique interactions
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 }

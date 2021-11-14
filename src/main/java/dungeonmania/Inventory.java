@@ -1,6 +1,7 @@
 package dungeonmania;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import dungeonmania.exceptions.InvalidActionException;
@@ -13,7 +14,8 @@ public class Inventory {
     private List<Item> items = new ArrayList<>();
     //takes in a string which is the name of the recipe and returns a list of all the materials required
     private HashMap<String, List<String>> recipes = new HashMap<String, List<String>>(); 
-    
+    //note when crafting, the recipes should contain the type inside of the recipename
+    //however the materials in each recipe is the simple name, lowercased.
     public Inventory() {
         List<String> bowMats = new ArrayList<>();
         bowMats.add(Wood.class.getSimpleName().toLowerCase());
@@ -24,13 +26,22 @@ public class Inventory {
         List<String> shieldMats1 = new ArrayList<>();
         shieldMats1.add(Wood.class.getSimpleName().toLowerCase());
         shieldMats1.add(Wood.class.getSimpleName().toLowerCase());
-        shieldMats1.add(Treasure.class.getSimpleName().toLowerCase());
+        shieldMats1.add(SunStone.class.getSimpleName().toLowerCase());
         addRecipe(Shield.class.getSimpleName().toLowerCase() + "1", shieldMats1);
         List<String> shieldMats2 = new ArrayList<>();
         shieldMats2.add(Wood.class.getSimpleName().toLowerCase());
         shieldMats2.add(Wood.class.getSimpleName().toLowerCase());
-        shieldMats2.add(Key.class.getSimpleName().toLowerCase());
+        shieldMats2.add(Treasure.class.getSimpleName().toLowerCase());
         addRecipe(Shield.class.getSimpleName().toLowerCase() + "2", shieldMats2);
+        List<String> shieldMats3 = new ArrayList<>();
+        shieldMats3.add(Wood.class.getSimpleName().toLowerCase());
+        shieldMats3.add(Wood.class.getSimpleName().toLowerCase());
+        shieldMats3.add(Key.class.getSimpleName().toLowerCase());
+        addRecipe(Shield.class.getSimpleName().toLowerCase() + "3", shieldMats3);
+        List<String> midnight_armourMats = new ArrayList<>();
+        midnight_armourMats.add(Armour.class.getSimpleName().toLowerCase());
+        midnight_armourMats.add(SunStone.class.getSimpleName().toLowerCase());
+        addRecipe("midnight_armour", midnight_armourMats);
     }
     /**
      * @invariant the item wanting to be craft is buidable
@@ -38,11 +49,7 @@ public class Inventory {
      * @description craft will be in charge of adding items to proper lists and taking away what is needed
      */
     public Item craft(String itemName, int itemId) throws ClassNotFoundException, NoSuchMethodException, InstantiationException,
-          IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException, IllegalArgumentException {
-        //if it is not a Shield and is not equal 
-        if (!(Shield.class.getSimpleName().toLowerCase().equals(itemName) || Bow.class.getSimpleName().toLowerCase().equals(itemName))) {
-            throw new IllegalArgumentException("Cannot craft something that is not a bow or a shield");
-        }
+          IllegalAccessError, IllegalAccessException, InvocationTargetException, InvalidActionException {
         //first finds the first recipe that can craft ur item
         List<String> recipe = this.getRecipesOfItem(itemName);
         //the recipe cant be crafted
@@ -67,7 +74,14 @@ public class Inventory {
         if (itemName.equals("bow")) {
             itemName = Bow.class.getCanonicalName();
         }
-        else if (itemName.equals("shield")) {
+        else if (itemName.equals("midnight_armour")) {
+            itemName = MidnightArmour.class.getCanonicalName();
+        }
+        else if (itemName.equals("sceptre")) {
+            itemName = Sceptre.class.getCanonicalName();
+        }
+        //must be a shield
+        else {
             itemName = Shield.class.getCanonicalName();
         }
         //create the new item
@@ -80,14 +94,32 @@ public class Inventory {
         //invariant, assume the item can be crafted
         return newItem;
     }
-    public List<String> generateBuildables() {
+    public List<String> generateBuildables(List<Entity> entitiesOnMap) {
         List<String> recipesBuildable = new ArrayList<>();
         HashMap<String, List<String>> recipes = getRecipes();
         //for each recipe
-        for (String recipeName: recipes.keySet()) {
+        List<String> recipeKeys = new ArrayList<>(recipes.keySet());
+        Collections.sort(recipeKeys);
+        for (String recipeName: recipeKeys) {
             if (this.isRecipeBuildable(recipeName)) {
-                //if can build
-                recipesBuildable.add(recipeName);
+                //lock for if the item to build is midnight and has items for it, check zombies exist or not
+                if (recipeName.equals("midnight_armour")) {
+                    boolean zombiesExist = false;
+                    //if zombie found then set to true
+                    for (Entity e: entitiesOnMap) {
+                        if (e instanceof ZombieToast) {
+                            zombiesExist = true;
+                        }
+                    }
+                    if (zombiesExist == false) {
+                        recipesBuildable.add(recipeName);
+                    }
+
+                }
+                //not midnight armour so no conditions
+                else {
+                    recipesBuildable.add(recipeName);
+                }
             }
         }
         //go through each recipe
@@ -103,8 +135,14 @@ public class Inventory {
             else if (r.contains(Shield.class.getSimpleName().toLowerCase()) && !(itemsBuildable.contains(Shield.class.getSimpleName().toLowerCase()))) {
                 itemsBuildable.add(Shield.class.getSimpleName().toLowerCase());
             }
+            else if (r.contains("midnight_armour") && !(itemsBuildable.contains("midnight_armour"))) {
+                itemsBuildable.add("midnight_armour");
+            }
+            else if (r.contains(Sceptre.class.getSimpleName()) && !(itemsBuildable.contains(Sceptre.class.getSimpleName()))) {
+                itemsBuildable.add(Sceptre.class.getSimpleName());
+            }
         }
-        return recipesBuildable;
+        return itemsBuildable;
     }
     public void addItemToInventory(Item item) {
         //adds an item and adds them to the nessecary lists
@@ -142,12 +180,16 @@ public class Inventory {
     }
     /**
      * getRecipesOfItem will return the first recipe which you have materials for and is for that specific item
-     * @param itemName
+     * @param itemName is the json prefix ie the item type
      * @return
      */
     public List<String> getRecipesOfItem(String itemName) {
         //for a given item name go through all recipes that contain itemName and check which one to return
-        for (String recipeName: getRecipes().keySet()) {
+        HashMap<String, List<String>> recipes = getRecipes();
+        //for each recipe
+        List<String> recipeKeys = new ArrayList<>(recipes.keySet());
+        Collections.sort(recipeKeys);
+        for (String recipeName: recipeKeys) {
             if (this.isRecipeBuildable(recipeName) && recipeName.contains(itemName)) {
                 return getRecipes().get(recipeName);
             }
@@ -180,7 +222,7 @@ public class Inventory {
         }
         return defense;
     }
-    public List<Consumable> getConsumables() {
+    /*public List<Consumable> getConsumables() {
         List<Consumable> consumable = new ArrayList<>();
         for (Item item: this.getItems()) {
             if (item instanceof Consumable) {
@@ -188,7 +230,7 @@ public class Inventory {
             }
         }
         return consumable;
-    }
+    }*/
     public List<Material> getMaterials() {
         List<Material> mats = new ArrayList<>();
         for (Item item: this.getItems()) {

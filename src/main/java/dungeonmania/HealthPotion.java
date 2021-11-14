@@ -2,7 +2,7 @@ package dungeonmania;
 
 public class HealthPotion extends Item implements Consumable {
     public HealthPotion(int itemId) {
-        super(itemId, 1);
+        super(itemId, 1, "health_potion");
     }
     public void consume(Character character) {
         if (this.getUses() != 0) {

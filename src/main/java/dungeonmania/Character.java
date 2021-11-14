@@ -16,12 +16,13 @@ public class Character extends Entity implements Battleable{
     private int InvincibleDuration;
     private int InvisibleDuration;
     private double maxHealth;
+    private String gameMode;
 
-    public Character(int id, String type, Position position) {
-        super(id, type, position);
-        this.health = 200;
+    public Character(int id, Position position) {
+        super(id, "player", position);
+        this.health = 500;
         this.maxHealth = this.health;
-        this.baseDamage = 20;
+        this.baseDamage = 3;
         this.baseDefense = 0;
         this.InvincibleDuration = 0;
         this.InvisibleDuration = 0;
@@ -63,7 +64,10 @@ public class Character extends Entity implements Battleable{
         return this.health;
     }
     public void setHealth(double newHealth) {
-        this.health = newHealth;
+        if (!(this.isInvincible())) {
+            this.health = newHealth;
+        }
+
     }
     /**
      * Attempts to revive the player if has the one ring
@@ -89,7 +93,7 @@ public class Character extends Entity implements Battleable{
         this.InvisibleDuration = length;
     }
     public boolean isInvincible () {
-        if (this.InvincibleDuration > 0) {
+        if (this.InvincibleDuration > 0 && (!(this.getGameMode().equals("hard")))) {
             setInvincibleLength(getInvincibleLength() - 1);
             return true;
         }
@@ -114,5 +118,17 @@ public class Character extends Entity implements Battleable{
     }
     public double getBaseDefense() {
         return this.baseDefense;
+    }
+    public String getGameMode() {
+        return this.gameMode;
+    }
+    public void setGameMode(String gameMode) {
+        //sets gamemode and alters max health
+        this.gameMode = gameMode;
+        if (this.getGameMode().equals("hard")) {
+            this.maxHealth = 200;
+            this.setHealth(this.getMaxHealth());
+        }
+        //and current health
     }
 }

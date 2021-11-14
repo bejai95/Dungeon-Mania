@@ -9,31 +9,33 @@ import dungeonmania.util.Position;
 
 public class Portal extends StaticEntity {
     //-----Data-----
-    private String potalColour;
+    private String portalColour;
 
-    //Contains a list of all portals on the map
-    private static List<Portal> portalList = new ArrayList<Portal>();
 
     //-----Constructors-----
-    public Portal(int id, String type, Position position, String potalColour) {
-        super(id, "potal", position);
-        this.potalColour = potalColour;
-        portalList.add(this);
+    public Portal(int id, Position position, String portalColour) {
+        super(id, "portal", position);
+        this.portalColour = portalColour;
     }
 
     //-----Methods-----
-    //Gets the location for where the caracter should teleport to 
-    public Position getTeleportLocation(){
-        for (Portal portalItem : portalList) {
-            if ((portalItem != this) && (portalItem.getPotalColour() == this.potalColour)) {
-                return portalItem.getPosition();
+    /*When given a list of static entities this finds the coresponding portal and
+    finds the location for where the character should teleport to */
+    public Position getTeleportLocation(List<StaticEntity> staticEntitiesList){
+        for (StaticEntity staticEntityItem : staticEntitiesList) {
+            if (staticEntityItem instanceof Portal) {
+                Portal potentialPortal = (Portal)staticEntityItem;
+                if ((potentialPortal != this) && (portalColour.equals(potentialPortal.getportalColour()))){
+                        return potentialPortal.getPosition();
+                }
             }
         }
         return getPosition();
     }
 
-    public String getPotalColour() {
-        return potalColour;
+    //-----Getters and Setters-----
+    public String getportalColour() {
+        return portalColour;
     }
 
 }

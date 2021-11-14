@@ -1,8 +1,8 @@
 package dungeonmania;
 
-public class Armour extends Item implements DefenseItem {
+public class Armour extends Item implements DefenseItem, Material {
     public Armour(int itemId) {
-        super(itemId, 3);
+        super(itemId, 3, "armour");
     }
     public double getMultipler() {
         //has uses

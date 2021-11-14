@@ -9,7 +9,7 @@ public class ZombieToast extends MovingEntity {
     public static double defaultdefense = 0;
     public static int defaultSpeed = 1;
 
-    public ZombieToast(int id, Position position, Movement moveBehaviour) {
+    public ZombieToast(int id, Position position, Movement moveBehaviour, double armourChance) {
         super(id, "zombie_toast", position, moveBehaviour);
 
         setHealth(defaultHealth);
@@ -17,6 +17,13 @@ public class ZombieToast extends MovingEntity {
         setDefense(defaultdefense);
         setSpeed(defaultSpeed);
 
-    }
+        super.spawnArmour(armourChance);
 
+    }
+    public void applyNextMove() {
+        if (moveBehaviour instanceof RandomMovement) {
+            RandomMovement rm = (RandomMovement) moveBehaviour;
+            this.setPosition(rm.getNextPos());
+        }
+    }
 }

@@ -13,7 +13,9 @@ import org.junit.jupiter.api.Test;
 import dungeonmania.exceptions.InvalidActionException;
 import dungeonmania.response.models.DungeonResponse;
 import dungeonmania.response.models.EntityResponse;
+import dungeonmania.response.models.ItemResponse;
 import dungeonmania.util.Direction;
+import dungeonmania.util.Position;
 
 public class TickTests {
     
@@ -30,7 +32,8 @@ public class TickTests {
     public void testInvalidMove() {
         DungeonManiaController c = new DungeonManiaController();
         DungeonResponse r = c.newGame("maze", "Peaceful");
-        assertEquals(getPlayer(c.tick(null, Direction.LEFT).getEntities()), getPlayer(r.getEntities()));
+        Position initPos = getPlayer(r.getEntities()).getPosition();
+        assertEquals(getPlayer(c.tick(null, Direction.LEFT).getEntities()).getPosition(), initPos);
     }
 
     @Test
@@ -52,40 +55,46 @@ public class TickTests {
     public void testBombUse() {
         DungeonManiaController c = new DungeonManiaController();
         DungeonResponse r = c.newGame("bomb", "Peaceful");
-        DungeonResponse s = c.tick(null, Direction.RIGHT);
-        assertDoesNotThrow(() -> c.tick("bomb", Direction.RIGHT));
+        c.tick(null, Direction.RIGHT);
+        c.tick(null, Direction.RIGHT);
+        Inventory i = c.getCurrentlyAccessingGame().getInventory();
+        assertTrue(i.getItems().size() == 1);
+        for (Item ir: i.getItems()) {
+            if (ir.getType().equals("bomb")) {
+                assertDoesNotThrow(() -> c.tick(Integer.toString(ir.getitemId()), Direction.NONE));
+                break;
+            }
+        }
     }
 
     @Test
     public void testInvalidBombUse() {
         DungeonManiaController c = new DungeonManiaController();
-        DungeonResponse r = c.newGame("bomb", "Peaceful");
-        assertThrows(InvalidActionException.class, () -> c.tick("bomb", Direction.RIGHT));
+        DungeonResponse r = c.newGame("advanced-2", "Peaceful");
+        List<EntityResponse> dud = r.getEntities();
+        for (EntityResponse entity: dud) {
+            if (entity.getType().equals("bomb")) {
+                assertThrows(InvalidActionException.class, () -> c.tick(entity.getId(), Direction.RIGHT));
+                break;
+            }
+        }
     }
 
     @Test
     public void testInvalidItemUse() {
         DungeonManiaController c = new DungeonManiaController();
-        DungeonResponse r = c.newGame("bomb", "Peaceful");
+        DungeonResponse r = c.newGame("advanced-2", "Peaceful");
         assertThrows(IllegalArgumentException.class, () -> c.tick("sword", Direction.RIGHT));
     }
 
     @Test
     public void testTickOnNoneMove() {
         DungeonManiaController c = new DungeonManiaController();
-        DungeonResponse r = c.newGame("bomb", "Peaceful");
+        DungeonResponse r = c.newGame("advanced-2", "Peaceful");
         for(int i = 0; i < 100; i++){
             c.tick(null, Direction.NONE);
         }
         DungeonResponse s = c.tick(null, Direction.NONE);
         assertNotEquals(r.getEntities(), s.getEntities());
     }
-
-
-
-
-
-
-
-
 }

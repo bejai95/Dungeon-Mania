@@ -8,7 +8,7 @@ public class Exit extends StaticEntity {
     //-----Data-----
 
     //-----Constructors-----
-    public Exit(int id, String type, Position position) {
+    public Exit(int id, Position position) {
         super(id, "exit", position);
     }
 

@@ -25,37 +25,38 @@ public class BattleTests {
     public void testWinAgainstSpider() {
         DungeonManiaController c = new DungeonManiaController();
 
-        Character character = new Character(1, "Character", new Position(5,5));
+        Character character = new Character(1, new Position(5,5));
         MovingEntity spider1 = new Spider(0, new Position(5,5), new SquareMovement());
         BattleManager bat = new BattleManager(character, spider1, Collections.emptyList());
 
-        List<Battleable> alive = new ArrayList<>();
-        alive.add(character);
+        List<Battleable> dead = new ArrayList<>();
+        dead.add(spider1);
  
-        assertEquals(alive, bat.battle());
+        assertEquals(dead, bat.battle());
     }
 
     @Test
     public void testWinAgainstSpiderWithAlly() {
         DungeonManiaController c = new DungeonManiaController();
 
-        Character character = new Character(1, "Character", new Position(5,5));
+        Character character = new Character(1, new Position(5,5));
         Item treasure = new Treasure(3);
         character.getInventory().addItemToInventory(treasure);
         MovingEntity spider1 = new Spider(0, new Position(5,5), new SquareMovement());
         List<Mercenary> mercs = new ArrayList<>();
-        Mercenary merc = new Mercenary(2, new Position(5,4), 1);
+        Mercenary merc = new Mercenary(2, new Position(5,4),0);
         merc.chase(character);
         merc.interact(character);
         mercs.add(merc);
 
         BattleManager bat = new BattleManager(character, spider1, mercs);
 
-        List<Battleable> alive = new ArrayList<>();
-        alive.add(character);
-        alive.add(merc);
+        List<Entity> dead = new ArrayList<>();
+        /*alive.add(character);
+        alive.add(merc);*/
+        dead.add(spider1);
  
-        assertEquals(alive, bat.battle());
+        assertEquals(dead, bat.battle());
         
     }
 

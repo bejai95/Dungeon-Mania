@@ -104,6 +104,11 @@
         "type": "player"
       },
       {
+        "x": 2,
+        "y": 1,
+        "type": "health_potion"
+      },
+      {
         "x": 6,
         "y": 1,
         "type": "sword"
@@ -441,6 +446,11 @@
         "x": 13,
         "y": 14,
         "type": "wood"
+      },
+      {
+        "x": 14,
+        "y": 14,
+        "type": "health_potion"
       },
       {
         "x": 17,

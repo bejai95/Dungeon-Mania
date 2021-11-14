@@ -34,20 +34,17 @@ public class UnpickedUpItem extends StaticEntity {
     //Method for picking up an item
     //Note: I am temporarily Using 0 for ID until ID system implemented
     //Note the ID gets transferred to the item on pickup
-    public Item pickupItem () throws ClassNotFoundException, IllegalAccessError, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
-        if (itemClass == "Key") {
+    public Item pickupItem() throws ClassNotFoundException, IllegalAccessError, IllegalAccessException, InvocationTargetException, InstantiationException, NoSuchMethodException {
+        if (itemClass.equals("Key")) {
             Key newKey = new Key(getId(),keyNum);
             return (Item)newKey;
         }
-
 
         //Create the new item if the item isn't a key
         Class classType = Class.forName("dungeonmania." + itemClass);
         Constructor construct = classType.getConstructor(int.class);
         Item newItem = (Item)construct.newInstance(getId());
 
-        //Remove this object from the static entities list
-        super.removeStaticEntity();
 
         //return item
         return newItem;
@@ -57,5 +54,8 @@ public class UnpickedUpItem extends StaticEntity {
     public String getItemClass() {
         return itemClass;
     }
-    
+
+    public int getKeyNum() {
+        return keyNum;
+    }
 }

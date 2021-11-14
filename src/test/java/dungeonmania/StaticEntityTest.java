@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,229 +13,441 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import java.lang.reflect.*;
 
+//Note these need to be changed as static entities functions rewritten
+
 public class StaticEntityTest {
-    //-----StaticEntity Tests-----
-    //Check to see if removing static entity from list works
-    @Test
-    public void testRemoveStaticEntity(){
-        Position p1 = new Position(0, 0);
-        Position p2 = new Position(0, 1);
-        StaticEntity s1 = new StaticEntity(1, "Boulder", p1);
-        List<StaticEntity> oneItemList = new ArrayList<StaticEntity>(StaticEntity.getStaticEntitiesList());
-        StaticEntity s2 = new StaticEntity(2, "Wall", p2);
-        s2.removeStaticEntity();
-        List<StaticEntity> afterDeleteList = new ArrayList<StaticEntity>(StaticEntity.getStaticEntitiesList());
-        assertEquals(oneItemList, afterDeleteList);
+    //-----Game Setup Helper Function-----
+    private Game startGame() {
+    	DungeonManiaController controller1 = new DungeonManiaController();
+        controller1.newGame("advanced-2", "standard");
+        return controller1.getCurrentlyAccessingGame();
     }
 
-    //Checks to see if isCollision correctlys detects a collision
+    //-----Exit test-----
     @Test
-    public void testIsCollisionTrue(){
-        Position p1 = new Position(1, 1);
-        Position p2 = new Position(1, 1);
-        StaticEntity s1 = new StaticEntity(1, "Boulder", p1);
-        assertTrue(s1.isCollision(p2));
-    }   
+    public void exitTest(){
+        //Crete the game
+        Game game1 = startGame();
 
-    //Checks to see if isCollision correctlys detects that there is no collision
+        //Gather Variables
+        Character player1 = game1.getPlayer();
+        Position player1Pos = player1.getPosition();
+        Inventory inventory1 = game1.getInventory();
+
+        //Create an exit next to the player
+        int exID = Game.generateUniqueId();
+        Position exitPos =  player1Pos.translateBy(Direction.RIGHT);
+        Exit exit1 = new Exit(exID, exitPos);
+        game1.getEntities().add(exit1);
+
+        //Move onto exit
+        game1.tick(null, Direction.RIGHT);
+        assertEquals("", game1.getGoalsLeft());
+    }
+
+    //-----Picking up item Tests-----
     @Test
-    public void testIsCollisionFalse(){
-        Position p1 = new Position(1, 1);
-        Position p2 = new Position(0, 1);
-        StaticEntity s1 = new StaticEntity(1, "Boulder", p1);
-        assertFalse(s1.isCollision(p2));
-    }  
+    public void itemPickupTest(){
+        //Crete the game
+        Game game1 = startGame();
+
+        //Gather Variables
+		Character player1 = game1.getPlayer();
+		Position player1Pos = player1.getPosition();
+		Inventory inventory1 = game1.getInventory();
+
+        //Create a key unpickedup item
+		int kID = Game.generateUniqueId();
+        Position keyPos =  player1Pos.translateBy(Direction.DOWN);
+		UnpickedUpItem unpickKey = new UnpickedUpItem(kID, "key", keyPos, "Key", 1);
+        game1.getEntities().add(unpickKey);
+
+        //Create a non key unpickedup item (wood)
+		int wID = Game.generateUniqueId();
+        Position woodPos = keyPos.translateBy(Direction.DOWN);
+		UnpickedUpItem unpickWood = new UnpickedUpItem(wID, "wood", woodPos, "Wood");
+        game1.getEntities().add(unpickWood);
+
+        //Move down and collect items
+		game1.tick(null, Direction.DOWN);
+        game1.tick(null, Direction.DOWN);
+
+        //Check if items correctly picked up
+		assertTrue(inventory1.getItem(kID) != null);
+        assertTrue(inventory1.getItem(wID) != null);
+    }
+
+	//-----Boulder/Bomb/Switch Tests-----
+	//Tests to see if a player can sucessfully activate a bomb using a boulder
+	@Test
+    public void sucessfulBombBoulderTest(){
+		//Crete the game
+        Game game1 = startGame();
+
+		//Gather Variables
+		Character player1 = game1.getPlayer();
+		Position player1Pos = player1.getPosition();
+		Inventory inventory1 = game1.getInventory();
+
+		//Create Bomb
+		int up1ID = Game.generateUniqueId();
+		Position bombPos = player1Pos.translateBy(Direction.DOWN);
+		UnpickedUpItem unpick1 = new UnpickedUpItem(up1ID, "bomb", bombPos, "Bomb");
+        game1.getEntities().add(unpick1);
+
+		//Create Switch
+		int s1ID = Game.generateUniqueId();
+		Position switchPos = new Position(1, 4);
+		FloorSwitch switch1 = new FloorSwitch(s1ID, switchPos);
+        game1.getEntities().add(switch1);
+
+		//Create Boulder
+		int bID = Game.generateUniqueId();
+		Position boulderPos = new Position(1, 5);
+		Boulder boulder1 = new Boulder(bID, boulderPos);
+        game1.getEntities().add(boulder1);
+
+		//Move down and collect bomb
+		game1.tick(null, Direction.DOWN);
+
+		//Make sure bomb is picked up
+		assertTrue(inventory1.getItem(up1ID) != null);
+
+		//Move down and place bomb
+		game1.tick(null, Direction.DOWN);
+	    game1.tick(String.valueOf(up1ID), Direction.NONE);
+
+        //Test bomb placed
+        Boolean bombPresent = false;
+        for (Entity ent : game1.getEntities()) {
+            if (ent instanceof PlacedBomb) {
+                bombPresent = true;
+            }
+        }
+        assertTrue(bombPresent);
+
+        //Move into position
+        game1.tick(null, Direction.RIGHT);
+        for(int i = 0; i < 3; i++) {
+            game1.tick(null, Direction.DOWN);
+        }
+        game1.tick(null, Direction.LEFT);
+
+        //Spawn spider
+        int sp1ID = Game.generateUniqueId();
+        Spider spider1 = new Spider(sp1ID, new Position(2, 4), new SquareMovement());
+        game1.getEntities().add(spider1);
+
+        //Check spider in the game
+        assertTrue(game1.getEntities().contains(spider1));
+
+        //Move boulder onto switch
+        game1.tick(null, Direction.UP);
+
+        //Check spider is removed
+        assertFalse(game1.getEntities().contains(spider1));
+
+        //Test positions
+        assertEquals(player1.getPosition(), boulderPos);
+        assertEquals(boulder1.getPosition(), switchPos);
+
+        //Test switch activated
+        assertTrue(switch1.getIsActive());
+
+        //Test bomb exploded
+        bombPresent = false;
+        for (Entity ent : game1.getEntities()) {
+            if (ent instanceof PlacedBomb) {
+                bombPresent = true;
+            }
+        }
+        assertFalse(bombPresent);
+
+        //Move boulder off switch
+        game1.tick(null, Direction.UP);
+
+        //Test positions
+        assertEquals(player1.getPosition(), switchPos);
+        assertEquals(boulder1.getPosition(), switchPos.translateBy(Direction.UP));
+
+        //Test Switch deactivates
+        assertFalse(switch1.getIsActive());
+
+
+
+	}
+
+	//-----Portal Tests-----
+	//Tests to see if a player sucessfully will pass through a portal
+	@Test
+    public void sucessfulPotalTest(){
+		//Crete the game
+        Game game1 = startGame();
+
+		//Gather Variables
+		Character player1 = game1.getPlayer();
+		Position player1Pos = player1.getPosition();
+
+		//Create Blue Portal 1
+		int pblue1ID = Game.generateUniqueId();
+		Portal portalBlue1 = new Portal(pblue1ID, player1Pos.translateBy(Direction.DOWN), "BLUE");
+		game1.getEntities().add(portalBlue1);
+
+		//Create Blue Portal 2
+		int pblue2ID = Game.generateUniqueId();
+		Portal portalBlue2 = new Portal(pblue1ID, new Position(1, 12), "BLUE");
+		game1.getEntities().add(portalBlue2);
+
+		//Create Red Portal
+		int pred1ID = Game.generateUniqueId();
+		Portal portalRed1 = new Portal(pblue1ID, new Position(7, 12), "RED");
+		game1.getEntities().add(portalRed1);
+
+		//Move into portal
+		game1.tick(null, Direction.DOWN);
+
+		//Check player telported correctly
+		assertEquals(player1.getPosition(), portalBlue2.getPosition().translateBy(Direction.DOWN));
+
+	}
+
+
+    //-----Door Interaction Tests-----
+    //Check to see if the sunstone correctly opens the door
+    @Test
+    public void doorInteractionSunstoneTest(){
+    	//Crete the game
+        Game game1 = startGame();
+
+        //Get the inventory
+        Inventory inventory1 = game1.getInventory();
+
+        //Add sunstone to inventory
+        int s1id = Game.generateUniqueId();
+        SunStone sunstone1 = new SunStone(s1id);
+        inventory1.addItemToInventory(sunstone1);
+
+        //Get player position and next position
+        Position playerpos = game1.getPlayer().getPosition();
+        Position nextpos = playerpos.translateBy(Direction.RIGHT);
+        
+        //Create door
+        int d1id = Game.generateUniqueId();
+        Door door1 = new Door(d1id, nextpos, 1);
+        game1.getEntities().add(door1);
+
+
+        //Interact with the door
+        game1.tick(null, Direction.RIGHT);
+
+
+        //Check door is open
+        assertTrue(door1.getIsOpen());
+
+        //Check all items are still there
+        assertTrue(inventory1.getItem(s1id) != null);
+        
+    }
+
+     //Check to see if the sunstone take priority over keys
+     @Test
+     public void doorInteractionSunstonePriorityTest(){
+    	//Crete the game
+        Game game1 = startGame();
+ 
+        //Get the inventory
+        Inventory inventory1 = game1.getInventory();
+ 
+		//Add sunstone to inventory
+		int s1id = Game.generateUniqueId();
+		SunStone sunstone1 = new SunStone(s1id);
+		inventory1.addItemToInventory(sunstone1);
+
+		//Add matching key to inventory
+		int k1id = Game.generateUniqueId();
+		Key key1 = new Key(k1id, 1);
+		inventory1.addItemToInventory(key1);
+
+		//Add unmatching key to inventory
+		int k2id = Game.generateUniqueId();
+		Key key2 = new Key(k2id, 0);
+		inventory1.addItemToInventory(key2);
+
+		//Get player position and next position
+		Position playerpos = game1.getPlayer().getPosition();
+		Position nextpos = playerpos.translateBy(Direction.RIGHT);
+		
+		//Create door
+		int d1id = Game.generateUniqueId();
+		Door door1 = new Door(d1id, nextpos, 1);
+		game1.getEntities().add(door1);
+
+
+		//Interact with the door
+		game1.tick(null, Direction.RIGHT);
+
+
+		//Check door is open
+		assertTrue(door1.getIsOpen());
+
+		//Check all items are still there
+		assertTrue(inventory1.getItem(s1id) != null);
+		assertTrue(inventory1.getItem(k1id) != null);
+		assertTrue(inventory1.getItem(k2id) != null);
+         
+     }
+
+    //Check to see if matching key opens door
+    @Test
+    public void doorInteractionKeyTest(){
+    	//Crete the game
+        Game game1 = startGame();
+
+        //Get the inventory
+        Inventory inventory1 = game1.getInventory();
+
+        //Add matching key to inventory
+        int k1id = Game.generateUniqueId();
+        Key key1 = new Key(k1id, 1);
+        inventory1.addItemToInventory(key1);
+
+        //Add unmatching key to inventory
+        int k2id = Game.generateUniqueId();
+        Key key2 = new Key(k2id, 0);
+        inventory1.addItemToInventory(key2);
+
+        //Get player position and next position
+        Position playerpos = game1.getPlayer().getPosition();
+        Position nextpos = playerpos.translateBy(Direction.RIGHT);
+        
+        //Create door
+        int d1id = Game.generateUniqueId();
+        Door door1 = new Door(d1id, nextpos, 1);
+        game1.getEntities().add(door1);
+
+
+        //Interact with the door
+        game1.tick(null, Direction.RIGHT);
+
+
+        //Check door is open
+        assertTrue(door1.getIsOpen());
+
+        //Check all items are still there
+        assertTrue(inventory1.getItem(k1id) == null);
+        assertTrue(inventory1.getItem(k2id) != null);
+        
+    }
+
+    //Check that unmatching key doesn't open door
+    @Test
+    public void doorInteractionUnmatchKeyTest(){
+    	//Crete the game
+        Game game1 = startGame();
+
+        //Get the inventory
+        Inventory inventory1 = game1.getInventory();
+
+        //Add unmatching key to inventory
+        int k2id = Game.generateUniqueId();
+        Key key2 = new Key(k2id, 0);
+        inventory1.addItemToInventory(key2);
+
+        //Get player position and next position
+        Position playerpos = game1.getPlayer().getPosition();
+        Position nextpos = playerpos.translateBy(Direction.RIGHT);
+        
+        //Create door
+        int d1id = Game.generateUniqueId();
+        Door door1 = new Door(d1id, nextpos, 1);
+        game1.getEntities().add(door1);
+
+
+        //Interact with the door
+        game1.tick(null, Direction.RIGHT);
+
+
+        //Check door is open
+        assertFalse(door1.getIsOpen());
+
+        //Check all items are still there
+        assertTrue(inventory1.getItem(k2id) != null);
+        
+    }
+
+    //-----Zombie Spawner Tests-----
+    //Spawn a zombie on standard mode
+    @Test
+    public void zombieSpawnerTestStandard(){
+        //Crete the game
+        Game game1 = startGame();
+
+        //Gather Variables
+        Character player1 = game1.getPlayer();
+
+        //Protect the player
+        int w1ID = Game.generateUniqueId();
+		Wall wall1 = new Wall(w1ID, new Position(2, 1));
+		game1.getEntities().add(wall1);
+        int w2ID = Game.generateUniqueId();
+		Wall wall2 = new Wall(w2ID, new Position(2, 2));
+		game1.getEntities().add(wall2);
+        int w3ID = Game.generateUniqueId();
+		Wall wall3 = new Wall(w3ID, new Position(1, 2));
+		game1.getEntities().add(wall2);
+
+        //Create Zombie Spawner
+        int zspID = Game.generateUniqueId();
+		ZombieToastSpawner zombieSpawner1 = new ZombieToastSpawner(zspID, new Position(4, 2));
+		game1.getEntities().add(zombieSpawner1);
+
+        //Spawn Zombie
+        for(int i = 0; i < 20; i++) {
+            game1.tick(null, Direction.NONE);
+        }
+
+        //Find Zombie
+        ZombieToast zombie1 = null;
+        for (Entity ent : game1.getEntities()) {
+            if (ent instanceof ZombieToast) {
+                zombie1 = (ZombieToast)ent;
+            }
+        }
+
+
+        //Assert Zombie created
+        assertTrue(zombie1 != null); 
+
+        //Assert Zombie spawns in allowed positions
+        Position zombiePos = zombie1.getPosition();
+        assertTrue(zombiePos.equals(new Position(3, 1))  || zombiePos.equals(new Position(4, 1)) || zombiePos.equals(new Position(5, 1)) || zombiePos.equals(new Position(5, 2)) || zombiePos.equals(new Position(5, 3))); 
+
+        //Spawn another Zombie
+        for(int i = 0; i < 20; i++) {
+            game1.tick(null, Direction.NONE);
+        }
+
+        //Find Zombie 
+        ZombieToast zombie2 = null;
+        for (Entity ent : game1.getEntities()) {
+            if (ent instanceof ZombieToast) {
+                ZombieToast currZombie = (ZombieToast)ent;
+                if (! currZombie.equals(zombie1)) {
+                    zombie2 = currZombie;
+                }
+            }
+        }
+
+        //Assert Zombie created
+        assertTrue(zombie2 != null); 
+
+        //Assert Zombie spawns in allowed positions
+        Position zombiePos2 = zombie2.getPosition();
+        assertTrue(zombiePos2.equals(new Position(3, 1))  || zombiePos2.equals(new Position(4, 1)) || zombiePos2.equals(new Position(5, 1)) || zombiePos2.equals(new Position(5, 2)) || zombiePos2.equals(new Position(5, 3))); 
+
+    }
+
+
     
-    //-----Door Tests-----
-    //Tests to see if a matching key will unlock the door
-    @Test
-    public void testOpenDoorMatch(){
-        Position p1 = new Position(1, 1);
-        Key k1 = new Key(0,1);
-        Door d1 = new Door(1, "Door", p1, 1);
-        d1.openDoor(k1);
-        assertTrue(d1.getIsOpen());
-    } 
-    
-    //Tests to see if a unmatching key will fail to unlock the door
-    @Test
-    public void testOpenDoorUnmatch(){
-        Position p1 = new Position(1, 1);
-        Key k1 = new Key(0,1);
-        Door d1 = new Door(1, "Door", p1, 2);
-        d1.openDoor(k1);
-        assertFalse(d1.getIsOpen());
-    }      
-
-    //-----Portal Tests-----
-    //Tests to see if portal will give the correct teleport location
-    @Test
-    public void testPortalTeleport(){
-        Position portal1Location = new Position(1, 1);
-        Position portal2Location = new Position(4, 6);  
-        Position portal3Location = new Position(7, 9);  
-        Position portal4Location = new Position(9, 9);  
-        Position expectedTeleport1Location = portal3Location; 
-        Position expectedTeleport2Location = portal4Location; 
-        Portal portal1 = new Portal(1, "portal", portal1Location, "blue");
-        Portal portal2 = new Portal(2, "portal", portal2Location, "green");
-        Portal portal3 = new Portal(3, "portal", portal3Location, "blue");
-        Portal portal4 = new Portal(4, "portal", portal4Location, "green");
-        assertEquals(expectedTeleport1Location, portal1.getTeleportLocation());
-        assertEquals(expectedTeleport2Location, portal2.getTeleportLocation());
-    }   
-
-    //-----Boulder-----
-    //Tests moving a boulder onto an empty cell
-    @Test
-    public void testBoulderMoveOpen(){
-        Position startPos = new Position(1, 1);        
-        Position expectedPos = startPos.translateBy(Direction.RIGHT);
-        Boulder b1 = new Boulder(1, "Boulder", startPos);
-        b1.move(Direction.RIGHT);
-        assertEquals(expectedPos, b1.getPosition());
-    }   
-
-    //Tests moving a boulder onto a wall
-    @Test
-    public void testBoulderMoveCollide(){
-        Position startPos = new Position(1, 1);        
-        Position wallPos = startPos.translateBy(Direction.RIGHT);
-        Position expectedPos = startPos;
-        Boulder b1 = new Boulder(1, "Boulder", startPos);
-        Wall w1 = new Wall(2, "wall", wallPos);
-        b1.move(Direction.RIGHT);
-        assertEquals(expectedPos, b1.getPosition());
-    }    
-
-
-    //-----Floor Switch Tests-----
-    //Tests to see if the isFloorSwitch function correctly recognises a floor switch
-    @Test
-    public void testIsFloorSwitch(){
-        Position floorSwitchLocation = new Position(1, 1);
-        Position emptyLocation = new Position(0, 0);
-        FloorSwitch f1 = new FloorSwitch(0, "floor_switch", floorSwitchLocation);
-        assertEquals(f1, FloorSwitch.isFloorSwitch(floorSwitchLocation));
-        assertEquals(null, FloorSwitch.isFloorSwitch(emptyLocation));        
-    }  
-    
-    /*Tests to see if the isFloorSwitch activates when boulder is placed on top
-    and then deactivated when it is moved off it*/
-    @Test
-    public void testIsFloorActivate(){
-        Position boulderPos = new Position(1, 1, 1);        
-        Position floorSwitchPos = new Position(2, 1, 0);  
-        Boulder b1 = new Boulder(0, "Boulder", boulderPos);
-        FloorSwitch f1 = new FloorSwitch(0, "floor_switch", floorSwitchPos);
-        assertFalse(f1.getIsActive());
-        b1.move(Direction.RIGHT);
-        assertTrue(f1.getIsActive());
-        b1.move(Direction.RIGHT);
-        assertFalse(f1.getIsActive());
-    }  
-    
-    //-----Place Bomb Tests-----
-    //Tests to see if a bomb explodes on placement by seeing if it is removed from the list
-    @Test
-    public void testExplodeOnPlacement(){
-        Position boulderPos = new Position(1, 1, 1);        
-        Position floorSwitchPos = new Position(2, 1, 0); 
-        Position bombPos1 = new Position(8, 8, 8); 
-        Position bombPos2 = floorSwitchPos.translateBy(Direction.RIGHT); 
-        Boulder boulder1 = new Boulder(0, "Boulder", boulderPos);
-        FloorSwitch f1 = new FloorSwitch(0, "floor_switch", floorSwitchPos);
-        boulder1.move(Direction.RIGHT);
-        PlacedBomb bomb1 = new PlacedBomb(0, "bomb", bombPos1);
-        List<PlacedBomb> initialBombList = new ArrayList<PlacedBomb>(PlacedBomb.getPlacedBombList());
-        PlacedBomb bomb2 = new PlacedBomb(0, "bomb", bombPos2);    
-        List<PlacedBomb> postBombList = new ArrayList<PlacedBomb>(PlacedBomb.getPlacedBombList());
-        assertEquals(initialBombList, postBombList);
-    }     
-    
-    //Tests to see if a bomb explodes when a boulder is moved onto a switch
-    @Test
-    public void testExplodeOnSwitchMove(){
-        Position boulderPos = new Position(1, 1, 1);        
-        Position floorSwitchPos = new Position(2, 1, 0); 
-        Position bombPos1 = new Position(8, 8, 8); 
-        Position bombPos2 = floorSwitchPos.translateBy(Direction.RIGHT); 
-        Boulder boulder1 = new Boulder(0, "Boulder", boulderPos);
-        FloorSwitch f1 = new FloorSwitch(0, "floor_switch", floorSwitchPos);
-        PlacedBomb bomb1 = new PlacedBomb(0, "bomb", bombPos1);
-        List<PlacedBomb> initialBombList = new ArrayList<PlacedBomb>(PlacedBomb.getPlacedBombList());
-        PlacedBomb bomb2 = new PlacedBomb(0, "bomb", bombPos2);    
-        boulder1.move(Direction.RIGHT);
-        List<PlacedBomb> postBombList = new ArrayList<PlacedBomb>(PlacedBomb.getPlacedBombList());
-        assertEquals(initialBombList, postBombList);
-    }   
-    
-    //-----Zombie Toast Spawner-----
-    //Checks to see if Zombies are spawned under the right conditions
-    @Test
-    public void testZombieToastSpawner(){
-        Position spawnerPos = new Position(1,1); 
-        ZombieToastSpawner newSpawner = new ZombieToastSpawner(1, "spawner", spawnerPos);
-        ZombieToast newZombie1 = newSpawner.spawn(15, "hard");
-        ZombieToast newZombie2 = newSpawner.spawn(20, "easy");
-        ZombieToast newZombie3 = newSpawner.spawn(20, "hard");
-        ZombieToast newZombie4 = newSpawner.spawn(15, "easy");
-        ZombieToast newZombie5 = newSpawner.spawn(30, "hard");
-        ZombieToast newZombie6 = newSpawner.spawn(80, "easy");
-        assertFalse(newZombie1 == null);
-        assertFalse(newZombie2 == null);
-        assertTrue(newZombie3 == null);
-        assertTrue(newZombie4 == null);
-        assertFalse(newZombie1 == null);
-        assertFalse(newZombie2 == null);
-    }  
-    
-    //Checks to see if Zombie toast spawner correctly finds the empty tile 
-    @Test
-    public void testZombieToastSpawnerLocation(){
-        Position wallPos1 = new Position(0,0); 
-        Position wallPos2 = new Position(1,0); 
-        Position wallPos3 = new Position(2,0); 
-        Position wallPos4 = new Position(0,1); 
-        Position wallPos5 = new Position(2,1); 
-        Position wallPos6 = new Position(0,2); 
-        Position wallPos7 = new Position(1,2);     
-        Wall newWall1 = new Wall(0, "wall", wallPos1);    
-        Wall newWall2 = new Wall(1, "wall", wallPos2);  
-        Wall newWall3 = new Wall(2, "wall", wallPos3);  
-        Wall newWall4 = new Wall(3, "wall", wallPos4);  
-        Wall newWall5 = new Wall(4, "wall", wallPos5);  
-        Wall newWall6 = new Wall(5, "wall", wallPos6);  
-        Wall newWall7 = new Wall(6, "wall", wallPos7);  
-
-        Position spawnerPos = new Position(1,1); 
-        ZombieToastSpawner newSpawner = new ZombieToastSpawner(7, "spawner", spawnerPos);
-
-        ZombieToast newZombie1 = newSpawner.spawn(15, "hard");
-
-        Position expectedPos = new Position(2,2);
-        assertEquals(expectedPos, newZombie1.getPosition()); 
-    }   
-
-    //-----UnpickedUpItem-----
-    //Tests that picking up an will give the correct class and itemid
-    @Test
-    public void testUnpickedupItem() throws ClassNotFoundException, IllegalAccessError, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException{
-        Position p1 = new Position(0, 0);
-        UnpickedUpItem newUnpickedUpItem = new UnpickedUpItem(0, "unPickedupItem", p1, "Wood");
-        Item newItem = newUnpickedUpItem.pickupItem();
-        assertEquals("class dungeonmania.Wood", String.valueOf(newItem.getClass())); 
-        assertEquals(0, newItem.getitemId()); 
-    }   
-
-    //Tests picking up a key works correctly
-    @Test
-    public void testUnpickedupItemKey() throws ClassNotFoundException, IllegalAccessError, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException{
-        Position p1 = new Position(0, 0);
-        UnpickedUpItem newUnpickedUpItem = new UnpickedUpItem(0, "unPickedupItem", p1, "Key", 2);
-        Item newItem = newUnpickedUpItem.pickupItem();
-        Key newKey = (Key)newItem;
-        assertEquals(2,newKey.getKeyNum()); 
-
-    }   
 }
+
