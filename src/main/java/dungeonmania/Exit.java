@@ -10,7 +10,6 @@ public class Exit extends StaticEntity {
     //-----Constructors-----
     public Exit(int id, Position position) {
         super(id, "exit", position);
-        this.setIsInteractable(true);
     }
 
 
