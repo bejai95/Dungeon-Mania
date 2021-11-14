@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.PriorityQueue;
+import java.util.stream.Collectors;
 
 import dungeonmania.util.Position;
 
@@ -32,6 +33,10 @@ public class DijkstraMovement implements Movement{
             System.out.println(getPosString(pos) + ":" + grid.get(source).get(pos));
         }
     }
+
+    private List<Position> getAdjacentPositionsInGrid(Position pos, Map<Position, Map<Position, Double>> grid){
+        return pos.getCardinallyAdjacentPositions().stream().filter(x -> grid.keySet().contains(x)).collect(Collectors.toList());
+    }
     private Map<Position, Position> dijkstras(Map<Position, Map<Position, Double>> grid, Position source){
         //printSourceCol(grid, source);
         Map<Position, Double> dist = new HashMap<Position, Double>();
@@ -56,17 +61,19 @@ public class DijkstraMovement implements Movement{
             }
         };*/
         PriorityQueue<Position> queue = new PriorityQueue<Position>(grid.keySet().size(), (a, b) -> Double.compare(dist.get(a), dist.get(b)));
-        queue.addAll(grid.keySet());
+        //queue.addAll(grid.keySet());
+        queue.add(source);
         while(!queue.isEmpty()){
             Position u = queue.remove();
             /*double d = dist.get(u); 
             int i = (int) d;
             System.out.println("(" + u.getX() + ", " + u.getY() + ")" + " Has dist: " + i);*/
-            for(Position v : grid.get(u).keySet()){
+            for(Position v : getAdjacentPositionsInGrid(u, grid)){
                 if(grid.get(u).get(v) != Double.POSITIVE_INFINITY){
                     if(dist.get(u) + grid.get(u).get(v) < dist.get(v)){
                         dist.put(v, dist.get(u) + grid.get(u).get(v));
                         prev.put(v, u);
+                        queue.add(v);
                     }
                 }
             }
@@ -82,9 +89,11 @@ public class DijkstraMovement implements Movement{
     private Position walkBackThroughPath(Position placeInPath, Map<Position, Position> pre, Position source, Position init){
         Position last = pre.get(placeInPath);
         if(last == null){
+            System.out.println("Nowhere to move");
             return init;
         }
         if(Objects.equals(last, source)){
+            System.out.println(placeInPath);
             return placeInPath;
         }
         return walkBackThroughPath(last, pre, source, init);

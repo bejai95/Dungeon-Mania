@@ -51,7 +51,13 @@ public class DijkstraTests {
 
     @Test
     public void testObstructionBent() {
-        
+        Character player = new Character(0, new Position(1, 1));
+        ChaseMovement m = new ChaseMovement();
+        m.setTarget(player);
+        DungeonManiaController d = new DungeonManiaController();
+        d.newGame("advanced-2", "Hard");
+        Map<Position, Map<Position, Double>> grid = d.getCurrentlyAccessingGame().generateAdjacencyMatrix();
+        assertEquals(m.move(new Position(3, 5), grid), new Position(3, 4));
     }
 
     @Test
