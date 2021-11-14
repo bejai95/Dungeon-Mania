@@ -1,106 +1,59 @@
 package dungeonmania;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.api.Test;
 
+import dungeonmania.DungeonManiaController;
+import dungeonmania.response.models.DungeonResponse;
+import dungeonmania.response.models.EntityResponse;
+import dungeonmania.response.models.ItemResponse;
 import dungeonmania.util.Direction;
 import dungeonmania.util.Position;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+
+import java.util.ArrayList;
+
 public class MovementTest {
-    
-    @Test
-    public void testSpiderMove() {
 
-        MovingEntity spider1 = new Spider(0, new Position(0,0), new SquareMovement());
+    public static boolean entityResponsesEqual(EntityResponse e1, EntityResponse e2) {
+        return e1.getId().equals(e2.getId()) &&
+               e1.getType().equals(e2.getType()) &&
+               e1.getPosition().equals(e2.getPosition());
+    }
 
-        // Spider's first move should move into the circle (top side)
-        spider1.move(null);
-        assertEquals(spider1.getPosition(), new Position(0,0).translateBy(Direction.UP));
 
-        // First quarter of square movement (right side)
-        spider1.move(null);
-        spider1.move(null);
-        assertEquals(spider1.getPosition(), new Position(0,0).translateBy(Direction.RIGHT));
+    public void testMovement(Direction direction, int toX, int toY) {
+        DungeonManiaController controller = new DungeonManiaController();
+        DungeonResponse initialResponse = controller.newGame("movementTestBasic", "standard");
+        EntityResponse player = initialResponse.getEntities().stream().filter(e -> e.getType().equals("player")).findFirst().get();
+        
+        DungeonResponse response = controller.tick(null, direction);
+        EntityResponse expected = new EntityResponse(player.getId(), player.getType(), new Position(toX, toY), false);
 
-        // Second quarter of square movement (bottom side)
-        spider1.move(null);
-        spider1.move(null);
-        assertEquals(spider1.getPosition(), new Position(0,0).translateBy(Direction.DOWN));
-
-        // Third quarter of square movement (left side)
-        spider1.move(null);
-        spider1.move(null);
-        assertEquals(spider1.getPosition(), new Position(0,0).translateBy(Direction.LEFT));
-    
-        // Full loop of square movement (top side)
-        spider1.move(null);
-        spider1.move(null);
-        assertEquals(spider1.getPosition(), new Position(0,0).translateBy(Direction.UP));
-
+        assertTrue(entityResponsesEqual(expected, response.getEntities().stream()
+                    .filter(e -> e.getType().equals("player")).findFirst().get()));
     }
 
     @Test
-    public void testZombieMove() {
-        MovingEntity zombie1 = new ZombieToast(0, new Position(0,0), new RandomMovement(), 0);
-
-        for (int i = 0; i < 100; i++) {
-            Position originalPos = zombie1.getPosition();
-            zombie1.move(null);
-            assert(Position.isAdjacent(originalPos,zombie1.getPosition()));
-        }
+    public void testMovementDown() {
+        testMovement(Direction.DOWN, 1, 2);
     }
 
     @Test
-    public void testMercMove() {
-        Character c = new Character(1, new Position(0, 0));
-
-        // Chase when above target
-        Mercenary merc1 = new Mercenary(0, new Position(0,3), 0);
-        merc1.chase(c);
-        merc1.move(null);
-        assertEquals(merc1.getPosition(), new Position(0, 2));
-
-        // Chase when to the right of target
-        merc1.setPosition(new Position(3, 0));
-        merc1.move(null);
-        assertEquals(merc1.getPosition(), new Position(2, 0));
-
-        // Chase when below target
-        merc1.setPosition(new Position(0, -3));
-        merc1.move(null);
-        assertEquals(merc1.getPosition(), new Position(0, -2));
-
-        // Chase when left of target
-        merc1.setPosition(new Position(-3, 0));
-        merc1.move(null);
-        assertEquals(merc1.getPosition(), new Position(-2, 0));
-
-        // Chase when up-right of target
-        merc1.setPosition(new Position(2, 2));
-        merc1.move(null);
-        merc1.move(null);
-        assertEquals(merc1.getPosition(), new Position(1, 1));
-
-        // Chase when down-right of target
-        merc1.setPosition(new Position(2, -2));
-        merc1.move(null);
-        merc1.move(null);
-        assertEquals(merc1.getPosition(), new Position(1, -1));
-
-        // Chase when down-left of target
-        merc1.setPosition(new Position(-2, -2));
-        merc1.move(null);
-        merc1.move(null);
-        assertEquals(merc1.getPosition(), new Position(-1, -1));
-
-        // Chase when up-left of target
-        merc1.setPosition(new Position(-2, 2));
-        merc1.move(null);
-        merc1.move(null);
-        assertEquals(merc1.getPosition(), new Position(-1, 1));
+    public void testMovementUp() {
+        testMovement(Direction.UP, 1, 0);
     }
 
-    
+    @Test
+    public void testMovementLeft() {
+        testMovement(Direction.LEFT, 0, 1);
+    }
+
+    @Test
+    public void testMovementRight() {
+        testMovement(Direction.RIGHT, 2, 1);
+    }
 
 }

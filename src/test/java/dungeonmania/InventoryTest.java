@@ -286,4 +286,35 @@ public class InventoryTest {
         assertTrue(character.getInventory().getItems().size() == 1);
 
     }
+    @Test
+    public void testHard() {
+        Character character = new Character(4, new Position(3, 3));
+        character.setGameMode("hard");
+        //make sure health is lower
+        assertTrue(character.getHealth() == 200);
+        InvincibilityPotion ip = new InvincibilityPotion(3);
+        character.getInventory().addItemToInventory(ip);
+        ip.consume(character);
+        //make sure that not invincibility
+        assertTrue(!(character.isInvincible()));
+    }
+    public void testUsingSunStone() {
+        //make sure that it can be used as if treasure and if have both make sure it is used before treasure
+        //make sure the treasure stays and the sun stone is removed
+        Character character = new Character(2, new Position(2, 3));
+        //add sun stone 
+        SunStone sun = new SunStone(2);
+        Treasure t = new Treasure(3);
+        Wood w1 = new Wood(4);
+        Wood w2 = new Wood(6);
+        character.getInventory().addItemToInventory(t);
+        character.getInventory().addItemToInventory(sun);
+        character.getInventory().addItemToInventory(w1);
+        character.getInventory().addItemToInventory(w2);
+        assertDoesNotThrow(() -> character.getInventory().craft("shield", 7));
+        List<Item> items = character.getInventory().getItems();
+        assertTrue(items.get(0) ==t);
+        assertTrue(items.get(1).getType().equals("shield"));
+        assertTrue(items.size() == 2);
+    }
 }

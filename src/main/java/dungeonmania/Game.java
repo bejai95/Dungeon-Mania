@@ -35,7 +35,6 @@ public class Game {
     private int tickCounter; // Initialized to zero
     private final List<AnimationQueue> animations = new ArrayList<>();
     private String gameMode;
-    private static int numDungeonIds; // Initialized to zero
     private static int uniqueIdNum; // Initialized to zero
     private final int spiderLimit = 4;
     
@@ -46,17 +45,11 @@ public class Game {
     private int spiderTicks = 10;
     
     public Game() {
+
     }
 
     public Goal getGoal(){ return goal;}
 
-    public static int getNumDungeonIds() {
-        return numDungeonIds;
-    }
-
-    public static void incrementNumDungeonIds() {
-        numDungeonIds++;
-    }
     /**
      * Initialises the inventory and buildables lists
      */
@@ -69,7 +62,7 @@ public class Game {
      * @param cell
      * @return
      */
-    static int generateUniqueId() {
+    public static int generateUniqueId() {
         int ret = uniqueIdNum;
         uniqueIdNum++;
         return ret;
@@ -160,6 +153,13 @@ public class Game {
         if(getPlayer() == null){
             return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), null, null, getGoalsLeft(), animations);
         }
+        System.out.println(dungeonId);
+        System.out.println(dungeonName);
+        System.out.println(dungeonId);
+        //breaks at the line below
+        System.out.println(entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()));
+        System.out.println(getInventory().getItemsAsResponse());
+        System.out.println(getInventory().generateBuildables(this.getEntities()));
         return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(this.getEntities()), getGoalsLeft(), animations);
     } 
 
@@ -531,11 +531,11 @@ public class Game {
         }
         //we know that itemUsed == null, thats ok
 
-        //remove dead items
-        inventory.removeDeadItems();
-
         //Interact with static entities, such as picking up items
         staticInteraction.findInteractableStaticEntity(movementDirection);
+
+        //remove dead items
+        inventory.removeDeadItems();
 
         //move in direction
         if (isCollision(player, player.getPosition().translateBy(movementDirection))) {
@@ -574,7 +574,9 @@ public class Game {
         //battle -- needs list of mercenaries, needs movingEntity on same tile as player
 
         MovingEntity baddie = getEntityOnPlayer(player);
-        if(baddie != null && !baddie.isAlly()){
+        System.out.println(gameMode);
+        System.out.println(gameMode != "Peaceful");
+        if(!gameMode.equals("Peaceful") && !gameMode.equals("peaceful") && baddie != null && !baddie.isAlly()){
             System.out.println("Health Before: " + player.getHealth());
             BattleManager bat = new BattleManager(player, baddie, getMercenaries());
             List<Battleable> dead = bat.battle();

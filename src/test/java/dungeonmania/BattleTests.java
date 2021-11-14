@@ -29,10 +29,10 @@ public class BattleTests {
         MovingEntity spider1 = new Spider(0, new Position(5,5), new SquareMovement());
         BattleManager bat = new BattleManager(character, spider1, Collections.emptyList());
 
-        List<Battleable> alive = new ArrayList<>();
-        alive.add(character);
+        List<Battleable> dead = new ArrayList<>();
+        dead.add(spider1);
  
-        assertEquals(alive, bat.battle());
+        assertEquals(dead, bat.battle());
     }
 
     @Test

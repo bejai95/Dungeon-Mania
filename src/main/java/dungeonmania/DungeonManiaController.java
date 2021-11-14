@@ -27,6 +27,7 @@ import org.json.JSONObject;
 
 public class DungeonManiaController {
     private Game currentlyAccessingGame;
+    private static int dungeonIdNum; // Initialized to zero
     
     public DungeonManiaController() {
         currentlyAccessingGame = null;
@@ -38,8 +39,20 @@ public class DungeonManiaController {
         return "en_US";
     }
     public List<String> getGameModes() {
-        return Arrays.asList("Standard", "Peaceful", "Hard");
+        return Arrays.asList("standard", "peaceful", "hard");
     }
+
+    /**
+     * Generates a unique dungeon id
+     * @param cell
+     * @return
+     */
+    private static int generateUniqueDungeonId() {
+        int ret = dungeonIdNum;
+        dungeonIdNum++;
+        return ret;
+    }
+
     /**
      * /dungeons
      * 
@@ -53,9 +66,10 @@ public class DungeonManiaController {
         }
     }
     public DungeonResponse newGame(String dungeonName, String gameMode) throws IllegalArgumentException {
-        
+        String gameModeLowercase = gameMode.toLowerCase();
+
         // Deal with throwing exceptions
-        if (!this.getGameModes().contains(gameMode)) {
+        if (!getGameModes().contains(gameModeLowercase)) {
             throw new IllegalArgumentException("Invalid gameMode argument");
         } else if (!DungeonManiaController.dungeons().contains(dungeonName)) {
             throw new IllegalArgumentException("Invalid dungeonName argument");
@@ -71,16 +85,15 @@ public class DungeonManiaController {
                 .create();
                 
             // Generate an Id for the new dungeon
-            String newDungeonId = String.valueOf(Game.getNumDungeonIds());
+            String newDungeonId = String.valueOf(generateUniqueDungeonId());
 
             // Create a new game
             currentlyAccessingGame = gson.fromJson(JSONString, Game.class);
             currentlyAccessingGame.setDungeonId(newDungeonId);
             currentlyAccessingGame.setDungeonName(dungeonName);
-            currentlyAccessingGame.setGameMode(gameMode);
+            currentlyAccessingGame.setGameMode(gameModeLowercase);
             currentlyAccessingGame.initialiseBuildables();
             currentlyAccessingGame.setHealthBar(1);
-            Game.incrementNumDungeonIds();
 
             //Set portal colour sprites
             currentlyAccessingGame.setSprites();
@@ -91,7 +104,9 @@ public class DungeonManiaController {
             for (Mercenary cur: allMercenaries) {
                 cur.chase(player);
             }
-
+            
+            player.setGameMode(gameModeLowercase);
+            
             return currentlyAccessingGame.generateDungeonResponse();
         }
         catch (IOException e) {

@@ -63,10 +63,19 @@ public class staticEntityInteract {
      */
     private void doorInteraction(Door interactionDoor){
         List<Item> itemsList = currentGame.getInventory().getItems();
+        //check for sun stone first as it takes priority
+        for (Item selectedItem : itemsList) {
+            if (selectedItem.getType().equals("sun_stone")) {
+                if (interactionDoor.openDoor(selectedItem)) {
+                    interactionDoor.setType("door_open");
+                    return;
+                }
+            }
+        }
+        //check for key now
         for (Item selectedItem : itemsList) {
             if (selectedItem.getType().equals("key")) {
-                Key inputKey = (Key)selectedItem;
-                if (interactionDoor.openDoor(inputKey)) {
+                if (interactionDoor.openDoor(selectedItem)) {
                     interactionDoor.setType("door_open");
                 }
             }

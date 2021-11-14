@@ -79,7 +79,11 @@ public class Mercenary extends MovingEntity {
             throw new InvalidActionException("Player not within 2 cardinal tiles of mercenary");
         }
         Item t = ch.getInventory().getItemFromType("treasure");
-        if(t != null) {
+        Item ss = ch.getInventory().getItemFromType("sun_stone");
+        if (ss != null) {
+            currentGold++;
+        }
+        else if(t != null) {
             // Remove the treasure
             ch.getInventory().removeItem(t);
             currentGold++;
