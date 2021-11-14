@@ -259,22 +259,33 @@ public class milestone2SystemTests {
         }
 
         // Test interact exception when player is more than 2 tiles away from the mercenary
-        String mercenaryId = null;
+        String mercenary1Id = null;
+        String mercenary2Id = null;
         for (EntityResponse curr: res2.getEntities()) {
             if (curr.getPosition().getX() == 4 && curr.getPosition().getY() == 1) {
-                mercenaryId = curr.getId();
+                mercenary1Id = curr.getId();
+            } else if (curr.getPosition().getX() == 8 && curr.getPosition().getY() == 1) {
+                mercenary2Id = curr.getId();
             }
         }
-        final String mercenaryIdFinal = mercenaryId;
-        assertThrows(InvalidActionException.class, () -> controller2.interact(mercenaryIdFinal));
+        final String mercenary1IdFinal = mercenary1Id;
+        assertThrows(InvalidActionException.class, () -> controller2.interact(mercenary1IdFinal));
 
         // Test interact exception when player does not have any gold and attempts to bribe a mercenary
         controller2.tick(null, Direction.LEFT); // Player should collide with the wall
-        assertThrows(InvalidActionException.class, () -> controller2.interact(mercenaryIdFinal));
+        assertThrows(InvalidActionException.class, () -> controller2.interact(mercenary1IdFinal));
 
-        /*
-        // Battle that mercenary and then take a health potion
-        for (int i = 0; i < 4; i++) {
+        // Battle the first mercenary, pick up some treasure and then test bribing the second mercenary
+        for (int i = 0; i < 2; i++) {
+            res2 = controller2.tick(null, Direction.RIGHT);
+        }
+        Mercenary merc2 = (Mercenary)controller2.getCurrentlyAccessingGame().getEntityById(mercenary2Id);
+        assertTrue(merc2.getIsHostile() == true);
+        controller2.interact(mercenary2Id);
+        assertTrue(merc2.getIsHostile() == false);
+
+        // Pick up and use a health potion
+        for (int i = 0; i < 3; i++) {
             res2 = controller2.tick(null, Direction.RIGHT);
         }
         String healthPotionId = null;
@@ -283,25 +294,34 @@ public class milestone2SystemTests {
                 healthPotionId = curr.getId();
             }
         }
-        controller2.tick(healthPotionId, Direction.NONE);
-        */
-        
+        res2 = controller2.tick(healthPotionId, Direction.RIGHT);
 
+        // Test interact when the player is not cardinally adjacent to the spawner
+        String spawnerId = null;
+        for (EntityResponse curr: res2.getEntities()) {
+            if (curr.getType().equals("zombie_toast_spawner")) {
+                spawnerId = curr.getId();
+            }
+        }
+        final String spawnerIdFinal = spawnerId;
+        assertThrows(InvalidActionException.class, () -> controller2.interact(spawnerIdFinal));
 
+        // Test interact when the character does not have a sword to use on the spawner
+        for (int i = 0; i < 8; i++) {
+            res2 = controller2.tick(null, Direction.RIGHT);
+        }
+        assertThrows(InvalidActionException.class, () -> controller2.interact(spawnerIdFinal));
 
-
-
-
-
-
-        
+        // Pick up a sword and then interact with the spawner, test that it has been destroyed
+        controller2.tick(null, Direction.DOWN);
+        controller2.tick(null, Direction.UP);
+        res2 = controller2.interact(spawnerIdFinal);
+        boolean containsSpawner = false;
+        for (EntityResponse curr: res2.getEntities()) {
+            if (curr.getType().equals("zombie_toast_spawner")) {
+                containsSpawner = true;
+            }
+        }
+        assertTrue(containsSpawner == false);
     }
-
-        // 
-
-
-
-
-
-
 }
