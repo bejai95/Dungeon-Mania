@@ -17,8 +17,13 @@ public class Door extends StaticEntity {
 
     //-----Methods-----
     //This will open a door and will return true if the door is sucessfully opened 
-    public boolean openDoor (Key inputKey){
-        if (inputKey.getKeyNum() == matchingKeyNum) {
+    public boolean openDoor (Item inputKey){
+        if (inputKey instanceof SunStone) {
+            return true;
+        }
+        //must be a key
+        Key inputtedKey = (Key) inputKey;
+        if (inputtedKey.getKeyNum() == matchingKeyNum) {
             //Open the door
             this.isOpen = true;
             //Moves the door down to the bottom layer so the player can walk over it
