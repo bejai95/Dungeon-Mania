@@ -539,7 +539,16 @@ public class Game {
         List<MovingEntity> movingEntities = getMovingEntities();
         for(MovingEntity mob : movingEntities){
             if (!isCollision(mob, mob.getNextMove())) {
-                mob.move();
+                if (mob instanceof ZombieToast) {
+                    ZombieToast zt = (ZombieToast) mob;
+                    zt.applyNextMove();
+                }
+                else {
+                    mob.move();
+                }
+            }
+            else {
+                System.out.println(mob.getType() + " could not pass through the wall");
             }
             // TODO else collision response
         }
