@@ -235,4 +235,73 @@ public class milestone2SystemTests {
         controller1.tick(null, Direction.UP);
         assertTrue(currentGame.getPlayer().getInventory().getItems().size() == 2); // Remaining key should have been used now
     }
+
+    // Test that interact works correctly
+    @Test
+    public void testInteract() {
+        
+        DungeonManiaController controller1 = new DungeonManiaController();
+        DungeonManiaController controller2 = new DungeonManiaController();
+
+        DungeonResponse res1 =  controller1.newGame("advanced-2", "Standard");
+        DungeonResponse res2 = controller2.newGame("battleground", "Standard");
+        
+        // Test interact with an id that does not correspond with any entity
+        assertThrows(IllegalArgumentException.class, () -> controller1.interact("NonValidEntityId"));
+        
+        // Test interact with id's that correspond to entities but are not interactable (only mercenaries and spawners are interactable)
+        List<EntityResponse> allEntities = res1.getEntities();
+        for (EntityResponse curr: allEntities) {
+            if (!(curr.getType().equals("mercenary") || curr.getType().equals("zombie_toast_spawner"))) {
+                String entityId = curr.getId();
+                assertThrows(IllegalArgumentException.class, () -> controller1.interact(entityId));
+            }
+        }
+
+        // Test interact exception when player is more than 2 tiles away from the mercenary
+        String mercenaryId = null;
+        for (EntityResponse curr: res2.getEntities()) {
+            if (curr.getPosition().getX() == 4 && curr.getPosition().getY() == 1) {
+                mercenaryId = curr.getId();
+            }
+        }
+        final String mercenaryIdFinal = mercenaryId;
+        assertThrows(InvalidActionException.class, () -> controller2.interact(mercenaryIdFinal));
+
+        // Test interact exception when player does not have any gold and attempts to bribe a mercenary
+        controller2.tick(null, Direction.LEFT); // Player should collide with the wall
+        assertThrows(InvalidActionException.class, () -> controller2.interact(mercenaryIdFinal));
+
+        /*
+        // Battle that mercenary and then take a health potion
+        for (int i = 0; i < 4; i++) {
+            res2 = controller2.tick(null, Direction.RIGHT);
+        }
+        String healthPotionId = null;
+        for (ItemResponse curr: res2.getInventory()) {
+            if (curr.getType().equals("health_potion")) {
+                healthPotionId = curr.getId();
+            }
+        }
+        controller2.tick(healthPotionId, Direction.NONE);
+        */
+        
+
+
+
+
+
+
+
+
+        
+    }
+
+        // 
+
+
+
+
+
+
 }
