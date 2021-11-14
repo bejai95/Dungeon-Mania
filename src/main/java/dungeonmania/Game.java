@@ -48,11 +48,11 @@ public class Game {
     private int spiderTicks = 10;
     private int hydraTicks = 50;
     
-    public Game() {
+    public Game() {}
 
+    public Goal getGoal() { 
+        return goal;
     }
-
-    public Goal getGoal(){ return goal;}
 
     /**
      * Initialises the inventory and buildables lists
@@ -63,8 +63,6 @@ public class Game {
 
     /**
      * Generates a unique id for an entity or item
-     * @param cell
-     * @return
      */
     public static int generateUniqueId() {
         int ret = uniqueIdNum;
@@ -72,6 +70,10 @@ public class Game {
         return ret;
     }
 
+    /**
+     * Sets the health bar based on the character's current health
+     * @param newHealth
+     */
     public void setHealthBar(double newHealth) {
         if (newHealth == 1) {
             animations.add(new AnimationQueue("PostTick", Integer.toString(getPlayer().getId()), Arrays.asList("healthbar set 1", "healthbar tint 0x00ff00"), false, -1));
@@ -83,7 +85,6 @@ public class Game {
     /**
      * Checks if a cell is empty
      * @param cell
-     * @return
      */
     public boolean isEmpty(Position cell) {
         for (int i = 0; i < entities.size(); i++) {
@@ -97,7 +98,6 @@ public class Game {
     /**
      * Finds an adjacent empty cell when given a cell
      * @param centre
-     * @return
      */
     public Position getEmpty(Position centre) {
         List<Position> adjacentPositions = centre.getAdjacentPositions();
@@ -139,6 +139,7 @@ public class Game {
     }
     /**
      * Gets all the goals left to complete
+     * @return A string containing the goals that are left
      */
    public String getGoalsLeft() {
        if (onExit) {
@@ -151,31 +152,22 @@ public class Game {
         }
     }
 
-    // Generate a dungeon response
     /**
      * Returns the dungeon information as a dungeon response
-     * @return
      */
     public DungeonResponse generateDungeonResponse() {
         if(getPlayer() == null){
             return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), null, null, getGoalsLeft(), animations);
         }
-        // System.out.println(dungeonId);
-        // System.out.println(dungeonName);
-        // System.out.println(dungeonId);
-        // //breaks at the line below
-        // System.out.println(entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()));
-        // System.out.println(getInventory().getItemsAsResponse());
-        // System.out.println(getInventory().generateBuildables(this.getEntities()));
         return new DungeonResponse(dungeonId, dungeonName, entities.stream().map(x -> x.getInfo()).collect(Collectors.toList()), getInventory().getItemsAsResponse(), getInventory().generateBuildables(this.getEntities()), getGoalsLeft(), animations);
     } 
 
     public void setGameMode(String gameMode) {
         this.gameMode = gameMode;
     }
+
     /**
      * Gets the player from the entities list
-     * @return
      */
     public Character getPlayer(){
         for(Entity entity : entities){
@@ -199,7 +191,6 @@ public class Game {
     }
     /**
      * Gets a list of all the moving entities on the map
-     * @return
      */
     public List<MovingEntity> getMovingEntities(){
         List<MovingEntity> ret = new ArrayList<>();
@@ -211,6 +202,9 @@ public class Game {
         return ret;
     }
 
+    /**
+     * Gets a list of all the battleable entities on the map
+     */
     private List<Battleable> getBattlebles(){
         List<Battleable> ret = new ArrayList<>();
         for(Entity entity : entities){
@@ -221,6 +215,10 @@ public class Game {
         return ret;
     }
 
+    /**
+     * 
+     * @param bats
+     */
     private List<Entity> batToEnts(List<Battleable> bats){
         List<Entity> ret = new ArrayList<>();
         for(Battleable bat : bats){

@@ -52,22 +52,6 @@ public class TickTests {
     }
 
     @Test
-    public void testBombUse() {
-        DungeonManiaController c = new DungeonManiaController();
-        DungeonResponse r = c.newGame("bomb", "Peaceful");
-        c.tick(null, Direction.RIGHT);
-        c.tick(null, Direction.RIGHT);
-        Inventory i = c.getCurrentlyAccessingGame().getInventory();
-        assertTrue(i.getItems().size() == 1);
-        for (Item ir: i.getItems()) {
-            if (ir.getType().equals("bomb")) {
-                assertDoesNotThrow(() -> c.tick(Integer.toString(ir.getitemId()), Direction.NONE));
-                break;
-            }
-        }
-    }
-
-    @Test
     public void testInvalidBombUse() {
         DungeonManiaController c = new DungeonManiaController();
         DungeonResponse r = c.newGame("advanced-2", "Peaceful");
